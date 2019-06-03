@@ -7,7 +7,7 @@ import utilidade.ControladorBotaoConfirma;
 public class ControladorMenuPrincipal {
 
     @FXML
-    private void fexarPrograma(ActionEvent event) {
+    private static void fexarPrograma(ActionEvent event) {
 	var confirma = new ControladorBotaoConfirma();
 
 	 char sim_nao = confirma.btnChama();
