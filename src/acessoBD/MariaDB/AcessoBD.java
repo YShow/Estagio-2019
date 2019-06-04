@@ -8,14 +8,18 @@ import java.sql.SQLException;
 
 public class AcessoBD {
     private Connection conexao;
-
+    // USUARIO DO BANCO
+    private static final String USUARIO = ""; 
+    //SENHA DO BANCO
+    private static final String SENHA = ""; 
     public Connection getConexao() {
 	return this.conexao;
     }
 
     public AcessoBD() throws Exception {
 	try {
-	    String stringConexao = "jdbc:mysql://localhost:3306/cantagalo" + "?user=teste&password=1234";
+	   final var stringConexao = "jdbc:mariadb://localhost:3306/cantagalo"
+	   	+ "?user=" + USUARIO + "&password=" + SENHA;
 
 	    this.conexao = DriverManager.getConnection(stringConexao);
 	} catch (Exception ex) {
