@@ -12,9 +12,10 @@ public class Main extends Application {
 
     public void start(Stage primaryStage) {
 	try {
-	    var root = (BorderPane) FXMLLoader.load(getClass().getResource("MenuPrincipal.fxml"));
-	    var scene = new Scene(root, HEIGHT, HEIGHT);
+	    final var root = (BorderPane) FXMLLoader.load(getClass().getResource("MenuPrincipal.fxml"));
+	    final var scene = new Scene(root, HEIGHT, HEIGHT);
 	    scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
+	    primaryStage.setTitle("Canta Galo");
 	    primaryStage.setMinHeight(HEIGHT);
 	    primaryStage.setMinWidth(HEIGHT);
 	    primaryStage.setScene(scene);
