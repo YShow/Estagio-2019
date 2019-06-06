@@ -9,10 +9,10 @@ public class Cliente {
         this.nome = nome;
     }
     public String getCPF() {
-        return CPF;
+        return cpf;
     }
-    public void setCPF(String cPF) {
-        CPF = cPF;
+    public void setCPF(String cpf) {
+        this.cpf = cpf;
     }
     public String getEndereco() {
         return endereco;
@@ -42,7 +42,7 @@ public class Cliente {
         return codigo;
     }
     private String nome;
-    private String CPF;
+    private String cpf;
     private String endereco;
     private String telefone;
     private Boolean ativo;
