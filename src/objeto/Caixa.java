@@ -2,36 +2,43 @@ package objeto;
 
 import java.util.Date;
 
-
-
 public class Caixa {
     public Date getData() {
-        return data;
+	return data;
     }
+
     public void setData(Date data) {
-        this.data = data;
+	this.data = data;
     }
+
     public Double getPrecototal() {
-        return precototal;
+	return precototal;
     }
+
     public void setPrecototal(Double precototal) {
-        this.precototal = precototal;
+	this.precototal = precototal;
     }
+
     public Double getSaida() {
-        return saida;
+	return saida;
     }
+
     public void setSaida(Double saida) {
-        this.saida = saida;
+	this.saida = saida;
     }
+
     public Cliente getCliente() {
-        return cliente;
+	return cliente;
     }
+
     public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+	this.cliente = cliente;
     }
+
     public int getCodigo() {
-        return codigo;
+	return codigo;
     }
+
     private int codigo;
     private Date data;
     private Double precototal;
