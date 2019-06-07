@@ -1,11 +1,10 @@
 package negocio;
 
-import objeto.Produto;
-
 import static acessoBD.MariaDB.AcessoBD.getConexao;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import objeto.Produto;
 
 public class NegProduto {
     private static final String SQL_INSERT = "";

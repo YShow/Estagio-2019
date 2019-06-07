@@ -1,12 +1,10 @@
 package negocio;
 
 import static acessoBD.MariaDB.AcessoBD.getConexao;
-import objeto.Vendas;
 
-import static acessoBD.MariaDB.AcessoBD.getConexao;
-
-import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import objeto.Vendas;
 
 public class NegVendas {
 

@@ -1,10 +1,10 @@
 package negocio;
 
 import static acessoBD.MariaDB.AcessoBD.getConexao;
-import objeto.Cliente;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.util.ArrayList;
+
+import objeto.Cliente;
 
 public class NegCliente {
     private static final String SQL_INSERT = "";

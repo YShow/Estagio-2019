@@ -1,10 +1,10 @@
 package negocio;
 
 import static acessoBD.MariaDB.AcessoBD.getConexao;
-import objeto.Caixa;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import objeto.Caixa;
 
 public class NegCaixa {
     private static final String SQL_INSERT = "";
@@ -25,6 +25,7 @@ public class NegCaixa {
 
     public boolean alterar(Caixa caixa) throws Exception {
 	var comando = getConexao().prepareStatement(SQL_UPDATE);
+
 	return false;
     }
 

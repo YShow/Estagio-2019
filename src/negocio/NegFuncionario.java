@@ -1,11 +1,10 @@
 package negocio;
 
-import objeto.Funcionario;
-
 import static acessoBD.MariaDB.AcessoBD.getConexao;
 
-import java.sql.ResultSet;
 import java.util.ArrayList;
+
+import objeto.Funcionario;
 
 public class NegFuncionario {
     private static final String SQL_INSERT = "";
