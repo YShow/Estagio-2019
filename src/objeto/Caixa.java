@@ -9,6 +9,7 @@ public class Caixa {
 
     public void setData(Date data) {
 	this.data = data;
+
     }
 
     public Double getPrecototal() {

@@ -10,7 +10,8 @@ public class AcessoBD {
     private static final String USUARIO = "";
     // SENHA DO BANCO
     private static final String SENHA = "";
-    private static final String STRINGCONEXAO = "jdbc:mariadb://localhost:3306/cantagalo" + "?user=" + USUARIO + "&password=" + SENHA;
+    private static final String STRINGCONEXAO = "jdbc:mariadb://localhost:3306/cantagalo" + "?user=" + USUARIO
+	    + "&password=" + SENHA;
 
     public static Connection getConexao() throws SQLException {
 	conexao = DriverManager.getConnection(STRINGCONEXAO);
