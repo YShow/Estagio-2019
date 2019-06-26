@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
@@ -9,16 +8,12 @@
 	<top>
 		<AnchorPane prefHeight="30.0" prefWidth="625.0">
          <children>
-            <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-              <menus>
-                  <Menu mnemonicParsing="false" onAction="#menuTelaFuncionario" text="Funcionario" />
-                <Menu mnemonicParsing="false" onAction="#menuTelaCliente" text="Cliente" />
-                <Menu mnemonicParsing="false" onAction="#menuTelaCidade" text="Cidade" />
-                <Menu mnemonicParsing="false" onAction="#menuTelaCaixa" text="Caixa" />
-                  <Menu mnemonicParsing="false" onAction="#menuTelaProduto" text="Produto" />
-                  <Menu mnemonicParsing="false" onAction="#menuTelaVenda" text="Venda" />
-              </menus>
-            </MenuBar>
+            <Button blendMode="HARD_LIGHT" layoutX="14.0" layoutY="4.0" maxHeight="25.0" maxWidth="87.0" mnemonicParsing="false" onAction="#menuTelaFuncionario" text="Funcionario" AnchorPane.leftAnchor="14.0" />
+            <Button blendMode="HARD_LIGHT" layoutX="183.0" layoutY="4.0" mnemonicParsing="false" onAction="#menuTelaCliente" text="Cliente" />
+            <Button blendMode="HARD_LIGHT" layoutX="111.0" layoutY="4.0" mnemonicParsing="false" onAction="#menuTelaCidade" prefHeight="25.0" prefWidth="66.0" text="Cidade" AnchorPane.leftAnchor="111.0" />
+            <Button blendMode="HARD_LIGHT" layoutX="313.0" layoutY="4.0" mnemonicParsing="false" onAction="#menuTelaProduto" text="Produto" />
+            <Button blendMode="HARD_LIGHT" layoutX="248.0" layoutY="4.0" mnemonicParsing="false" onAction="#menuTelaVenda" text="Venda" />
+            <Button blendMode="HARD_LIGHT" layoutX="387.0" layoutY="7.0" mnemonicParsing="false" onAction="#menuTelaCaixa" text="Caixa" />
          </children>
 		</AnchorPane>
 	</top>
