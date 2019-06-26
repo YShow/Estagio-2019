@@ -3,7 +3,6 @@ package acessoBD.MariaDB;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
 public class AcessoBD {
     // USUARIO DO BANCO
     private static final String USUARIO = "";
