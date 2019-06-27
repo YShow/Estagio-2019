@@ -1,7 +1,6 @@
 package apresentacao;
 
 import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -11,9 +10,11 @@ public class Main extends Application {
 
     private static final double HEIGHT = 600;
 
+    @Override
     public void start(Stage primaryStage) {
-	//isto é um teste para como esconder uma tela e abrir outra sem fexar o programa
-	//Platform.setImplicitExit(false);
+	// isto é um teste para como esconder uma tela e abrir outra sem fexar o
+	// programa
+	// Platform.setImplicitExit(false);
 	try {
 	    final var root = (BorderPane) FXMLLoader.load(getClass().getResource("MenuPrincipal.fxml"));
 	    final var scene = new Scene(root, HEIGHT, HEIGHT);
