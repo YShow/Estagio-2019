@@ -22,10 +22,10 @@ public class ControladorMenuPrincipal {
 	    root = FXMLLoader.load(getClass().getResource("Caixa.fxml"));
 
 	    stage.setTitle("Menu de Caixa");
-	    stage.setScene(new Scene(root, 450, 450));
+	    stage.setScene(new Scene(root, 600, 450));
 	    stage.show();
 	} catch (IOException e) {
-	    e.getMessage();
+	   e.getMessage();
 	}
     }
 
@@ -37,7 +37,7 @@ public class ControladorMenuPrincipal {
 	    root = FXMLLoader.load(getClass().getResource("Cidade.fxml"));
 
 	    stage.setTitle("Menu de Cidade");
-	    stage.setScene(new Scene(root, 450, 450));
+	    stage.setScene(new Scene(root, 600, 450));
 	    stage.show();
 
 	} catch (IOException e) {
@@ -52,7 +52,7 @@ public class ControladorMenuPrincipal {
 	    root = FXMLLoader.load(getClass().getResource("Cliente.fxml"));
 
 	    stage.setTitle("Menu de Cliente");
-	    stage.setScene(new Scene(root, 450, 450));
+	    stage.setScene(new Scene(root, 600, 450));
 	    stage.show();
 
 	} catch (IOException e) {
@@ -67,7 +67,7 @@ public class ControladorMenuPrincipal {
 	    root = FXMLLoader.load(getClass().getResource("Funcionario.fxml"));
 
 	    stage.setTitle("Menu de Funcionario");
-	    stage.setScene(new Scene(root, 450, 450));
+	    stage.setScene(new Scene(root, 600, 450));
 	    stage.show();
 
 	} catch (IOException e) {
@@ -82,7 +82,7 @@ public class ControladorMenuPrincipal {
 	    root = FXMLLoader.load(getClass().getResource("Produto.fxml"));
 
 	    stage.setTitle("Menu de Produto");
-	    stage.setScene(new Scene(root, 450, 450));
+	    stage.setScene(new Scene(root, 600, 450));
 	    stage.show();
 
 	} catch (IOException e) {
@@ -97,7 +97,7 @@ public class ControladorMenuPrincipal {
 	    root = FXMLLoader.load(getClass().getResource("Venda.fxml"));
 
 	    stage.setTitle("Menu de Venda");
-	    stage.setScene(new Scene(root, 450, 450));
+	    stage.setScene(new Scene(root, 600, 450));
 	    stage.show();
 
 	} catch (IOException e) {

@@ -2,7 +2,7 @@ package negocio;
 
 import static acessoBD.MariaDB.AcessoBD.getConexao;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import objeto.Caixa;
 
@@ -25,7 +25,7 @@ public class NegCaixa {
 	return comando.execute();
     }
 
-    public ArrayList<Caixa> consultar(String metodo) throws Exception {
+    public List<Caixa> consultar(String metodo) throws Exception {
 	var comando = getConexao().prepareStatement(SQL_SEARCH);
 	comando.setString(1, metodo);
 	var caixa = comando.executeQuery();

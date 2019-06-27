@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class AcessoBD {
+private class AcessoBD {
     // USUARIO DO BANCO
     private static final String USUARIO = "";
     // SENHA DO BANCO
