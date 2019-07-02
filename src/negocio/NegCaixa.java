@@ -33,7 +33,7 @@ public class NegCaixa {
 	return null;
     }
 
-    public boolean alterar(Caixa caixa) throws Exception {
+    public boolean alterar(Caixa caixa) throws Exception  {
 	var comando = getConexao().prepareStatement(SQL_UPDATE);
 
 	return false;

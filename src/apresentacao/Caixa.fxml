@@ -7,51 +7,30 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-
-<AnchorPane prefHeight="393.0" prefWidth="606.0"
-	xmlns:fx="http://javafx.com/fxml/1"
-	xmlns="http://javafx.com/javafx/11.0.1">
+<AnchorPane prefHeight="393.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apresentacao.ControladorMenuCaixa">
 	<children>
-		<BorderPane prefHeight="393.0" prefWidth="376.0"
-			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+		<BorderPane prefHeight="393.0" prefWidth="376.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<top>
-				<AnchorPane prefHeight="50.0" prefWidth="606.0"
-					BorderPane.alignment="CENTER">
+				<AnchorPane prefHeight="50.0" prefWidth="606.0" BorderPane.alignment="CENTER">
 					<children>
-						<TextField layoutX="14.0" layoutY="13.0"
-							prefHeight="25.0" prefWidth="483.0" AnchorPane.leftAnchor="14.0"
-							AnchorPane.rightAnchor="109.0" />
-						<Button layoutX="517.0" layoutY="13.0"
-							mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0"
-							text="Consultar" AnchorPane.rightAnchor="14.0" />
+						<TextField fx:id="txtPesquisaCaixa" layoutX="14.0" layoutY="13.0" prefHeight="25.0" prefWidth="483.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="109.0" />
+						<Button layoutX="517.0" layoutY="13.0" mnemonicParsing="false" onAction="#conulstaCaixa" prefHeight="25.0" prefWidth="75.0" text="Consultar" AnchorPane.rightAnchor="14.0" />
 					</children>
 				</AnchorPane>
 			</top>
 			<bottom>
-				<AnchorPane prefHeight="49.0" prefWidth="606.0"
-					BorderPane.alignment="CENTER">
+				<AnchorPane prefHeight="49.0" prefWidth="606.0" BorderPane.alignment="CENTER">
 					<children>
-						<Button layoutX="519.0" layoutY="12.0"
-							mnemonicParsing="false" text="Desativar"
-							AnchorPane.rightAnchor="14.0" />
-						<Button layoutX="452.0" layoutY="12.0"
-							mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0"
-							text="Alterar" AnchorPane.rightAnchor="91.0" />
-						<Button layoutX="391.0" layoutY="12.0"
-							mnemonicParsing="false" text="Inserir"
-							AnchorPane.rightAnchor="160.0" />
+						<Button layoutX="519.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnDesativarCaixa" text="Desativar" AnchorPane.rightAnchor="14.0" />
+						<Button layoutX="452.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnAlterarCaixa" prefHeight="25.0" prefWidth="63.0" text="Alterar" AnchorPane.rightAnchor="91.0" />
+						<Button layoutX="391.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnInserirCaixa" text="Inserir" AnchorPane.rightAnchor="160.0" />
 					</children>
 				</AnchorPane>
 			</bottom>
 			<center>
-				<AnchorPane minWidth="-Infinity" prefHeight="275.0"
-					prefWidth="606.0">
+				<AnchorPane minWidth="-Infinity" prefHeight="275.0" prefWidth="606.0">
 					<children>
-						<TableView layoutX="175.0" layoutY="47.0"
-							prefHeight="294.0" prefWidth="606.0"
-							AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-							AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<TableView layoutX="175.0" layoutY="47.0" prefHeight="294.0" prefWidth="606.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<columns>
 								<TableColumn prefWidth="75.0" text="C1" />
 								<TableColumn prefWidth="131.0" text="C2" />
