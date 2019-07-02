@@ -11,7 +11,7 @@ public class ControladorMenuFuncionario {
 
     @FXML
     void btnAlteraFuncionario(ActionEvent event) {
-
+	
     }
 
     @FXML
