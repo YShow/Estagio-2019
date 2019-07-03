@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class ControladorMenuPrincipal {
 
     private final Stage stage = new Stage();
-    private Parent root;
+    private static Parent root;
 
     @FXML
     void menuTelaCaixa(ActionEvent event) {
