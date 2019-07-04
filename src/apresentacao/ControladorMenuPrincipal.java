@@ -49,12 +49,13 @@ public class ControladorMenuPrincipal {
     void menuTelaCliente(ActionEvent event) {
 
 	try {
+	   while(true) {
 	    root = FXMLLoader.load(getClass().getResource("Cliente.fxml"));
 
 	    stage.setTitle("Menu de Cliente");
 	    stage.setScene(new Scene(root, 600, 450));
 	    stage.show();
-
+	   }
 	} catch (IOException e) {
 	    e.getMessage();
 	}

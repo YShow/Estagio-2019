@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="344.0" prefWidth="373.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1">
+   <children>
+      <TextField fx:id="txtCodigo" editable="false" layoutX="14.0" layoutY="29.0" prefHeight="25.0" prefWidth="83.0" AnchorPane.leftAnchor="14.0" />
+      <Label layoutX="14.0" layoutY="14.0" text="Codigo" AnchorPane.leftAnchor="14.0" />
+      <Label layoutX="14.0" layoutY="54.0" text="Nome do Produto" AnchorPane.leftAnchor="14.0" />
+      <TextField fx:id="txtNome" layoutX="14.0" layoutY="69.0" prefHeight="25.0" prefWidth="330.0" AnchorPane.leftAnchor="14.0" />
+      <Label layoutX="14.0" layoutY="94.0" text="Quantidade" AnchorPane.leftAnchor="14.0" />
+      <TextField fx:id="txtQuantidade" layoutX="14.0" layoutY="109.0" prefHeight="25.0" prefWidth="89.0" AnchorPane.leftAnchor="14.0" />
+      <Label layoutX="14.0" layoutY="134.0" text="Preço" AnchorPane.leftAnchor="14.0" />
+      <TextField fx:id="txtPreco" layoutX="14.0" layoutY="149.0" prefHeight="25.0" prefWidth="89.0" AnchorPane.leftAnchor="14.0" />
+      <Button layoutX="287.0" layoutY="305.0" mnemonicParsing="false" onAction="#btnGravar" text="Gravar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="29.0" />
+   </children>
+</AnchorPane>
