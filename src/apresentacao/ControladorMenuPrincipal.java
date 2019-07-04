@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class ControladorMenuPrincipal {
 
     private final Stage stage = new Stage();
-    private static Parent root;
+    private Parent root;
 
     @FXML
     void menuTelaCaixa(ActionEvent event) {
@@ -25,7 +25,7 @@ public class ControladorMenuPrincipal {
 	    stage.setScene(new Scene(root, 600, 450));
 	    stage.show();
 	} catch (IOException e) {
-	   e.getMessage();
+	    e.getMessage();
 	}
     }
 
@@ -49,13 +49,13 @@ public class ControladorMenuPrincipal {
     void menuTelaCliente(ActionEvent event) {
 
 	try {
-	   while(true) {
+
 	    root = FXMLLoader.load(getClass().getResource("Cliente.fxml"));
 
 	    stage.setTitle("Menu de Cliente");
 	    stage.setScene(new Scene(root, 600, 450));
 	    stage.show();
-	   }
+
 	} catch (IOException e) {
 	    e.getMessage();
 	}
