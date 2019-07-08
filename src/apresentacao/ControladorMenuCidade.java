@@ -10,7 +10,7 @@ public class ControladorMenuCidade {
 
     @FXML
     private TextField txtConsullaCidade;
-    private static final ControladorInserirCidade tela = new ControladorInserirCidade();
+    private final ControladorInserirCidade tela = new ControladorInserirCidade();
 
     @FXML
     void btnAlteraCidade(ActionEvent event) {

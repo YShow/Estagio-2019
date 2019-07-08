@@ -8,7 +8,7 @@ import javafx.scene.control.TextField;
 
 public class ControladorMenuProduto {
 
-    private static final ControladorInserirProduto tela = new ControladorInserirProduto();
+    private final ControladorInserirProduto tela = new ControladorInserirProduto();
     @FXML
     private TextField txtProduto;
 

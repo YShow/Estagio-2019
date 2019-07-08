@@ -9,7 +9,7 @@ import apresentacao.insere.ControladorInserirCliente;
 public class ControladorMenuCliente {
     @FXML
     private TextField txtCliente;
-    private static final ControladorInserirCliente tela = new ControladorInserirCliente();
+    private final ControladorInserirCliente tela = new ControladorInserirCliente();
 
     @FXML
     void btnAlterarCliente(ActionEvent event) {

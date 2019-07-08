@@ -10,7 +10,7 @@ public class ControladorMenuFuncionario {
 
     @FXML
     private TextField txtFuncionario;
-    private static final ControladorInserirFuncionario tela = new ControladorInserirFuncionario();
+    private final ControladorInserirFuncionario tela = new ControladorInserirFuncionario();
 
     @FXML
     void btnAlteraFuncionario(ActionEvent event) {
