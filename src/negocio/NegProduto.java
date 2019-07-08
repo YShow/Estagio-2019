@@ -9,33 +9,33 @@ import java.util.List;
 import objeto.Produto;
 
 public class NegProduto {
-	private final AcessoBD conexao = new AcessoBD();
-	private static final String SQL_INSERT = "";
-	private static final String SQL_SEARCH = "";
-	private static final String SQL_UPDATE = "";
-	private static final String SQL_DELETE = "";
+    private final AcessoBD conexao = new AcessoBD();
+    private static final String SQL_INSERT = "";
+    private static final String SQL_SEARCH = "";
+    private static final String SQL_UPDATE = "";
+    private static final String SQL_DELETE = "";
 
-	public boolean inserir(Produto produto) throws SQLException {
-		try (var comando = conexao.getConexao().prepareStatement(SQL_INSERT)) {
-			return false;
-		}
+    public boolean inserir(Produto produto) throws SQLException {
+	try (var comando = conexao.getConexao().prepareStatement(SQL_INSERT)) {
+	    return false;
 	}
+    }
 
-	public List<Produto> consultar(String metodo) throws SQLException {
-		try (var comando = conexao.getConexao().prepareStatement(SQL_SEARCH)) {
-			return null;
-		}
+    public List<Produto> consultar(String metodo) throws SQLException {
+	try (var comando = conexao.getConexao().prepareStatement(SQL_SEARCH)) {
+	    return null;
 	}
+    }
 
-	public boolean alterar(Produto produto) throws SQLException {
-		try (var comando = conexao.getConexao().prepareStatement(SQL_UPDATE)) {
-			return false;
-		}
+    public boolean alterar(Produto produto) throws SQLException {
+	try (var comando = conexao.getConexao().prepareStatement(SQL_UPDATE)) {
+	    return false;
 	}
+    }
 
-	public boolean excluir(int id) throws SQLException {
-		try (var comando = conexao.getConexao().prepareStatement(SQL_DELETE)) {
-			return false;
-		}
+    public boolean excluir(int id) throws SQLException {
+	try (var comando = conexao.getConexao().prepareStatement(SQL_DELETE)) {
+	    return false;
 	}
+    }
 }

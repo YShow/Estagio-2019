@@ -1,7 +1,7 @@
 package apresentacao;
 
 import apresentacao.insere.ControladorInserirProduto;
-import apresentacao.insere.ControladorInserirProduto.INSERE_ALTERA;
+import utilidade.TIPO_TELA;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
@@ -11,14 +11,18 @@ public class ControladorMenuProduto {
     private static final ControladorInserirProduto tela = new ControladorInserirProduto();
     @FXML
     private TextField txtProduto;
+
     @FXML
     void btnAlteraProduto(ActionEvent event) {
-	tela.abreTelaProdutoInsere(INSERE_ALTERA.ALTERA);
+	tela.abreTelaProdutoInsere(TIPO_TELA.ALTERA);
     }
 
     @FXML
     void btnConsultaProduto(ActionEvent event) {
-
+	if (txtProduto.getText().isBlank()) {
+	    // TODO
+	    System.out.println("nao tem nada");
+	}
     }
 
     @FXML
@@ -28,6 +32,6 @@ public class ControladorMenuProduto {
 
     @FXML
     void btnInsereProduto(ActionEvent event) {
-	tela.abreTelaProdutoInsere(INSERE_ALTERA.INSERE);
+	tela.abreTelaProdutoInsere(TIPO_TELA.INSERE);
     }
 }

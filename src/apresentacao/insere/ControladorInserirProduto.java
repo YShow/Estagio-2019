@@ -1,6 +1,7 @@
 package apresentacao.insere;
 
 import java.io.IOException;
+import utilidade.TIPO_TELA;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,7 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ControladorInserirProduto {
-    private Stage stage;
+
     @FXML
     private TextField txtCodigo;
 
@@ -28,49 +29,30 @@ public class ControladorInserirProduto {
     @FXML
     private Button btnGravar;
 
-    public enum INSERE_ALTERA {
-	INSERE, ALTERA
-    }
-    
-     public void abreTelaProdutoInsere(final INSERE_ALTERA insere_altera) {	
+    public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela) {
 	Parent root;
-	stage = new Stage();
+	Stage stage = new Stage();
+
+	var loader = new FXMLLoader();
 	stage.initModality(Modality.APPLICATION_MODAL);
-	if (insere_altera.equals(INSERE_ALTERA.ALTERA)) {
-	    try {
-		
-		var loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/apresentacao/insere/ProdutoInsere.fxml"));
-		root = loader.load();		
+
+	try {
+	    loader.setLocation(getClass().getResource("/apresentacao/insere/ProdutoInsere.fxml"));
+	    root = loader.load();
+	    stage.setScene(new Scene(root, 600, 450));
+	    stage.setMinHeight(root.minHeight(-1));
+	    stage.setMinWidth(root.minWidth(-1));
+	    if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 		var controlador = (ControladorInserirProduto) loader.getController();
 		controlador.btnGravar.setText("Alterar");
-				
 		stage.setTitle("Alterar Produto");
-		stage.setScene(new Scene(root, 600, 450));
-		stage.setMinHeight(root.minHeight(-1));
-		stage.setMinWidth(root.minWidth(-1));
 		stage.show();
-		
-		
-	    } catch (IOException e) {
-		System.out.println(e.getMessage());
-	    }
-	} else {
-	    try {
-		
-		var loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/apresentacao/insere/ProdutoInsere.fxml"));
-		root = loader.load();
-		
+	    } else if (tipo_tela.equals(TIPO_TELA.INSERE)) {
 		stage.setTitle("Inserir Produto");
-		stage.setScene(new Scene(root, 600, 450));
-		stage.setMinHeight(root.minHeight(-1));
-		stage.setMinWidth(root.minWidth(-1));
 		stage.show();
-		
-	    } catch (IOException e) {
-		System.out.println(e.getMessage());
 	    }
+	} catch (IOException e) {
+	    System.out.println(e.getMessage());
 	}
     }
 
