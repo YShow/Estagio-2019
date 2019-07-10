@@ -24,7 +24,7 @@ public class ControladorInserirCidade {
     private ChoiceBox<?> chbEstado;
 
     public void abreTelaCidadeInsere(final TIPO_TELA tipo_tela) {
-	Stage stage = new Stage();
+	var stage = new Stage();
 	Parent root;
 	var loader = new FXMLLoader();
 	stage.initModality(Modality.APPLICATION_MODAL);

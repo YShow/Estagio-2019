@@ -29,7 +29,7 @@ public class ControladorInserirFuncionario {
     private Button btnGravarFuncionario;
 
     public void abreTelaFuncionarioInsere(final TIPO_TELA tipo_tela) {
-	Stage stage = new Stage();
+	var stage = new Stage();
 	Parent root;
 	var loader = new FXMLLoader();
 	stage.initModality(Modality.APPLICATION_MODAL);

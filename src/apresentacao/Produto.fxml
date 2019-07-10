@@ -21,9 +21,9 @@
 			<bottom>
 				<AnchorPane prefHeight="49.0" prefWidth="606.0" BorderPane.alignment="CENTER">
 					<children>
-						<Button layoutX="519.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnDesativaProduto" text="Desativar" AnchorPane.rightAnchor="14.0" />
-						<Button layoutX="452.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnAlteraProduto" prefHeight="25.0" prefWidth="63.0" text="Alterar" AnchorPane.rightAnchor="91.0" />
-						<Button layoutX="391.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnInsereProduto" text="Inserir" AnchorPane.rightAnchor="160.0" />
+						<Button fx:id="btnDesativaProduto" layoutX="519.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnDesativaProduto" text="Desativar" AnchorPane.rightAnchor="14.0" />
+						<Button fx:id="btnAlteraProduto" layoutX="452.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnAlteraProduto" prefHeight="25.0" prefWidth="63.0" text="Alterar" AnchorPane.rightAnchor="91.0" />
+						<Button fx:id="btnInsereProduto" layoutX="391.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnInsereProduto" text="Inserir" AnchorPane.rightAnchor="160.0" />
 					</children>
 				</AnchorPane>
 			</bottom>

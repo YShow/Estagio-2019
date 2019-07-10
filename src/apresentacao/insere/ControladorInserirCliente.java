@@ -27,7 +27,7 @@ public class ControladorInserirCliente {
     private Button btnGrava;
 
     public void abreTelaClienteInsere(final TIPO_TELA tipo_tela) {
-	Stage stage = new Stage();
+	var stage = new Stage();
 	Parent root;
 	var loader = new FXMLLoader();
 	stage.initModality(Modality.APPLICATION_MODAL);

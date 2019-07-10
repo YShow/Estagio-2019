@@ -20,7 +20,6 @@ public class ControladorMenuPrincipal {
 	try {
 
 	    root = FXMLLoader.load(getClass().getResource("Caixa.fxml"));
-
 	    stage.setTitle("Menu de Caixa");
 	    stage.setScene(new Scene(root, 600, 450));
 	    stage.show();

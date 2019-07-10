@@ -31,7 +31,7 @@ public class ControladorInserirProduto {
 
     public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela) {
 	Parent root;
-	Stage stage = new Stage();
+	var stage = new Stage();
 
 	var loader = new FXMLLoader();
 	stage.initModality(Modality.APPLICATION_MODAL);
