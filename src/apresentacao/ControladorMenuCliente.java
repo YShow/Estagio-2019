@@ -27,6 +27,7 @@ public class ControladorMenuCliente {
     @FXML
     private Button btnInsereCliente;
     private final ControladorInserirCliente tela = new ControladorInserirCliente();
+
     public void abreTelaClienteMenu(final TIPO_TELA tipo_tela) {
 	var stage = new Stage();
 	Parent root;
@@ -49,7 +50,7 @@ public class ControladorMenuCliente {
 		controlador.btnDesativarCliente.setText("Selecionar");
 		stage.setTitle("Consultar Cliente");
 		stage.show();
-	    } 
+	    }
 	} catch (IOException e) {
 	    System.out.println(e.getMessage());
 	}

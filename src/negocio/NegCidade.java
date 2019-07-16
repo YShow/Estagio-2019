@@ -7,29 +7,46 @@ import java.util.ArrayList;
 import java.util.List;
 
 import objeto.Cidade;
+import objeto.VendaProd;
 
 public class NegCidade {
     private final AcessoBD conexao = new AcessoBD();
-    private static final String SQL_INSERT = "";
-    private static final String SQL_SEARCH = "";
-    private static final String SQL_UPDATE = "";
+    private static final String SQL_INSERT = "INSERT INTO cidade(nome,estado) values(?,?)";
+    private static final String SQL_SEARCH = "select nome,estado from cidade where nome = ?";
+    private static final String SQL_UPDATE = "update cidade set nome = ?, estado = ? where codigo = ?";
     private static final String SQL_DELETE = "";
 
     public boolean inserir(Cidade cidade) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_INSERT)) {
-	    return false;
+	    comando.setString(1, cidade.getNome());
+	    comando.setString(2, cidade.getEstado());
+
+	    return comando.execute();
 	}
     }
 
     public List<Cidade> consultar(String metodo) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_SEARCH)) {
-	    return null;
+	    var result = comando.executeQuery();
+	    var lista = new ArrayList<Cidade>();
+	    while (result.next()) {
+		var cidade = new Cidade();
+		cidade.setCodigo(result.getInt("codigo"));
+		cidade.setNome(result.getString("nome"));
+		cidade.setEstado(result.getString("estado"));
+		lista.add(cidade);
+	    }
+	    return lista;
 	}
     }
 
-    public boolean alterar(Cidade cidade) throws SQLException {
+    public int alterar(Cidade cidade) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_UPDATE)) {
-	    return false;
+	    comando.setString(1, cidade.getNome());
+	    comando.setString(2, cidade.getEstado());
+	    comando.setInt(3, cidade.getCodigo());
+
+	    return comando.executeUpdate();
 	}
     }
 

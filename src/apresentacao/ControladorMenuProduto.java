@@ -25,6 +25,7 @@ public class ControladorMenuProduto {
     private Button btnAlteraProduto;
     @FXML
     private Button btnInsereProduto;
+
     public void abreTelaProdutoMenu(final TIPO_TELA tipo_tela) {
 	var stage = new Stage();
 	Parent root;
@@ -44,11 +45,11 @@ public class ControladorMenuProduto {
 		controlador.btnInsereProduto.setVisible(false);
 		controlador.btnAlteraProduto.setDisable(true);
 		controlador.btnAlteraProduto.setVisible(false);
-		
+
 		controlador.btnDesativaProduto.setText("Selecionar");
 		stage.setTitle("Consultar produto ");
 		stage.show();
-	    } 
+	    }
 	} catch (IOException e) {
 	    System.out.println(e.getMessage());
 	}

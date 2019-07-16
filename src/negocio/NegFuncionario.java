@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import objeto.Funcionario;
+import objeto.VendaProd;
 
 public class NegFuncionario {
     private final AcessoBD conexao = new AcessoBD();
@@ -23,7 +24,16 @@ public class NegFuncionario {
 
     public List<Funcionario> consultar(String metodo) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_SEARCH)) {
-	    return null;
+	    var result = comando.executeQuery();
+	    var lista = new ArrayList<Funcionario>();
+	    while (result.next()) {
+		var funcionario = new Funcionario();
+		//
+		//
+		//
+		lista.add(funcionario);
+	    }
+	    return lista;
 	}
     }
 

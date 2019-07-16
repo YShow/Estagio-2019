@@ -18,12 +18,22 @@ public class NegVendas {
     public boolean inserir(Vendas vendas) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_INSERT)) {
 	    return false;
+
 	}
     }
 
     public List<Vendas> consultar(String metodo) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_SEARCH)) {
-	    return null;
+	    var result = comando.executeQuery();
+	    var lista = new ArrayList<Vendas>();
+	    while (result.next()) {
+		var venda = new Vendas();
+		//
+		//
+		//
+		lista.add(venda);
+	    }
+	    return lista;
 	}
     }
 

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import objeto.Produto;
+import objeto.VendaProd;
 
 public class NegProduto {
     private final AcessoBD conexao = new AcessoBD();
@@ -23,7 +24,16 @@ public class NegProduto {
 
     public List<Produto> consultar(String metodo) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_SEARCH)) {
-	    return null;
+	    var result = comando.executeQuery();
+	    var lista = new ArrayList<Produto>();
+	    while (result.next()) {
+		var produto = new Produto();
+		//
+		//
+		//
+		lista.add(produto);
+	    }
+	    return lista;
 	}
     }
 

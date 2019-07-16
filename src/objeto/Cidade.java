@@ -11,6 +11,10 @@ public class Cidade {
 	this.nome = nome;
     }
 
+    public void setCodigo(int codigo) {
+	this.codigo = codigo;
+    }
+
     public String getEstado() {
 	return estado;
     }

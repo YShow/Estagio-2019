@@ -28,11 +28,11 @@ public class Caixa {
 	this.saida = saida;
     }
 
-    public Cliente getCliente() {
+    public int getCliente() {
 	return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(int cliente) {
 	this.cliente = cliente;
     }
 
@@ -44,5 +44,10 @@ public class Caixa {
     private Date data;
     private Double precototal;
     private Double saida;
-    private Cliente cliente;
+    private int cliente;
+
+    public void setCodigo(int codigo) {
+	this.codigo = codigo;
+
+    }
 }

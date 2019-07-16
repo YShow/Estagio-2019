@@ -1,6 +1,8 @@
 package apresentacao.insere;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import utilidade.TIPO_TELA;
 
 import javafx.event.ActionEvent;
@@ -12,6 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import negocio.NegProduto;
+import objeto.Produto;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 public class ControladorInserirProduto {
 
@@ -28,8 +34,10 @@ public class ControladorInserirProduto {
     private TextField txtPreco;
     @FXML
     private Button btnGravar;
+    private static TIPO_TELA tipo_tela;
 
     public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela) {
+	ControladorInserirProduto.tipo_tela = tipo_tela;
 	Parent root;
 	var stage = new Stage();
 
@@ -58,7 +66,34 @@ public class ControladorInserirProduto {
 
     @FXML
     void btnGravar(ActionEvent event) {
+	var produto = new NegProduto();
+	try {
+	    if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 
+		var resultado = produto.alterar(pegaProduto());
+
+	    }
+
+	    else if (tipo_tela.equals(TIPO_TELA.INSERE)) {
+		System.out.println("insere");
+	    }
+	} catch (SQLException e) {
+	    e.getMessage();
+	}
+    }
+
+    Produto pegaProduto() {
+	var produto = new Produto();
+	if (!(txtNome.getText().isBlank() && txtPreco.getText().isBlank() && txtQuantidade.getText().isBlank())) {
+
+	    produto.setAtivo(true);
+	    produto.setNome(txtNome.getText());
+	    produto.setPreco(Double.parseDouble(txtPreco.getText()));
+	    produto.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+	    return produto;
+	} else {
+	    return null;
+	}
     }
 
 }

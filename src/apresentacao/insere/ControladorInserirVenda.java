@@ -36,6 +36,7 @@ public class ControladorInserirVenda {
 
     @FXML
     private Button btnGravar;
+
     public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela) {
 	Parent root;
 	var stage = new Stage();
@@ -62,6 +63,7 @@ public class ControladorInserirVenda {
 	    System.out.println(e.getMessage());
 	}
     }
+
     @FXML
     void btnPesquisaCliente(ActionEvent event) {
 	var telaCliente = new ControladorMenuCliente();
@@ -71,6 +73,7 @@ public class ControladorInserirVenda {
     @FXML
     void btnPesquisaProduto(ActionEvent event) {
 	var telaProduto = new ControladorMenuProduto();
-	telaProduto.abreTelaProdutoMenu(TIPO_TELA.CONSULTA);;
+	telaProduto.abreTelaProdutoMenu(TIPO_TELA.CONSULTA);
+	;
     }
 }

@@ -10,7 +10,7 @@ public class ControladorMenuVenda {
     private final ControladorInserirVenda tela = new ControladorInserirVenda();
     @FXML
     private TextField txtVenda;
-    
+
     @FXML
     void btnAlteraVenda(ActionEvent event) {
 	tela.abreTelaProdutoInsere(TIPO_TELA.ALTERA);
