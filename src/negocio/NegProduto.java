@@ -11,7 +11,7 @@ import objeto.VendaProd;
 
 public class NegProduto {
     private final AcessoBD conexao = new AcessoBD();
-    private static final String SQL_INSERT = "";
+    private static final String SQL_INSERT = "insert into produto";
     private static final String SQL_SEARCH = "";
     private static final String SQL_UPDATE = "";
     private static final String SQL_DELETE = "";
