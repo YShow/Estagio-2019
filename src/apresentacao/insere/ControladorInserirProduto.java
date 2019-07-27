@@ -34,10 +34,10 @@ public class ControladorInserirProduto {
     private TextField txtPreco;
     @FXML
     private Button btnGravar;
-    private static TIPO_TELA tipo_tela;
+    private static TIPO_TELA tipo_telaa;
 
     public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela) {
-	ControladorInserirProduto.tipo_tela = tipo_tela;
+	tipo_telaa = tipo_tela;
 	Parent root;
 	var stage = new Stage();
 
@@ -68,13 +68,13 @@ public class ControladorInserirProduto {
     void btnGravar(ActionEvent event) {
 	var produto = new NegProduto();
 	try {
-	    if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
+	    if (tipo_telaa.equals(TIPO_TELA.ALTERA)) {
 
 		var resultado = produto.alterar(pegaProduto());
 
 	    }
 
-	    else if (tipo_tela.equals(TIPO_TELA.INSERE)) {
+	    else if (tipo_telaa.equals(TIPO_TELA.INSERE)) {
 		System.out.println("insere");
 	    }
 	} catch (SQLException e) {

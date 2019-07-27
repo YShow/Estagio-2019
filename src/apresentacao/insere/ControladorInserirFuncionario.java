@@ -1,6 +1,7 @@
 package apresentacao.insere;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,6 +14,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import negocio.NegFuncionario;
+import objeto.Funcionario;
 import utilidade.TIPO_TELA;
 
 public class ControladorInserirFuncionario {
@@ -21,14 +24,18 @@ public class ControladorInserirFuncionario {
 
     @FXML
     private PasswordField txtSenhaFuncionario;
+    @FXML
+    private TextField txtFuncao;
 
     @FXML
     private CheckBox chkAdm;
 
     @FXML
     private Button btnGravarFuncionario;
+    private static TIPO_TELA tipo_telaa;
 
     public void abreTelaFuncionarioInsere(final TIPO_TELA tipo_tela) {
+	tipo_telaa = tipo_tela;
 	var stage = new Stage();
 	Parent root;
 	var loader = new FXMLLoader();
@@ -56,7 +63,22 @@ public class ControladorInserirFuncionario {
 
     @FXML
     void btnGravarFuncionario(ActionEvent event) {
-
+	if(tipo_telaa == TIPO_TELA.INSERE)
+	{
+	    System.out.println("executando");
+	    Funcionario funcionario = new Funcionario();
+	    funcionario.setAdministrador(chkAdm.isPressed());
+	    funcionario.setFuncao(txtFuncao.getText());
+	    funcionario.setNome(txtNomeFuncionario.getText());
+	    funcionario.setSenha(txtSenhaFuncionario.getText());
+	    
+	    NegFuncionario insere  = new NegFuncionario();
+	    try {
+		insere.inserir(funcionario);
+	    } catch (SQLException e) {		
+		System.out.println(e.getMessage());
+	    }
+	}
     }
 
 }
