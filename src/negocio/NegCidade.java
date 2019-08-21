@@ -20,7 +20,7 @@ public class NegCidade {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_INSERT)) {
 	    comando.setString(1, cidade.getNome());
 	    comando.setString(2, cidade.getEstado());
-
+	   
 	    return comando.execute();
 	}
     }
