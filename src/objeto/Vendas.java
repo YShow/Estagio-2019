@@ -1,12 +1,13 @@
 package objeto;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 public class Vendas {
     private Produto produto;
     private Cliente cliente;
     private int codigo;
-    private Date data;
+    private LocalDate data;
 
     private String formaPagamento;
 
@@ -26,11 +27,11 @@ public class Vendas {
 	this.cliente = cliente;
     }
 
-    public Date getData() {
+    public LocalDate getData() {
 	return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
 	this.data = data;
     }
 

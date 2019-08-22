@@ -2,8 +2,8 @@ package negocio;
 
 import acessoBD.MariaDB.AcessoBD;
 
-import java.sql.Date;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,14 +19,14 @@ public class NegCaixa {
 	    + "SET data= ?, preco_total=?, saida= ?, codigo_cliente= ?" + "WHERE codigo= ?;";
     private static final String SQL_DELETE = "";
 
-    public boolean inserir(Caixa caixa) throws SQLException {
+    public int inserir(Caixa caixa) throws SQLException {
 	try (final var comando = conexao.getConexao().prepareStatement(SQL_INSERT)) {
-	    comando.setString(1, caixa.getData().toString());
+	    comando.setObject(1, caixa.getData());
 	    comando.setDouble(2, caixa.getPrecototal());
 	    comando.setDouble(3, caixa.getSaida());
 	    comando.setInt(4, caixa.getCliente());
 
-	    return comando.execute();
+	    return comando.executeUpdate();
 	}
     }
 
@@ -39,7 +39,7 @@ public class NegCaixa {
 	    while (result.next()) {
 		var caixa = new Caixa();
 		caixa.setCodigo(result.getInt("codigo"));
-		caixa.setData(result.getDate("data"));
+		caixa.setData(result.getObject("data",LocalDate.class));
 		caixa.setPrecototal(result.getDouble("preco_total"));
 		caixa.setSaida(result.getDouble("saida"));
 		caixa.setCliente(result.getInt("codigo_cliente"));
@@ -51,7 +51,7 @@ public class NegCaixa {
 
     public int alterar(Caixa caixa) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_UPDATE)) {
-	    comando.setDate(1, (Date) caixa.getData());
+	    comando.setObject(1, caixa.getData());
 	    comando.setDouble(2, caixa.getPrecototal());
 	    comando.setDouble(3, caixa.getSaida());
 	    comando.setDouble(4, caixa.getCliente());
@@ -60,9 +60,10 @@ public class NegCaixa {
 	}
     }
 
-    public boolean excluir(int id) throws SQLException {
+    public int excluir(int id) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_DELETE)) {
-	    return false;
+	    comando.setInt(1, id);
+	    return comando.executeUpdate();
 	}
     }
 }

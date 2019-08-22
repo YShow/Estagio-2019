@@ -1,13 +1,13 @@
 package objeto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Caixa {
-    public Date getData() {
+    public LocalDate getData() {
 	return data;
     }
 
-    public void setData(Date data) {
+    public void setData(LocalDate data) {
 	this.data = data;
 
     }
@@ -41,7 +41,7 @@ public class Caixa {
     }
 
     private int codigo;
-    private Date data;
+    private LocalDate data;
     private Double precototal;
     private Double saida;
     private int cliente;
