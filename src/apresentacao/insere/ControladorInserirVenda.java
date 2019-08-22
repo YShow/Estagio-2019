@@ -74,6 +74,6 @@ public class ControladorInserirVenda {
     void btnPesquisaProduto(ActionEvent event) {
 	var telaProduto = new ControladorMenuProduto();
 	telaProduto.abreTelaProdutoMenu(TIPO_TELA.CONSULTA);
-	;
+	
     }
 }

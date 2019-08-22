@@ -26,6 +26,8 @@ public class ControladorInserirFuncionario {
     private PasswordField txtSenhaFuncionario;
     @FXML
     private TextField txtFuncao;
+    @FXML
+    private TextField txtCodigo;
 
     @FXML
     private CheckBox chkAdm;
@@ -34,7 +36,7 @@ public class ControladorInserirFuncionario {
     private Button btnGravarFuncionario;
     private static TIPO_TELA tipo_telaa;
 
-    public void abreTelaFuncionarioInsere(final TIPO_TELA tipo_tela) {
+    public void abreTelaFuncionarioInsere(final TIPO_TELA tipo_tela,Funcionario funcionario) {
 	tipo_telaa = tipo_tela;
 	var stage = new Stage();
 	Parent root;
@@ -47,12 +49,19 @@ public class ControladorInserirFuncionario {
 	    stage.setScene(new Scene(root, 600, 450));
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
+	    var controlador = (ControladorInserirFuncionario) loader.getController();
 	    if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
-		var controlador = (ControladorInserirFuncionario) loader.getController();
+		
 		controlador.btnGravarFuncionario.setText("Alterar");
+		controlador.txtFuncao.setText(funcionario.getFuncao());
+		controlador.txtNomeFuncionario.setText(funcionario.getNome());
+		controlador.txtSenhaFuncionario.setText(funcionario.getSenha());
+		controlador.chkAdm.setSelected(funcionario.getAdministrador());
+		controlador.txtCodigo.setText(String.valueOf(funcionario.getCodigo()));
 		stage.setTitle("Alterar Funcionario");
 		stage.show();
 	    } else {
+		
 		stage.setTitle("Inserir Funcionario");
 		stage.show();
 	    }
@@ -65,16 +74,34 @@ public class ControladorInserirFuncionario {
     void btnGravarFuncionario(ActionEvent event) {
 	if(tipo_telaa == TIPO_TELA.INSERE)
 	{
-	    System.out.println("executando");
-	    Funcionario funcionario = new Funcionario();
-	    funcionario.setAdministrador(chkAdm.isPressed());
+	    
+	    var funcionario = new Funcionario();	    
+	    funcionario.setAdministrador(chkAdm.isSelected());
 	    funcionario.setFuncao(txtFuncao.getText());
 	    funcionario.setNome(txtNomeFuncionario.getText());
 	    funcionario.setSenha(txtSenhaFuncionario.getText());
 	    
-	    NegFuncionario insere  = new NegFuncionario();
+	    final var insere  = new NegFuncionario();
 	    try {
-		insere.inserir(funcionario);
+		 insere.inserir(funcionario);
+		
+	    } catch (SQLException e) {		
+		System.out.println(e.getMessage());
+	    }
+	} else {
+	    var funcionario = new Funcionario();
+	    
+	    funcionario.setCodigo(Integer.valueOf(txtCodigo.getText()));
+	    System.out.println(funcionario.getCodigo());
+	    funcionario.setAdministrador(chkAdm.isSelected());
+	    funcionario.setFuncao(txtFuncao.getText());
+	    funcionario.setNome(txtNomeFuncionario.getText());
+	    funcionario.setSenha(txtSenhaFuncionario.getText());
+	    
+	    final var altera  = new NegFuncionario();
+	    try {
+		 altera.alterar(funcionario);
+		
 	    } catch (SQLException e) {		
 		System.out.println(e.getMessage());
 	    }

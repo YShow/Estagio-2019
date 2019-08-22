@@ -30,10 +30,13 @@
 			<center>
 				<AnchorPane minWidth="-Infinity" prefHeight="275.0" prefWidth="606.0">
 					<children>
-						<TableView layoutX="175.0" layoutY="47.0" prefHeight="294.0" prefWidth="606.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<TableView fx:id="tblFuncionario" layoutX="175.0" layoutY="47.0" prefHeight="294.0" prefWidth="606.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<columns>
-								<TableColumn prefWidth="75.0" text="C1" />
-								<TableColumn minWidth="0.0" prefWidth="200.0" text="C2" />
+                        <TableColumn fx:id="tcCodigo" prefWidth="75.0" text="Código" />
+								<TableColumn fx:id="tcNome" prefWidth="75.0" text="Nome" />
+								<TableColumn fx:id="tcFuncao" minWidth="0.0" prefWidth="200.0" text="Função" />
+                        <TableColumn fx:id="tcSenha" prefWidth="75.0" text="Senha" />
+                        <TableColumn fx:id="tcAdm" prefWidth="118.0" text="Administrador" />
 							</columns>
 						</TableView>
 					</children>
