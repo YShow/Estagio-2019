@@ -30,10 +30,13 @@
 			<center>
 				<AnchorPane minWidth="-Infinity" prefHeight="275.0" prefWidth="606.0">
 					<children>
-						<TableView layoutX="175.0" layoutY="47.0" prefHeight="294.0" prefWidth="606.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<TableView fx:id="tvProduto" layoutX="175.0" layoutY="47.0" prefHeight="294.0" prefWidth="606.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<columns>
-								<TableColumn prefWidth="75.0" text="C1" />
-								<TableColumn prefWidth="131.0" text="C2" />
+								<TableColumn fx:id="tcCodigo" prefWidth="75.0" text="Código" />
+								<TableColumn fx:id="tcNome" prefWidth="131.0" text="Nome" />
+                        <TableColumn fx:id="tcPreco" prefWidth="75.0" text="Preço" />
+                        <TableColumn fx:id="tcQuantidade" prefWidth="75.0" text="Quantidade" />
+                        <TableColumn fx:id="tcAtivo" prefWidth="75.0" text="Ativo" />
 							</columns>
 						</TableView>
 					</children>

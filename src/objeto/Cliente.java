@@ -43,11 +43,11 @@ public class Cliente {
 	this.ativo = ativo;
     }
 
-    public int getCidade() {
+    public Cidade getCidade() {
 	return cidade;
     }
 
-    public void setCidade(int cidade) {
+    public void setCidade(Cidade cidade) {
 	this.cidade = cidade;
     }
 
@@ -64,5 +64,5 @@ public class Cliente {
     private String endereco;
     private String telefone;
     private Boolean ativo;
-    private int cidade;
+    private Cidade cidade;
 }

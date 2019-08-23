@@ -72,35 +72,30 @@ public class ControladorInserirFuncionario {
 
     @FXML
     void btnGravarFuncionario(ActionEvent event) {
+	final var negFun  = new NegFuncionario();
+	final var funcionario = new Funcionario();
 	if(tipo_telaa == TIPO_TELA.INSERE)
-	{
-	    
-	    var funcionario = new Funcionario();	    
+	{	 
 	    funcionario.setAdministrador(chkAdm.isSelected());
 	    funcionario.setFuncao(txtFuncao.getText());
 	    funcionario.setNome(txtNomeFuncionario.getText());
-	    funcionario.setSenha(txtSenhaFuncionario.getText());
-	    
-	    final var insere  = new NegFuncionario();
+	    funcionario.setSenha(txtSenhaFuncionario.getText());	 
 	    try {
-		 insere.inserir(funcionario);
+		 negFun.inserir(funcionario);
 		
 	    } catch (SQLException e) {		
 		System.out.println(e.getMessage());
 	    }
-	} else {
-	    var funcionario = new Funcionario();
-	    
-	    funcionario.setCodigo(Integer.valueOf(txtCodigo.getText()));
-	    System.out.println(funcionario.getCodigo());
+	} else {	    
+	    funcionario.setCodigo(Integer.valueOf(txtCodigo.getText()));	   
 	    funcionario.setAdministrador(chkAdm.isSelected());
 	    funcionario.setFuncao(txtFuncao.getText());
 	    funcionario.setNome(txtNomeFuncionario.getText());
 	    funcionario.setSenha(txtSenhaFuncionario.getText());
 	    
-	    final var altera  = new NegFuncionario();
+	   
 	    try {
-		 altera.alterar(funcionario);
+		 negFun.alterar(funcionario);
 		
 	    } catch (SQLException e) {		
 		System.out.println(e.getMessage());

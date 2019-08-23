@@ -21,7 +21,8 @@ import objeto.Cidade;
 public class ControladorInserirCidade {
     @FXML
     private TextField txtCidade;
-
+    @FXML
+    private TextField txtCodigo;
     @FXML
     private Button btnGravar;
     
@@ -32,7 +33,7 @@ public class ControladorInserirCidade {
     private static TIPO_TELA tipo_telaa;
 
 
-    public void abreTelaCidadeInsere(final TIPO_TELA tipo_tela) {
+    public void abreTelaCidadeInsere(final TIPO_TELA tipo_tela,Cidade cidade) {
 	
 	tipo_telaa = tipo_tela;
 	var stage = new Stage();
@@ -50,6 +51,9 @@ public class ControladorInserirCidade {
 	    if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 		var controlador = (ControladorInserirCidade) loader.getController();
 		controlador.btnGravar.setText("Alterar");
+		controlador.txtCidade.setText(cidade.getNome());
+		controlador.txtEstado.setText(cidade.getEstado());
+		controlador.txtCodigo.setText(String.valueOf(cidade.getCodigo()));
 		stage.setTitle("Alterar Cidade");
 		stage.show();
 	    } else if (tipo_tela.equals(TIPO_TELA.INSERE)) {
@@ -65,17 +69,30 @@ public class ControladorInserirCidade {
 
     @FXML
     void btnGravar(ActionEvent event) {
+	final  var negcidade = new NegCidade();
+	  final var cidade = new Cidade();
 	if(tipo_telaa == TIPO_TELA.INSERE)
 	{
-	    Cidade cidade = new Cidade();
+	    
 	    cidade.setNome(txtCidade.getText());
 	    cidade.setEstado(txtEstado.getText());
-	    NegCidade negcidade = new NegCidade();
+	  
 	   try {
 	    negcidade.inserir(cidade);
 	} catch (SQLException e) {
 	   System.out.println(e.getMessage());
 	}
+	} else
+	{
+	    cidade.setCodigo(Integer.valueOf(txtCodigo.getText()));
+	    cidade.setEstado(txtEstado.getText());
+	    cidade.setNome(txtCidade.getText());
+	    
+	    try {
+		negcidade.alterar(cidade);
+	    } catch (SQLException e) {
+		  System.out.println(e.getMessage());
+	    }
 	}
     }
 }

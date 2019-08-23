@@ -12,7 +12,7 @@ import objeto.VendaProd;
 public class NegCidade {
     private final AcessoBD conexao = new AcessoBD();
     private static final String SQL_INSERT = "INSERT INTO cidade(nome,estado) values(?,?)";
-    private static final String SQL_SEARCH = "select nome,estado from cidade where nome LIKE ? ";
+    private static final String SQL_SEARCH = "select codigo,nome,estado from cidade where nome LIKE ? ";
     private static final String SQL_UPDATE = "update cidade set nome = ?, estado = ? where codigo = ?";
     private static final String SQL_DELETE = "";
 
@@ -32,6 +32,7 @@ public class NegCidade {
 	    var lista = new ArrayList<Cidade>();
 	    while (result.next()) {
 		var cidade = new Cidade();
+		cidade.setCodigo(result.getInt("codigo"));
 		cidade.setNome(result.getString("nome"));
 		cidade.setEstado(result.getString("estado"));
 		lista.add(cidade);
