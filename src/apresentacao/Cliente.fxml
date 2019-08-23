@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="393.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apresentacao.ControladorMenuCliente">
+<AnchorPane prefHeight="393.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apresentacao.ControladorMenuCliente">
 	<children>
 		<BorderPane prefHeight="393.0" prefWidth="376.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<top>
@@ -39,6 +39,7 @@
                         <TableColumn fx:id="tcTelefone" prefWidth="76.0" text="Telefone" />
                         <TableColumn fx:id="tcAtivo" prefWidth="91.0" text="Ativo" />
                         <TableColumn fx:id="tcCidade" prefWidth="75.0" text="Cidade" />
+                        <TableColumn fx:id="tcCodCidade" prefWidth="75.0" text="Cod. Cidade" visible="false" />
 							</columns>
 						</TableView>
 					</children>

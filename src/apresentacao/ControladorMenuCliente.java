@@ -2,6 +2,8 @@ package apresentacao;
 
 import javafx.beans.binding.Binding;
 import javafx.beans.binding.Bindings;
+import javafx.beans.property.ReadOnlyIntegerWrapper;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -67,6 +69,8 @@ public class ControladorMenuCliente {
     private TableColumn<Cliente, Boolean> tcAtivo;
     @FXML
     private TableColumn<Cliente,String> tcCidade;
+    @FXML
+    private TableColumn<Cliente, Integer> tcCodCidade;
     private final ControladorInserirCliente tela = new ControladorInserirCliente();
 
     public void abreTelaClienteMenu(final TIPO_TELA tipo_tela) {
@@ -116,12 +120,20 @@ public class ControladorMenuCliente {
 	    tcEndereco.setCellValueFactory(new PropertyValueFactory("Endereco"));
 	    tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));
 	    tcTelefone.setCellValueFactory(new PropertyValueFactory("Telefone"));
-	    tcCidade.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cliente,Cidade>, ObservableValue<String>>() {
+	    //workaround para selecionar apenas o nome da cidade em vez de a referencia de memoria
+	    tcCidade.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cliente,String>, ObservableValue<String>>() {
 	        
 	        @Override
-	        public ObservableValue<String> call(CellDataFeatures<Cliente, Cidade> param) {
-	    	// TODO Auto-generated method stub
+	        public ObservableValue<String> call(CellDataFeatures<Cliente, String> param) {	    	
 	    	return new ReadOnlyStringWrapper(param.getValue().getCidade().getNome());
+	        }
+	    });
+	    
+	    tcCodCidade.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cliente,Integer>, ObservableValue<Integer>>() {
+	        
+	        @Override
+	        public  ObservableValue<Integer> call(CellDataFeatures<Cliente, Integer> param) {	    	
+	    	return new ReadOnlyObjectWrapper<>(param.getValue().getCidade().getCodigo());
 	        }
 	    });
 	   

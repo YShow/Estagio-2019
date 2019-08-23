@@ -18,8 +18,8 @@ public class NegCliente {
     	"FROM cantagalo.cliente c\n" + 
     	"JOIN cidade ci ON c.id_cidade = ci.codigo\n"
     	+ "WHERE c.nome LIKE ?;";
-    private static final String SQL_UPDATE = "update cliente set nome = ?, CPF = ?, endereco = ?"
-	    + "telefone = ?, ativo = ?, id_cidade = ? where codigo = ? ;";
+    private static final String SQL_UPDATE = "update cliente set nome = ?, CPF = ?, endereco = ?,"
+	    + "telefone = ?, ativo = ?, id_cidade = ? where codigo = ?;";
     private static final String SQL_DELETE = "";
 
     public int inserir(Cliente cliente) throws SQLException {
