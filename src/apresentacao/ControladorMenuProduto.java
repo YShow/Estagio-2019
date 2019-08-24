@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import negocio.NegCidade;
 import negocio.NegProduto;
 import objeto.Cidade;
+import objeto.Cliente;
 import objeto.Produto;
 
 public class ControladorMenuProduto {
@@ -55,8 +56,10 @@ public class ControladorMenuProduto {
 
     @FXML
     private TableColumn<Produto, Boolean> tcAtivo;
+    private static TIPO_TELA tipo_telaa;
 
     public void abreTelaProdutoMenu(final TIPO_TELA tipo_tela) {
+	tipo_telaa = tipo_tela;
 	var stage = new Stage();
 	Parent root;
 	var loader = new FXMLLoader();
@@ -78,7 +81,7 @@ public class ControladorMenuProduto {
 
 		controlador.btnDesativaProduto.setText("Selecionar");
 		stage.setTitle("Consultar produto ");
-		stage.show();
+		stage.showAndWait();
 	    }
 	} catch (IOException e) {
 	    System.out.println(e.getMessage());
@@ -112,7 +115,16 @@ public class ControladorMenuProduto {
 
     @FXML
     void btnDesativaProduto(ActionEvent event) {
-
+	if(tipo_telaa.equals(TIPO_TELA.CONSULTA))
+	{
+	    var produto = tvProduto.getSelectionModel().getSelectedItem();
+	    System.out.println(produto.getCodigo());
+	    Produto.codProduto = produto.getCodigo();
+	}
+	else
+	{
+	    
+	}
     }
 
     @FXML

@@ -8,6 +8,15 @@ public class Vendas {
     private Cliente cliente;
     private int codigo;
     private LocalDate data;
+    private Caixa caixa;
+
+    public Caixa getCaixa() {
+        return caixa;
+    }
+
+    public void setCaixa(Caixa caixa) {
+        this.caixa = caixa;
+    }
 
     private String formaPagamento;
 
@@ -45,6 +54,11 @@ public class Vendas {
 
     public int getCodigo() {
 	return codigo;
+    }
+    
+    public void setCodigo(int codigo)
+    {
+	this.codigo = codigo;
     }
 
 }

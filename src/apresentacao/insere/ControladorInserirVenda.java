@@ -13,6 +13,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import objeto.Cidade;
+import objeto.Cliente;
+import objeto.Produto;
+import objeto.Vendas;
 import utilidade.TIPO_TELA;
 
 public class ControladorInserirVenda {
@@ -36,8 +40,10 @@ public class ControladorInserirVenda {
 
     @FXML
     private Button btnGravar;
+    private TIPO_TELA tipo_telaa;
 
-    public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela) {
+    public void abreTelaVendaInsere(final TIPO_TELA tipo_tela,Vendas venda) {
+	tipo_telaa = tipo_tela;
 	Parent root;
 	var stage = new Stage();
 
@@ -52,7 +58,7 @@ public class ControladorInserirVenda {
 	    stage.setMinWidth(root.minWidth(-1));
 	    if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 		var controlador = (ControladorInserirVenda) loader.getController();
-		controlador.btnGravar.setText("Alterar");
+		controlador.txtCliente.setText(String.valueOf(venda.getCliente().getCodigo()));
 		stage.setTitle("Alterar Venda");
 		stage.show();
 	    } else if (tipo_tela.equals(TIPO_TELA.INSERE)) {
@@ -68,12 +74,24 @@ public class ControladorInserirVenda {
     void btnPesquisaCliente(ActionEvent event) {
 	var telaCliente = new ControladorMenuCliente();
 	telaCliente.abreTelaClienteMenu(TIPO_TELA.CONSULTA);
+	atualizaValorCliente();
     }
 
     @FXML
     void btnPesquisaProduto(ActionEvent event) {
 	var telaProduto = new ControladorMenuProduto();
 	telaProduto.abreTelaProdutoMenu(TIPO_TELA.CONSULTA);
+	atualizaValorProduto();
+    }
+    
+    private void atualizaValorCliente()
+    {
 	
+	txtCliente.setText(String.valueOf(Cliente.CodClienteGet()));
+    }
+    
+    private void atualizaValorProduto()
+    {
+	txtProduto.setText(String.valueOf(Produto.CodProdutoGet()));
     }
 }

@@ -41,8 +41,12 @@ public class Produto {
     public void setCodigo(int codigo) {
 	this.codigo = codigo;
     }
-
+    public static int CodProdutoGet()
+    {
+	return codProduto;
+    }
     private Boolean ativo;
+    public static int codProduto;
     private Double preco;
     private int quantidade;
     private String nome;

@@ -75,7 +75,7 @@ public class ControladorInserirCliente {
 		controlador.txtCodCidade.setText(String.valueOf(cliente.getCidade().getCodigo()));
 		controlador.btnGrava.setText("Alterar");
 		stage.setTitle("Alterar Cliente");
-		stage.show();
+		stage.showAndWait();
 	    } else if (tipo_tela.equals(TIPO_TELA.INSERE)) {
 		stage.setTitle("Inserir Cliente");
 		stage.show();

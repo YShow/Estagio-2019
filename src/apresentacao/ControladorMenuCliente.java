@@ -72,8 +72,9 @@ public class ControladorMenuCliente {
     @FXML
     private TableColumn<Cliente, Integer> tcCodCidade;
     private final ControladorInserirCliente tela = new ControladorInserirCliente();
-
+    private static TIPO_TELA tipo_telaa;
     public void abreTelaClienteMenu(final TIPO_TELA tipo_tela) {
+	tipo_telaa = tipo_tela;
 	var stage = new Stage();
 	Parent root;
 	var loader = new FXMLLoader();
@@ -94,7 +95,7 @@ public class ControladorMenuCliente {
 		controlador.btnAlterarCliente.setVisible(false);
 		controlador.btnDesativarCliente.setText("Selecionar");
 		stage.setTitle("Consultar Cliente");
-		stage.show();
+		stage.showAndWait();
 	    }
 	} catch (IOException e) {
 	    System.out.println(e.getMessage());
@@ -145,7 +146,16 @@ public class ControladorMenuCliente {
 
     @FXML
     void btnDesativarCliente(ActionEvent event) {
-
+	
+	if(tipo_telaa.equals(TIPO_TELA.CONSULTA))
+	{
+	    var cliente = tvCliente.getSelectionModel().getSelectedItem();
+	    System.out.println(cliente.getCodigo());
+	    Cliente.codCliente = cliente.getCodigo();
+	}
+	else {
+	    
+	}
     }
 
     @FXML

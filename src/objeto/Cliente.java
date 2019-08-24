@@ -58,8 +58,14 @@ public class Cliente {
     public void setCodigo(int codigo) {
 	this.codigo = codigo;
     }
-
+    public static int CodClienteGet()
+    {
+	return codCliente;
+    }
+   
+    
     private String nome;
+    public static int codCliente;
     private String cpf;
     private String endereco;
     private String telefone;

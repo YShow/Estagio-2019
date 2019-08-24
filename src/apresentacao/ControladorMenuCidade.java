@@ -19,9 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import negocio.NegCidade;
-import negocio.NegFuncionario;
 import objeto.Cidade;
-import objeto.Funcionario;
 import utilidade.TIPO_TELA;
 
 public class ControladorMenuCidade {
@@ -91,12 +89,13 @@ public class ControladorMenuCidade {
 	final var negCidade = new NegCidade();
 	try {
 	    List<Cidade> funcionario = negCidade.consultar(txtConsullaCidade.getText());
+	   
 	    var data = FXCollections.observableList(funcionario);
 	    tvCidade.setItems(data);
 	    tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
 	    tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));
 	    tcEstado.setCellValueFactory(new PropertyValueFactory("Estado"));
-	    
+	   
 	} catch (SQLException e) {
 	    
 	    System.out.println(e.getMessage());
