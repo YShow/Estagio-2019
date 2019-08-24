@@ -4,7 +4,7 @@ public class Funcionario {
     private int codigo;
 
     public void setCodigo(int codigo) {
-        this.codigo = codigo;
+	this.codigo = codigo;
     }
 
     public String getNome() {

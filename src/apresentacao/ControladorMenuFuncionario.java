@@ -1,7 +1,6 @@
 package apresentacao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import apresentacao.insere.ControladorInserirFuncionario;
@@ -12,10 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import negocio.NegCidade;
 import negocio.NegFuncionario;
-import objeto.Cidade;
 import objeto.Funcionario;
 import utilidade.TIPO_TELA;
 
@@ -25,10 +21,10 @@ public class ControladorMenuFuncionario {
     private TextField txtFuncionario;
     @FXML
     private TableView<Funcionario> tblFuncionario;
-    
+
     @FXML
     private TableColumn<Funcionario, Integer> tcCodigo;
-    
+
     @FXML
     private TableColumn<Funcionario, String> tcNome;
 
@@ -46,10 +42,9 @@ public class ControladorMenuFuncionario {
     void btnAlteraFuncionario(ActionEvent event) {
 	final var funcionario = tblFuncionario.getSelectionModel().getSelectedItem();
 	System.out.println(funcionario.getNome());
-	tela.abreTelaFuncionarioInsere(TIPO_TELA.ALTERA,funcionario);
+	tela.abreTelaFuncionarioInsere(TIPO_TELA.ALTERA, funcionario);
     }
 
-    
     @FXML
     void btnConsultaFuncionario(ActionEvent event) {
 	final var negFuncionario = new NegFuncionario();
@@ -63,7 +58,7 @@ public class ControladorMenuFuncionario {
 	    tcSenha.setCellValueFactory(new PropertyValueFactory("Senha"));
 	    tcAdm.setCellValueFactory(new PropertyValueFactory("Administrador"));
 	} catch (SQLException e) {
-	    
+
 	    System.out.println(e.getMessage());
 	}
     }
@@ -75,6 +70,6 @@ public class ControladorMenuFuncionario {
 
     @FXML
     void btnInsereFuncionario(ActionEvent event) {
-	tela.abreTelaFuncionarioInsere(TIPO_TELA.INSERE,null);
+	tela.abreTelaFuncionarioInsere(TIPO_TELA.INSERE, null);
     }
 }

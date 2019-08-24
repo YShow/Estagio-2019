@@ -3,8 +3,6 @@ package apresentacao.insere;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import utilidade.TIPO_TELA;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +15,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import negocio.NegProduto;
 import objeto.Produto;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import utilidade.TIPO_TELA;
 
 public class ControladorInserirProduto {
 
@@ -39,7 +36,7 @@ public class ControladorInserirProduto {
     private CheckBox chkAtivo;
     private static TIPO_TELA tipo_telaa;
 
-    public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela,Produto produto) {
+    public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela, Produto produto) {
 	tipo_telaa = tipo_tela;
 	Parent root;
 	var stage = new Stage();
@@ -76,9 +73,8 @@ public class ControladorInserirProduto {
     void btnGravar(ActionEvent event) {
 	var negProduto = new NegProduto();
 	var produto = new Produto();
-	if(tipo_telaa == TIPO_TELA.INSERE)
-	{
-	    produto.setAtivo(chkAtivo.isSelected());	    
+	if (tipo_telaa == TIPO_TELA.INSERE) {
+	    produto.setAtivo(chkAtivo.isSelected());
 	    produto.setNome(txtNome.getText());
 	    produto.setPreco(Double.valueOf(txtPreco.getText()));
 	    produto.setQuantidade(Integer.valueOf(txtQuantidade.getText()));
@@ -87,22 +83,20 @@ public class ControladorInserirProduto {
 	    } catch (SQLException e) {
 		System.out.println(e.getMessage());
 	    }
-	} else
-	{
+	} else {
 	    produto.setAtivo(chkAtivo.isSelected());
 	    produto.setCodigo(Integer.valueOf(txtCodigo.getText()));
 	    produto.setNome(txtNome.getText());
 	    produto.setPreco(Double.valueOf(txtPreco.getText()));
 	    produto.setQuantidade(Integer.valueOf(txtQuantidade.getText()));
-	    
+
 	    try {
 		negProduto.alterar(produto);
 	    } catch (SQLException e) {
 		System.out.println(e.getMessage());
 	    }
-	  }
-	
+	}
+
     }
 
-    
 }

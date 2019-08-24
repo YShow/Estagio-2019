@@ -1,11 +1,10 @@
 package negocio;
 
-import acessoBD.MariaDB.AcessoBD;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import acessoBD.MariaDB.AcessoBD;
 import objeto.Cidade;
 import objeto.Cliente;
 
@@ -13,11 +12,9 @@ public class NegCliente {
     private final AcessoBD conexao = new AcessoBD();
     private static final String SQL_INSERT = "insert into cliente(nome,CPF,endereco,telefone,ativo,id_cidade)"
 	    + " values(?,?,?,?,?,?)";
-    private static final String SQL_SEARCH = "SELECT c.codigo, c.nome, c.CPF, c.endereco, c.telefone, c.ativo, c.id_cidade,\n" + 
-    	"ci.nome\n" + 
-    	"FROM cantagalo.cliente c\n" + 
-    	"JOIN cidade ci ON c.id_cidade = ci.codigo\n"
-    	+ "WHERE c.nome LIKE ?;";
+    private static final String SQL_SEARCH = "SELECT c.codigo, c.nome, c.CPF, c.endereco, c.telefone, c.ativo, c.id_cidade,\n"
+	    + "ci.nome\n" + "FROM cantagalo.cliente c\n" + "JOIN cidade ci ON c.id_cidade = ci.codigo\n"
+	    + "WHERE c.nome LIKE ?;";
     private static final String SQL_UPDATE = "update cliente set nome = ?, CPF = ?, endereco = ?,"
 	    + "telefone = ?, ativo = ?, id_cidade = ? where codigo = ?;";
     private static final String SQL_DELETE = "";
@@ -44,12 +41,11 @@ public class NegCliente {
 	    comando.setString(1, '%' + metodo + '%');
 	    var result = comando.executeQuery();
 	    var lista = new ArrayList<Cliente>();
-	    /*SELECT c.codigo, c.nome, c.CPF, c.endereco, c.telefone, c.ativo, c.id_cidade,\n" + 
-	    	"ci.nome\n" + 
-	    	"FROM cantagalo.cliente c\n" + 
-	    	"JOIN cidade ci ON c.id_cidade = ci.codigo"
-	    	+ "WHERE c.nome LIKE ? 
-	    */
+	    /*
+	     * SELECT c.codigo, c.nome, c.CPF, c.endereco, c.telefone, c.ativo,
+	     * c.id_cidade,\n" + "ci.nome\n" + "FROM cantagalo.cliente c\n" +
+	     * "JOIN cidade ci ON c.id_cidade = ci.codigo" + "WHERE c.nome LIKE ?
+	     */
 	    while (result.next()) {
 		var cliente = new Cliente();
 		var cidade = new Cidade();
@@ -59,10 +55,10 @@ public class NegCliente {
 		cliente.setEndereco(result.getString("c.endereco"));
 		cliente.setTelefone(result.getString("c.telefone"));
 		cliente.setAtivo(result.getBoolean("c.ativo"));
-		
+
 		cidade.setNome(result.getString("ci.nome"));
 		cidade.setCodigo(result.getInt("c.id_cidade"));
-		
+
 		cliente.setCidade(cidade);
 		lista.add(cliente);
 	    }
@@ -72,9 +68,7 @@ public class NegCliente {
 
     public int alterar(Cliente cliente) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_UPDATE)) {
-	    
-	    
-	    
+
 	    comando.setString(1, cliente.getNome());
 	    comando.setString(2, cliente.getCPF());
 	    comando.setString(3, cliente.getEndereco());

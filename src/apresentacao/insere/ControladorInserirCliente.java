@@ -14,7 +14,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import negocio.NegCidade;
 import negocio.NegCliente;
 import objeto.Cidade;
 import objeto.Cliente;
@@ -47,9 +46,8 @@ public class ControladorInserirCliente {
     @FXML
     private TextField txtCodCidade;
     private static TIPO_TELA tipo_telaa;
-    
-    
-    public void abreTelaClienteInsere(final TIPO_TELA tipo_tela,Cliente cliente) {
+
+    public void abreTelaClienteInsere(final TIPO_TELA tipo_tela, Cliente cliente) {
 	tipo_telaa = tipo_tela;
 	var stage = new Stage();
 	Parent root;
@@ -63,7 +61,7 @@ public class ControladorInserirCliente {
 	    stage.setMinWidth(root.minWidth(-1));
 	    stage.setScene(new Scene(root, 600, 450));
 	    var controlador = (ControladorInserirCliente) loader.getController();
-	    if (tipo_tela.equals(tipo_telaa.ALTERA)) {		
+	    if (tipo_tela.equals(tipo_telaa.ALTERA)) {
 		controlador.btnGrava.setText("Alterar");
 		controlador.chkAtivo.setSelected((cliente.getAtivo()));
 		controlador.txtCidade.setText(cliente.getCidade().getNome());
@@ -87,39 +85,36 @@ public class ControladorInserirCliente {
 
     @FXML
     void btnGrava(ActionEvent event) {
-	final  var negCliente = new NegCliente();
-	  final var cliente = new Cliente();
-	  final var cidade = new Cidade();
-	if(tipo_telaa == TIPO_TELA.INSERE)
-	{
+	final var negCliente = new NegCliente();
+	final var cliente = new Cliente();
+	final var cidade = new Cidade();
+	if (tipo_telaa == TIPO_TELA.INSERE) {
 	    cliente.setAtivo(chkAtivo.isSelected());
-	    
-	    //INSERCAO DE CODIGO CIDADE APENAS
-	    cidade.setCodigo(Integer.valueOf(txtCodCidade.getText()));   
-	    
+
+	    // INSERCAO DE CODIGO CIDADE APENAS
+	    cidade.setCodigo(Integer.valueOf(txtCodCidade.getText()));
+
 	    cliente.setCidade(cidade);
-	    
-	  
-	   try {
-	   negCliente.inserir(cliente);
-	} catch (SQLException e) {
-	   System.out.println(e.getMessage());
-	}
-	} else
-	{
-	   cliente.setAtivo(chkAtivo.isSelected());
-	   cliente.setCodigo(Integer.valueOf(txtCodigo.getText()));
-	   cliente.setCPF(txtCPF.getText());
-	   cliente.setEndereco(txtEndereco.getText());
-	   cliente.setNome(txtNome.getText());
-	   cliente.setTelefone(txtTelefone.getText());	   
-	   cidade.setCodigo(Cidade.CodCidadeGet());
-	   cliente.setCidade(cidade);
-	    
+
+	    try {
+		negCliente.inserir(cliente);
+	    } catch (SQLException e) {
+		System.out.println(e.getMessage());
+	    }
+	} else {
+	    cliente.setAtivo(chkAtivo.isSelected());
+	    cliente.setCodigo(Integer.valueOf(txtCodigo.getText()));
+	    cliente.setCPF(txtCPF.getText());
+	    cliente.setEndereco(txtEndereco.getText());
+	    cliente.setNome(txtNome.getText());
+	    cliente.setTelefone(txtTelefone.getText());
+	    cidade.setCodigo(Cidade.CodCidadeGet());
+	    cliente.setCidade(cidade);
+
 	    try {
 		negCliente.alterar(cliente);
 	    } catch (SQLException e) {
-		  System.out.println(e.getMessage());
+		System.out.println(e.getMessage());
 	    }
 	}
     }
@@ -128,12 +123,12 @@ public class ControladorInserirCliente {
     void btnPesquisarCidade(ActionEvent event) {
 	var abreTelaCidadeMenu = new ControladorMenuCidade();
 	abreTelaCidadeMenu.abreTelaCidadeMenu(TIPO_TELA.CONSULTA);
-	
+
 	atualizaValorCidade();
-	
+
     }
-    private void atualizaValorCidade()
-    {
+
+    private void atualizaValorCidade() {
 	txtCodCidade.setText(String.valueOf(Cidade.CodCidadeGet()));
 	txtCidade.setText(Cidade.NomeCidadeGet());
     }

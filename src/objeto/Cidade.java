@@ -26,19 +26,15 @@ public class Cidade {
     public int getCodigo() {
 	return codigo;
     }
-    
-    public static int CodCidadeGet()
-    {
+
+    public static int CodCidadeGet() {
 	return codCidade;
     }
-    
-    public static String NomeCidadeGet()
-    {
+
+    public static String NomeCidadeGet() {
 	return nomeCidade;
     }
-    
-    
-   
+
     private String estado;
     private int codigo;
     public static int codCidade;

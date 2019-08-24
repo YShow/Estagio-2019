@@ -1,13 +1,11 @@
 package negocio;
 
-import acessoBD.MariaDB.AcessoBD;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import acessoBD.MariaDB.AcessoBD;
 import objeto.VendaProd;
-import objeto.Vendas;
 
 public class NegVendaProd {
     private final AcessoBD conexao = new AcessoBD();

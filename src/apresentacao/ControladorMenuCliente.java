@@ -1,8 +1,10 @@
 package apresentacao;
 
-import javafx.beans.binding.Binding;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.ReadOnlyIntegerWrapper;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.List;
+
+import apresentacao.insere.ControladorInserirCliente;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
@@ -14,25 +16,16 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import negocio.NegCliente;
-import negocio.NegFuncionario;
-import objeto.Cidade;
 import objeto.Cliente;
-import objeto.Funcionario;
 import utilidade.TIPO_TELA;
-
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.List;
-
-import apresentacao.insere.ControladorInserirCliente;
 
 public class ControladorMenuCliente {
     @FXML
@@ -68,11 +61,12 @@ public class ControladorMenuCliente {
     @FXML
     private TableColumn<Cliente, Boolean> tcAtivo;
     @FXML
-    private TableColumn<Cliente,String> tcCidade;
+    private TableColumn<Cliente, String> tcCidade;
     @FXML
     private TableColumn<Cliente, Integer> tcCodCidade;
     private final ControladorInserirCliente tela = new ControladorInserirCliente();
     private static TIPO_TELA tipo_telaa;
+
     public void abreTelaClienteMenu(final TIPO_TELA tipo_tela) {
 	tipo_telaa = tipo_tela;
 	var stage = new Stage();
@@ -104,8 +98,8 @@ public class ControladorMenuCliente {
 
     @FXML
     void btnAlterarCliente(ActionEvent event) {
-	var cliente =  tvCliente.getSelectionModel().getSelectedItem();
-	tela.abreTelaClienteInsere(TIPO_TELA.ALTERA,cliente);
+	var cliente = tvCliente.getSelectionModel().getSelectedItem();
+	tela.abreTelaClienteInsere(TIPO_TELA.ALTERA, cliente);
     }
 
     @FXML
@@ -121,46 +115,47 @@ public class ControladorMenuCliente {
 	    tcEndereco.setCellValueFactory(new PropertyValueFactory("Endereco"));
 	    tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));
 	    tcTelefone.setCellValueFactory(new PropertyValueFactory("Telefone"));
-	    //workaround para selecionar apenas o nome da cidade em vez de a referencia de memoria
-	    tcCidade.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cliente,String>, ObservableValue<String>>() {
-	        
-	        @Override
-	        public ObservableValue<String> call(CellDataFeatures<Cliente, String> param) {	    	
-	    	return new ReadOnlyStringWrapper(param.getValue().getCidade().getNome());
-	        }
-	    });
-	    
-	    tcCodCidade.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Cliente,Integer>, ObservableValue<Integer>>() {
-	        
-	        @Override
-	        public  ObservableValue<Integer> call(CellDataFeatures<Cliente, Integer> param) {	    	
-	    	return new ReadOnlyObjectWrapper<>(param.getValue().getCidade().getCodigo());
-	        }
-	    });
-	   
+	    // workaround para selecionar apenas o nome da cidade em vez de a referencia de
+	    // memoria
+	    tcCidade.setCellValueFactory(
+		    new Callback<TableColumn.CellDataFeatures<Cliente, String>, ObservableValue<String>>() {
+
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<Cliente, String> param) {
+			    return new ReadOnlyStringWrapper(param.getValue().getCidade().getNome());
+			}
+		    });
+
+	    tcCodCidade.setCellValueFactory(
+		    new Callback<TableColumn.CellDataFeatures<Cliente, Integer>, ObservableValue<Integer>>() {
+
+			@Override
+			public ObservableValue<Integer> call(CellDataFeatures<Cliente, Integer> param) {
+			    return new ReadOnlyObjectWrapper<>(param.getValue().getCidade().getCodigo());
+			}
+		    });
+
 	} catch (SQLException e) {
-	    
+
 	    System.out.println(e.getMessage());
 	}
     }
 
     @FXML
     void btnDesativarCliente(ActionEvent event) {
-	
-	if(tipo_telaa.equals(TIPO_TELA.CONSULTA))
-	{
+
+	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
 	    var cliente = tvCliente.getSelectionModel().getSelectedItem();
 	    System.out.println(cliente.getCodigo());
 	    Cliente.codCliente = cliente.getCodigo();
-	}
-	else {
-	    
+	} else {
+
 	}
     }
 
     @FXML
     void btnInsereCliente(ActionEvent event) {
-	tela.abreTelaClienteInsere(TIPO_TELA.INSERE,null);
+	tela.abreTelaClienteInsere(TIPO_TELA.INSERE, null);
     }
 
 }

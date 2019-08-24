@@ -2,7 +2,6 @@ package objeto;
 
 import java.time.LocalDate;
 
-
 public class Vendas {
     private Produto produto;
     private Cliente cliente;
@@ -11,11 +10,11 @@ public class Vendas {
     private Caixa caixa;
 
     public Caixa getCaixa() {
-        return caixa;
+	return caixa;
     }
 
     public void setCaixa(Caixa caixa) {
-        this.caixa = caixa;
+	this.caixa = caixa;
     }
 
     private String formaPagamento;
@@ -55,9 +54,8 @@ public class Vendas {
     public int getCodigo() {
 	return codigo;
     }
-    
-    public void setCodigo(int codigo)
-    {
+
+    public void setCodigo(int codigo) {
 	this.codigo = codigo;
     }
 

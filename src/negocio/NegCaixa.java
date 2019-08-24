@@ -1,12 +1,11 @@
 package negocio;
 
-import acessoBD.MariaDB.AcessoBD;
-
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import acessoBD.MariaDB.AcessoBD;
 import objeto.Caixa;
 
 public class NegCaixa {
@@ -39,7 +38,7 @@ public class NegCaixa {
 	    while (result.next()) {
 		var caixa = new Caixa();
 		caixa.setCodigo(result.getInt("codigo"));
-		caixa.setData(result.getObject("data",LocalDate.class));
+		caixa.setData(result.getObject("data", LocalDate.class));
 		caixa.setPrecototal(result.getDouble("preco_total"));
 		caixa.setSaida(result.getDouble("saida"));
 		caixa.setCliente(result.getInt("codigo_cliente"));

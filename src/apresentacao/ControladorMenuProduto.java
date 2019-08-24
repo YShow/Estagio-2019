@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import apresentacao.insere.ControladorInserirProduto;
-import utilidade.TIPO_TELA;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,11 +18,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import negocio.NegCidade;
 import negocio.NegProduto;
-import objeto.Cidade;
-import objeto.Cliente;
 import objeto.Produto;
+import utilidade.TIPO_TELA;
 
 public class ControladorMenuProduto {
 
@@ -91,7 +88,7 @@ public class ControladorMenuProduto {
     @FXML
     void btnAlteraProduto(ActionEvent event) {
 	final var produto = tvProduto.getSelectionModel().getSelectedItem();
-	tela.abreTelaProdutoInsere(TIPO_TELA.ALTERA,produto);
+	tela.abreTelaProdutoInsere(TIPO_TELA.ALTERA, produto);
     }
 
     @FXML
@@ -106,29 +103,26 @@ public class ControladorMenuProduto {
 	    tcPreco.setCellValueFactory(new PropertyValueFactory("Preco"));
 	    tcQuantidade.setCellValueFactory(new PropertyValueFactory("Quantidade"));
 	    tcAtivo.setCellValueFactory(new PropertyValueFactory("Ativo"));
-	    
+
 	} catch (SQLException e) {
-	    
+
 	    System.out.println(e.getMessage());
 	}
     }
 
     @FXML
     void btnDesativaProduto(ActionEvent event) {
-	if(tipo_telaa.equals(TIPO_TELA.CONSULTA))
-	{
+	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
 	    var produto = tvProduto.getSelectionModel().getSelectedItem();
 	    System.out.println(produto.getCodigo());
 	    Produto.codProduto = produto.getCodigo();
-	}
-	else
-	{
-	    
+	} else {
+
 	}
     }
 
     @FXML
     void btnInsereProduto(ActionEvent event) {
-	tela.abreTelaProdutoInsere(TIPO_TELA.INSERE,null);
+	tela.abreTelaProdutoInsere(TIPO_TELA.INSERE, null);
     }
 }

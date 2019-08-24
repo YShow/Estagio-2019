@@ -1,13 +1,11 @@
 package negocio;
 
-import acessoBD.MariaDB.AcessoBD;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import acessoBD.MariaDB.AcessoBD;
 import objeto.Cidade;
-import objeto.VendaProd;
 
 public class NegCidade {
     private final AcessoBD conexao = new AcessoBD();
@@ -20,7 +18,7 @@ public class NegCidade {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_INSERT)) {
 	    comando.setString(1, cidade.getNome());
 	    comando.setString(2, cidade.getEstado());
-	   
+
 	    return comando.execute();
 	}
     }

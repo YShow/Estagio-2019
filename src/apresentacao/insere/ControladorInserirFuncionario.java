@@ -36,7 +36,7 @@ public class ControladorInserirFuncionario {
     private Button btnGravarFuncionario;
     private static TIPO_TELA tipo_telaa;
 
-    public void abreTelaFuncionarioInsere(final TIPO_TELA tipo_tela,Funcionario funcionario) {
+    public void abreTelaFuncionarioInsere(final TIPO_TELA tipo_tela, Funcionario funcionario) {
 	tipo_telaa = tipo_tela;
 	var stage = new Stage();
 	Parent root;
@@ -51,7 +51,7 @@ public class ControladorInserirFuncionario {
 	    stage.setMinWidth(root.minWidth(-1));
 	    var controlador = (ControladorInserirFuncionario) loader.getController();
 	    if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
-		
+
 		controlador.btnGravarFuncionario.setText("Alterar");
 		controlador.txtFuncao.setText(funcionario.getFuncao());
 		controlador.txtNomeFuncionario.setText(funcionario.getNome());
@@ -61,7 +61,7 @@ public class ControladorInserirFuncionario {
 		stage.setTitle("Alterar Funcionario");
 		stage.show();
 	    } else {
-		
+
 		stage.setTitle("Inserir Funcionario");
 		stage.show();
 	    }
@@ -72,32 +72,30 @@ public class ControladorInserirFuncionario {
 
     @FXML
     void btnGravarFuncionario(ActionEvent event) {
-	final var negFun  = new NegFuncionario();
+	final var negFun = new NegFuncionario();
 	final var funcionario = new Funcionario();
-	if(tipo_telaa == TIPO_TELA.INSERE)
-	{	 
-	    funcionario.setAdministrador(chkAdm.isSelected());
-	    funcionario.setFuncao(txtFuncao.getText());
-	    funcionario.setNome(txtNomeFuncionario.getText());
-	    funcionario.setSenha(txtSenhaFuncionario.getText());	 
-	    try {
-		 negFun.inserir(funcionario);
-		
-	    } catch (SQLException e) {		
-		System.out.println(e.getMessage());
-	    }
-	} else {	    
-	    funcionario.setCodigo(Integer.valueOf(txtCodigo.getText()));	   
+	if (tipo_telaa == TIPO_TELA.INSERE) {
 	    funcionario.setAdministrador(chkAdm.isSelected());
 	    funcionario.setFuncao(txtFuncao.getText());
 	    funcionario.setNome(txtNomeFuncionario.getText());
 	    funcionario.setSenha(txtSenhaFuncionario.getText());
-	    
-	   
 	    try {
-		 negFun.alterar(funcionario);
-		
-	    } catch (SQLException e) {		
+		negFun.inserir(funcionario);
+
+	    } catch (SQLException e) {
+		System.out.println(e.getMessage());
+	    }
+	} else {
+	    funcionario.setCodigo(Integer.valueOf(txtCodigo.getText()));
+	    funcionario.setAdministrador(chkAdm.isSelected());
+	    funcionario.setFuncao(txtFuncao.getText());
+	    funcionario.setNome(txtNomeFuncionario.getText());
+	    funcionario.setSenha(txtSenhaFuncionario.getText());
+
+	    try {
+		negFun.alterar(funcionario);
+
+	    } catch (SQLException e) {
 		System.out.println(e.getMessage());
 	    }
 	}

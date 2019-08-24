@@ -29,8 +29,7 @@ public class ControladorMenuCidade {
 
     @FXML
     private TableView<Cidade> tvCidade;
-    
-    
+
     @FXML
     private TableColumn<Cidade, Integer> tcCodigo;
 
@@ -46,11 +45,9 @@ public class ControladorMenuCidade {
     private Button btnInserir;
     @FXML
     private TableColumn<Cidade, String> tcEstado;
-    private static  TIPO_TELA tipo_telaa;
+    private static TIPO_TELA tipo_telaa;
     private final ControladorInserirCidade tela = new ControladorInserirCidade();
-    
- 
-    
+
     public void abreTelaCidadeMenu(final TIPO_TELA tipo_tela) {
 	tipo_telaa = tipo_tela;
 	var stage = new Stage();
@@ -70,18 +67,18 @@ public class ControladorMenuCidade {
 		controlador.btnAlterar.setDisable(true);
 		controlador.btnDesativar.setText("Selecionar");
 		controlador.btnInserir.setDisable(true);
-		stage.setTitle("Consultar Cidade");		
+		stage.setTitle("Consultar Cidade");
 		stage.showAndWait();
 	    }
 	} catch (IOException e) {
 	    System.out.println(e.getMessage());
 	}
     }
-    
+
     @FXML
     void btnAlteraCidade(ActionEvent event) {
 	final var cidade = tvCidade.getSelectionModel().getSelectedItem();
-	tela.abreTelaCidadeInsere(TIPO_TELA.ALTERA,cidade);
+	tela.abreTelaCidadeInsere(TIPO_TELA.ALTERA, cidade);
     }
 
     @FXML
@@ -89,35 +86,33 @@ public class ControladorMenuCidade {
 	final var negCidade = new NegCidade();
 	try {
 	    List<Cidade> funcionario = negCidade.consultar(txtConsullaCidade.getText());
-	   
+
 	    var data = FXCollections.observableList(funcionario);
 	    tvCidade.setItems(data);
 	    tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
 	    tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));
 	    tcEstado.setCellValueFactory(new PropertyValueFactory("Estado"));
-	   
+
 	} catch (SQLException e) {
-	    
+
 	    System.out.println(e.getMessage());
 	}
     }
 
     @FXML
     void btnDesativaCidade(ActionEvent event) {
-	if(tipo_telaa.equals(TIPO_TELA.CONSULTA))
-	{
+	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
 	    var cidade = tvCidade.getSelectionModel().getSelectedItem();
-	    
+
 	    Cidade.nomeCidade = cidade.getNome();
 	    Cidade.codCidade = cidade.getCodigo();
-	    
+
 	}
     }
 
     @FXML
     void btnInsereCidade(ActionEvent event) {
-	tela.abreTelaCidadeInsere(TIPO_TELA.INSERE,null);
+	tela.abreTelaCidadeInsere(TIPO_TELA.INSERE, null);
     }
-    
-    
+
 }
