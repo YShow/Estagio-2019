@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utilidade.TIPO_TELA;
 
 public class ControladorMenuPrincipal {
 
@@ -30,34 +31,15 @@ public class ControladorMenuPrincipal {
 
     @FXML
     void menuTelaCidade(ActionEvent event) {
-
-	try {
-
-	    root = FXMLLoader.load(getClass().getResource("Cidade.fxml"));
-
-	    stage.setTitle("Menu de Cidade");
-	    stage.setScene(new Scene(root, 600, 450));
-	    stage.show();
-
-	} catch (IOException e) {
-	    e.getMessage();
-	}
+	var telaCidade = new ControladorMenuCidade();
+	telaCidade.abreTelaCidadeMenu(TIPO_TELA.EXCLUI);
     }
 
     @FXML
     void menuTelaCliente(ActionEvent event) {
 
-	try {
-
-	    root = FXMLLoader.load(getClass().getResource("Cliente.fxml"));
-
-	    stage.setTitle("Menu de Cliente");
-	    stage.setScene(new Scene(root, 600, 450));
-	    stage.show();
-
-	} catch (IOException e) {
-	    e.getMessage();
-	}
+	var telaCliente = new ControladorMenuCliente();
+	telaCliente.abreTelaClienteMenu(TIPO_TELA.EXCLUI);
     }
 
     @FXML
@@ -78,16 +60,9 @@ public class ControladorMenuPrincipal {
     @FXML
     void menuTelaProduto(ActionEvent event) {
 
-	try {
-	    root = FXMLLoader.load(getClass().getResource("Produto.fxml"));
+	var telaProduto = new ControladorMenuProduto();
+	telaProduto.abreTelaProdutoMenu(TIPO_TELA.EXCLUI);
 
-	    stage.setTitle("Menu de Produto");
-	    stage.setScene(new Scene(root, 600, 450));
-	    stage.show();
-
-	} catch (IOException e) {
-	    e.getMessage();
-	}
     }
 
     @FXML

@@ -20,6 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import negocio.NegCidade;
 import objeto.Cidade;
+import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
 public class ControladorMenuCidade {
@@ -54,7 +55,7 @@ public class ControladorMenuCidade {
 	Parent root;
 	var loader = new FXMLLoader();
 	stage.initModality(Modality.APPLICATION_MODAL);
-
+	var controlador = (ControladorMenuCidade) loader.getController();
 	try {
 	    loader.setLocation(getClass().getResource("/apresentacao/Cidade.fxml"));
 	    root = loader.load();
@@ -63,13 +64,14 @@ public class ControladorMenuCidade {
 	    stage.setScene(new Scene(root, 600, 450));
 
 	    if (tipo_tela.equals(TIPO_TELA.CONSULTA)) {
-		var controlador = (ControladorMenuCidade) loader.getController();
+
 		controlador.btnAlterar.setDisable(true);
 		controlador.btnDesativar.setText("Selecionar");
 		controlador.btnInserir.setDisable(true);
 		stage.setTitle("Consultar Cidade");
 		stage.showAndWait();
-	    }
+	    } else
+		stage.show();
 	} catch (IOException e) {
 	    System.out.println(e.getMessage());
 	}
@@ -101,12 +103,23 @@ public class ControladorMenuCidade {
 
     @FXML
     void btnDesativaCidade(ActionEvent event) {
+	var cidade = tvCidade.getSelectionModel().getSelectedItem();
+	System.out.println(tipo_telaa.toString());
 	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
-	    var cidade = tvCidade.getSelectionModel().getSelectedItem();
 
 	    Cidade.nomeCidade = cidade.getNome();
 	    Cidade.codCidade = cidade.getCodigo();
 
+	} else {
+	    var negCidade = new NegCidade();
+	    try {
+		if (negCidade.excluir(cidade.getCodigo())) {
+		    tvCidade.getItems().remove(cidade);
+		    Alerta.alertaSucesso();
+		}
+	    } catch (SQLException e) {
+		Alerta.alertaCidadeEmUso();
+	    }
 	}
     }
 

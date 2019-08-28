@@ -12,7 +12,7 @@ public class NegCidade {
     private static final String SQL_INSERT = "INSERT INTO cidade(nome,estado) values(?,?)";
     private static final String SQL_SEARCH = "select codigo,nome,estado from cidade where nome LIKE ? ";
     private static final String SQL_UPDATE = "update cidade set nome = ?, estado = ? where codigo = ?";
-    private static final String SQL_DELETE = "";
+    private static final String SQL_DELETE = "DELETE FROM cantagalo.cidade\n" + "WHERE codigo = ? ;";
 
     public boolean inserir(Cidade cidade) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_INSERT)) {
@@ -51,7 +51,8 @@ public class NegCidade {
 
     public boolean excluir(int id) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_DELETE)) {
-	    return false;
+	    comando.setInt(1, id);
+	    return comando.executeUpdate() >= 1;
 	}
     }
 }

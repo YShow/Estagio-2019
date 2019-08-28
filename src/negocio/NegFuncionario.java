@@ -15,7 +15,7 @@ public class NegFuncionario {
 	    + "  where nome LIKE ? ";
     private static final String SQL_UPDATE = "update funcionario set nome = ?, funcao = ?, administrador = ?,"
 	    + "senha = ? where codigo = ?";
-    private static final String SQL_DELETE = "";
+    private static final String SQL_DELETE = "DELETE FROM cantagalo.funcionario\n" + "WHERE codigo=? ;";
 
     public int inserir(Funcionario funcionario) throws SQLException {
 
@@ -62,7 +62,8 @@ public class NegFuncionario {
 
     public boolean excluir(int id) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_DELETE)) {
-	    return false;
+	    comando.setInt(1, id);
+	    return comando.executeUpdate() >= 1;
 	}
     }
 

@@ -20,6 +20,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import negocio.NegProduto;
 import objeto.Produto;
+import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
 public class ControladorMenuProduto {
@@ -112,12 +113,22 @@ public class ControladorMenuProduto {
 
     @FXML
     void btnDesativaProduto(ActionEvent event) {
+	var produto = tvProduto.getSelectionModel().getSelectedItem();
 	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
-	    var produto = tvProduto.getSelectionModel().getSelectedItem();
 	    System.out.println(produto.getCodigo());
 	    Produto.codProduto = produto.getCodigo();
 	} else {
+	    var negProduto = new NegProduto();
+	    try {
+		if (negProduto.excluir(produto.getCodigo())) {
 
+		    tvProduto.getItems().remove(produto);
+		    Alerta.alertaSucesso();
+
+		}
+	    } catch (SQLException e) {
+		Alerta.alertaErro(e.getMessage());
+	    }
 	}
     }
 

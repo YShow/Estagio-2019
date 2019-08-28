@@ -75,12 +75,11 @@ public class ControladorInserirCidade {
 	    cidade.setEstado(txtEstado.getText());
 
 	    try {
-		
-		if(negcidade.inserir(cidade))
-		{
+
+		if (negcidade.inserir(cidade)) {
 		    Alerta.alertaSucesso();
 		}
-		
+
 	    } catch (SQLException e) {
 		Alerta.alertaErro(e.getMessage());
 	    }

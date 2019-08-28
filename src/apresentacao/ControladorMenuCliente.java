@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -25,6 +26,7 @@ import javafx.stage.Stage;
 import javafx.util.Callback;
 import negocio.NegCliente;
 import objeto.Cliente;
+import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
 public class ControladorMenuCliente {
@@ -90,7 +92,8 @@ public class ControladorMenuCliente {
 		controlador.btnDesativarCliente.setText("Selecionar");
 		stage.setTitle("Consultar Cliente");
 		stage.showAndWait();
-	    }
+	    } else
+		stage.show();
 	} catch (IOException e) {
 	    System.out.println(e.getMessage());
 	}
@@ -143,13 +146,21 @@ public class ControladorMenuCliente {
 
     @FXML
     void btnDesativarCliente(ActionEvent event) {
-
+	var cliente = tvCliente.getSelectionModel().getSelectedItem();
 	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
-	    var cliente = tvCliente.getSelectionModel().getSelectedItem();
+
 	    System.out.println(cliente.getCodigo());
 	    Cliente.codCliente = cliente.getCodigo();
 	} else {
-
+	    var negCliente = new NegCliente();
+	    try {
+		if (negCliente.excluir(cliente.getCodigo())) {
+		    tvCliente.getItems().remove(cliente);
+		    Alerta.alertaSucesso();
+		}
+	    } catch (SQLException e) {
+		Alerta.alertaClienteEmCaixa();
+	    }
 	}
     }
 

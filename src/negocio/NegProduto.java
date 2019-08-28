@@ -61,7 +61,8 @@ public class NegProduto {
 
     public boolean excluir(int id) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_DELETE)) {
-	    return false;
+	    comando.setInt(1, id);
+	    return comando.executeUpdate() >= 1;
 	}
     }
 }

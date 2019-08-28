@@ -39,10 +39,9 @@ public class ControladorInserirVenda {
 
     @FXML
     private Button btnGravar;
-   
 
     public void abreTelaVendaInsere(final TIPO_TELA tipo_tela, Vendas venda) {
-	
+
 	Parent root;
 	var stage = new Stage();
 

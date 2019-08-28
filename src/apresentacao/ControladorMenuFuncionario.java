@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import negocio.NegFuncionario;
 import objeto.Funcionario;
+import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
 public class ControladorMenuFuncionario {
@@ -65,7 +66,16 @@ public class ControladorMenuFuncionario {
 
     @FXML
     void btnDesativaFuncionario(ActionEvent event) {
-
+	final var negFuncionario = new NegFuncionario();
+	final var funcionario = tblFuncionario.getSelectionModel().getSelectedItem();
+	try {
+	    if (negFuncionario.excluir(funcionario.getCodigo())) {
+		tblFuncionario.getItems().remove(funcionario);
+		Alerta.alertaSucesso();
+	    }
+	} catch (SQLException e) {
+	    Alerta.alertaErro(e.getMessage());
+	}
     }
 
     @FXML

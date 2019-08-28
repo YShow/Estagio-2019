@@ -19,16 +19,15 @@ public class Main extends Application {
 	// isto é um teste para como esconder uma tela e abrir outra sem fexar o
 	// programa
 	// Platform.setImplicitExit(false);
-	
+
 	try {
 	    var login = new ControladorTelaLogin();
-	    login.start(primaryStage);	    
+	    login.start(primaryStage);
 
-	}  catch (Exception e) {
+	} catch (Exception e) {
 	    Alerta.alertaErro(e.getMessage());
 	}
-	
-	
+
     }
 
     public static void main(String[] args) {

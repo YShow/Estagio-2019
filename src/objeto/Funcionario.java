@@ -3,6 +3,16 @@ package objeto;
 public class Funcionario {
     private int codigo;
 
+    private static Funcionario funcionario;
+
+    public static Funcionario getFuncionario() {
+	return funcionario;
+    }
+
+    public static void setFuncionario(Funcionario funcionario) {
+	Funcionario.funcionario = funcionario;
+    }
+
     public void setCodigo(int codigo) {
 	this.codigo = codigo;
     }

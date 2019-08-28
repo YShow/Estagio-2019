@@ -17,7 +17,7 @@ public class NegCliente {
 	    + "WHERE c.nome LIKE ?;";
     private static final String SQL_UPDATE = "update cliente set nome = ?, CPF = ?, endereco = ?,"
 	    + "telefone = ?, ativo = ?, id_cidade = ? where codigo = ?;";
-    private static final String SQL_DELETE = "";
+    private static final String SQL_DELETE = "DELETE FROM cantagalo.cliente\n" + "WHERE codigo=?;";
 
     public int inserir(Cliente cliente) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_INSERT)) {
@@ -82,7 +82,8 @@ public class NegCliente {
 
     public boolean excluir(int id) throws SQLException {
 	try (var comando = conexao.getConexao().prepareStatement(SQL_DELETE)) {
-	    return false;
+	    comando.setInt(1, id);
+	    return comando.executeUpdate() >= 1;
 	}
     }
 }
