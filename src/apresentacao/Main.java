@@ -5,8 +5,10 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import utilidade.Alerta;
 
 public class Main extends Application {
 
@@ -17,19 +19,16 @@ public class Main extends Application {
 	// isto é um teste para como esconder uma tela e abrir outra sem fexar o
 	// programa
 	// Platform.setImplicitExit(false);
+	
 	try {
-	    final var root = (BorderPane) FXMLLoader.load(getClass().getResource("MenuPrincipal.fxml"));
-	    final var scene = new Scene(root, HEIGHT, HEIGHT);
-	    scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-	    primaryStage.setTitle("Canta Galo");
-	    primaryStage.setMinHeight(HEIGHT);
-	    primaryStage.setMinWidth(HEIGHT);
-	    primaryStage.setScene(scene);
-	    primaryStage.show();
+	    var login = new ControladorTelaLogin();
+	    login.start(primaryStage);	    
 
-	} catch (IOException e) {
-	    e.getMessage();
+	}  catch (Exception e) {
+	    Alerta.alertaErro(e.getMessage());
 	}
+	
+	
     }
 
     public static void main(String[] args) {
