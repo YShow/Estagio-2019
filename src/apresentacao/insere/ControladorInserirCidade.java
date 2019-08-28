@@ -14,6 +14,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import negocio.NegCidade;
 import objeto.Cidade;
+import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
 public class ControladorInserirCidade {
@@ -74,9 +75,14 @@ public class ControladorInserirCidade {
 	    cidade.setEstado(txtEstado.getText());
 
 	    try {
-		negcidade.inserir(cidade);
+		
+		if(negcidade.inserir(cidade))
+		{
+		    Alerta.alertaSucesso();
+		}
+		
 	    } catch (SQLException e) {
-		System.out.println(e.getMessage());
+		Alerta.alertaErro(e.getMessage());
 	    }
 	} else {
 	    cidade.setCodigo(Integer.valueOf(txtCodigo.getText()));

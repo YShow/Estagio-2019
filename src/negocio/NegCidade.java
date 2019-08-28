@@ -19,7 +19,7 @@ public class NegCidade {
 	    comando.setString(1, cidade.getNome());
 	    comando.setString(2, cidade.getEstado());
 
-	    return comando.execute();
+	    return comando.executeUpdate() >= 1;
 	}
     }
 
