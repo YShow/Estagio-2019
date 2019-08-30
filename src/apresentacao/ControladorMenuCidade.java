@@ -18,8 +18,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 import negocio.NegCidade;
 import objeto.Cidade;
+import objeto.Funcionario;
 import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
@@ -54,14 +57,18 @@ public class ControladorMenuCidade {
 	var stage = new Stage();
 	Parent root;
 	var loader = new FXMLLoader();
+	
 	stage.initModality(Modality.APPLICATION_MODAL);
-	var controlador = (ControladorMenuCidade) loader.getController();
+	
 	try {
 	    loader.setLocation(getClass().getResource("/apresentacao/Cidade.fxml"));
 	    root = loader.load();
+	    var controlador = (ControladorMenuCidade) loader.getController();
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
-	    stage.setScene(new Scene(root, 600, 450));
+	    var scene = new Scene(root);
+	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+	    stage.setScene(scene);
 
 	    if (tipo_tela.equals(TIPO_TELA.CONSULTA)) {
 
@@ -69,8 +76,14 @@ public class ControladorMenuCidade {
 		controlador.btnDesativar.setText("Selecionar");
 		controlador.btnInserir.setDisable(true);
 		stage.setTitle("Consultar Cidade");
-		stage.showAndWait();
-	    } else
+		stage.showAndWait();		
+	    } 
+	    
+	    if(Funcionario.getFuncionario().getAdministrador().equals(false))
+		{controlador.btnDesativar.setVisible(false);
+		controlador.btnDesativar.setDisable(true);
+		
+		}
 		stage.show();
 	} catch (IOException e) {
 	    System.out.println(e.getMessage());

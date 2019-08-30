@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import apresentacao.ControladorMenuCidade;
+import apresentacao.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +15,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 import negocio.NegCliente;
 import objeto.Cidade;
 import objeto.Cliente;
@@ -59,7 +62,9 @@ public class ControladorInserirCliente {
 	    root = loader.load();
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
-	    stage.setScene(new Scene(root, 600, 450));
+	    var scene = new Scene(root);
+	    new JMetro(scene,Main.style).setAutomaticallyColorPanes(true);
+	    stage.setScene(scene);
 	    var controlador = (ControladorInserirCliente) loader.getController();
 	    if (tipo_tela.equals(tipo_telaa.ALTERA)) {
 		controlador.btnGrava.setText("Alterar");

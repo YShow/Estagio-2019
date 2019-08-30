@@ -14,7 +14,7 @@
 				<AnchorPane prefHeight="50.0" prefWidth="606.0" BorderPane.alignment="CENTER">
 					<children>
 						<TextField fx:id="txtFuncionario" layoutX="14.0" layoutY="13.0" prefHeight="25.0" prefWidth="483.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="109.0" />
-						<Button layoutX="517.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnConsultaFuncionario" prefHeight="25.0" prefWidth="75.0" text="Consultar" AnchorPane.rightAnchor="14.0" />
+						<Button layoutX="517.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnConsultaFuncionario" prefHeight="25.0" prefWidth="94.0" text="Consultar" AnchorPane.rightAnchor="6.0" />
 					</children>
 				</AnchorPane>
 			</top>
@@ -22,8 +22,8 @@
 				<AnchorPane prefHeight="49.0" prefWidth="606.0" BorderPane.alignment="CENTER">
 					<children>
 						<Button layoutX="519.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnDesativaFuncionario" text="Desativar" AnchorPane.rightAnchor="14.0" />
-						<Button layoutX="452.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnAlteraFuncionario" prefHeight="25.0" prefWidth="63.0" text="Alterar" AnchorPane.rightAnchor="91.0" />
-						<Button layoutX="391.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnInsereFuncionario" text="Inserir" AnchorPane.rightAnchor="160.0" />
+						<Button layoutX="445.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnAlteraFuncionario" prefHeight="25.0" prefWidth="63.0" text="Alterar" AnchorPane.rightAnchor="98.0" />
+						<Button layoutX="381.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnInsereFuncionario" text="Inserir" AnchorPane.rightAnchor="170.0" />
 					</children>
 				</AnchorPane>
 			</bottom>
@@ -32,11 +32,11 @@
 					<children>
 						<TableView fx:id="tblFuncionario" layoutX="175.0" layoutY="47.0" prefHeight="294.0" prefWidth="606.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<columns>
-                        <TableColumn fx:id="tcCodigo" prefWidth="75.0" text="Código" />
-								<TableColumn fx:id="tcNome" prefWidth="75.0" text="Nome" />
-								<TableColumn fx:id="tcFuncao" minWidth="0.0" prefWidth="200.0" text="Função" />
-                        <TableColumn fx:id="tcSenha" prefWidth="75.0" text="Senha" />
-                        <TableColumn fx:id="tcAdm" prefWidth="118.0" text="Administrador" />
+                        <TableColumn fx:id="tcCodigo" prefWidth="99.0" text="Código" />
+								<TableColumn fx:id="tcNome" prefWidth="125.0" text="Nome" />
+								<TableColumn fx:id="tcFuncao" minWidth="0.0" prefWidth="126.0" text="Função" />
+                        <TableColumn fx:id="tcSenha" prefWidth="108.0" text="Senha" />
+                        <TableColumn fx:id="tcAdm" prefWidth="136.0" text="Administrador" />
 							</columns>
 						</TableView>
 					</children>

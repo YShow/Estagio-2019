@@ -18,7 +18,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 import negocio.NegProduto;
+import objeto.Funcionario;
 import objeto.Produto;
 import utilidade.Alerta;
 import utilidade.TIPO_TELA;
@@ -68,10 +71,12 @@ public class ControladorMenuProduto {
 	    root = loader.load();
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
-	    stage.setScene(new Scene(root, 600, 450));
-
+	    var scene = new Scene(root);
+	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+	    stage.setScene(scene);
+	    var controlador = (ControladorMenuProduto) loader.getController();
 	    if (tipo_tela.equals(TIPO_TELA.CONSULTA)) {
-		var controlador = (ControladorMenuProduto) loader.getController();
+		
 		controlador.btnInsereProduto.setDisable(true);
 		controlador.btnInsereProduto.setVisible(false);
 		controlador.btnAlteraProduto.setDisable(true);
@@ -80,7 +85,11 @@ public class ControladorMenuProduto {
 		controlador.btnDesativaProduto.setText("Selecionar");
 		stage.setTitle("Consultar produto ");
 		stage.showAndWait();
-	    }
+	    }if(!Funcionario.getFuncionario().getAdministrador())
+		{controlador.btnDesativaProduto.setVisible(false);
+	    	controlador.btnDesativaProduto.setDisable(true);
+		}
+	    stage.show();
 	} catch (IOException e) {
 	    System.out.println(e.getMessage());
 	}

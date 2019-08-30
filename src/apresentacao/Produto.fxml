@@ -22,8 +22,8 @@
 				<AnchorPane prefHeight="49.0" prefWidth="606.0" BorderPane.alignment="CENTER">
 					<children>
 						<Button fx:id="btnDesativaProduto" layoutX="519.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnDesativaProduto" text="Desativar" AnchorPane.rightAnchor="14.0" />
-						<Button fx:id="btnAlteraProduto" layoutX="452.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnAlteraProduto" prefHeight="25.0" prefWidth="63.0" text="Alterar" AnchorPane.rightAnchor="91.0" />
-						<Button fx:id="btnInsereProduto" layoutX="391.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnInsereProduto" text="Inserir" AnchorPane.rightAnchor="160.0" />
+						<Button fx:id="btnAlteraProduto" layoutX="449.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnAlteraProduto" prefHeight="25.0" prefWidth="63.0" text="Alterar" AnchorPane.rightAnchor="94.0" />
+						<Button fx:id="btnInsereProduto" layoutX="384.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnInsereProduto" text="Inserir" AnchorPane.rightAnchor="167.0" />
 					</children>
 				</AnchorPane>
 			</bottom>
@@ -32,11 +32,11 @@
 					<children>
 						<TableView fx:id="tvProduto" layoutX="175.0" layoutY="47.0" prefHeight="294.0" prefWidth="606.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<columns>
-								<TableColumn fx:id="tcCodigo" prefWidth="75.0" text="Código" />
-								<TableColumn fx:id="tcNome" prefWidth="131.0" text="Nome" />
-                        <TableColumn fx:id="tcPreco" prefWidth="75.0" text="Preço" />
-                        <TableColumn fx:id="tcQuantidade" prefWidth="75.0" text="Quantidade" />
-                        <TableColumn fx:id="tcAtivo" prefWidth="75.0" text="Ativo" />
+								<TableColumn fx:id="tcCodigo" prefWidth="94.0" text="Código" />
+								<TableColumn fx:id="tcNome" prefWidth="122.0" text="Nome" />
+                        <TableColumn fx:id="tcPreco" prefWidth="114.0" text="Preço" />
+                        <TableColumn fx:id="tcQuantidade" prefWidth="186.0" text="Quantidade" />
+                        <TableColumn fx:id="tcAtivo" minWidth="37.0" prefWidth="87.0" text="Ativo" />
 							</columns>
 						</TableView>
 					</children>

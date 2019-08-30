@@ -3,6 +3,7 @@ package apresentacao.insere;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import apresentacao.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 import negocio.NegProduto;
 import objeto.Produto;
 import utilidade.TIPO_TELA;
@@ -47,7 +50,9 @@ public class ControladorInserirProduto {
 	try {
 	    loader.setLocation(getClass().getResource("/apresentacao/insere/ProdutoInsere.fxml"));
 	    root = loader.load();
-	    stage.setScene(new Scene(root, 600, 450));
+	    var scene = new Scene(root);
+	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+	    stage.setScene(scene);
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
 	    if (tipo_tela.equals(TIPO_TELA.ALTERA)) {

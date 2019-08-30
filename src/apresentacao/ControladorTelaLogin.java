@@ -5,14 +5,20 @@ import java.sql.SQLException;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import jfxtras.styles.jmetro.JMetro;
+import jfxtras.styles.jmetro.Style;
 import negocio.NegLogin;
 import objeto.Funcionario;
 import utilidade.Alerta;
@@ -24,9 +30,12 @@ public class ControladorTelaLogin extends Application {
     @FXML
     private PasswordField txtSenha;
     private static Stage stage;
+    
+    private double xOffset = 0;
+    private double yOffset = 0;
 
     @FXML
-    void btnLogin(ActionEvent event) {
+   private  void btnLogin(ActionEvent event) {
 	if (txtUsuario.getText().isBlank() && txtSenha.getText().isBlank())
 	    Alerta.alertaCampoNulo();
 	else {
@@ -52,15 +61,20 @@ public class ControladorTelaLogin extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-	stage = primaryStage;
+	
+	
+	stage = primaryStage;	
+	stage.initStyle(StageStyle.TRANSPARENT);
 	abreTelaLogin();
     }
 
-    public void abreTelaLogin() {
+    private void abreTelaLogin() {
 
 	try {
 	    final var root = (AnchorPane) FXMLLoader.load(getClass().getResource("TelaLogin.fxml"));
+	   
 	    final var scene = new Scene(root);
+	    new JMetro(scene,Main.style).setAutomaticallyColorPanes(true);
 	    stage.setTitle("Canta Galo");
 	    stage.setScene(scene);
 	    stage.show();
@@ -71,14 +85,27 @@ public class ControladorTelaLogin extends Application {
 
     }
 
-    public void abreTelaMenuPrincipal() {
+    private void abreTelaMenuPrincipal() {
 	try {
 	    final var root = (BorderPane) FXMLLoader.load(getClass().getResource("MenuPrincipal.fxml"));
-	    final var scene = new Scene(root, 500, 500);
-	    scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-	    stage.setTitle("Canta Galo");
-	    stage.setMinHeight(600);
-	    stage.setMinWidth(600);
+	    final var scene = new Scene(root);
+	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+	    
+	    
+	    root.setOnMousePressed(event -> {
+	            xOffset = event.getSceneX();
+	            yOffset = event.getSceneY();
+	        });
+
+	        
+	        //move around here
+	    root.setOnMouseDragged(event -> {
+	            stage.setX(event.getScreenX() - xOffset);
+	            stage.setY(event.getScreenY() - yOffset);
+	});
+	    
+	    
+	    stage.setTitle("Canta Galo");	    
 	    stage.setScene(scene);
 	    stage.show();
 	} catch (IOException e) {
