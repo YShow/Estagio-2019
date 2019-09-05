@@ -1,20 +1,15 @@
 package apresentacao;
 
-import java.io.IOException;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.Style;
 import utilidade.Alerta;
 
 public class Main extends Application {
 
-    private static final double HEIGHT = 600;
-    public final static Style style = Style.LIGHT;
+
+    public final static Style style = Style.LIGHT ;
     @Override
     public void start(Stage primaryStage) {
 	// isto é um teste para como esconder uma tela e abrir outra sem fexar o

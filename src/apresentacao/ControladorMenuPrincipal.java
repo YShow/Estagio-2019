@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
@@ -49,18 +50,8 @@ public class ControladorMenuPrincipal {
     @FXML
     void menuTelaFuncionario(ActionEvent event) {
 
-	try {
-	    root = FXMLLoader.load(getClass().getResource("Funcionario.fxml"));
-
-	    stage.setTitle("Menu de Funcionario");
-	    var scene = new Scene(root);
-	    new JMetro(scene,Main.style).setAutomaticallyColorPanes(true);
-	    stage.setScene(scene);
-	    stage.show();
-
-	} catch (IOException e) {
-	    e.getMessage();
-	}
+	var telaFuncionario = new ControladorMenuFuncionario();
+	telaFuncionario.abreTelaFuncionarioMenu();
     }
 
     @FXML
