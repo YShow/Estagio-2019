@@ -18,7 +18,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.0</version>
+				<version>3.8.1</version>
 				<configuration>
 					<release>12</release>
 				</configuration>
@@ -78,11 +78,11 @@
 			<version>2.4.3</version>
 		</dependency>
 
-		<!-- <dependency> -->
-		<!-- <groupId>org.openjfx</groupId> -->
-		<!-- <artifactId>javafx-graphics</artifactId> -->
-		<!-- <version>12.0.2</version> -->
-		<!-- </dependency> -->
+		<dependency>
+		<groupId>org.openjfx</groupId>
+		<artifactId>javafx-graphics</artifactId>
+		<version>12.0.2</version>
+		 </dependency>
 
 		<dependency>
 			<groupId>org.jfxtras</groupId>
