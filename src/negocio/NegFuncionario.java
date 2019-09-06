@@ -2,6 +2,9 @@ package negocio;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,48 +22,38 @@ public class NegFuncionario {
     private static final String SQL_DELETE = "DELETE FROM cantagalo.funcionario\n" + "WHERE codigo=? ;";
 
     public boolean inserir(final Funcionario funcionario) throws SQLException {
-
-	try (final var con = conexao.getConexao()) {
-	    final var startTime = System.currentTimeMillis();
-	    con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	
+	final var con = conexao.getConexao();
+	 con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	    con.setAutoCommit(false);
 	    var comando = con.prepareStatement(SQL_INSERT);
-	  /*
+	try (con;comando;) {	  
 	    comando.setString(1, funcionario.getNome());
 	    comando.setString(2, funcionario.getFuncao());
 	    comando.setBoolean(3, funcionario.getAdministrador());
 	    comando.setString(4, funcionario.getSenha());
-	    */
-	    var a = 0;
-	    while(a < 1000000)
-	    {
-	    comando.setString(1, "123");
-	    comando.setString(2, "123");
-	    comando.setBoolean(3, true);
-	    comando.setString(4, "123");
-	    comando.addBatch();
-	    a++;
-	}
-	   final var inseriu = comando.executeBatch();
+
+	
+	   final var inseriu = comando.executeUpdate() >= 1;
 	    con.commit();
-	    final var endTime = System.currentTimeMillis();
-	    System.out.println("tempo total desde inserir funcionario " + (endTime-startTime) + "ms"); 
-	    return inseriu.length >= 1;
+	
+	
+	    return inseriu;
 	}
     }
 
     public List<Funcionario> consultar(final String metodo) throws SQLException {
-	try (final var con = conexao.getConexao()) {
-	    final var startTime = System.currentTimeMillis();
-	    //con.setAutoCommit(false);
-	    //con.setReadOnly(true);
-	    //con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	   final var agora = Instant.now();
+	final var con = conexao.getConexao();
+	  con.setAutoCommit(false);
+	    con.setReadOnly(true);
+	    con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	    final var comando = con.prepareStatement(SQL_SEARCH);
+	try (con;comando;) {	  
 	    comando.setString(1, '%' + metodo + '%');
-	    var result = comando.executeQuery();
-	   // con.commit();
+	  final  var result = comando.executeQuery();
 	    
-	    var lista = new ArrayList<Funcionario>();
+	   final var lista = new ArrayList<Funcionario>();
 
 	    while (result.next()) {
 		var funcionario = new Funcionario();
@@ -71,38 +64,42 @@ public class NegFuncionario {
 		funcionario.setSenha(result.getString("senha"));
 		lista.add(funcionario);
 	    }
-	    final var endTime = System.currentTimeMillis();
-	    System.out.println("tempo total desde select funcionario " + (endTime-startTime) + "ms"); 
-	    System.out.println("tamanho da lista de pessoas: " + lista.size());
+	 
+	    final var depois =  Instant.now();
+	    
+	    System.out.println("tempo de duraçao" + Duration.between(agora, depois).toMillis()  + "ms");
+	 
 	    return lista;
 	}
     }
 
     public boolean alterar(final Funcionario funcionario) throws SQLException {
-
-	try (final var con = conexao.getConexao()) {
-	    final var startTime = System.currentTimeMillis();
-	    con.setAutoCommit(false);
+	
+	 final var con = conexao.getConexao();   
+	 con.setAutoCommit(false);
 	    con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	    final var comando = con.prepareStatement(SQL_UPDATE);
+	try (con;comando;) {
+	   
 	    comando.setString(1, funcionario.getNome());
 	    comando.setString(2, funcionario.getFuncao());
 	    comando.setBoolean(3, funcionario.getAdministrador());
 	    comando.setString(4, funcionario.getSenha());
 	    comando.setInt(5, funcionario.getCodigo());
-	    final var alterou = comando.executeUpdate();
+	    final var alterou = comando.executeUpdate() >= 1;
 	    con.commit();
-	    final var endTime = System.currentTimeMillis();
-	    System.out.println("tempo total desde alterar funcionario " + (endTime-startTime) + "ms"); 
-	    return alterou >= 1;
+	   
+	    return alterou;
 	}
     }
 
     public boolean excluir(final int id) throws SQLException {
-	try (final var con = conexao.getConexao()) {
-	    con.setAutoCommit(false);
+	final var con = conexao.getConexao();
+	con.setAutoCommit(false);
 	    con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	    final var comando =  con.prepareStatement(SQL_DELETE);
+	try (con;comando;) {
+	    
 	    comando.setInt(1, id);
 	    final var excluiu = comando.executeUpdate() >= 1;
 	    con.commit();

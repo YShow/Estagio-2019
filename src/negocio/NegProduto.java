@@ -1,5 +1,6 @@
 package negocio;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,25 +18,35 @@ public class NegProduto {
 	    + "SET ativo=?, preco=?, quantidade=?, nome=?\n" + "WHERE codigo=? ;";
     private static final String SQL_DELETE = "";
 
-    public int inserir(Produto produto) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_INSERT)) {
+    public boolean inserir(final Produto produto) throws SQLException {
+	final var con = conexao.getConexao();
+	con.setAutoCommit(false);
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	final var comando = con.prepareStatement(SQL_INSERT);
+	try (con;comando;) {
 	    comando.setBoolean(1, produto.getAtivo());
 	    comando.setDouble(2, produto.getPreco());
 	    comando.setInt(3, produto.getQuantidade());
 	    comando.setString(4, produto.getNome());
-
-	    return comando.executeUpdate();
+	    final var inseriu = comando.executeUpdate() >= 1;
+	    con.commit();
+	    return inseriu;
 	}
 
     }
 
-    public List<Produto> consultar(String metodo) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_SEARCH)) {
+    public List<Produto> consultar(final String metodo) throws SQLException {
+	final var con = conexao.getConexao();
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	con.setAutoCommit(false);
+	con.setReadOnly(true);
+	final var comando = con.prepareStatement(SQL_SEARCH);
+	try (con;comando;) {
 	    comando.setString(1, '%' + metodo + '%');
-	    var result = comando.executeQuery();
-	    var lista = new ArrayList<Produto>();
+	   final var result = comando.executeQuery();
+	   final var lista = new ArrayList<Produto>();
 	    while (result.next()) {
-		var produto = new Produto();
+		final var produto = new Produto();
 		produto.setAtivo(result.getBoolean("ativo"));
 		produto.setNome(result.getString("nome"));
 		produto.setPreco(result.getDouble("preco"));
@@ -48,21 +59,33 @@ public class NegProduto {
 	}
     }
 
-    public int alterar(Produto produto) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_UPDATE)) {
+    public boolean alterar(final Produto produto) throws SQLException {
+	final var con = conexao.getConexao();
+	con.setAutoCommit(false);
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	final var comando = con.prepareStatement(SQL_UPDATE);
+	try (con;comando;) {
 	    comando.setBoolean(1, produto.getAtivo());
 	    comando.setDouble(2, produto.getPreco());
 	    comando.setInt(3, produto.getQuantidade());
 	    comando.setString(4, produto.getNome());
 	    comando.setInt(5, produto.getCodigo());
-	    return comando.executeUpdate();
+	    final var alterou =  comando.executeUpdate() >= 1;
+	    con.commit();
+	    return alterou;
 	}
     }
 
-    public boolean excluir(int id) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_DELETE)) {
+    public boolean excluir(final int id) throws SQLException {
+	final var con = conexao.getConexao();
+	con.setAutoCommit(false);
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	final var comando = con.prepareStatement(SQL_DELETE);
+	try (con;comando;) {
 	    comando.setInt(1, id);
-	    return comando.executeUpdate() >= 1;
+	   final var excluiu = comando.executeUpdate() >= 1;
+		con.commit();
+	    return excluiu;
 	}
     }
 }

@@ -1,5 +1,6 @@
 package negocio;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -20,8 +21,12 @@ public class NegVendas {
 	    + "SET cod_cliente=0, cod_caixa=0, data_venda='', forma_de_pagamento=''\n" + "WHERE codigo=0;\n";
     private static final String SQL_DELETE = "DELETE FROM cantagalo.vendas\n" + "WHERE codigo=0;\n" + "";
 
-    public int inserir(Vendas vendas) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_INSERT)) {
+    public boolean inserir(final Vendas vendas) throws SQLException {
+	final var con = conexao.getConexao();
+	con.setAutoCommit(false);
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	final var comando = con.prepareStatement(SQL_INSERT);
+	try (con;comando;) {
 	    /*
 	     * "INSERT INTO cantagalo.vendas\n" +
 	     * "(cod_cliente, cod_caixa, data_venda, forma_de_pagamento)\n" +
@@ -31,25 +36,32 @@ public class NegVendas {
 	    comando.setInt(2, vendas.getCaixa().getCodigo());
 	    comando.setObject(3, vendas.getData());
 	    comando.setString(4, vendas.getFormaPagamento());
-	    return comando.executeUpdate();
+	    final var inseriu = comando.executeUpdate() >= 1;
+	    con.commit();
+	    return inseriu;
 
 	}
     }
 
-    public List<Vendas> consultar(String metodo) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_SEARCH)) {
+    public List<Vendas> consultar(final String metodo) throws SQLException {
+	final var con = conexao.getConexao();
+	con.setAutoCommit(false);
+	con.setReadOnly(true);
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	final var comando = conexao.getConexao().prepareStatement(SQL_SEARCH);
+	try (con;comando;) {
 	    comando.setString(1, '%' + metodo + '%');
-	    var result = comando.executeQuery();
-	    var lista = new ArrayList<Vendas>();
+	   final var result = comando.executeQuery();
+	  final  var lista = new ArrayList<Vendas>();
 
 	    /*
 	     * "SELECT codigo, cod_cliente, cod_caixa, data_venda," +
 	     * " forma_de_pagamento\n" + "FROM cantagalo.vendas WHERE data_venda LIKE ? \n";
 	     */
 	    while (result.next()) {
-		var venda = new Vendas();
-		var cliente = new Cliente();
-		var caixa = new Caixa();
+		final var venda = new Vendas();
+		final var cliente = new Cliente();
+		final var caixa = new Caixa();
 		venda.setCodigo(result.getInt("codigo"));
 		cliente.setCodigo(result.getInt("cod_cliente"));
 		venda.setCliente(cliente);
@@ -63,14 +75,26 @@ public class NegVendas {
 	}
     }
 
-    public boolean alterar(Vendas vendas) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_UPDATE)) {
+    public boolean alterar(final Vendas vendas) throws SQLException {
+	final var con = conexao.getConexao();
+	con.setAutoCommit(false);	
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	final var comando = conexao.getConexao().prepareStatement(SQL_UPDATE);
+	try (con;comando;) {
+	    
+	    con.commit();
 	    return false;
 	}
     }
 
-    public boolean excluir(int id) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_DELETE)) {
+    public boolean excluir(final int id) throws SQLException {
+	final var con = conexao.getConexao();
+	con.setAutoCommit(false);	
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	final var comando = conexao.getConexao().prepareStatement(SQL_DELETE);
+	try (con;comando) {
+	    
+	    con.commit();
 	    return false;
 	}
     }

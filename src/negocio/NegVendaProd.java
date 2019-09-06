@@ -1,5 +1,6 @@
 package negocio;
 
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,18 +15,30 @@ public class NegVendaProd {
     private static final String SQL_UPDATE = "";
     private static final String SQL_DELETE = "";
 
-    public boolean inserir(VendaProd vendaProd) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_INSERT)) {
+    public boolean inserir(final VendaProd vendaProd) throws SQLException {
+	final var con = conexao.getConexao();
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	con.setAutoCommit(false);
+	final var comando = con.prepareStatement(SQL_INSERT);
+	try (con;comando;) {
+	    
+	    
+	    con.commit();
 	    return false;
 	}
     }
 
-    public List<VendaProd> consultar(String metodo) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_SEARCH)) {
-	    var result = comando.executeQuery();
-	    var lista = new ArrayList<VendaProd>();
+    public List<VendaProd> consultar(final String metodo) throws SQLException {
+	final var con = conexao.getConexao();
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	con.setAutoCommit(false);
+	con.setReadOnly(true);
+	final var comando = con.prepareStatement(SQL_SEARCH);
+	try (con;comando;) {
+	  final  var result = comando.executeQuery();
+	    final var lista = new ArrayList<VendaProd>();
 	    while (result.next()) {
-		var vendaProd = new VendaProd();
+		final var vendaProd = new VendaProd();
 		//
 		//
 		//
@@ -35,14 +48,26 @@ public class NegVendaProd {
 	}
     }
 
-    public boolean alterar(VendaProd vendaProd) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_UPDATE)) {
+    public boolean alterar(final VendaProd vendaProd) throws SQLException {
+	final var con = conexao.getConexao();
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	con.setAutoCommit(false);
+	final var comando = con.prepareStatement(SQL_UPDATE);
+	try (con;comando;) {
+	    
+	    con.commit();
 	    return false;
 	}
     }
 
-    public boolean excluir(int id) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_DELETE)) {
+    public boolean excluir(final int id) throws SQLException {
+	final var con = conexao.getConexao();
+	con.setAutoCommit(false);
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	final var comando = con.prepareStatement(SQL_DELETE);
+	try (con;comando;) {
+	    
+	    con.commit();
 	    return false;
 	}
     }

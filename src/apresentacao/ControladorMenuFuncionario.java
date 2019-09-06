@@ -67,8 +67,7 @@ public class ControladorMenuFuncionario {
 		
 		stage.setOnCloseRequest(e -> {
 		    System.out.println("limpou");
-		    control.limpaTabela();
-		    Alerta.alertaSucesso();
+		    control.limpaTabela();		  
 		  
 		});
 	} catch (IOException e) {
