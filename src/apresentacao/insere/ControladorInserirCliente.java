@@ -98,7 +98,10 @@ public class ControladorInserirCliente {
 
 	    // INSERCAO DE CODIGO CIDADE APENAS
 	    cidade.setCodigo(Integer.valueOf(txtCodCidade.getText()));
-
+	    cliente.setNome(txtNome.getText());
+	    cliente.setEndereco(txtEndereco.getText());
+	    cliente.setTelefone(txtTelefone.getText());
+	    cliente.setCPF(txtCPF.getText());
 	    cliente.setCidade(cidade);
 
 	    try {

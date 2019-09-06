@@ -6,24 +6,40 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="368.0" prefWidth="507.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apresentacao.insere.ControladorInserirCliente">
-   <children>
-      <Label layoutX="14.0" layoutY="14.0" text="Codigo" />
-      <TextField fx:id="txtCodigo" editable="false" layoutX="14.0" layoutY="29.0" prefHeight="25.0" prefWidth="58.0" AnchorPane.leftAnchor="14.0" />
-      <Label layoutX="14.0" layoutY="54.0" text="Nome" />
-      <TextField fx:id="txtNome" layoutX="14.0" layoutY="69.0" prefHeight="25.0" prefWidth="198.0" />
-      <Label layoutX="134.0" layoutY="94.0" text="Cidade" />
-      <TextField fx:id="txtCidade" layoutX="134.0" layoutY="109.0" prefHeight="25.0" prefWidth="110.0" AnchorPane.leftAnchor="134.0" />
-      <Button layoutX="254.0" layoutY="109.0" mnemonicParsing="false" onAction="#btnPesquisarCidade" text="Pesquisar" AnchorPane.leftAnchor="254.0" />
-      <Button fx:id="btnGrava" layoutX="417.0" layoutY="329.0" mnemonicParsing="false" onAction="#btnGrava" text="Gravar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="33.0" />
-      <Label layoutX="16.0" layoutY="134.0" text="CPF" />
-      <TextField fx:id="txtCPF" layoutX="14.0" layoutY="149.0" prefHeight="25.0" prefWidth="152.0" />
-      <Label layoutX="16.0" layoutY="177.0" text="Endereço" />
-      <TextField fx:id="txtEndereco" layoutX="14.0" layoutY="192.0" prefHeight="25.0" prefWidth="152.0" />
-      <Label layoutX="16.0" layoutY="217.0" text="Telefone" />
-      <TextField fx:id="txtTelefone" layoutX="16.0" layoutY="232.0" prefHeight="25.0" prefWidth="152.0" />
-      <CheckBox fx:id="chkAtivo" layoutX="15.0" layoutY="263.0" mnemonicParsing="false" selected="true" text="Ativo" />
-      <Label layoutX="16.0" layoutY="94.0" text="Cod. Cidade" />
-      <TextField fx:id="txtCodCidade" layoutX="16.0" layoutY="109.0" prefHeight="25.0" prefWidth="110.0" />
-   </children>
+<AnchorPane prefHeight="368.0" prefWidth="507.0"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="apresentacao.insere.ControladorInserirCliente">
+	<children>
+		<Label layoutX="14.0" layoutY="14.0" text="Codigo" />
+		<TextField fx:id="txtCodigo" editable="false" layoutX="14.0"
+			layoutY="29.0" prefHeight="25.0" prefWidth="58.0"
+			AnchorPane.leftAnchor="14.0" />
+		<Label layoutX="14.0" layoutY="54.0" text="Nome" />
+		<TextField fx:id="txtNome" layoutX="14.0" layoutY="69.0"
+			prefHeight="25.0" prefWidth="198.0" />
+		<Label layoutX="134.0" layoutY="94.0" text="Cidade" />
+		<TextField fx:id="txtCidade" layoutX="134.0" layoutY="109.0"
+			prefHeight="25.0" prefWidth="110.0" AnchorPane.leftAnchor="134.0" />
+		<Button layoutX="254.0" layoutY="109.0" mnemonicParsing="false"
+			onAction="#btnPesquisarCidade" text="Pesquisar"
+			AnchorPane.leftAnchor="254.0" />
+		<Button fx:id="btnGrava" layoutX="417.0" layoutY="329.0"
+			mnemonicParsing="false" onAction="#btnGrava" text="Gravar"
+			AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="33.0" />
+		<Label layoutX="16.0" layoutY="134.0" text="CPF" />
+		<TextField fx:id="txtCPF" layoutX="14.0" layoutY="149.0"
+			prefHeight="25.0" prefWidth="152.0" />
+		<Label layoutX="16.0" layoutY="177.0" text="Endereço" />
+		<TextField fx:id="txtEndereco" layoutX="14.0"
+			layoutY="192.0" prefHeight="25.0" prefWidth="152.0" />
+		<Label layoutX="16.0" layoutY="217.0" text="Telefone" />
+		<TextField fx:id="txtTelefone" layoutX="16.0"
+			layoutY="232.0" prefHeight="25.0" prefWidth="152.0" />
+		<CheckBox fx:id="chkAtivo" layoutX="15.0" layoutY="263.0"
+			mnemonicParsing="false" selected="true" text="Ativo" />
+		<Label layoutX="16.0" layoutY="94.0" text="Cod. Cidade" />
+		<TextField fx:id="txtCodCidade" layoutX="16.0"
+			layoutY="109.0" prefHeight="25.0" prefWidth="110.0" />
+	</children>
 </AnchorPane>

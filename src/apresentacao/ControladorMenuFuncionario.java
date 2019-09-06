@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -67,6 +68,8 @@ public class ControladorMenuFuncionario {
 		stage.setOnCloseRequest(e -> {
 		    System.out.println("limpou");
 		    control.limpaTabela();
+		    Alerta.alertaSucesso();
+		  
 		});
 	} catch (IOException e) {
 	    System.out.println(e.getMessage());
@@ -86,7 +89,7 @@ public class ControladorMenuFuncionario {
     }
     @FXML
     void btnConsultaFuncionario(ActionEvent event) {
-	
+	limpaTabela();
 	final var negFuncionario = new NegFuncionario();
 	try {
 	    List<Funcionario> funcionario = negFuncionario.consultar(txtFuncionario.getText());
@@ -97,6 +100,7 @@ public class ControladorMenuFuncionario {
 	    tcFuncao.setCellValueFactory(new PropertyValueFactory("Funcao"));
 	    tcSenha.setCellValueFactory(new PropertyValueFactory("Senha"));
 	    tcAdm.setCellValueFactory(new PropertyValueFactory("Administrador"));
+	    
 	} catch (SQLException e) {
 
 	    System.out.println(e.getMessage());
