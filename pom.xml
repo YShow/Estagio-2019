@@ -89,7 +89,11 @@
 			<artifactId>jmetro</artifactId>
 			<version>11.5.8</version>
 		</dependency>
-
+<dependency>
+    <groupId>org.bouncycastle</groupId>
+    <artifactId>bcprov-jdk15on</artifactId>
+    <version>1.63</version>
+</dependency>
 	</dependencies>
 	<repositories>
 		<repository>

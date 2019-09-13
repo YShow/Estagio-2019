@@ -40,7 +40,7 @@ public class ControladorTelaLogin extends Application {
 	    Alerta.alertaCampoNulo();
 	else {
 	    final var funcionario = new Funcionario();
-	    funcionario.setNome(txtUsuario.getText());
+	    funcionario.setUsuario(txtUsuario.getText());
 	    funcionario.setSenha(txtSenha.getText());
 	    var login = new NegLogin();
 	    try {

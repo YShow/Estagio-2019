@@ -10,15 +10,16 @@ import java.util.List;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Funcionario;
+import utilidade.Senha;
 
 public class NegFuncionario {
     private final AcessoBD conexao = new AcessoBD();
-    private static final String SQL_INSERT = "insert into funcionario(nome,funcao,administrador,senha)"
-	    + " values(?,?,?,?)";
-    private static final String SQL_SEARCH = "select codigo,nome,funcao,administrador,senha from funcionario"
+    private static final String SQL_INSERT = "insert into funcionario(nome,funcao,administrador,senhahash,salt,usuario)"
+	    + " values(?,?,?,?,?,?)";
+    private static final String SQL_SEARCH = "select codigo,nome,funcao,administrador,senhahash from funcionario"
 	    + "  where nome LIKE ? ";
     private static final String SQL_UPDATE = "update funcionario set nome = ?, funcao = ?, administrador = ?,"
-	    + "senha = ? where codigo = ?";
+	    + "senhahash = ? where codigo = ?";
     private static final String SQL_DELETE = "DELETE FROM cantagalo.funcionario\n" + "WHERE codigo=? ;";
 
     public boolean inserir(final Funcionario funcionario) throws SQLException {
@@ -27,11 +28,15 @@ public class NegFuncionario {
 	 con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	    con.setAutoCommit(false);
 	    var comando = con.prepareStatement(SQL_INSERT);
-	try (con;comando;) {	  
+	   
+	try (con;comando;) {	
+	    final var salt = Senha.geraSalt();
 	    comando.setString(1, funcionario.getNome());
 	    comando.setString(2, funcionario.getFuncao());
 	    comando.setBoolean(3, funcionario.getAdministrador());
-	    comando.setString(4, funcionario.getSenha());
+	    comando.setString(4, Senha.criaSenha(funcionario.getSenha(),salt));
+	    comando.setString(5, salt);
+	    comando.setString(6, "yasser");
 
 	
 	   final var inseriu = comando.executeUpdate() >= 1;
