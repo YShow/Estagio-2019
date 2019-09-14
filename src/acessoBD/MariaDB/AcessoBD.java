@@ -1,16 +1,12 @@
 package acessoBD.MariaDB;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-import utilidade.Senha;
+
 
 public class AcessoBD {
     // USUARIO DO BANCO

@@ -2,6 +2,8 @@ package negocio;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +24,7 @@ public class NegVendas {
     private static final String SQL_DELETE = "DELETE FROM cantagalo.vendas\n" + "WHERE codigo=0;\n" + "";
 
     public boolean inserir(final Vendas vendas) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -38,12 +41,15 @@ public class NegVendas {
 	    comando.setString(4, vendas.getFormaPagamento());
 	    final var inseriu = comando.executeUpdate() >= 1;
 	    con.commit();
+	    System.out.println("Inserir de Vendas demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return inseriu;
 
 	}
     }
 
     public List<Vendas> consultar(final String metodo) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);
 	con.setReadOnly(true);
@@ -71,11 +77,14 @@ public class NegVendas {
 		venda.setFormaPagamento(result.getString("forma_de_pagamento"));
 		lista.add(venda);
 	    }
+	    System.out.println("Consulta de Vendas demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return lista;
 	}
     }
 
     public boolean alterar(final Vendas vendas) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);	
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -83,11 +92,14 @@ public class NegVendas {
 	try (con;comando;) {
 	    
 	    con.commit();
+	    System.out.println("Alterar de Vendas demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return false;
 	}
     }
 
     public boolean excluir(final int id) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);	
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -95,6 +107,8 @@ public class NegVendas {
 	try (con;comando) {
 	    
 	    con.commit();
+	    System.out.println("Excluir de Vendas demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return false;
 	}
     }

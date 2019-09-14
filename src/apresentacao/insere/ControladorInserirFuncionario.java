@@ -60,7 +60,6 @@ public class ControladorInserirFuncionario {
 		controlador.btnGravarFuncionario.setText("Alterar");
 		controlador.txtFuncao.setText(funcionario.getFuncao());
 		controlador.txtNomeFuncionario.setText(funcionario.getNome());
-		controlador.txtSenhaFuncionario.setText(funcionario.getSenha());
 		controlador.chkAdm.setSelected(funcionario.getAdministrador());
 		controlador.txtCodigo.setText(String.valueOf(funcionario.getCodigo()));
 		stage.setTitle("Alterar Funcionario");
@@ -95,7 +94,10 @@ public class ControladorInserirFuncionario {
 	    funcionario.setAdministrador(chkAdm.isSelected());
 	    funcionario.setFuncao(txtFuncao.getText());
 	    funcionario.setNome(txtNomeFuncionario.getText());
+	    if(!txtSenhaFuncionario.getText().strip().isBlank())
 	    funcionario.setSenha(txtSenhaFuncionario.getText());
+	    else
+		funcionario.setSenha("");
 
 	    try {
 		negFun.alterar(funcionario);

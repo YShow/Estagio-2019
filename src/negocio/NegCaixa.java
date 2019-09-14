@@ -1,6 +1,9 @@
 package negocio;
 
+import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,25 +21,39 @@ public class NegCaixa {
 	    + "SET data= ?, preco_total=?, saida= ?, codigo_cliente= ?" + "WHERE codigo= ?;";
     private static final String SQL_DELETE = "";
 
-    public int inserir(Caixa caixa) throws SQLException {
-	try (final var comando = conexao.getConexao().prepareStatement(SQL_INSERT)) {
+    public boolean inserir(final Caixa caixa) throws SQLException {
+	final var comeco = Instant.now();
+	final var con = conexao.getConexao();
+	final var comando = con.prepareStatement(SQL_INSERT);
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	con.setAutoCommit(false);
+	try (con;comando;) {
 	    comando.setObject(1, caixa.getData());
 	    comando.setDouble(2, caixa.getPrecototal());
 	    comando.setDouble(3, caixa.getSaida());
 	    comando.setInt(4, caixa.getCliente());
-
-	    return comando.executeUpdate();
+	    final var inseriu = comando.executeUpdate() >=1;
+	    con.commit();
+	    System.out.println("Insercao de caixa demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
+	    return inseriu;
 	}
     }
 
-    public List<Caixa> consultar(String metodo) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_SEARCH)) {
+    public List<Caixa> consultar(final String metodo) throws SQLException {
+	final var comeco = Instant.now();
+	final var con = conexao.getConexao();
+	final var comando = con.prepareStatement(SQL_SEARCH);
+	con.setAutoCommit(false);
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	con.setReadOnly(true);
+	try (con;comando;) {
 	    comando.setString(1, metodo);
 
-	    var result = comando.executeQuery();
-	    var lista = new ArrayList<Caixa>();
+	   final var result = comando.executeQuery();
+	    final var lista = new ArrayList<Caixa>();
 	    while (result.next()) {
-		var caixa = new Caixa();
+		final var caixa = new Caixa();
 		caixa.setCodigo(result.getInt("codigo"));
 		caixa.setData(result.getObject("data", LocalDate.class));
 		caixa.setPrecototal(result.getDouble("preco_total"));
@@ -44,25 +61,46 @@ public class NegCaixa {
 		caixa.setCliente(result.getInt("codigo_cliente"));
 		lista.add(caixa);
 	    }
+	    System.out.println("Consulta de caixa demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return lista;
 	}
     }
 
-    public int alterar(Caixa caixa) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_UPDATE)) {
+    public boolean alterar(final Caixa caixa) throws SQLException {
+	final var comeco = Instant.now();
+	final var con = conexao.getConexao();
+	final var comando = con.prepareStatement(SQL_UPDATE);
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	con.setAutoCommit(false);
+	try (con;comando;) {
 	    comando.setObject(1, caixa.getData());
 	    comando.setDouble(2, caixa.getPrecototal());
 	    comando.setDouble(3, caixa.getSaida());
 	    comando.setDouble(4, caixa.getCliente());
 	    comando.setDouble(5, caixa.getCodigo());
-	    return comando.executeUpdate();
+	    final var alterou = comando.executeUpdate() >= 1;
+	    con.commit();
+	    
+	    System.out.println("Alterar de caixa demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
+	    return alterou;
 	}
     }
 
-    public int excluir(int id) throws SQLException {
-	try (var comando = conexao.getConexao().prepareStatement(SQL_DELETE)) {
+    public boolean excluir(final int id) throws SQLException {
+	final var comeco = Instant.now();
+	final var con = conexao.getConexao();
+	final var comando = con.prepareStatement(SQL_DELETE);
+	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	con.setAutoCommit(false);
+	try (con;comando;) {
 	    comando.setInt(1, id);
-	    return comando.executeUpdate();
+	    final var excluiu = comando.executeUpdate() >= 1;
+	    con.commit();
+	    System.out.println("Alterar de caixa demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
+	    return excluiu;
 	}
     }
 }

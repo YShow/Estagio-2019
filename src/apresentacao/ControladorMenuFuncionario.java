@@ -40,8 +40,7 @@ public class ControladorMenuFuncionario {
     @FXML
     private TableColumn<Funcionario, String> tcFuncao;
 
-    @FXML
-    private TableColumn<Funcionario, String> tcSenha;
+ 
 
     @FXML
     private TableColumn<Funcionario, String> tcAdm;
@@ -79,7 +78,7 @@ public class ControladorMenuFuncionario {
     @FXML
     void btnAlteraFuncionario(ActionEvent event) {
 	final var funcionario = tblFuncionario.getSelectionModel().getSelectedItem();
-	System.out.println(funcionario.getNome());
+
 	tela.abreTelaFuncionarioInsere(TIPO_TELA.ALTERA, funcionario);
     }
 
@@ -97,7 +96,7 @@ public class ControladorMenuFuncionario {
 	    tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
 	    tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));
 	    tcFuncao.setCellValueFactory(new PropertyValueFactory("Funcao"));
-	    tcSenha.setCellValueFactory(new PropertyValueFactory("Senha"));
+	
 	    tcAdm.setCellValueFactory(new PropertyValueFactory("Administrador"));
 	    
 	} catch (SQLException e) {

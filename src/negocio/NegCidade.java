@@ -2,6 +2,8 @@ package negocio;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class NegCidade {
     private static final String SQL_DELETE = "DELETE FROM cantagalo.cidade\n" + "WHERE codigo = ? ;";
 
     public boolean inserir(final Cidade cidade) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);
 	    con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -26,14 +29,18 @@ public class NegCidade {
 	    comando.setString(2, cidade.getEstado());
 	    final var inseriu = comando.executeUpdate() >= 1;
 	    con.commit();
+	    System.out.println("Insercao de cidade demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return inseriu;
 	}
     }
 
     public List<Cidade> consultar(final String metodo) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);
 	    con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	    con.setReadOnly(true);
 	    final var comando = con.prepareStatement(SQL_SEARCH);
 	try (con;comando;) {
 	    
@@ -48,11 +55,14 @@ public class NegCidade {
 		cidade.setEstado(result.getString("estado"));
 		lista.add(cidade);
 	    }
+	    System.out.println("Consulta de cidade demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return lista;
 	}
     }
 
     public boolean alterar(final Cidade cidade) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	 con.setAutoCommit(false);
 	    con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -64,11 +74,14 @@ public class NegCidade {
 	    comando.setInt(3, cidade.getCodigo());
 	    final var alterou = comando.executeUpdate() >= 1;
 	    con.commit();
+	    System.out.println("Altera de cidade demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return alterou;
 	}
     }
 
     public boolean excluir(final int id) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	 con.setAutoCommit(false);
 	    con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -78,6 +91,8 @@ public class NegCidade {
 	    comando.setInt(1, id);
 	    final var excluiu = comando.executeUpdate() >= 1;
 	    con.commit();
+	    System.out.println("Excluir de cidade demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return excluiu;
 	}
     }

@@ -2,6 +2,8 @@ package negocio;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.Instant;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Funcionario;
@@ -12,13 +14,14 @@ public class NegLogin {
     private static final String SQL_SEARCH = "SELECT usuario,salt, senhahash, administrador from funcionario WHERE  usuario = ?;";
 
     public boolean verificaLogin(final Funcionario funcionario) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	con.setAutoCommit(false);
 	con.setReadOnly(true);
 	final var comando = con.prepareStatement(SQL_SEARCH);
 	try (con;comando;) {
-	   
+	   var existeUsuario = false;
 	    comando.setString(1, funcionario.getUsuario());
 	    final var resultado = comando.executeQuery();
 	    if (resultado.next()) {
@@ -28,11 +31,13 @@ public class NegLogin {
 		{
 		funcionarioPadrao.setAdministrador(resultado.getBoolean("administrador"));
 		Funcionario.setFuncionario(funcionarioPadrao);
-		return true;
+		existeUsuario = true;
 		}else
-		    return false;
-	    } else
-		return false;
+		    existeUsuario = true;
+	    }
+	    System.out.println("Login de usuario demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
+	    return existeUsuario;
 	}
     }
 }

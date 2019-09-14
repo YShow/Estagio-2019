@@ -23,6 +23,7 @@ public class NegCliente {
     private static final String SQL_DELETE = "DELETE FROM cantagalo.cliente\n" + "WHERE codigo=?;";
 
     public boolean inserir(final Cliente cliente) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -36,13 +37,14 @@ public class NegCliente {
 	    comando.setInt(6, cliente.getCidade().getCodigo());
 	    final var inseriu = comando.executeUpdate() >= 1;
 	    con.commit();
+	    System.out.println("Insercao de Cliente demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return inseriu;
-	} finally {
-	    System.out.println(con.isClosed());
-	}
+	} 
     }
 
     public List<Cliente> consultar(final String metodo) throws SQLException {
+	final var comeco = Instant.now();
 	
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);
@@ -71,18 +73,21 @@ public class NegCliente {
 		cliente.setCidade(cidade);
 		lista.add(cliente);
 	     }
-	    
+	    System.out.println("Consulta de cliente demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return lista;
 	}
 
     }
 
     public boolean alterar(final Cliente cliente) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	final var comando = con.prepareStatement(SQL_UPDATE);
-	try (con;comando) {
-	    con.setAutoCommit(false);
+	con.setAutoCommit(false);
 	    con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+	try (con;comando) {
+	    
 	    comando.setString(1, cliente.getNome());
 	    comando.setString(2, cliente.getCPF());
 	    comando.setString(3, cliente.getEndereco());
@@ -92,12 +97,14 @@ public class NegCliente {
 	    comando.setInt(7, cliente.getCodigo());
 	    final var alterou = comando.executeUpdate() >= 1;
 	    con.commit();
-
+	    System.out.println("Alterar de cliente demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return alterou;
 	}
     }
 
     public boolean excluir(final int id) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -106,6 +113,8 @@ public class NegCliente {
 	    comando.setInt(1, id);
 	    final var excluiu = comando.executeUpdate() >= 1;
 	    con.commit();
+	    System.out.println("Excluir de cliente demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return excluiu;
 	}
     }

@@ -2,6 +2,8 @@ package negocio;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +21,7 @@ public class NegProduto {
     private static final String SQL_DELETE = "";
 
     public boolean inserir(final Produto produto) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -30,12 +33,15 @@ public class NegProduto {
 	    comando.setString(4, produto.getNome());
 	    final var inseriu = comando.executeUpdate() >= 1;
 	    con.commit();
+	    System.out.println("Inserir de produto demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return inseriu;
 	}
 
     }
 
     public List<Produto> consultar(final String metodo) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	con.setAutoCommit(false);
@@ -55,11 +61,14 @@ public class NegProduto {
 
 		lista.add(produto);
 	    }
+	    System.out.println("Consulta de produto demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return lista;
 	}
     }
 
     public boolean alterar(final Produto produto) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -72,11 +81,14 @@ public class NegProduto {
 	    comando.setInt(5, produto.getCodigo());
 	    final var alterou =  comando.executeUpdate() >= 1;
 	    con.commit();
+	    System.out.println("Altera de produto demorou: " + 
+		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return alterou;
 	}
     }
 
     public boolean excluir(final int id) throws SQLException {
+	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -85,6 +97,8 @@ public class NegProduto {
 	    comando.setInt(1, id);
 	   final var excluiu = comando.executeUpdate() >= 1;
 		con.commit();
+		System.out.println("Excluir de produto demorou: " + 
+			    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
 	    return excluiu;
 	}
     }
