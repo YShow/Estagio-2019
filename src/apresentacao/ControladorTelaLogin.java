@@ -80,7 +80,7 @@ public class ControladorTelaLogin extends Application {
 	    stage.show();
 
 	} catch (IOException e) {
-	    System.out.println(e.getMessage());
+	    Alerta.alertaErro(e.getMessage());
 	}
 
     }

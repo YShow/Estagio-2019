@@ -11,6 +11,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import jfxtras.styles.jmetro.Style;
+import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
 public class ControladorMenuPrincipal {
@@ -30,7 +31,7 @@ public class ControladorMenuPrincipal {
 	    stage.setScene(scene);
 	    stage.show();
 	} catch (IOException e) {
-	    e.getMessage();
+	    Alerta.alertaErro(e.getMessage());
 	}
     }
 
@@ -75,7 +76,7 @@ public class ControladorMenuPrincipal {
 	    stage.show();
 
 	} catch (IOException e) {
-	    e.getMessage();
+	    Alerta.alertaErro(e.getMessage());
 	}
     }
 }

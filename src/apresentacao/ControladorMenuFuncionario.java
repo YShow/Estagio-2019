@@ -70,7 +70,7 @@ public class ControladorMenuFuncionario {
 		  
 		});
 	} catch (IOException e) {
-	    System.out.println(e.getMessage());
+	    Alerta.alertaErro(e.getMessage());
 	}
     }
     
@@ -101,7 +101,7 @@ public class ControladorMenuFuncionario {
 	    
 	} catch (SQLException e) {
 
-	    System.out.println(e.getMessage());
+	    Alerta.alertaErro(e.getMessage());
 	}
     }
 

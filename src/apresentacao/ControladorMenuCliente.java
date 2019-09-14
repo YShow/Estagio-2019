@@ -104,7 +104,7 @@ public class ControladorMenuCliente {
 	    }
 	    	stage.show();
 	} catch (IOException e) {
-	    System.out.println(e.getMessage());
+	   Alerta.alertaErro(e.getMessage());
 	}
     }
 
@@ -149,7 +149,7 @@ public class ControladorMenuCliente {
 
 	} catch (SQLException e) {
 
-	    System.out.println(e.getMessage());
+	    Alerta.alertaErro(e.getMessage());
 	}
     }
 

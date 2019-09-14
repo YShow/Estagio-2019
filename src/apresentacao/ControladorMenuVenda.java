@@ -18,6 +18,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import negocio.NegVendas;
 import objeto.Vendas;
+import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
 public class ControladorMenuVenda {
@@ -82,7 +83,7 @@ public class ControladorMenuVenda {
 
 	} catch (SQLException e) {
 
-	    System.out.println(e.getMessage());
+	    Alerta.alertaErro(e.getMessage());
 	}
     }
 

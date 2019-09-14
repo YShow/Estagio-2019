@@ -91,7 +91,7 @@ public class ControladorMenuProduto {
 		}
 	    stage.show();
 	} catch (IOException e) {
-	    System.out.println(e.getMessage());
+	    Alerta.alertaErro(e.getMessage());
 	}
     }
 
@@ -116,7 +116,7 @@ public class ControladorMenuProduto {
 
 	} catch (SQLException e) {
 
-	    System.out.println(e.getMessage());
+	    Alerta.alertaErro(e.getMessage());
 	}
     }
 

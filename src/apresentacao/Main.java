@@ -14,6 +14,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
 	// isto é um teste para como esconder uma tela e abrir outra sem fexar o
 	// programa
+	//TODO
 	// Platform.setImplicitExit(false);
 
 	try {
