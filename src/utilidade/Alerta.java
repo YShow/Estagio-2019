@@ -1,7 +1,5 @@
 package utilidade;
 
-
-
 import apresentacao.Main;
 
 import javafx.scene.control.Alert;
@@ -17,10 +15,10 @@ public class Alerta {
     private static final Alert alerta = new Alert(Alert.AlertType.NONE);
 
     public static void alertaSucesso() {
-	new JMetro(alerta.getDialogPane().getScene(),Main.style).setAutomaticallyColorPanes(true);
+	new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
 	alerta.initStyle(StageStyle.TRANSPARENT);
 	alerta.initModality(Modality.APPLICATION_MODAL);
-	alerta.setAlertType(AlertType.INFORMATION);	
+	alerta.setAlertType(AlertType.INFORMATION);
 	alerta.setHeaderText("Função realizada com sucesso");
 	alerta.setHeight(300);
 	alerta.setWidth(300);
@@ -29,11 +27,11 @@ public class Alerta {
     }
 
     public static void alertaErro(final String erro) {
-	new JMetro(alerta.getDialogPane().getScene(),Main.style).setAutomaticallyColorPanes(true);
+	new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
 	alerta.initStyle(StageStyle.TRANSPARENT);
 	alerta.initModality(Modality.APPLICATION_MODAL);
 	alerta.setAlertType(AlertType.WARNING);
-	alerta.setTitle("Ocorreu um problema");	
+	alerta.setTitle("Ocorreu um problema");
 	alerta.setHeaderText("Verifique os campos e informe o erro ao desenvolvedor");
 	alerta.setContentText("Erro: " + erro);
 	alerta.setResult(ButtonType.OK);
@@ -44,7 +42,7 @@ public class Alerta {
     }
 
     public static void alertaCampoNulo() {
-	new JMetro(alerta.getDialogPane().getScene(),Main.style).setAutomaticallyColorPanes(true);
+	new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
 	alerta.initStyle(StageStyle.TRANSPARENT);
 	alerta.initModality(Modality.APPLICATION_MODAL);
 	alerta.setHeaderText("Verifique os campos");
@@ -56,7 +54,7 @@ public class Alerta {
     }
 
     public static void alertaCidadeEmUso() {
-	new JMetro(alerta.getDialogPane().getScene(),Main.style).setAutomaticallyColorPanes(true);
+	new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
 	alerta.initStyle(StageStyle.TRANSPARENT);
 	alerta.initModality(Modality.APPLICATION_MODAL);
 	alerta.setAlertType(AlertType.WARNING);
@@ -69,7 +67,7 @@ public class Alerta {
     }
 
     public static void alertaClienteEmCaixa() {
-	new JMetro(alerta.getDialogPane().getScene(),Main.style).setAutomaticallyColorPanes(true);
+	new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
 	alerta.initStyle(StageStyle.TRANSPARENT);
 	alerta.initModality(Modality.APPLICATION_MODAL);
 	alerta.setAlertType(AlertType.WARNING);

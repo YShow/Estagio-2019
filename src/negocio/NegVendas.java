@@ -29,7 +29,7 @@ public class NegVendas {
 	con.setAutoCommit(false);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	final var comando = con.prepareStatement(SQL_INSERT);
-	try (con;comando;) {
+	try (con; comando;) {
 	    /*
 	     * "INSERT INTO cantagalo.vendas\n" +
 	     * "(cod_cliente, cod_caixa, data_venda, forma_de_pagamento)\n" +
@@ -41,8 +41,8 @@ public class NegVendas {
 	    comando.setString(4, vendas.getFormaPagamento());
 	    final var inseriu = comando.executeUpdate() >= 1;
 	    con.commit();
-	    System.out.println("Inserir de Vendas demorou: " + 
-		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
+	    System.out
+		    .println("Inserir de Vendas demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 	    return inseriu;
 
 	}
@@ -55,10 +55,10 @@ public class NegVendas {
 	con.setReadOnly(true);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	final var comando = conexao.getConexao().prepareStatement(SQL_SEARCH);
-	try (con;comando;) {
+	try (con; comando;) {
 	    comando.setString(1, '%' + metodo + '%');
-	   final var result = comando.executeQuery();
-	  final  var lista = new ArrayList<Vendas>();
+	    final var result = comando.executeQuery();
+	    final var lista = new ArrayList<Vendas>();
 
 	    /*
 	     * "SELECT codigo, cod_cliente, cod_caixa, data_venda," +
@@ -77,8 +77,8 @@ public class NegVendas {
 		venda.setFormaPagamento(result.getString("forma_de_pagamento"));
 		lista.add(venda);
 	    }
-	    System.out.println("Consulta de Vendas demorou: " + 
-		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
+	    System.out.println(
+		    "Consulta de Vendas demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 	    return lista;
 	}
     }
@@ -86,14 +86,14 @@ public class NegVendas {
     public boolean alterar(final Vendas vendas) throws SQLException {
 	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
-	con.setAutoCommit(false);	
+	con.setAutoCommit(false);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	final var comando = conexao.getConexao().prepareStatement(SQL_UPDATE);
-	try (con;comando;) {
-	    
+	try (con; comando;) {
+
 	    con.commit();
-	    System.out.println("Alterar de Vendas demorou: " + 
-		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
+	    System.out
+		    .println("Alterar de Vendas demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 	    return false;
 	}
     }
@@ -101,14 +101,14 @@ public class NegVendas {
     public boolean excluir(final int id) throws SQLException {
 	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
-	con.setAutoCommit(false);	
+	con.setAutoCommit(false);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	final var comando = conexao.getConexao().prepareStatement(SQL_DELETE);
-	try (con;comando) {
-	    
+	try (con; comando) {
+
 	    con.commit();
-	    System.out.println("Excluir de Vendas demorou: " + 
-		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
+	    System.out
+		    .println("Excluir de Vendas demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 	    return false;
 	}
     }

@@ -37,6 +37,6 @@ public class Cidade {
 
     private String estado;
     private int codigo;
-    private static int codCidade;
-    private static String nomeCidade;
+    public static int codCidade;
+    public static String nomeCidade;
 }

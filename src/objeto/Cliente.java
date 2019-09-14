@@ -39,7 +39,7 @@ public class Cliente {
 	return ativo;
     }
 
-    public void setAtivo(Final Boolean ativo) {
+    public void setAtivo(final Boolean ativo) {
 	this.ativo = ativo;
     }
 

@@ -60,9 +60,12 @@ public class ControladorMenuVenda {
 	    tcFormaPAg.setCellValueFactory(new PropertyValueFactory("FormaPagamento"));
 	    tcDataVenda.setCellValueFactory(new PropertyValueFactory("Data"));
 
-	    tcCodCaixa.setCellValueFactory(codCaixa -> new ReadOnlyIntegerWrapper(codCaixa.getValue().getCaixa().getCodigo()).asObject());
+	    tcCodCaixa.setCellValueFactory(
+		    codCaixa -> new ReadOnlyIntegerWrapper(codCaixa.getValue().getCaixa().getCodigo()).asObject());
 
-	    tcCodCliente.setCellValueFactory(codCliente -> new ReadOnlyIntegerWrapper(codCliente.getValue().getCliente().getCodigo()).asObject());
+	    tcCodCliente.setCellValueFactory(
+		    codCliente -> new ReadOnlyIntegerWrapper(codCliente.getValue().getCliente().getCodigo())
+			    .asObject());
 
 	} catch (SQLException e) {
 

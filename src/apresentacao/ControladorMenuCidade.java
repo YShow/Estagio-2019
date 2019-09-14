@@ -58,9 +58,9 @@ public class ControladorMenuCidade {
 	var stage = new Stage();
 	Parent root;
 	final var loader = new FXMLLoader();
-	
+
 	stage.initModality(Modality.APPLICATION_MODAL);
-	
+
 	try {
 	    loader.setLocation(getClass().getResource("/apresentacao/Cidade.fxml"));
 	    root = loader.load();
@@ -77,15 +77,15 @@ public class ControladorMenuCidade {
 		controlador.btnDesativar.setText("Selecionar");
 		controlador.btnInserir.setDisable(true);
 		stage.setTitle("Consultar Cidade");
-		stage.showAndWait();		
-	    } 
-	    
-	    if(Funcionario.getFuncionario().getAdministrador().equals(false))
-		{controlador.btnDesativar.setVisible(false);
+		stage.showAndWait();
+	    }
+
+	    if (Funcionario.getFuncionario().getAdministrador().equals(false)) {
+		controlador.btnDesativar.setVisible(false);
 		controlador.btnDesativar.setDisable(true);
-		
-		}
-		stage.show();
+
+	    }
+	    stage.show();
 	} catch (IOException e) {
 	    Alerta.alertaErro(e.getMessage());
 	}
@@ -118,14 +118,14 @@ public class ControladorMenuCidade {
     @FXML
     void btnDesativaCidade(ActionEvent event) {
 	final var cidade = tvCidade.getSelectionModel().getSelectedItem();
-	
+
 	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
 
 	    Cidade.nomeCidade = cidade.getNome();
 	    Cidade.codCidade = cidade.getCodigo();
 
 	} else {
-	   final var negCidade = new NegCidade();
+	    final var negCidade = new NegCidade();
 	    try {
 		if (negCidade.excluir(cidade.getCodigo())) {
 		    tvCidade.getItems().remove(cidade);

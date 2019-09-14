@@ -27,15 +27,15 @@ public class NegCaixa {
 	final var comando = con.prepareStatement(SQL_INSERT);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	con.setAutoCommit(false);
-	try (con;comando;) {
+	try (con; comando;) {
 	    comando.setObject(1, caixa.getData());
 	    comando.setDouble(2, caixa.getPrecototal());
 	    comando.setDouble(3, caixa.getSaida());
 	    comando.setInt(4, caixa.getCliente());
-	    final var inseriu = comando.executeUpdate() >=1;
+	    final var inseriu = comando.executeUpdate() >= 1;
 	    con.commit();
-	    System.out.println("Insercao de caixa demorou: " + 
-		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
+	    System.out
+		    .println("Insercao de caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 	    return inseriu;
 	}
     }
@@ -47,10 +47,10 @@ public class NegCaixa {
 	con.setAutoCommit(false);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	con.setReadOnly(true);
-	try (con;comando;) {
+	try (con; comando;) {
 	    comando.setString(1, metodo);
 
-	   final var result = comando.executeQuery();
+	    final var result = comando.executeQuery();
 	    final var lista = new ArrayList<Caixa>();
 	    while (result.next()) {
 		final var caixa = new Caixa();
@@ -61,8 +61,8 @@ public class NegCaixa {
 		caixa.setCliente(result.getInt("codigo_cliente"));
 		lista.add(caixa);
 	    }
-	    System.out.println("Consulta de caixa demorou: " + 
-		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
+	    System.out
+		    .println("Consulta de caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 	    return lista;
 	}
     }
@@ -73,7 +73,7 @@ public class NegCaixa {
 	final var comando = con.prepareStatement(SQL_UPDATE);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	con.setAutoCommit(false);
-	try (con;comando;) {
+	try (con; comando;) {
 	    comando.setObject(1, caixa.getData());
 	    comando.setDouble(2, caixa.getPrecototal());
 	    comando.setDouble(3, caixa.getSaida());
@@ -81,9 +81,9 @@ public class NegCaixa {
 	    comando.setDouble(5, caixa.getCodigo());
 	    final var alterou = comando.executeUpdate() >= 1;
 	    con.commit();
-	    
-	    System.out.println("Alterar de caixa demorou: " + 
-		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
+
+	    System.out
+		    .println("Alterar de caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 	    return alterou;
 	}
     }
@@ -94,12 +94,12 @@ public class NegCaixa {
 	final var comando = con.prepareStatement(SQL_DELETE);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	con.setAutoCommit(false);
-	try (con;comando;) {
+	try (con; comando;) {
 	    comando.setInt(1, id);
 	    final var excluiu = comando.executeUpdate() >= 1;
 	    con.commit();
-	    System.out.println("Alterar de caixa demorou: " + 
-		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
+	    System.out
+		    .println("Alterar de caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 	    return excluiu;
 	}
     }

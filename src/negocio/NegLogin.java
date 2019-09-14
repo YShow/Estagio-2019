@@ -20,23 +20,23 @@ public class NegLogin {
 	con.setAutoCommit(false);
 	con.setReadOnly(true);
 	final var comando = con.prepareStatement(SQL_SEARCH);
-	try (con;comando;) {
-	   var existeUsuario = false;
+	try (con; comando;) {
+	    var existeUsuario = false;
 	    comando.setString(1, funcionario.getUsuario());
 	    final var resultado = comando.executeQuery();
 	    if (resultado.next()) {
-		
+
 		final var funcionarioPadrao = new Funcionario();
-		if(Senha.senhaCorreta(funcionario.getSenha(),resultado.getString("senhahash"), resultado.getString("salt")))
-		{
-		funcionarioPadrao.setAdministrador(resultado.getBoolean("administrador"));
-		Funcionario.setFuncionario(funcionarioPadrao);
-		existeUsuario = true;
-		}else
+		if (Senha.senhaCorreta(funcionario.getSenha(), resultado.getString("senhahash"),
+			resultado.getString("salt"))) {
+		    funcionarioPadrao.setAdministrador(resultado.getBoolean("administrador"));
+		    Funcionario.setFuncionario(funcionarioPadrao);
+		    existeUsuario = true;
+		} else
 		    existeUsuario = true;
 	    }
-	    System.out.println("Login de usuario demorou: " + 
-		    Duration.between(comeco, Instant.now()).toMillis()  + "ms");
+	    System.out
+		    .println("Login de usuario demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 	    return existeUsuario;
 	}
     }

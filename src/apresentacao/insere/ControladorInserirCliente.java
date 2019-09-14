@@ -63,8 +63,8 @@ public class ControladorInserirCliente {
 	    root = loader.load();
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
-	   final var scene = new Scene(root);
-	    new JMetro(scene,Main.style).setAutomaticallyColorPanes(true);
+	    final var scene = new Scene(root);
+	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 	    stage.setScene(scene);
 	    final var controlador = (ControladorInserirCliente) loader.getController();
 	    if (tipo_tela.equals(tipo_telaa.ALTERA)) {

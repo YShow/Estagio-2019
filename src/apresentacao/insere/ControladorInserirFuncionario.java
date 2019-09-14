@@ -50,7 +50,7 @@ public class ControladorInserirFuncionario {
 	try {
 	    loader.setLocation(getClass().getResource("/apresentacao/insere/FuncionarioInsere.fxml"));
 	    root = loader.load();
-	   final  var scene = new Scene(root);
+	    final var scene = new Scene(root);
 	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 	    stage.setScene(scene);
 	    stage.setMinHeight(root.minHeight(-1));
@@ -95,10 +95,10 @@ public class ControladorInserirFuncionario {
 	    funcionario.setAdministrador(chkAdm.isSelected());
 	    funcionario.setFuncao(txtFuncao.getText());
 	    funcionario.setNome(txtNomeFuncionario.getText());
-	    if(txtSenhaFuncionario.getText().strip().isBlank())
+	    if (txtSenhaFuncionario.getText().strip().isBlank())
 		funcionario.setSenha("");
-	    else		
-	    funcionario.setSenha(txtSenhaFuncionario.getText());
+	    else
+		funcionario.setSenha(txtSenhaFuncionario.getText());
 	    try {
 		negFun.alterar(funcionario);
 

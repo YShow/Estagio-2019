@@ -26,7 +26,7 @@ public class ControladorMenuPrincipal {
 
 	    root = FXMLLoader.load(getClass().getResource("Caixa.fxml"));
 	    stage.setTitle("Menu de Caixa");
-	   final var scene = new Scene(root);
+	    final var scene = new Scene(root);
 	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 	    stage.setScene(scene);
 	    stage.show();
@@ -71,7 +71,7 @@ public class ControladorMenuPrincipal {
 
 	    stage.setTitle("Menu de Venda");
 	    final var scene = new Scene(root);
-	    new JMetro(scene,Main.style).setAutomaticallyColorPanes(true);
+	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 	    stage.setScene(scene);
 	    stage.show();
 

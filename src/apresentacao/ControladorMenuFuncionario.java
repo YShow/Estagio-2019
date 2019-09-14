@@ -39,41 +39,38 @@ public class ControladorMenuFuncionario {
     @FXML
     private TableColumn<Funcionario, String> tcFuncao;
 
- 
-
     @FXML
     private TableColumn<Funcionario, String> tcAdm;
     private final ControladorInserirFuncionario tela = new ControladorInserirFuncionario();
 
     public void abreTelaFuncionarioMenu() {
-	
+
 	final var stage = new Stage();
 	Parent root;
 	final var loader = new FXMLLoader();
-	
+
 	stage.initModality(Modality.APPLICATION_MODAL);
-	
+
 	try {
 	    loader.setLocation(getClass().getResource("/apresentacao/Funcionario.fxml"));
-	    root = loader.load();	    	 
+	    root = loader.load();
 	    final var control = (ControladorMenuFuncionario) loader.getController();
-	   final var scene = new Scene(root);
+	    final var scene = new Scene(root);
 	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
-	    stage.setScene(scene);	   
-	    
-		stage.show();
-		
-		stage.setOnCloseRequest(e -> {
-		    
-		    control.limpaTabela();		  
-		  
-		});
+	    stage.setScene(scene);
+
+	    stage.show();
+
+	    stage.setOnCloseRequest(e -> {
+
+		control.limpaTabela();
+
+	    });
 	} catch (IOException e) {
 	    Alerta.alertaErro(e.getMessage());
 	}
     }
-    
-    
+
     @FXML
     void btnAlteraFuncionario(ActionEvent event) {
 	final var funcionario = tblFuncionario.getSelectionModel().getSelectedItem();
@@ -84,6 +81,7 @@ public class ControladorMenuFuncionario {
     private void limpaTabela() {
 	tblFuncionario.getItems().clear();
     }
+
     @FXML
     void btnConsultaFuncionario(ActionEvent event) {
 	limpaTabela();
@@ -95,9 +93,9 @@ public class ControladorMenuFuncionario {
 	    tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
 	    tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));
 	    tcFuncao.setCellValueFactory(new PropertyValueFactory("Funcao"));
-	
+
 	    tcAdm.setCellValueFactory(new PropertyValueFactory("Administrador"));
-	    
+
 	} catch (SQLException e) {
 
 	    Alerta.alertaErro(e.getMessage());

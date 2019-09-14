@@ -55,7 +55,7 @@ public class ControladorInserirVenda {
 	try {
 	    loader.setLocation(getClass().getResource("/apresentacao/insere/VendaInsere.fxml"));
 	    root = loader.load();
-	   final var scene = new Scene(root);
+	    final var scene = new Scene(root);
 	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 	    stage.setScene(scene);
 	    stage.setMinHeight(root.minHeight(-1));
@@ -70,7 +70,7 @@ public class ControladorInserirVenda {
 		stage.show();
 	    }
 	} catch (IOException e) {
-	   Alerta.alertaErro(e.getMessage());
+	    Alerta.alertaErro(e.getMessage());
 	}
     }
 

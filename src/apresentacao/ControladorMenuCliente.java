@@ -87,9 +87,9 @@ public class ControladorMenuCliente {
 	    stage.setMinWidth(root.minWidth(-1));
 	    final var scene = new Scene(root);
 	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
-	    stage.setScene(scene);	   
+	    stage.setScene(scene);
 	    if (tipo_tela.equals(TIPO_TELA.CONSULTA)) {
-	
+
 		controlador.btnInsereCliente.setDisable(true);
 		controlador.btnInsereCliente.setVisible(false);
 		controlador.btnAlterarCliente.setDisable(true);
@@ -97,14 +97,14 @@ public class ControladorMenuCliente {
 		controlador.btnDesativarCliente.setText("Selecionar");
 		stage.setTitle("Consultar Cliente");
 		stage.showAndWait();
-	    } if(!Funcionario.getFuncionario().getAdministrador())
-	    {
-		btnDesativarCliente.setVisible(true);
-	    	btnDesativarCliente.setDisable(true);
 	    }
-	    	stage.show();
+	    if (!Funcionario.getFuncionario().getAdministrador()) {
+		btnDesativarCliente.setVisible(true);
+		btnDesativarCliente.setDisable(true);
+	    }
+	    stage.show();
 	} catch (IOException e) {
-	   Alerta.alertaErro(e.getMessage());
+	    Alerta.alertaErro(e.getMessage());
 	}
     }
 
@@ -118,8 +118,8 @@ public class ControladorMenuCliente {
     void btnConsultaCliente(ActionEvent event) {
 	final var negCliente = new NegCliente();
 	try {
-	   final List<Cliente> cliente = negCliente.consultar(txtCliente.getText());
-	   final var data = FXCollections.observableList(cliente);
+	    final List<Cliente> cliente = negCliente.consultar(txtCliente.getText());
+	    final var data = FXCollections.observableList(cliente);
 	    tvCliente.setItems(data);
 	    tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
 	    tcAtivo.setCellValueFactory(new PropertyValueFactory("Ativo"));
@@ -158,7 +158,6 @@ public class ControladorMenuCliente {
 	final var cliente = tvCliente.getSelectionModel().getSelectedItem();
 	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
 
-	    
 	    Cliente.codCliente = cliente.getCodigo();
 	} else {
 	    final var negCliente = new NegCliente();

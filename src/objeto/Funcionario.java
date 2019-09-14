@@ -54,12 +54,13 @@ public class Funcionario {
     }
 
     private String nome;
+
     public String getUsuario() {
-        return usuario;
+	return usuario;
     }
 
     public void setUsuario(final String usuario) {
-        this.usuario = usuario;
+	this.usuario = usuario;
     }
 
     private String usuario;

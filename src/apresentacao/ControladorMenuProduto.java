@@ -76,7 +76,7 @@ public class ControladorMenuProduto {
 	    stage.setScene(scene);
 	    var controlador = (ControladorMenuProduto) loader.getController();
 	    if (tipo_tela.equals(TIPO_TELA.CONSULTA)) {
-		
+
 		controlador.btnInsereProduto.setDisable(true);
 		controlador.btnInsereProduto.setVisible(false);
 		controlador.btnAlteraProduto.setDisable(true);
@@ -85,10 +85,11 @@ public class ControladorMenuProduto {
 		controlador.btnDesativaProduto.setText("Selecionar");
 		stage.setTitle("Consultar produto ");
 		stage.showAndWait();
-	    }if(!Funcionario.getFuncionario().getAdministrador())
-		{controlador.btnDesativaProduto.setVisible(false);
-	    	controlador.btnDesativaProduto.setDisable(true);
-		}
+	    }
+	    if (!Funcionario.getFuncionario().getAdministrador()) {
+		controlador.btnDesativaProduto.setVisible(false);
+		controlador.btnDesativaProduto.setDisable(true);
+	    }
 	    stage.show();
 	} catch (IOException e) {
 	    Alerta.alertaErro(e.getMessage());
@@ -124,7 +125,7 @@ public class ControladorMenuProduto {
     void btnDesativaProduto(ActionEvent event) {
 	final var produto = tvProduto.getSelectionModel().getSelectedItem();
 	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
-	    
+
 	    Produto.codProduto = produto.getCodigo();
 	} else {
 	    final var negProduto = new NegProduto();

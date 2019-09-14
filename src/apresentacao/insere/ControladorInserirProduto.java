@@ -57,7 +57,7 @@ public class ControladorInserirProduto {
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
 	    if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
-		 final var controlador = (ControladorInserirProduto) loader.getController();
+		final var controlador = (ControladorInserirProduto) loader.getController();
 		controlador.btnGravar.setText("Alterar");
 		controlador.txtCodigo.setText(String.valueOf(produto.getCodigo()));
 		controlador.txtNome.setText(produto.getNome());

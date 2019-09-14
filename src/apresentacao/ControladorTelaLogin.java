@@ -29,12 +29,12 @@ public class ControladorTelaLogin extends Application {
     @FXML
     private PasswordField txtSenha;
     private static Stage stage;
-    
+
     private double xOffset = 0;
     private double yOffset = 0;
 
     @FXML
-   private  void btnLogin(ActionEvent event) {
+    private void btnLogin(ActionEvent event) {
 	if (txtUsuario.getText().isBlank() && txtSenha.getText().isBlank())
 	    Alerta.alertaCampoNulo();
 	else {
@@ -60,9 +60,8 @@ public class ControladorTelaLogin extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-	
-	
-	stage = primaryStage;	
+
+	stage = primaryStage;
 	stage.initStyle(StageStyle.TRANSPARENT);
 	abreTelaLogin();
     }
@@ -71,9 +70,9 @@ public class ControladorTelaLogin extends Application {
 
 	try {
 	    final var root = (AnchorPane) FXMLLoader.load(getClass().getResource("TelaLogin.fxml"));
-	   
+
 	    final var scene = new Scene(root);
-	    new JMetro(scene,Main.style).setAutomaticallyColorPanes(true);
+	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 	    stage.setTitle("Canta Galo");
 	    stage.setScene(scene);
 	    stage.show();
@@ -89,22 +88,19 @@ public class ControladorTelaLogin extends Application {
 	    final var root = (BorderPane) FXMLLoader.load(getClass().getResource("MenuPrincipal.fxml"));
 	    final var scene = new Scene(root);
 	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
-	    
-	    
-	    root.setOnMousePressed(event -> {
-	            xOffset = event.getSceneX();
-	            yOffset = event.getSceneY();
-	        });
 
-	        
-	        //move around here
+	    root.setOnMousePressed(event -> {
+		xOffset = event.getSceneX();
+		yOffset = event.getSceneY();
+	    });
+
+	    // move around here
 	    root.setOnMouseDragged(event -> {
-	            stage.setX(event.getScreenX() - xOffset);
-	            stage.setY(event.getScreenY() - yOffset);
-	});
-	    
-	    
-	    stage.setTitle("Canta Galo");	    
+		stage.setX(event.getScreenX() - xOffset);
+		stage.setY(event.getScreenY() - yOffset);
+	    });
+
+	    stage.setTitle("Canta Galo");
 	    stage.setScene(scene);
 	    stage.show();
 	} catch (IOException e) {
