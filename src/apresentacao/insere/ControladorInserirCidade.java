@@ -14,7 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
 import negocio.NegCidade;
 import objeto.Cidade;
 import utilidade.Alerta;
@@ -37,22 +36,22 @@ public class ControladorInserirCidade {
     public void abreTelaCidadeInsere(final TIPO_TELA tipo_tela, Cidade cidade) {
 
 	tipo_telaa = tipo_tela;
-	var stage = new Stage();
+	final var stage = new Stage();
 	Parent root;
-	var loader = new FXMLLoader();
+	final var loader = new FXMLLoader();
 	stage.initModality(Modality.APPLICATION_MODAL);
 
 	try {
 	    loader.setLocation(getClass().getResource("/apresentacao/insere/CidadeInsere.fxml"));
 	    root = loader.load();
-	    var scene = new Scene(root);
+	    final var scene = new Scene(root);
 	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 	    stage.setScene(scene);
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
 
 	    if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
-		var controlador = (ControladorInserirCidade) loader.getController();
+		final var controlador = (ControladorInserirCidade) loader.getController();
 		controlador.btnGravar.setText("Alterar");
 		controlador.txtCidade.setText(cidade.getNome());
 		controlador.txtEstado.setText(cidade.getEstado());
@@ -65,7 +64,7 @@ public class ControladorInserirCidade {
 
 	    }
 	} catch (IOException e) {
-	    System.out.println(e.getMessage());
+	    Alerta.alertaErro(e.getMessage());
 	}
 
     }
@@ -96,7 +95,7 @@ public class ControladorInserirCidade {
 	    try {
 		negcidade.alterar(cidade);
 	    } catch (SQLException e) {
-		System.out.println(e.getMessage());
+		Alerta.alertaErro(e.getMessage());
 	    }
 	}
     }

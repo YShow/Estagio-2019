@@ -9,11 +9,11 @@ public class Funcionario {
 	return funcionario;
     }
 
-    public static void setFuncionario(Funcionario funcionario) {
+    public static void setFuncionario(final Funcionario funcionario) {
 	Funcionario.funcionario = funcionario;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(final int codigo) {
 	this.codigo = codigo;
     }
 
@@ -21,7 +21,7 @@ public class Funcionario {
 	return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(final String nome) {
 	this.nome = nome;
     }
 
@@ -29,7 +29,7 @@ public class Funcionario {
 	return funcao;
     }
 
-    public void setFuncao(String funcao) {
+    public void setFuncao(final String funcao) {
 	this.funcao = funcao;
     }
 
@@ -37,7 +37,7 @@ public class Funcionario {
 	return administrador;
     }
 
-    public void setAdministrador(Boolean administrador) {
+    public void setAdministrador(final Boolean administrador) {
 	this.administrador = administrador;
     }
 
@@ -45,7 +45,7 @@ public class Funcionario {
 	return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(final String senha) {
 	this.senha = senha;
     }
 
@@ -58,7 +58,7 @@ public class Funcionario {
         return usuario;
     }
 
-    public void setUsuario(String usuario) {
+    public void setUsuario(final String usuario) {
         this.usuario = usuario;
     }
 

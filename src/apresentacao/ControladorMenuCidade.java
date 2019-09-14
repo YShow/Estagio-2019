@@ -57,17 +57,17 @@ public class ControladorMenuCidade {
 	tipo_telaa = tipo_tela;
 	var stage = new Stage();
 	Parent root;
-	var loader = new FXMLLoader();
+	final var loader = new FXMLLoader();
 	
 	stage.initModality(Modality.APPLICATION_MODAL);
 	
 	try {
 	    loader.setLocation(getClass().getResource("/apresentacao/Cidade.fxml"));
 	    root = loader.load();
-	    var controlador = (ControladorMenuCidade) loader.getController();
+	    final var controlador = (ControladorMenuCidade) loader.getController();
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
-	    var scene = new Scene(root);
+	    final var scene = new Scene(root);
 	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 	    stage.setScene(scene);
 
@@ -117,15 +117,15 @@ public class ControladorMenuCidade {
 
     @FXML
     void btnDesativaCidade(ActionEvent event) {
-	var cidade = tvCidade.getSelectionModel().getSelectedItem();
-	System.out.println(tipo_telaa.toString());
+	final var cidade = tvCidade.getSelectionModel().getSelectedItem();
+	
 	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
 
 	    Cidade.nomeCidade = cidade.getNome();
 	    Cidade.codCidade = cidade.getCodigo();
 
 	} else {
-	    var negCidade = new NegCidade();
+	   final var negCidade = new NegCidade();
 	    try {
 		if (negCidade.excluir(cidade.getCodigo())) {
 		    tvCidade.getItems().remove(cidade);

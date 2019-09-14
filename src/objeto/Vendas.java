@@ -13,7 +13,7 @@ public class Vendas {
 	return caixa;
     }
 
-    public void setCaixa(Caixa caixa) {
+    public void setCaixa(final Caixa caixa) {
 	this.caixa = caixa;
     }
 
@@ -23,7 +23,7 @@ public class Vendas {
 	return produto;
     }
 
-    public void setProduto(Produto produto) {
+    public void setProduto(final Produto produto) {
 	this.produto = produto;
     }
 
@@ -31,7 +31,7 @@ public class Vendas {
 	return cliente;
     }
 
-    public void setCliente(Cliente cliente) {
+    public void setCliente(final Cliente cliente) {
 	this.cliente = cliente;
     }
 
@@ -39,7 +39,7 @@ public class Vendas {
 	return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(final LocalDate data) {
 	this.data = data;
     }
 
@@ -47,7 +47,7 @@ public class Vendas {
 	return formaPagamento;
     }
 
-    public void setFormaPagamento(String formaPagamento) {
+    public void setFormaPagamento(final String formaPagamento) {
 	this.formaPagamento = formaPagamento;
     }
 
@@ -55,7 +55,7 @@ public class Vendas {
 	return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(final int codigo) {
 	this.codigo = codigo;
     }
 

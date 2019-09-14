@@ -7,7 +7,7 @@ public class Caixa {
 	return data;
     }
 
-    public void setData(LocalDate data) {
+    public void setData(final LocalDate data) {
 	this.data = data;
 
     }
@@ -24,7 +24,7 @@ public class Caixa {
 	return saida;
     }
 
-    public void setSaida(Double saida) {
+    public void setSaida(final Double saida) {
 	this.saida = saida;
     }
 
@@ -32,7 +32,7 @@ public class Caixa {
 	return cliente;
     }
 
-    public void setCliente(int cliente) {
+    public void setCliente(final int cliente) {
 	this.cliente = cliente;
     }
 
@@ -46,7 +46,7 @@ public class Caixa {
     private Double saida;
     private int cliente;
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(final int codigo) {
 	this.codigo = codigo;
 
     }

@@ -9,7 +9,7 @@ import utilidade.Alerta;
 public class Main extends Application {
 
 
-    public final static Style style = Style.LIGHT ;
+    public static final Style style = Style.LIGHT ;
     @Override
     public void start(Stage primaryStage) {
 	// isto é um teste para como esconder uma tela e abrir outra sem fexar o
@@ -18,7 +18,7 @@ public class Main extends Application {
 	// Platform.setImplicitExit(false);
 
 	try {
-	    var login = new ControladorTelaLogin();
+	    final var login = new ControladorTelaLogin();
 	    login.start(primaryStage);
 
 	} catch (Exception e) {

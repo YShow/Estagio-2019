@@ -27,7 +27,7 @@ public class NegLogin {
 	    if (resultado.next()) {
 		
 		final var funcionarioPadrao = new Funcionario();
-		if(Senha.senhaCorreta(funcionario.getSenha(),resultado.getString("senhahash"), resultado.getString("salt").toString()))
+		if(Senha.senhaCorreta(funcionario.getSenha(),resultado.getString("senhahash"), resultado.getString("salt")))
 		{
 		funcionarioPadrao.setAdministrador(resultado.getBoolean("administrador"));
 		Funcionario.setFuncionario(funcionarioPadrao);

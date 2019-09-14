@@ -7,7 +7,7 @@ public class Cliente {
 	return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(final String nome) {
 	this.nome = nome;
     }
 
@@ -15,7 +15,7 @@ public class Cliente {
 	return cpf;
     }
 
-    public void setCPF(String cpf) {
+    public void setCPF(final String cpf) {
 	this.cpf = cpf;
     }
 
@@ -23,7 +23,7 @@ public class Cliente {
 	return endereco;
     }
 
-    public void setEndereco(String endereco) {
+    public void setEndereco(final String endereco) {
 	this.endereco = endereco;
     }
 
@@ -31,7 +31,7 @@ public class Cliente {
 	return telefone;
     }
 
-    public void setTelefone(String telefone) {
+    public void setTelefone(final String telefone) {
 	this.telefone = telefone;
     }
 
@@ -39,7 +39,7 @@ public class Cliente {
 	return ativo;
     }
 
-    public void setAtivo(Boolean ativo) {
+    public void setAtivo(Final Boolean ativo) {
 	this.ativo = ativo;
     }
 
@@ -47,7 +47,7 @@ public class Cliente {
 	return cidade;
     }
 
-    public void setCidade(Cidade cidade) {
+    public void setCidade(final Cidade cidade) {
 	this.cidade = cidade;
     }
 
@@ -55,7 +55,7 @@ public class Cliente {
 	return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(final int codigo) {
 	this.codigo = codigo;
     }
 

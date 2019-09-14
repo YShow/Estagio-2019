@@ -15,9 +15,10 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
+
 import negocio.NegProduto;
 import objeto.Produto;
+import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
 public class ControladorInserirProduto {
@@ -42,21 +43,21 @@ public class ControladorInserirProduto {
     public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela, Produto produto) {
 	tipo_telaa = tipo_tela;
 	Parent root;
-	var stage = new Stage();
+	final var stage = new Stage();
 
-	var loader = new FXMLLoader();
+	final var loader = new FXMLLoader();
 	stage.initModality(Modality.APPLICATION_MODAL);
 
 	try {
 	    loader.setLocation(getClass().getResource("/apresentacao/insere/ProdutoInsere.fxml"));
 	    root = loader.load();
-	    var scene = new Scene(root);
+	    final var scene = new Scene(root);
 	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 	    stage.setScene(scene);
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
 	    if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
-		var controlador = (ControladorInserirProduto) loader.getController();
+		 final var controlador = (ControladorInserirProduto) loader.getController();
 		controlador.btnGravar.setText("Alterar");
 		controlador.txtCodigo.setText(String.valueOf(produto.getCodigo()));
 		controlador.txtNome.setText(produto.getNome());
@@ -70,14 +71,14 @@ public class ControladorInserirProduto {
 		stage.show();
 	    }
 	} catch (IOException e) {
-	    System.out.println(e.getMessage());
+	    Alerta.alertaErro(e.getMessage());
 	}
     }
 
     @FXML
     void btnGravar(ActionEvent event) {
-	var negProduto = new NegProduto();
-	var produto = new Produto();
+	final var negProduto = new NegProduto();
+	final var produto = new Produto();
 	if (tipo_telaa == TIPO_TELA.INSERE) {
 	    produto.setAtivo(chkAtivo.isSelected());
 	    produto.setNome(txtNome.getText());
@@ -86,7 +87,7 @@ public class ControladorInserirProduto {
 	    try {
 		negProduto.inserir(produto);
 	    } catch (SQLException e) {
-		System.out.println(e.getMessage());
+		Alerta.alertaErro(e.getMessage());
 	    }
 	} else {
 	    produto.setAtivo(chkAtivo.isSelected());
@@ -98,7 +99,7 @@ public class ControladorInserirProduto {
 	    try {
 		negProduto.alterar(produto);
 	    } catch (SQLException e) {
-		System.out.println(e.getMessage());
+		Alerta.alertaErro(e.getMessage());
 	    }
 	}
 

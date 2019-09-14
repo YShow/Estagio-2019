@@ -19,7 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
+
 import negocio.NegProduto;
 import objeto.Funcionario;
 import objeto.Produto;
@@ -61,7 +61,7 @@ public class ControladorMenuProduto {
 
     public void abreTelaProdutoMenu(final TIPO_TELA tipo_tela) {
 	tipo_telaa = tipo_tela;
-	var stage = new Stage();
+	final var stage = new Stage();
 	Parent root;
 	var loader = new FXMLLoader();
 	stage.initModality(Modality.APPLICATION_MODAL);
@@ -71,7 +71,7 @@ public class ControladorMenuProduto {
 	    root = loader.load();
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
-	    var scene = new Scene(root);
+	    final var scene = new Scene(root);
 	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 	    stage.setScene(scene);
 	    var controlador = (ControladorMenuProduto) loader.getController();
@@ -105,8 +105,8 @@ public class ControladorMenuProduto {
     void btnConsultaProduto(ActionEvent event) {
 	final var negProduto = new NegProduto();
 	try {
-	    List<Produto> funcionario = negProduto.consultar(txtProduto.getText());
-	    var data = FXCollections.observableList(funcionario);
+	    final List<Produto> funcionario = negProduto.consultar(txtProduto.getText());
+	    final var data = FXCollections.observableList(funcionario);
 	    tvProduto.setItems(data);
 	    tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
 	    tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));
@@ -122,12 +122,12 @@ public class ControladorMenuProduto {
 
     @FXML
     void btnDesativaProduto(ActionEvent event) {
-	var produto = tvProduto.getSelectionModel().getSelectedItem();
+	final var produto = tvProduto.getSelectionModel().getSelectedItem();
 	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
-	    System.out.println(produto.getCodigo());
+	    
 	    Produto.codProduto = produto.getCodigo();
 	} else {
-	    var negProduto = new NegProduto();
+	    final var negProduto = new NegProduto();
 	    try {
 		if (negProduto.excluir(produto.getCodigo())) {
 

@@ -28,7 +28,7 @@ public class Alerta {
 
     }
 
-    public static void alertaErro(String erro) {
+    public static void alertaErro(final String erro) {
 	new JMetro(alerta.getDialogPane().getScene(),Main.style).setAutomaticallyColorPanes(true);
 	alerta.initStyle(StageStyle.TRANSPARENT);
 	alerta.initModality(Modality.APPLICATION_MODAL);

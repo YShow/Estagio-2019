@@ -16,10 +16,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
+
 import negocio.NegCliente;
 import objeto.Cidade;
 import objeto.Cliente;
+import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
 public class ControladorInserirCliente {
@@ -52,9 +53,9 @@ public class ControladorInserirCliente {
 
     public void abreTelaClienteInsere(final TIPO_TELA tipo_tela, Cliente cliente) {
 	tipo_telaa = tipo_tela;
-	var stage = new Stage();
+	final var stage = new Stage();
 	Parent root;
-	var loader = new FXMLLoader();
+	final var loader = new FXMLLoader();
 	stage.initModality(Modality.APPLICATION_MODAL);
 
 	try {
@@ -62,13 +63,13 @@ public class ControladorInserirCliente {
 	    root = loader.load();
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
-	    var scene = new Scene(root);
+	   final var scene = new Scene(root);
 	    new JMetro(scene,Main.style).setAutomaticallyColorPanes(true);
 	    stage.setScene(scene);
-	    var controlador = (ControladorInserirCliente) loader.getController();
+	    final var controlador = (ControladorInserirCliente) loader.getController();
 	    if (tipo_tela.equals(tipo_telaa.ALTERA)) {
 		controlador.btnGrava.setText("Alterar");
-		controlador.chkAtivo.setSelected((cliente.getAtivo()));
+		controlador.chkAtivo.setSelected(cliente.getAtivo());
 		controlador.txtCidade.setText(cliente.getCidade().getNome());
 		controlador.txtCodigo.setText(String.valueOf(cliente.getCodigo()));
 		controlador.txtCPF.setText(cliente.getCPF());
@@ -84,7 +85,7 @@ public class ControladorInserirCliente {
 		stage.show();
 	    }
 	} catch (IOException e) {
-	    System.out.println(e.getMessage());
+	    Alerta.alertaErro(e.getMessage());
 	}
     }
 
@@ -107,7 +108,7 @@ public class ControladorInserirCliente {
 	    try {
 		negCliente.inserir(cliente);
 	    } catch (SQLException e) {
-		System.out.println(e.getMessage());
+		Alerta.alertaErro(e.getMessage());
 	    }
 	} else {
 	    cliente.setAtivo(chkAtivo.isSelected());
@@ -122,14 +123,14 @@ public class ControladorInserirCliente {
 	    try {
 		negCliente.alterar(cliente);
 	    } catch (SQLException e) {
-		System.out.println(e.getMessage());
+		Alerta.alertaErro(e.getMessage());
 	    }
 	}
     }
 
     @FXML
     void btnPesquisarCidade(ActionEvent event) {
-	var abreTelaCidadeMenu = new ControladorMenuCidade();
+	final var abreTelaCidadeMenu = new ControladorMenuCidade();
 	abreTelaCidadeMenu.abreTelaCidadeMenu(TIPO_TELA.CONSULTA);
 
 	atualizaValorCidade();

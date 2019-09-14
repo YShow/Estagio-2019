@@ -15,10 +15,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
+
 import objeto.Cliente;
 import objeto.Produto;
 import objeto.Vendas;
+import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
 public class ControladorInserirVenda {
@@ -46,21 +47,21 @@ public class ControladorInserirVenda {
     public void abreTelaVendaInsere(final TIPO_TELA tipo_tela, Vendas venda) {
 
 	Parent root;
-	var stage = new Stage();
+	final var stage = new Stage();
 
-	var loader = new FXMLLoader();
+	final var loader = new FXMLLoader();
 	stage.initModality(Modality.APPLICATION_MODAL);
 
 	try {
 	    loader.setLocation(getClass().getResource("/apresentacao/insere/VendaInsere.fxml"));
 	    root = loader.load();
-	    var scene = new Scene(root);
+	   final var scene = new Scene(root);
 	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 	    stage.setScene(scene);
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
 	    if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
-		var controlador = (ControladorInserirVenda) loader.getController();
+		final var controlador = (ControladorInserirVenda) loader.getController();
 		controlador.txtCliente.setText(String.valueOf(venda.getCliente().getCodigo()));
 		stage.setTitle("Alterar Venda");
 		stage.show();
@@ -69,20 +70,20 @@ public class ControladorInserirVenda {
 		stage.show();
 	    }
 	} catch (IOException e) {
-	    System.out.println(e.getMessage());
+	   Alerta.alertaErro(e.getMessage());
 	}
     }
 
     @FXML
     void btnPesquisaCliente(ActionEvent event) {
-	var telaCliente = new ControladorMenuCliente();
+	final var telaCliente = new ControladorMenuCliente();
 	telaCliente.abreTelaClienteMenu(TIPO_TELA.CONSULTA);
 	atualizaValorCliente();
     }
 
     @FXML
     void btnPesquisaProduto(ActionEvent event) {
-	var telaProduto = new ControladorMenuProduto();
+	final var telaProduto = new ControladorMenuProduto();
 	telaProduto.abreTelaProdutoMenu(TIPO_TELA.CONSULTA);
 	atualizaValorProduto();
     }

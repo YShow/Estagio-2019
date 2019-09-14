@@ -10,7 +10,7 @@ public class VendaProd {
 	return produto;
     }
 
-    public void setProduto(Produto produto) {
+    public void setProduto(final Produto produto) {
 	this.produto = produto;
     }
 
@@ -18,7 +18,7 @@ public class VendaProd {
 	return vendas;
     }
 
-    public void setVendas(Vendas vendas) {
+    public void setVendas(final Vendas vendas) {
 	this.vendas = vendas;
     }
 
@@ -26,7 +26,7 @@ public class VendaProd {
 	return precoUnitario;
     }
 
-    public void setPrecoUnitario(Double precoUnitario) {
+    public void setPrecoUnitario(final Double precoUnitario) {
 	this.precoUnitario = precoUnitario;
     }
 
@@ -34,7 +34,7 @@ public class VendaProd {
 	return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(final int quantidade) {
 	this.quantidade = quantidade;
     }
 }

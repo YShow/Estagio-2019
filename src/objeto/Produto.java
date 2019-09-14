@@ -7,7 +7,7 @@ public class Produto {
 	return ativo;
     }
 
-    public void setAtivo(Boolean ativo) {
+    public void setAtivo(final Boolean ativo) {
 	this.ativo = ativo;
     }
 
@@ -15,7 +15,7 @@ public class Produto {
 	return preco;
     }
 
-    public void setPreco(Double preco) {
+    public void setPreco(final Double preco) {
 	this.preco = preco;
     }
 
@@ -23,7 +23,7 @@ public class Produto {
 	return quantidade;
     }
 
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(final int quantidade) {
 	this.quantidade = quantidade;
     }
 
@@ -31,7 +31,7 @@ public class Produto {
 	return nome;
     }
 
-    public void setNome(String nome) {
+    public void setNome(final String nome) {
 	this.nome = nome;
     }
 
@@ -39,7 +39,7 @@ public class Produto {
 	return codigo;
     }
 
-    public void setCodigo(int codigo) {
+    public void setCodigo(final int codigo) {
 	this.codigo = codigo;
     }
 

@@ -11,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -48,24 +47,24 @@ public class ControladorMenuFuncionario {
 
     public void abreTelaFuncionarioMenu() {
 	
-	var stage = new Stage();
+	final var stage = new Stage();
 	Parent root;
-	var loader = new FXMLLoader();
+	final var loader = new FXMLLoader();
 	
 	stage.initModality(Modality.APPLICATION_MODAL);
 	
 	try {
 	    loader.setLocation(getClass().getResource("/apresentacao/Funcionario.fxml"));
 	    root = loader.load();	    	 
-	    var control = (ControladorMenuFuncionario) loader.getController();
-	    var scene = new Scene(root);
+	    final var control = (ControladorMenuFuncionario) loader.getController();
+	   final var scene = new Scene(root);
 	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 	    stage.setScene(scene);	   
 	    
 		stage.show();
 		
 		stage.setOnCloseRequest(e -> {
-		    System.out.println("limpou");
+		    
 		    control.limpaTabela();		  
 		  
 		});
@@ -90,8 +89,8 @@ public class ControladorMenuFuncionario {
 	limpaTabela();
 	final var negFuncionario = new NegFuncionario();
 	try {
-	    List<Funcionario> funcionario = negFuncionario.consultar(txtFuncionario.getText());
-	    var data = FXCollections.observableList(funcionario);
+	    final List<Funcionario> funcionario = negFuncionario.consultar(txtFuncionario.getText());
+	    final var data = FXCollections.observableList(funcionario);
 	    tblFuncionario.setItems(data);
 	    tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
 	    tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));

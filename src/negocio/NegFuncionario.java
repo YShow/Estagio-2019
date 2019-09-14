@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.Instant;
-import java.time.temporal.Temporal;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class NegFuncionario {
 	final var con = conexao.getConexao();
 	 con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	    con.setAutoCommit(false);
-	    var comando = con.prepareStatement(SQL_INSERT);
+	    final var comando = con.prepareStatement(SQL_INSERT);
 	   
 	try (con;comando;) {	
 	    final var salt = Senha.geraSalt();
@@ -61,7 +61,7 @@ public class NegFuncionario {
 	   final var lista = new ArrayList<Funcionario>();
 
 	    while (result.next()) {
-		var funcionario = new Funcionario();
+		final var funcionario = new Funcionario();
 		funcionario.setCodigo(result.getInt("codigo"));
 		funcionario.setNome(result.getString("nome"));
 		funcionario.setFuncao(result.getString("funcao"));

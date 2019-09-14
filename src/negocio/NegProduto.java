@@ -13,7 +13,7 @@ import objeto.Produto;
 public class NegProduto {
     private final AcessoBD conexao = new AcessoBD();
     private static final String SQL_INSERT = "INSERT INTO cantagalo.produto\n" + "(ativo, preco, quantidade, nome)\n"
-	    + "VALUES(?, ?, ?, ?);\n" + "";
+	    + "VALUES(?, ?, ?, ?);\n";
     private static final String SQL_SEARCH = "SELECT codigo, ativo, preco, quantidade, nome\n"
 	    + "FROM cantagalo.produto WHERE nome LIKE ? ";
     private static final String SQL_UPDATE = "UPDATE cantagalo.produto\n"

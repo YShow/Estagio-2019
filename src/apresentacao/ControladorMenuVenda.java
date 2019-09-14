@@ -5,17 +5,16 @@ import java.time.LocalDate;
 import java.util.List;
 
 import apresentacao.insere.ControladorInserirVenda;
-import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.property.ReadOnlyIntegerWrapper;
+
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
+
 import negocio.NegVendas;
 import objeto.Vendas;
 import utilidade.Alerta;
@@ -45,7 +44,7 @@ public class ControladorMenuVenda {
 
     @FXML
     void btnAlteraVenda(ActionEvent event) {
-	var venda = tvVenda.getSelectionModel().getSelectedItem();
+	final var venda = tvVenda.getSelectionModel().getSelectedItem();
 	tela.abreTelaVendaInsere(TIPO_TELA.ALTERA, venda);
     }
 
@@ -53,33 +52,17 @@ public class ControladorMenuVenda {
     void btnConsultaVenda(ActionEvent event) {
 	final var negVenda = new NegVendas();
 	try {
-	    List<Vendas> venda = negVenda.consultar(txtVenda.getText());
+	    final List<Vendas> venda = negVenda.consultar(txtVenda.getText());
 
-	    var data = FXCollections.observableList(venda);
+	    final var data = FXCollections.observableList(venda);
 	    tvVenda.setItems(data);
 	    tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
 	    tcFormaPAg.setCellValueFactory(new PropertyValueFactory("FormaPagamento"));
 	    tcDataVenda.setCellValueFactory(new PropertyValueFactory("Data"));
 
-	    tcCodCaixa.setCellValueFactory(
-		    new Callback<TableColumn.CellDataFeatures<Vendas, Integer>, ObservableValue<Integer>>() {
+	    tcCodCaixa.setCellValueFactory(codCaixa -> new ReadOnlyIntegerWrapper(codCaixa.getValue().getCaixa().getCodigo()).asObject());
 
-			@Override
-			public ObservableValue<Integer> call(CellDataFeatures<Vendas, Integer> param) {
-
-			    return new ReadOnlyObjectWrapper<>(param.getValue().getCaixa().getCodigo());
-			}
-		    });
-
-	    tcCodCliente.setCellValueFactory(
-		    new Callback<TableColumn.CellDataFeatures<Vendas, Integer>, ObservableValue<Integer>>() {
-
-			@Override
-			public ObservableValue<Integer> call(CellDataFeatures<Vendas, Integer> param) {
-
-			    return new ReadOnlyObjectWrapper<>(param.getValue().getCliente().getCodigo());
-			}
-		    });
+	    tcCodCliente.setCellValueFactory(codCliente -> new ReadOnlyIntegerWrapper(codCliente.getValue().getCliente().getCodigo()).asObject());
 
 	} catch (SQLException e) {
 

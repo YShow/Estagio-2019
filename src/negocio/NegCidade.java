@@ -45,11 +45,11 @@ public class NegCidade {
 	try (con;comando;) {
 	    
 	    comando.setString(1, '%' + metodo + '%');
-	    var result = comando.executeQuery();
+	   final var result = comando.executeQuery();
 	   // con.commit();
-	    var lista = new ArrayList<Cidade>();
+	   final var lista = new ArrayList<Cidade>();
 	    while (result.next()) {
-		var cidade = new Cidade();
+		final var cidade = new Cidade();
 		cidade.setCodigo(result.getInt("codigo"));
 		cidade.setNome(result.getString("nome"));
 		cidade.setEstado(result.getString("estado"));

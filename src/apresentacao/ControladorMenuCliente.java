@@ -14,7 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -25,7 +25,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import jfxtras.styles.jmetro.JMetro;
-import jfxtras.styles.jmetro.Style;
+
 import negocio.NegCliente;
 import objeto.Cliente;
 import objeto.Funcionario;
@@ -74,18 +74,18 @@ public class ControladorMenuCliente {
 
     public void abreTelaClienteMenu(final TIPO_TELA tipo_tela) {
 	tipo_telaa = tipo_tela;
-	var stage = new Stage();
+	final var stage = new Stage();
 	Parent root;
-	var loader = new FXMLLoader();
+	final var loader = new FXMLLoader();
 	stage.initModality(Modality.APPLICATION_MODAL);
 
 	try {
 	    loader.setLocation(getClass().getResource("/apresentacao/Cliente.fxml"));
 	    root = loader.load();
-	    var controlador = (ControladorMenuCliente) loader.getController();
+	    final var controlador = (ControladorMenuCliente) loader.getController();
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
-	    var scene = new Scene(root);
+	    final var scene = new Scene(root);
 	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 	    stage.setScene(scene);	   
 	    if (tipo_tela.equals(TIPO_TELA.CONSULTA)) {
@@ -110,7 +110,7 @@ public class ControladorMenuCliente {
 
     @FXML
     void btnAlterarCliente(ActionEvent event) {
-	var cliente = tvCliente.getSelectionModel().getSelectedItem();
+	final var cliente = tvCliente.getSelectionModel().getSelectedItem();
 	tela.abreTelaClienteInsere(TIPO_TELA.ALTERA, cliente);
     }
 
@@ -118,8 +118,8 @@ public class ControladorMenuCliente {
     void btnConsultaCliente(ActionEvent event) {
 	final var negCliente = new NegCliente();
 	try {
-	    List<Cliente> cliente = negCliente.consultar(txtCliente.getText());
-	    var data = FXCollections.observableList(cliente);
+	   final List<Cliente> cliente = negCliente.consultar(txtCliente.getText());
+	   final var data = FXCollections.observableList(cliente);
 	    tvCliente.setItems(data);
 	    tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
 	    tcAtivo.setCellValueFactory(new PropertyValueFactory("Ativo"));
@@ -155,13 +155,13 @@ public class ControladorMenuCliente {
 
     @FXML
     void btnDesativarCliente(ActionEvent event) {
-	var cliente = tvCliente.getSelectionModel().getSelectedItem();
+	final var cliente = tvCliente.getSelectionModel().getSelectedItem();
 	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
 
-	    System.out.println(cliente.getCodigo());
+	    
 	    Cliente.codCliente = cliente.getCodigo();
 	} else {
-	    var negCliente = new NegCliente();
+	    final var negCliente = new NegCliente();
 	    try {
 		if (negCliente.excluir(cliente.getCodigo())) {
 		    tvCliente.getItems().remove(cliente);
