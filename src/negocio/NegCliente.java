@@ -6,6 +6,7 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Cidade;
@@ -29,17 +30,31 @@ public class NegCliente {
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 	final var comando = con.prepareStatement(SQL_INSERT);
 	try (con; comando;) {
-	    comando.setString(1, cliente.getNome());
-	    comando.setString(2, cliente.getCPF());
-	    comando.setString(3, cliente.getEndereco());
-	    comando.setString(4, cliente.getTelefone());
-	    comando.setBoolean(5, cliente.getAtivo());
-	    comando.setInt(6, cliente.getCidade().getCodigo());
-	    final var inseriu = comando.executeUpdate() >= 1;
+//	    comando.setString(1, cliente.getNome());
+//	    comando.setString(2, cliente.getCPF());
+//	    comando.setString(3, cliente.getEndereco());
+//	    comando.setString(4, cliente.getTelefone());
+//	    comando.setBoolean(5, cliente.getAtivo());
+//	    comando.setInt(6, cliente.getCidade().getCodigo());
+//	    final var inseriu = comando.executeUpdate() >= 1;
+	    var a = 0;
+	    var b = new Random();
+	    
+	    while(a <= 1000000) {
+	    comando.setString(1, "teste"+a);
+	    comando.setString(2, String.valueOf(b.nextInt(20)));
+	    comando.setString(3, "teste");
+	    comando.setString(4, "teste");
+	    comando.setBoolean(5, true);
+	    comando.setInt(6, 1);
+	    comando.addBatch();
+	    a++;
+	    }
+	    final var inseriu = comando.executeBatch();
 	    con.commit();
 	    System.out.println(
 		    "Insercao de Cliente demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
-	    return inseriu;
+	    return inseriu.length >= 1;
 	}
     }
 

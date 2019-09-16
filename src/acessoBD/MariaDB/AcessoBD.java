@@ -6,16 +6,14 @@ import java.sql.SQLException;
 
 public class AcessoBD {
     // USUARIO DO BANCO
-    private static final String USUARIO = "usuario";
-    // SENHA DO BANCO
-    private static final String SENHA = "1234";
-    private static final String STRINGCONEXAO = "jdbc:mariadb://localhost:3306/cantagalo?rewriteBatchedStatements=true";
-
+    
     public Connection getConexao() throws SQLException {
-	// obtain a strong SecureRandom implementation from
-	// securerandom.strongAlgorithms property of java.security.Security
-	// class
+	final String USUARIO = "usuario";
+	    // SENHA DO BANCO
+	final String SENHA = "1234";
+	final String STRINGCONEXAO = "jdbc:mariadb://localhost:3306/cantagalo?rewriteBatchedStatements=true";
 
+	
 	return DriverManager.getConnection(STRINGCONEXAO, USUARIO, SENHA);
     }
 
