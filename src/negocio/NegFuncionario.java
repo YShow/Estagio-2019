@@ -16,10 +16,10 @@ public class NegFuncionario {
     private final AcessoBD conexao = new AcessoBD();
     private static final String SQL_INSERT = "insert into funcionario(nome,funcao,administrador,senhahash,salt,usuario)"
 	    + " values(?,?,?,?,?,?)";
-    private static final String SQL_SEARCH = "select codigo,nome,funcao,administrador,senhahash from funcionario"
+    private static final String SQL_SEARCH = "select codigo,nome,funcao,administrador,usuario from funcionario"
 	    + "  where nome LIKE ? ";
     private static final String SQL_UPDATE = "update funcionario set nome = ?, funcao = ?, administrador = ?,"
-	    + "senhahash =COALESCE(?,senhahash), salt =COALESCE(?,salt) where codigo = ?";
+	    + "senhahash =COALESCE(?,senhahash), salt =COALESCE(?,salt),usuario = ? where codigo = ?";
     private static final String SQL_DELETE = "DELETE FROM cantagalo.funcionario\n" + "WHERE codigo=? ;";
 
     public boolean inserir(final Funcionario funcionario) throws SQLException {
@@ -36,7 +36,7 @@ public class NegFuncionario {
 	    comando.setBoolean(3, funcionario.getAdministrador());
 	    comando.setString(4, Senha.criaSenha(funcionario.getSenha(), salt));
 	    comando.setString(5, salt);
-	    comando.setString(6, "yasser");
+	    comando.setString(6, funcionario.getUsuario());
 
 	    final var inseriu = comando.executeUpdate() >= 1;
 	    con.commit();
@@ -65,6 +65,7 @@ public class NegFuncionario {
 		funcionario.setNome(result.getString("nome"));
 		funcionario.setFuncao(result.getString("funcao"));
 		funcionario.setAdministrador(result.getBoolean("administrador"));
+		funcionario.setUsuario(result.getString("usuario"));
 
 		lista.add(funcionario);
 	    }
@@ -96,8 +97,8 @@ public class NegFuncionario {
 		comando.setString(4, Senha.criaSenha(funcionario.getSenha(), salt));
 		comando.setString(5, salt);
 	    }
-
-	    comando.setInt(6, funcionario.getCodigo());
+	    comando.setString(6, funcionario.getUsuario());
+	    comando.setInt(7, funcionario.getCodigo());
 	    final var alterou = comando.executeUpdate() >= 1;
 	    con.commit();
 	    System.out.println(

@@ -42,7 +42,7 @@ public class ControladorMenuVenda {
 
     @FXML
     private TableColumn<Vendas, String> tcDataVenda;
-
+    
     @FXML
     private TableColumn<Vendas, String> tcFormaPAg;
 
@@ -61,7 +61,7 @@ public class ControladorMenuVenda {
 	    final var data = FXCollections.observableList(venda);
 	    tvVenda.setItems(data);
 	    tcCodigo.setCellValueFactory(cod -> new ReadOnlyIntegerWrapper(cod.getValue().getCodigo()).asObject());
-	    tcFormaPAg.setCellValueFactory(formPag -> new ReadOnlyStringWrapper(formPag.toString()));
+	    tcFormaPAg.setCellValueFactory(formPag -> new ReadOnlyStringWrapper(formPag.getValue().getFormaPagamento()));
 	   
 	    tcDataVenda.setCellValueFactory(dataVenda ->
 		new ReadOnlyStringWrapper(dataVenda.getValue().getData().

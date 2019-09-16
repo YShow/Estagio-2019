@@ -117,7 +117,7 @@ public class ControladorInserirCliente {
 	    cliente.setEndereco(txtEndereco.getText());
 	    cliente.setNome(txtNome.getText());
 	    cliente.setTelefone(txtTelefone.getText());
-	    cidade.setCodigo(Cidade.CodCidadeGet());
+	//   cidade.setCodigo(Cidade.CodCidadeGet());
 	    cliente.setCidade(cidade);
 
 	    try {
@@ -138,7 +138,7 @@ public class ControladorInserirCliente {
     }
 
     private void atualizaValorCidade() {
-	txtCodCidade.setText(String.valueOf(Cidade.CodCidadeGet()));
-	txtCidade.setText(Cidade.NomeCidadeGet());
+	//txtCodCidade.setText(String.valueOf(Cidade.CodCidadeGet()));
+	//txtCidade.setText(Cidade.NomeCidadeGet());
     }
 }

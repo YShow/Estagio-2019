@@ -27,16 +27,10 @@ public class Cidade {
 	return codigo;
     }
 
-    public static int CodCidadeGet() {
-	return codCidade;
-    }
-
-    public static String NomeCidadeGet() {
-	return nomeCidade;
-    }
+    
 
     private String estado;
     private int codigo;
     public static int codCidade;
-    public static String nomeCidade;
+  
 }

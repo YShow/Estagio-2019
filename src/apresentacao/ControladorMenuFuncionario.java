@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 import apresentacao.insere.ControladorInserirFuncionario;
+import javafx.beans.property.ReadOnlyBooleanWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,6 +43,8 @@ public class ControladorMenuFuncionario {
 
     @FXML
     private TableColumn<Funcionario, String> tcAdm;
+    @FXML
+    private TableColumn<Funcionario, String> tcUsuario;
     private final ControladorInserirFuncionario tela = new ControladorInserirFuncionario();
 
     public void abreTelaFuncionarioMenu() {
@@ -93,7 +97,7 @@ public class ControladorMenuFuncionario {
 	    tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
 	    tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));
 	    tcFuncao.setCellValueFactory(new PropertyValueFactory("Funcao"));
-
+	    tcUsuario.setCellValueFactory(usuario -> new ReadOnlyStringWrapper(usuario.getValue().getUsuario()));
 	    tcAdm.setCellValueFactory(new PropertyValueFactory("Administrador"));
 
 	} catch (SQLException e) {

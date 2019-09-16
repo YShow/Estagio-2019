@@ -58,8 +58,36 @@ public class ControladorMenuProduto {
     @FXML
     private TableColumn<Produto, Boolean> tcAtivo;
     private static TIPO_TELA tipo_telaa;
+    private static Produto produtoAlterar;
 
     public void abreTelaProdutoMenu(final TIPO_TELA tipo_tela) {
+	tipo_telaa = tipo_tela;
+	final var stage = new Stage();
+	Parent root;
+	var loader = new FXMLLoader();
+	stage.initModality(Modality.APPLICATION_MODAL);
+
+	try {
+	    loader.setLocation(getClass().getResource("/apresentacao/Produto.fxml"));
+	    root = loader.load();
+	    stage.setMinHeight(root.minHeight(-1));
+	    stage.setMinWidth(root.minWidth(-1));
+	    final var scene = new Scene(root);
+	    new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+	    stage.setScene(scene);
+	    var controlador = (ControladorMenuProduto) loader.getController();
+	   
+	    if (!Funcionario.getFuncionario().getAdministrador()) {
+		controlador.btnDesativaProduto.setVisible(false);
+		controlador.btnDesativaProduto.setDisable(true);
+	    }
+	    stage.show();
+	} catch (IOException e) {
+	    Alerta.alertaErro(e.getMessage());
+	}
+    }
+
+    public Produto abreTelaProdutoMenuAlterar(final TIPO_TELA tipo_tela) {
 	tipo_telaa = tipo_tela;
 	final var stage = new Stage();
 	Parent root;
@@ -90,12 +118,12 @@ public class ControladorMenuProduto {
 		controlador.btnDesativaProduto.setVisible(false);
 		controlador.btnDesativaProduto.setDisable(true);
 	    }
-	    stage.show();
+	  
 	} catch (IOException e) {
 	    Alerta.alertaErro(e.getMessage());
 	}
+	return this.produtoAlterar;
     }
-
     @FXML
     void btnAlteraProduto(ActionEvent event) {
 	final var produto = tvProduto.getSelectionModel().getSelectedItem();
@@ -126,7 +154,7 @@ public class ControladorMenuProduto {
 	final var produto = tvProduto.getSelectionModel().getSelectedItem();
 	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
 
-	    Produto.codProduto = produto.getCodigo();
+	  this.produtoAlterar = produto;
 	} else {
 	    final var negProduto = new NegProduto();
 	    try {

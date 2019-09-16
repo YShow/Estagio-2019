@@ -121,8 +121,8 @@ public class ControladorMenuCidade {
 
 	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
 
-	    Cidade.nomeCidade = cidade.getNome();
-	    Cidade.codCidade = cidade.getCodigo();
+	    //Cidade.nomeCidade = cidade.getNome();
+	    //Cidade.codCidade = cidade.getCodigo();
 
 	} else {
 	    final var negCidade = new NegCidade();

@@ -34,6 +34,7 @@
 							<columns>
 								<TableColumn fx:id="tcCodigo" prefWidth="99.0" text="Código" />
 								<TableColumn fx:id="tcNome" prefWidth="125.0" text="Nome" />
+                        <TableColumn fx:id="tcUsuario" editable="false" prefWidth="75.0" text="Usuario" />
 								<TableColumn fx:id="tcFuncao" minWidth="0.0" prefWidth="126.0" text="Função" />
 								<TableColumn fx:id="tcAdm" prefWidth="136.0" text="Administrador" />
 							</columns>

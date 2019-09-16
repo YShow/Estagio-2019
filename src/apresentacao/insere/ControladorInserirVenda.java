@@ -77,23 +77,23 @@ public class ControladorInserirVenda {
     @FXML
     void btnPesquisaCliente(ActionEvent event) {
 	final var telaCliente = new ControladorMenuCliente();
-	telaCliente.abreTelaClienteMenu(TIPO_TELA.CONSULTA);
-	atualizaValorCliente();
+	final var cliente = telaCliente.abreTelaClienteMenuAlterar(TIPO_TELA.CONSULTA);
+	atualizaValorCliente(cliente);
     }
 
     @FXML
     void btnPesquisaProduto(ActionEvent event) {
 	final var telaProduto = new ControladorMenuProduto();
-	telaProduto.abreTelaProdutoMenu(TIPO_TELA.CONSULTA);
-	atualizaValorProduto();
+	final var produto = telaProduto.abreTelaProdutoMenuAlterar(TIPO_TELA.CONSULTA);
+	atualizaValorProduto(produto);
     }
 
-    private void atualizaValorCliente() {
+    private void atualizaValorCliente(Cliente cliente) {
 
-	txtCliente.setText(String.valueOf(Cliente.CodClienteGet()));
+	txtCliente.setText(String.valueOf(cliente.getCodigo()));
     }
 
-    private void atualizaValorProduto() {
-	txtProduto.setText(String.valueOf(Produto.CodProdutoGet()));
+    private void atualizaValorProduto(Produto produto) {
+	txtProduto.setText(String.valueOf(produto.getCodigo()));
     }
 }

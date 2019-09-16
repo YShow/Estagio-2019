@@ -35,6 +35,8 @@ public class ControladorInserirFuncionario {
 
     @FXML
     private CheckBox chkAdm;
+    @FXML
+    private TextField txtUsuario;
 
     @FXML
     private Button btnGravarFuncionario;
@@ -63,6 +65,7 @@ public class ControladorInserirFuncionario {
 		controlador.txtNomeFuncionario.setText(funcionario.getNome());
 		controlador.chkAdm.setSelected(funcionario.getAdministrador());
 		controlador.txtCodigo.setText(String.valueOf(funcionario.getCodigo()));
+		controlador.txtUsuario.setText(funcionario.getUsuario());
 		stage.setTitle("Alterar Funcionario");
 		stage.show();
 	    } else {
@@ -81,9 +84,10 @@ public class ControladorInserirFuncionario {
 	final var funcionario = new Funcionario();
 	if (tipo_telaa == TIPO_TELA.INSERE) {
 	    funcionario.setAdministrador(chkAdm.isSelected());
-	    funcionario.setFuncao(txtFuncao.getText());
-	    funcionario.setNome(txtNomeFuncionario.getText());
-	    funcionario.setSenha(txtSenhaFuncionario.getText());
+	    funcionario.setFuncao(txtFuncao.getText().trim());
+	    funcionario.setNome(txtNomeFuncionario.getText().trim());
+	    funcionario.setSenha(txtSenhaFuncionario.getText().trim());
+	    funcionario.setUsuario(txtUsuario.getText().trim());
 	    try {
 		negFun.inserir(funcionario);
 
@@ -93,8 +97,9 @@ public class ControladorInserirFuncionario {
 	} else {
 	    funcionario.setCodigo(Integer.valueOf(txtCodigo.getText()));
 	    funcionario.setAdministrador(chkAdm.isSelected());
-	    funcionario.setFuncao(txtFuncao.getText());
-	    funcionario.setNome(txtNomeFuncionario.getText());
+	    funcionario.setFuncao(txtFuncao.getText().trim());
+	    funcionario.setNome(txtNomeFuncionario.getText().trim());
+	    funcionario.setUsuario(txtUsuario.getText().trim());
 	    if (txtSenhaFuncionario.getText().strip().isBlank())
 		funcionario.setSenha("");
 	    else
