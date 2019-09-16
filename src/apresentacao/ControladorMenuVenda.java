@@ -2,11 +2,15 @@ package apresentacao;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import apresentacao.insere.ControladorInserirVenda;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
-
+import javafx.beans.property.ReadOnlyObjectWrapper;
+import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+import javafx.util.converter.LocalDateStringConverter;
 import negocio.NegVendas;
 import objeto.Vendas;
 import utilidade.Alerta;
@@ -37,7 +41,7 @@ public class ControladorMenuVenda {
     private TableColumn<Vendas, Integer> tcCodCaixa;
 
     @FXML
-    private TableColumn<Vendas, LocalDate> tcDataVenda;
+    private TableColumn<Vendas, String> tcDataVenda;
 
     @FXML
     private TableColumn<Vendas, String> tcFormaPAg;
@@ -56,9 +60,12 @@ public class ControladorMenuVenda {
 
 	    final var data = FXCollections.observableList(venda);
 	    tvVenda.setItems(data);
-	    tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
-	    tcFormaPAg.setCellValueFactory(new PropertyValueFactory("FormaPagamento"));
-	    tcDataVenda.setCellValueFactory(new PropertyValueFactory("Data"));
+	    tcCodigo.setCellValueFactory(cod -> new ReadOnlyIntegerWrapper(cod.getValue().getCodigo()).asObject());
+	    tcFormaPAg.setCellValueFactory(formPag -> new ReadOnlyStringWrapper(formPag.toString()));
+	   
+	    tcDataVenda.setCellValueFactory(dataVenda ->
+		new ReadOnlyStringWrapper(dataVenda.getValue().getData().
+			format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
 
 	    tcCodCaixa.setCellValueFactory(
 		    codCaixa -> new ReadOnlyIntegerWrapper(codCaixa.getValue().getCaixa().getCodigo()).asObject());
