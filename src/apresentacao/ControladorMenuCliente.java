@@ -176,6 +176,7 @@ public class ControladorMenuCliente {
 
 	   
 	   clienteAlterar = cliente;
+	   btnDesativarCliente.getScene().getWindow().hide();
 	  
 	} else {
 	    final var negCliente = new NegCliente();

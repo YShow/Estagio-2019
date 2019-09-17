@@ -122,7 +122,7 @@ public class ControladorMenuProduto {
 	} catch (IOException e) {
 	    Alerta.alertaErro(e.getMessage());
 	}
-	return this.produtoAlterar;
+	return produtoAlterar;
     }
     @FXML
     void btnAlteraProduto(ActionEvent event) {
@@ -154,7 +154,8 @@ public class ControladorMenuProduto {
 	final var produto = tvProduto.getSelectionModel().getSelectedItem();
 	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
 
-	  this.produtoAlterar = produto;
+	  produtoAlterar = produto;
+	  btnDesativaProduto.getScene().getWindow().hide();
 	} else {
 	    final var negProduto = new NegProduto();
 	    try {

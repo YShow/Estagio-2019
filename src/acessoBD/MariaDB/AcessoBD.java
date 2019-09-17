@@ -8,10 +8,10 @@ public class AcessoBD {
     // USUARIO DO BANCO
     
     public Connection getConexao() throws SQLException {
-	final String USUARIO = "usuario";
+	final var USUARIO = "usuario";
 	    // SENHA DO BANCO
-	final String SENHA = "1234";
-	final String STRINGCONEXAO = "jdbc:mariadb://localhost:3306/cantagalo?rewriteBatchedStatements=true";
+	final var SENHA = "1234";
+	final var STRINGCONEXAO = "jdbc:mariadb://localhost:3306/cantagalo?rewriteBatchedStatements=true";
 
 	
 	return DriverManager.getConnection(STRINGCONEXAO, USUARIO, SENHA);

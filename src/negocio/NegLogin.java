@@ -29,15 +29,22 @@ public class NegLogin {
 		final var funcionarioPadrao = new Funcionario();
 		if (Senha.senhaCorreta(funcionario.getSenha(), resultado.getString("senhahash"),
 			resultado.getString("salt"))) {
+		    
 		    funcionarioPadrao.setAdministrador(resultado.getBoolean("administrador"));
 		    Funcionario.setFuncionario(funcionarioPadrao);
+		    
 		    existeUsuario = true;
-		} else
+		} else	{	
+		    funcionarioPadrao.setAdministrador(false);
+		    Funcionario.setFuncionario(funcionarioPadrao);
 		    existeUsuario = true;
-	    }
+		}
+		}
 	    System.out
 		    .println("Login de usuario demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 	    return existeUsuario;
+	}finally {
+	 System.gc();   
 	}
     }
 }
