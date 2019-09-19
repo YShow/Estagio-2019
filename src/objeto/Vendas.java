@@ -8,8 +8,17 @@ public class Vendas {
     private int codigo;
     private LocalDate data;
     private Caixa caixa;
+    private boolean ativo;
 
-    public Caixa getCaixa() {
+    public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	public Caixa getCaixa() {
 	return caixa;
     }
 

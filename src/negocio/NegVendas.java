@@ -16,12 +16,12 @@ import objeto.Vendas;
 public class NegVendas {
     private final AcessoBD conexao = new AcessoBD();
     private static final String SQL_INSERT = "INSERT INTO cantagalo.vendas\n"
-	    + "(cod_cliente, cod_caixa, data_venda, forma_de_pagamento)\n" + "VALUES(?, ?, ?, ?);";
+	    + "(cod_cliente, cod_caixa, data_venda, forma_de_pagamento,ativo)\n" + "VALUES(?, ?, ?, ?,?);";
     private static final String SQL_SEARCH = "SELECT codigo, cod_cliente, cod_caixa, data_venda,"
-	    + " forma_de_pagamento\n" + "FROM cantagalo.vendas WHERE data_venda LIKE ? \n";
+	    + " forma_de_pagamento,ativo\n" + "FROM cantagalo.vendas WHERE data_venda LIKE ? and ativo=true \n";
     private static final String SQL_UPDATE = "UPDATE cantagalo.vendas\n"
-	    + "SET cod_cliente=0, cod_caixa=0, data_venda='', forma_de_pagamento=''\n" + "WHERE codigo=0;\n";
-    private static final String SQL_DELETE = "DELETE FROM cantagalo.vendas\n" + "WHERE codigo=0;\n" + "";
+	    + "SET cod_cliente=?, cod_caixa=?, data_venda=?, forma_de_pagamento=?, aitvo=? " + "WHERE codigo= ?;\n";
+    private static final String SQL_DELETE = "update cantagalo.vendas set ativo=? where codigo = ?";
 
     public boolean inserir(final Vendas vendas) throws SQLException {
 	final var comeco = Instant.now();
@@ -39,6 +39,7 @@ public class NegVendas {
 	    comando.setInt(2, vendas.getCaixa().getCodigo());
 	    comando.setObject(3, vendas.getData());
 	    comando.setString(4, vendas.getFormaPagamento());
+	    comando.setBoolean(5, true);
 	    final var inseriu = comando.executeUpdate() >= 1;
 	    con.commit();
 	    System.out
@@ -54,7 +55,7 @@ public class NegVendas {
 	con.setAutoCommit(false);
 	con.setReadOnly(true);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-	final var comando = conexao.getConexao().prepareStatement(SQL_SEARCH);
+	final var comando = con.prepareStatement(SQL_SEARCH);
 	try (con; comando;) {
 	    comando.setString(1, '%' + metodo + '%');
 	    final var result = comando.executeQuery();
@@ -75,6 +76,7 @@ public class NegVendas {
 		venda.setCaixa(caixa);
 		venda.setData(result.getObject("data_venda", LocalDate.class));
 		venda.setFormaPagamento(result.getString("forma_de_pagamento"));
+		venda.setAtivo(result.getBoolean("ativo"));
 		lista.add(venda);
 	    }
 	    System.out.println(
@@ -88,7 +90,7 @@ public class NegVendas {
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-	final var comando = conexao.getConexao().prepareStatement(SQL_UPDATE);
+	final var comando = con.prepareStatement(SQL_UPDATE);
 	try (con; comando;) {
 
 	    con.commit();
@@ -103,13 +105,15 @@ public class NegVendas {
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-	final var comando = conexao.getConexao().prepareStatement(SQL_DELETE);
+	final var comando = con.prepareStatement(SQL_DELETE);
 	try (con; comando) {
-
+		comando.setBoolean(1, false);
+		comando.setInt(2, id);
+		final var desativou = comando.executeUpdate() >=1;
 	    con.commit();
 	    System.out
 		    .println("Excluir de Vendas demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
-	    return false;
+	    return desativou;
 	}
     }
 }

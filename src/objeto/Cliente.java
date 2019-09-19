@@ -68,4 +68,5 @@ public class Cliente {
     private String telefone;
     private Boolean ativo;
     private Cidade cidade;
+    
 }

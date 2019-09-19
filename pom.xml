@@ -20,7 +20,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<release>12</release>
+					<release>13</release>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -32,6 +32,7 @@
 							<mainClass>apresentacao.NewMain</mainClass>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>./libs/</classpathPrefix>
+							
 						</manifest>
 					</archive>
 				</configuration>
@@ -65,12 +66,12 @@
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
-			<version>12.0.2</version>
+			<version>13</version>
 		</dependency>
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-base</artifactId>
-			<version>12.0.2</version>
+			<version>13</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
@@ -81,7 +82,7 @@
 		<dependency>
 		<groupId>org.openjfx</groupId>
 		<artifactId>javafx-graphics</artifactId>
-		<version>12.0.2</version>
+		<version>13</version>
 		 </dependency>
 
 		<dependency>

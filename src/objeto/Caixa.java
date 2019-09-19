@@ -45,6 +45,15 @@ public class Caixa {
     private Double precototal;
     private Double saida;
     private int cliente;
+    public boolean isAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(boolean ativo) {
+		this.ativo = ativo;
+	}
+
+	private boolean ativo;
 
     public void setCodigo(final int codigo) {
 	this.codigo = codigo;

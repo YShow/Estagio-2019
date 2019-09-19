@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import apresentacao.insere.ControladorInserirVenda;
+import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -47,6 +48,9 @@ public class ControladorMenuVenda {
     private TableColumn<Vendas, String> tcFormaPAg;
 
     @FXML
+    private TableColumn<Vendas, Boolean> tcAtivo;
+
+    @FXML
     void btnAlteraVenda(ActionEvent event) {
 	final var venda = tvVenda.getSelectionModel().getSelectedItem();
 	tela.abreTelaVendaInsere(TIPO_TELA.ALTERA, venda);
@@ -73,6 +77,8 @@ public class ControladorMenuVenda {
 	    tcCodCliente.setCellValueFactory(
 		    codCliente -> new ReadOnlyIntegerWrapper(codCliente.getValue().getCliente().getCodigo())
 			    .asObject());
+	    
+	    tcAtivo.setCellValueFactory(ativo -> new ReadOnlyBooleanWrapper(ativo.getValue().isAtivo()));
 
 	} catch (SQLException e) {
 
@@ -82,7 +88,15 @@ public class ControladorMenuVenda {
 
     @FXML
     void btnDesativaVenda(ActionEvent event) {
-
+    	final var venda = tvVenda.getSelectionModel().getSelectedItem().getCodigo();
+    	final var negVenda = new NegVendas();
+    	try {
+			if(negVenda.excluir(venda))
+				Alerta.alertaSucesso();
+			
+		} catch (SQLException e) {
+			Alerta.alertaErro(e.getMessage());
+		}
     }
 
     @FXML

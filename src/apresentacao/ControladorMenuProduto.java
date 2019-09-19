@@ -153,7 +153,7 @@ public class ControladorMenuProduto {
     void btnDesativaProduto(ActionEvent event) {
 	final var produto = tvProduto.getSelectionModel().getSelectedItem();
 	if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
-
+		
 	  produtoAlterar = produto;
 	  btnDesativaProduto.getScene().getWindow().hide();
 	} else {
