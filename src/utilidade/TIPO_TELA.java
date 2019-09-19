@@ -1,5 +1,5 @@
 package utilidade;
 
 public enum TIPO_TELA {
-    INSERE, ALTERA, EXCLUI, CONSULTA
+	INSERE, ALTERA, EXCLUI, CONSULTA
 }

@@ -168,7 +168,6 @@ public class NegVendas {
 		try (con; comando;) {
 			comando.setInt(1, id);
 			final var result = comando.executeQuery();
-			
 
 			/*
 			 * SELECT v.codigo,v.cod_cliente,vp.cod_produto,v.ativo,
@@ -178,13 +177,13 @@ public class NegVendas {
 			 */
 			final var venda = new Vendas();
 			if (result.next()) {
-				
+
 				final var cliente = new Cliente();
 				final var caixa = new Caixa();
 				final var produto = new Produto();
 				venda.setCodigo(result.getInt("v.codigo"));
 				cliente.setCodigo(result.getInt("v.cod_cliente"));
-				
+
 				produto.setCodigo(result.getInt("vp.cod_produto"));
 				venda.setAtivo(result.getBoolean("v.ativo"));
 				venda.setFormaPagamento(result.getString("v.forma_de_pagamento"));
@@ -192,14 +191,14 @@ public class NegVendas {
 				produto.setQuantidade(result.getInt("vp.quantidade"));
 				caixa.setPrecototal(result.getDouble("c.preco_total"));
 				caixa.setSaida(result.getDouble("c.saida"));
-				
+
 				venda.setCaixa(caixa);
 				venda.setProduto(produto);
 				venda.setCliente(cliente);
-				
+
 			}
-			System.out.println(
-					"Consulta de Vendas para alterar demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
+			System.out.println("Consulta de Vendas para alterar demorou: "
+					+ Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return venda;
 		}
 

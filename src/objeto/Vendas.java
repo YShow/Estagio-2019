@@ -3,14 +3,14 @@ package objeto;
 import java.time.LocalDate;
 
 public class Vendas {
-    private Produto produto;
-    private Cliente cliente;
-    private int codigo;
-    private LocalDate data;
-    private Caixa caixa;
-    private boolean ativo;
+	private Produto produto;
+	private Cliente cliente;
+	private int codigo;
+	private LocalDate data;
+	private Caixa caixa;
+	private boolean ativo;
 
-    public boolean isAtivo() {
+	public boolean isAtivo() {
 		return ativo;
 	}
 
@@ -19,53 +19,53 @@ public class Vendas {
 	}
 
 	public Caixa getCaixa() {
-	return caixa;
-    }
+		return caixa;
+	}
 
-    public void setCaixa(final Caixa caixa) {
-	this.caixa = caixa;
-    }
+	public void setCaixa(final Caixa caixa) {
+		this.caixa = caixa;
+	}
 
-    private String formaPagamento;
+	private String formaPagamento;
 
-    public Produto getProduto() {
-	return produto;
-    }
+	public Produto getProduto() {
+		return produto;
+	}
 
-    public void setProduto(final Produto produto) {
-	this.produto = produto;
-    }
+	public void setProduto(final Produto produto) {
+		this.produto = produto;
+	}
 
-    public Cliente getCliente() {
-	return cliente;
-    }
+	public Cliente getCliente() {
+		return cliente;
+	}
 
-    public void setCliente(final Cliente cliente) {
-	this.cliente = cliente;
-    }
+	public void setCliente(final Cliente cliente) {
+		this.cliente = cliente;
+	}
 
-    public LocalDate getData() {
-	return data;
-    }
+	public LocalDate getData() {
+		return data;
+	}
 
-    public void setData(final LocalDate data) {
-	this.data = data;
-    }
+	public void setData(final LocalDate data) {
+		this.data = data;
+	}
 
-    public String getFormaPagamento() {
-	return formaPagamento;
-    }
+	public String getFormaPagamento() {
+		return formaPagamento;
+	}
 
-    public void setFormaPagamento(final String formaPagamento) {
-	this.formaPagamento = formaPagamento;
-    }
+	public void setFormaPagamento(final String formaPagamento) {
+		this.formaPagamento = formaPagamento;
+	}
 
-    public int getCodigo() {
-	return codigo;
-    }
+	public int getCodigo() {
+		return codigo;
+	}
 
-    public void setCodigo(final int codigo) {
-	this.codigo = codigo;
-    }
+	public void setCodigo(final int codigo) {
+		this.codigo = codigo;
+	}
 
 }
