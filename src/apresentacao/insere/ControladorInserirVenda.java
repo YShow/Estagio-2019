@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Tooltip;
@@ -58,10 +59,13 @@ public class ControladorInserirVenda {
 
     @FXML
     private TextField txtSaida;
+    @FXML
+    private CheckBox chkAtivo;
+    private static TIPO_TELA tipo_telaa;
    
 
     public void abreTelaVendaInsere(final TIPO_TELA tipo_tela, Vendas venda) {
-
+    	tipo_telaa = tipo_tela;
 	Parent root;
 	final var stage = new Stage();
 
@@ -77,13 +81,15 @@ public class ControladorInserirVenda {
 	    stage.setMinHeight(root.minHeight(-1));
 	    stage.setMinWidth(root.minWidth(-1));
 	   final var controlador = (ControladorInserirVenda) loader.getController();
+	  
 	    if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 		
 		controlador.txtCliente.setText(String.valueOf(venda.getCliente().getCodigo()));
+		preencheCampos(controlador,venda.getCodigo());
 		stage.setTitle("Alterar Venda");
 		stage.show();
 	    } else if (tipo_tela.equals(TIPO_TELA.INSERE)) {
-	    	formataCampo(controlador);
+	    	 formataCampo(controlador);
 		stage.setTitle("Inserir Venda");
 		stage.show();
 	    }
@@ -186,7 +192,27 @@ public class ControladorInserirVenda {
     	venda.setCaixa(caixa);
     	
     	try {
+    		if(tipo_telaa.equals(TIPO_TELA.INSERE))
 			negVenda.inserir(venda);
+    		else
+    			negVenda.alterar(venda);
+		} catch (SQLException e) {
+			Alerta.alertaErro(e.getMessage());
+		}
+    }
+
+    private void preencheCampos(ControladorInserirVenda controlador,int idVenda)
+    {
+    	final var negVenda = new NegVendas();
+    	try {
+			final var venda = negVenda.pegaVendaAlterar(idVenda);
+			
+			controlador.txtFormaPagamento.setText(venda.getFormaPagamento());
+			controlador.txtPrecoTotal.setText(String.valueOf(venda.getCaixa().getPrecototal()));
+			controlador.txtPrecoUnitario.setText(String.valueOf(venda.getProduto().getPreco()));
+			controlador.txtProduto.setText(String.valueOf(venda.getProduto().getCodigo()));
+			controlador.txtQtd.setText(String.valueOf(venda.getProduto().getQuantidade()));
+			controlador.chkAtivo.setSelected(venda.isAtivo());
 		} catch (SQLException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
