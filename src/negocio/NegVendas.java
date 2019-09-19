@@ -2,6 +2,7 @@ package negocio;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -22,25 +23,61 @@ public class NegVendas {
     private static final String SQL_UPDATE = "UPDATE cantagalo.vendas\n"
 	    + "SET cod_cliente=?, cod_caixa=?, data_venda=?, forma_de_pagamento=?, aitvo=? " + "WHERE codigo= ?;\n";
     private static final String SQL_DELETE = "update cantagalo.vendas set ativo=? where codigo = ?";
-
+    
+    private static final String SQL_VENDA_PRODUTO = "INSERT INTO cantagalo.vend_prod(preco_unitario, quantidade, cod_venda, cod_produto)\n" + 
+    		"VALUES(?,?,?,?);";
+    private static final String SQL_CAIXA = "INSERT into caixa(data,preco_total,saida,codigo_cliente,ativo) values(?,?,?,?,?)";
     public boolean inserir(final Vendas vendas) throws SQLException {
 	final var comeco = Instant.now();
 	final var con = conexao.getConexao();
 	con.setAutoCommit(false);
 	con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-	final var comando = con.prepareStatement(SQL_INSERT);
-	try (con; comando;) {
-	    /*
+	final var comando = con.prepareStatement(SQL_INSERT,Statement.RETURN_GENERATED_KEYS);
+	final var insereCaixa = con.prepareStatement(SQL_CAIXA,Statement.RETURN_GENERATED_KEYS);
+	final var insereVendaProd = con.prepareStatement(SQL_VENDA_PRODUTO);
+	try (con; comando;insereCaixa; insereVendaProd;) {
+
+		
+		//INSERT into caixa(data,preco_total,saida,codigo_cliente,ativo)
+		insereCaixa.setObject(1, vendas.getCaixa().getData());
+		insereCaixa.setDouble(2, vendas.getCaixa().getPrecototal());
+		insereCaixa.setDouble(3, vendas.getCaixa().getSaida());
+		insereCaixa.setInt(4, vendas.getCaixa().getCliente());
+		insereCaixa.setBoolean(5, vendas.getCaixa().isAtivo());
+		
+		insereCaixa.executeUpdate();
+		final var caixaCodigo = insereCaixa.getGeneratedKeys();
+		int codigoCaixa = 0;
+		if(caixaCodigo.next())
+		codigoCaixa = caixaCodigo.getInt(1);
+		
+		
+		
+		/*
 	     * "INSERT INTO cantagalo.vendas\n" +
-	     * "(cod_cliente, cod_caixa, data_venda, forma_de_pagamento)\n" +
-	     * "VALUES(?, ?, ?, ?);";
-	     */
+	     * "(cod_cliente, cod_caixa, data_venda, forma_de_pagamento,ativo)\n" +
+	     * "VALUES(?, ?, ?, ?,?);";
+	     */		
 	    comando.setInt(1, vendas.getCliente().getCodigo());
-	    comando.setInt(2, vendas.getCaixa().getCodigo());
+	    comando.setInt(2, codigoCaixa);
 	    comando.setObject(3, vendas.getData());
 	    comando.setString(4, vendas.getFormaPagamento());
-	    comando.setBoolean(5, true);
+	    comando.setBoolean(5, vendas.isAtivo());
 	    final var inseriu = comando.executeUpdate() >= 1;
+	    
+	    final var idVenda = comando.getGeneratedKeys();
+	    int codigoVenda = 0;
+	    if(idVenda.next())
+	    	codigoVenda = idVenda.getInt(1);
+	    
+	    //INSERT INTO cantagalo.vend_prod(preco_unitario, quantidade, cod_venda, cod_produto)\n" + 
+		//"VALUES(?,?,?,?);
+	    insereVendaProd.setDouble(1, vendas.getProduto().getPreco());
+	    insereVendaProd.setInt(2, vendas.getProduto().getQuantidade());
+	    insereVendaProd.setInt(3, codigoVenda);
+	    insereVendaProd.setInt(4, vendas.getProduto().getCodigo());
+	    insereVendaProd.executeUpdate();
+	    
 	    con.commit();
 	    System.out
 		    .println("Inserir de Vendas demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
@@ -61,6 +98,7 @@ public class NegVendas {
 	    final var result = comando.executeQuery();
 	    final var lista = new ArrayList<Vendas>();
 
+	    
 	    /*
 	     * "SELECT codigo, cod_cliente, cod_caixa, data_venda," +
 	     * " forma_de_pagamento\n" + "FROM cantagalo.vendas WHERE data_venda LIKE ? \n";

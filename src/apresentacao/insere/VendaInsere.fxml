@@ -22,5 +22,9 @@
 		<Label layoutX="14.0" layoutY="134.0" text="Preço total" />
 		<TextField fx:id="txtPrecoTotal" layoutX="12.0" layoutY="149.0" prefHeight="25.0" prefWidth="88.0" />
 		<Button fx:id="btnGravar" layoutX="529.0" layoutY="380.0" mnemonicParsing="false" onAction="#btnGravar" text="Gravar" />
+      <TextField fx:id="txtFormaPagamento" layoutX="114.0" layoutY="149.0" />
+      <Label layoutX="114.0" layoutY="134.0" text="Forma de pagamento" />
+      <TextField fx:id="txtSaida" layoutX="12.0" layoutY="189.0" prefHeight="25.0" prefWidth="88.0" />
+      <Label layoutX="12.0" layoutY="174.0" text="Saida" />
 	</children>
 </AnchorPane>
