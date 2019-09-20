@@ -63,18 +63,8 @@ public final class ControladorMenuPrincipal {
 
 	@FXML
 	private void menuTelaVenda(final ActionEvent event) {
+		final var telaVenda = new ControladorMenuVenda();
+		telaVenda.abreTelaVendaMenu();
 
-		try {
-			root = FXMLLoader.load(getClass().getResource("Venda.fxml"));
-
-			stage.setTitle("Menu de Venda");
-			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
-			stage.setScene(scene);
-			stage.show();
-
-		} catch (final IOException e) {
-			Alerta.alertaErro(e.getMessage());
-		}
 	}
 }

@@ -86,7 +86,7 @@ public final class ControladorMenuCliente {
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
 			if (!Funcionario.getFuncionario().getAdministrador()) {
-				btnDesativarCliente.setVisible(true);
+
 				btnDesativarCliente.setDisable(true);
 			}
 			stage.show();
@@ -119,10 +119,7 @@ public final class ControladorMenuCliente {
 			controlador.btnDesativarCliente.setText("Selecionar");
 			stage.setTitle("Consultar Cliente");
 			stage.showAndWait();
-			if (!Funcionario.getFuncionario().getAdministrador()) {
-				btnDesativarCliente.setVisible(true);
-				btnDesativarCliente.setDisable(true);
-			}
+
 
 		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());

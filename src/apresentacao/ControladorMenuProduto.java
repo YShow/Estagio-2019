@@ -77,7 +77,7 @@ public final class ControladorMenuProduto {
 			final var controlador = (ControladorMenuProduto) loader.getController();
 
 			if (!Funcionario.getFuncionario().getAdministrador()) {
-				controlador.btnDesativaProduto.setVisible(false);
+
 				controlador.btnDesativaProduto.setDisable(true);
 			}
 			stage.show();
@@ -114,7 +114,6 @@ public final class ControladorMenuProduto {
 				stage.showAndWait();
 			}
 			if (!Funcionario.getFuncionario().getAdministrador()) {
-				controlador.btnDesativaProduto.setVisible(false);
 				controlador.btnDesativaProduto.setDisable(true);
 			}
 

@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -44,6 +45,10 @@ public final class ControladorMenuFuncionario {
 	private TableColumn<Funcionario, String> tcAdm;
 	@FXML
 	private TableColumn<Funcionario, String> tcUsuario;
+
+    @FXML
+    private Button btnDesativaFuncionario;
+
 	private final ControladorInserirFuncionario tela = new ControladorInserirFuncionario();
 
 	public void abreTelaFuncionarioMenu() {
@@ -61,6 +66,10 @@ public final class ControladorMenuFuncionario {
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
+			if(!Funcionario.getFuncionario().getAdministrador())
+			{
+				control.btnDesativaFuncionario.setDisable(true);
+			}
 
 			stage.show();
 

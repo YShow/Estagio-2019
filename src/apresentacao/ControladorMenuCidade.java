@@ -79,13 +79,11 @@ public final class ControladorMenuCidade {
 				stage.showAndWait();
 				return cidadeVolta;
 			} else {
+				if(!Funcionario.getFuncionario().getAdministrador())
+				{
+					controlador.btnDesativar.setDisable(true);
+				}
 				stage.show();
-			}
-
-			if (Funcionario.getFuncionario().getAdministrador().equals(false)) {
-				controlador.btnDesativar.setVisible(false);
-				controlador.btnDesativar.setDisable(true);
-
 			}
 
 		} catch (final IOException e) {
