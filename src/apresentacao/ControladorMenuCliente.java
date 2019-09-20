@@ -79,7 +79,7 @@ public final class ControladorMenuCliente {
 		try {
 			loader.setLocation(getClass().getResource("/apresentacao/Cliente.fxml"));
 			root = loader.load();
-
+			controlador = (ControladorMenuCliente)loader.getController();
 			stage.setMinHeight(root.minHeight(-1));
 			stage.setMinWidth(root.minWidth(-1));
 			final var scene = new Scene(root);
@@ -90,6 +90,11 @@ public final class ControladorMenuCliente {
 				btnDesativarCliente.setDisable(true);
 			}
 			stage.show();
+			stage.setOnCloseRequest(e -> {
+
+				controlador.limpaTabela();
+
+			});
 		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
@@ -118,6 +123,11 @@ public final class ControladorMenuCliente {
 			controlador.btnAlterarCliente.setVisible(false);
 			controlador.btnDesativarCliente.setText("Selecionar");
 			stage.setTitle("Consultar Cliente");
+			stage.setOnCloseRequest(e -> {
+
+				controlador.limpaTabela();
+
+			});
 			stage.showAndWait();
 
 
@@ -136,6 +146,7 @@ public final class ControladorMenuCliente {
 
 	@FXML
 	private void btnConsultaCliente(final ActionEvent event) {
+		limpaTabela();
 		final var negCliente = new NegCliente();
 		try {
 			final List<Cliente> cliente = negCliente.consultar(txtCliente.getText());
@@ -186,4 +197,7 @@ public final class ControladorMenuCliente {
 		tela.abreTelaClienteInsere(TIPO_TELA.INSERE, null);
 	}
 
+	private void limpaTabela() {
+		tvCliente.getItems().clear();
+	}
 }
