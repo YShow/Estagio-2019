@@ -10,14 +10,14 @@ import java.util.List;
 import acessoBD.MariaDB.AcessoBD;
 import objeto.VendaProd;
 
-public class NegVendaProd {
+public final class NegVendaProd {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_INSERT = "";
 	private static final String SQL_SEARCH = "";
 	private static final String SQL_UPDATE = "";
 	private static final String SQL_DELETE = "";
 
-	public boolean inserir(final VendaProd vendaProd) throws SQLException {
+	public final boolean inserir(final VendaProd vendaProd) throws SQLException {
 		final var comeco = Instant.now();
 
 		final var con = conexao.getConexao();
@@ -33,7 +33,7 @@ public class NegVendaProd {
 		}
 	}
 
-	public List<VendaProd> consultar(final String metodo) throws SQLException {
+	public final List<VendaProd> consultar(final String metodo) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -56,7 +56,7 @@ public class NegVendaProd {
 		}
 	}
 
-	public boolean alterar(final VendaProd vendaProd) throws SQLException {
+	public final boolean alterar(final VendaProd vendaProd) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -71,7 +71,7 @@ public class NegVendaProd {
 		}
 	}
 
-	public boolean excluir(final int id) throws SQLException {
+	public final boolean excluir(final int id) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);

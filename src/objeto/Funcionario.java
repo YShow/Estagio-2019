@@ -1,6 +1,6 @@
 package objeto;
 
-public class Funcionario {
+public final class Funcionario {
 	private int codigo;
 
 	private static Funcionario funcionario;
@@ -73,7 +73,7 @@ public class Funcionario {
 		return ativo;
 	}
 
-	public void setAtivo(boolean ativo) {
+	public void setAtivo(final boolean ativo) {
 		this.ativo = ativo;
 	}
 }

@@ -2,7 +2,7 @@ package objeto;
 
 import java.time.LocalDate;
 
-public class Vendas {
+public final class Vendas {
 	private Produto produto;
 	private Cliente cliente;
 	private int codigo;
@@ -14,7 +14,7 @@ public class Vendas {
 		return ativo;
 	}
 
-	public void setAtivo(boolean ativo) {
+	public void setAtivo(final boolean ativo) {
 		this.ativo = ativo;
 	}
 

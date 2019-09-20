@@ -9,7 +9,7 @@ import org.bouncycastle.crypto.generators.SCrypt;
 import org.bouncycastle.util.Strings;
 import org.bouncycastle.util.encoders.Base64;
 
-public class Senha {
+public final class Senha {
 	public static final String geraSalt() {
 		try {
 
@@ -20,7 +20,7 @@ public class Senha {
 
 				secureRandom.nextBytes(salt);
 
-			} catch (NoSuchAlgorithmException e) {
+			} catch (final NoSuchAlgorithmException e) {
 				Alerta.alertaErro(e.getMessage());
 			}
 			return new String(Base64.encode(salt));

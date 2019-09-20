@@ -19,7 +19,7 @@ import objeto.Cidade;
 import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
-public class ControladorInserirCidade {
+public final class ControladorInserirCidade {
 	@FXML
 	private TextField txtCidade;
 	@FXML
@@ -27,13 +27,11 @@ public class ControladorInserirCidade {
 	@FXML
 	private Button btnGravar;
 
-	// POSSIVEL SOLUÇÃO
-	// https://stackoverflow.com/questions/34282973/javafx-fxml-add-choices-to-choice-box
 	@FXML
 	private TextField txtEstado;
 	private static TIPO_TELA tipo_telaa;
 
-	public void abreTelaCidadeInsere(final TIPO_TELA tipo_tela, Cidade cidade) {
+	public void abreTelaCidadeInsere(final TIPO_TELA tipo_tela, final Cidade cidade) {
 
 		tipo_telaa = tipo_tela;
 		final var stage = new Stage();
@@ -63,20 +61,20 @@ public class ControladorInserirCidade {
 				stage.show();
 
 			}
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 
 	}
 
 	@FXML
-	void btnGravar(ActionEvent event) {
+	private void btnGravar(final ActionEvent event) {
 		final var negcidade = new NegCidade();
 		final var cidade = new Cidade();
 		if (tipo_telaa == TIPO_TELA.INSERE) {
 
-			cidade.setNome(txtCidade.getText());
-			cidade.setEstado(txtEstado.getText());
+			cidade.setNome(txtCidade.getText().trim());
+			cidade.setEstado(txtEstado.getText().trim());
 
 			try {
 
@@ -84,17 +82,17 @@ public class ControladorInserirCidade {
 					Alerta.alertaSucesso();
 				}
 
-			} catch (SQLException e) {
+			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
 			}
 		} else {
-			cidade.setCodigo(Integer.valueOf(txtCodigo.getText()));
-			cidade.setEstado(txtEstado.getText());
-			cidade.setNome(txtCidade.getText());
+			cidade.setCodigo(Integer.valueOf(txtCodigo.getText().trim()));
+			cidade.setEstado(txtEstado.getText().trim());
+			cidade.setNome(txtCidade.getText().trim());
 
 			try {
 				negcidade.alterar(cidade);
-			} catch (SQLException e) {
+			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
 			}
 		}

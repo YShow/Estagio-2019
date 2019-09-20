@@ -15,7 +15,7 @@ import objeto.Cliente;
 import objeto.Produto;
 import objeto.Vendas;
 
-public class NegVendas {
+public final class NegVendas {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_INSERT = "INSERT INTO cantagalo.vendas\n"
 			+ "(cod_cliente, cod_caixa, data_venda, forma_de_pagamento,ativo)\n" + "VALUES(?, ?, ?, ?,?);";
@@ -33,7 +33,7 @@ public class NegVendas {
 			+ "JOIN vend_prod vp on vp.cod_venda = v.codigo\n" + "JOIN caixa c on c.codigo_cliente = v.cod_cliente\n"
 			+ "WHERE v.codigo = ?;";
 
-	public boolean inserir(final Vendas vendas) throws SQLException {
+	public final boolean inserir(final Vendas vendas) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
@@ -53,8 +53,9 @@ public class NegVendas {
 			insereCaixa.executeUpdate();
 			final var caixaCodigo = insereCaixa.getGeneratedKeys();
 			int codigoCaixa = 0;
-			if (caixaCodigo.next())
+			if (caixaCodigo.next()) {
 				codigoCaixa = caixaCodigo.getInt(1);
+			}
 
 			/*
 			 * "INSERT INTO cantagalo.vendas\n" +
@@ -70,8 +71,9 @@ public class NegVendas {
 
 			final var idVenda = comando.getGeneratedKeys();
 			int codigoVenda = 0;
-			if (idVenda.next())
+			if (idVenda.next()) {
 				codigoVenda = idVenda.getInt(1);
+			}
 
 			// INSERT INTO cantagalo.vend_prod(preco_unitario, quantidade, cod_venda,
 			// cod_produto)\n" +
@@ -90,7 +92,7 @@ public class NegVendas {
 		}
 	}
 
-	public List<Vendas> consultar(final String metodo) throws SQLException {
+	public final List<Vendas> consultar(final String metodo) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
@@ -98,7 +100,7 @@ public class NegVendas {
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
-			comando.setString(1, '%' + metodo + '%');
+			comando.setString(1, metodo + '%');
 			final var result = comando.executeQuery();
 			final var lista = new ArrayList<Vendas>();
 
@@ -126,7 +128,7 @@ public class NegVendas {
 		}
 	}
 
-	public boolean alterar(final Vendas vendas) throws SQLException {
+	public final boolean alterar(final Vendas vendas) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
@@ -141,7 +143,7 @@ public class NegVendas {
 		}
 	}
 
-	public boolean excluir(final int id) throws SQLException {
+	public final boolean excluir(final int id) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
@@ -158,7 +160,7 @@ public class NegVendas {
 		}
 	}
 
-	public Vendas pegaVendaAlterar(int id) throws SQLException {
+	public final Vendas pegaVendaAlterar(final int id) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);

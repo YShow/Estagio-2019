@@ -2,7 +2,7 @@ package objeto;
 
 import java.time.LocalDate;
 
-public class Caixa {
+public final class Caixa {
 	public LocalDate getData() {
 		return data;
 	}
@@ -16,7 +16,7 @@ public class Caixa {
 		return precototal;
 	}
 
-	public void setPrecototal(Double precototal) {
+	public void setPrecototal(final Double precototal) {
 		this.precototal = precototal;
 	}
 
@@ -50,7 +50,7 @@ public class Caixa {
 		return ativo;
 	}
 
-	public void setAtivo(boolean ativo) {
+	public void setAtivo(final boolean ativo) {
 		this.ativo = ativo;
 	}
 

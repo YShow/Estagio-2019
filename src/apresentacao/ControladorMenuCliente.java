@@ -27,7 +27,7 @@ import objeto.Funcionario;
 import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
-public class ControladorMenuCliente {
+public final class ControladorMenuCliente {
 	@FXML
 	private TextField txtCliente;
 
@@ -90,7 +90,7 @@ public class ControladorMenuCliente {
 				btnDesativarCliente.setDisable(true);
 			}
 			stage.show();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
@@ -124,7 +124,7 @@ public class ControladorMenuCliente {
 				btnDesativarCliente.setDisable(true);
 			}
 
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 
@@ -132,13 +132,13 @@ public class ControladorMenuCliente {
 	}
 
 	@FXML
-	void btnAlterarCliente(ActionEvent event) {
+	private void btnAlterarCliente(final ActionEvent event) {
 		final var cliente = tvCliente.getSelectionModel().getSelectedItem();
 		tela.abreTelaClienteInsere(TIPO_TELA.ALTERA, cliente);
 	}
 
 	@FXML
-	void btnConsultaCliente(ActionEvent event) {
+	private void btnConsultaCliente(final ActionEvent event) {
 		final var negCliente = new NegCliente();
 		try {
 			final List<Cliente> cliente = negCliente.consultar(txtCliente.getText());
@@ -156,14 +156,14 @@ public class ControladorMenuCliente {
 			tcCodCidade.setCellValueFactory(
 					codCidade -> new ReadOnlyIntegerWrapper(codCidade.getValue().getCidade().getCodigo()).asObject());
 
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
 
 	@FXML
-	void btnDesativarCliente(ActionEvent event) {
+	void btnDesativarCliente(final ActionEvent event) {
 		final var cliente = tvCliente.getSelectionModel().getSelectedItem();
 
 		if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
@@ -178,14 +178,14 @@ public class ControladorMenuCliente {
 					tvCliente.getItems().remove(cliente);
 					Alerta.alertaSucesso();
 				}
-			} catch (SQLException e) {
+			} catch (final SQLException e) {
 				Alerta.alertaClienteEmCaixa();
 			}
 		}
 	}
 
 	@FXML
-	void btnInsereCliente(ActionEvent event) {
+	void btnInsereCliente(final ActionEvent event) {
 		tela.abreTelaClienteInsere(TIPO_TELA.INSERE, null);
 	}
 

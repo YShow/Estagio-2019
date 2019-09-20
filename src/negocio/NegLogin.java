@@ -9,11 +9,11 @@ import acessoBD.MariaDB.AcessoBD;
 import objeto.Funcionario;
 import utilidade.Senha;
 
-public class NegLogin {
+public final class NegLogin {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_SEARCH = "SELECT usuario,salt, senhahash, administrador from funcionario WHERE  usuario = ?;";
 
-	public boolean verificaLogin(final Funcionario funcionario) throws SQLException {
+	public final boolean verificaLogin(final Funcionario funcionario) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);

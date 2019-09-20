@@ -19,7 +19,7 @@ import objeto.Vendas;
 import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
-public class ControladorMenuVenda {
+public final class ControladorMenuVenda {
 	private final ControladorInserirVenda tela = new ControladorInserirVenda();
 	@FXML
 	private TableView<Vendas> tvVenda;
@@ -45,13 +45,13 @@ public class ControladorMenuVenda {
 	private TableColumn<Vendas, Boolean> tcAtivo;
 
 	@FXML
-	void btnAlteraVenda(ActionEvent event) {
+	private void btnAlteraVenda(final ActionEvent event) {
 		final var venda = tvVenda.getSelectionModel().getSelectedItem();
 		tela.abreTelaVendaInsere(TIPO_TELA.ALTERA, venda);
 	}
 
 	@FXML
-	void btnConsultaVenda(ActionEvent event) {
+	private void btnConsultaVenda(final ActionEvent event) {
 		final var negVenda = new NegVendas();
 		try {
 			final List<Vendas> venda = negVenda.consultar(txtVenda.getText());
@@ -74,27 +74,29 @@ public class ControladorMenuVenda {
 
 			tcAtivo.setCellValueFactory(ativo -> new ReadOnlyBooleanWrapper(ativo.getValue().isAtivo()));
 
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
 
 	@FXML
-	void btnDesativaVenda(ActionEvent event) {
+	private void btnDesativaVenda(final ActionEvent event) {
 		final var venda = tvVenda.getSelectionModel().getSelectedItem().getCodigo();
 		final var negVenda = new NegVendas();
 		try {
-			if (negVenda.excluir(venda))
+			if (negVenda.excluir(venda)) {
+				tvVenda.getItems().remove(venda);
 				Alerta.alertaSucesso();
+			}
 
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
 
 	@FXML
-	void btnInsereVenda(ActionEvent event) {
+	private void btnInsereVenda(final ActionEvent event) {
 		tela.abreTelaVendaInsere(TIPO_TELA.INSERE, null);
 	}
 

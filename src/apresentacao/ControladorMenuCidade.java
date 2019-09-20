@@ -25,7 +25,7 @@ import objeto.Funcionario;
 import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
-public class ControladorMenuCidade {
+public final class ControladorMenuCidade {
 
 	@FXML
 	private TextField txtConsullaCidade;
@@ -54,7 +54,7 @@ public class ControladorMenuCidade {
 
 	public Cidade abreTelaCidadeMenu(final TIPO_TELA tipo_tela) {
 		tipo_telaa = tipo_tela;
-		var stage = new Stage();
+		final var stage = new Stage();
 		Parent root;
 		final var loader = new FXMLLoader();
 
@@ -78,8 +78,7 @@ public class ControladorMenuCidade {
 				stage.setTitle("Consultar Cidade");
 				stage.showAndWait();
 				return cidadeVolta;
-			}else
-			{
+			} else {
 				stage.show();
 			}
 
@@ -88,45 +87,44 @@ public class ControladorMenuCidade {
 				controlador.btnDesativar.setDisable(true);
 
 			}
-			
-		} catch (IOException e) {
+
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 		return null;
 	}
 
 	@FXML
-	void btnAlteraCidade(ActionEvent event) {
+	private void btnAlteraCidade(final ActionEvent event) {
 		final var cidade = tvCidade.getSelectionModel().getSelectedItem();
 		tela.abreTelaCidadeInsere(TIPO_TELA.ALTERA, cidade);
 	}
 
 	@FXML
-	void btnConsultaCidade(ActionEvent event) {
+	private void btnConsultaCidade(final ActionEvent event) {
 		final var negCidade = new NegCidade();
 		try {
-			List<Cidade> funcionario = negCidade.consultar(txtConsullaCidade.getText());
+			final List<Cidade> funcionario = negCidade.consultar(txtConsullaCidade.getText());
 
-			var data = FXCollections.observableList(funcionario);
+			final var data = FXCollections.observableList(funcionario);
 			tvCidade.setItems(data);
 			tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
 			tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));
 			tcEstado.setCellValueFactory(new PropertyValueFactory("Estado"));
 
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
 
 	@FXML
-	void btnDesativaCidade(ActionEvent event) {
+	private void btnDesativaCidade(final ActionEvent event) {
 		final var cidade = tvCidade.getSelectionModel().getSelectedItem();
 
 		if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
 			cidadeVolta = cidade;
 			btnDesativar.getScene().getWindow().hide();
-			
 
 		} else {
 			final var negCidade = new NegCidade();
@@ -135,14 +133,14 @@ public class ControladorMenuCidade {
 					tvCidade.getItems().remove(cidade);
 					Alerta.alertaSucesso();
 				}
-			} catch (SQLException e) {
+			} catch (final SQLException e) {
 				Alerta.alertaCidadeEmUso();
 			}
 		}
 	}
 
 	@FXML
-	void btnInsereCidade(ActionEvent event) {
+	private void btnInsereCidade(final ActionEvent event) {
 		tela.abreTelaCidadeInsere(TIPO_TELA.INSERE, null);
 	}
 

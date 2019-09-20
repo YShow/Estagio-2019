@@ -11,7 +11,7 @@ import acessoBD.MariaDB.AcessoBD;
 import objeto.Funcionario;
 import utilidade.Senha;
 
-public class NegFuncionario {
+public final class NegFuncionario {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_INSERT = "insert into funcionario(nome,funcao,administrador,senhahash,salt,usuario,ativo)"
 			+ " values(?,?,?,?,?,?,?)";
@@ -21,7 +21,7 @@ public class NegFuncionario {
 			+ "senhahash =COALESCE(?,senhahash), salt =COALESCE(?,salt),usuario = ?,ativo = ? where codigo = ?";
 	private static final String SQL_DELETE = "update funcionario set ativo = ?" + "WHERE codigo=? ;";
 
-	public boolean inserir(final Funcionario funcionario) throws SQLException {
+	public final boolean inserir(final Funcionario funcionario) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -45,7 +45,7 @@ public class NegFuncionario {
 		}
 	}
 
-	public List<Funcionario> consultar(final String metodo) throws SQLException {
+	public final List<Funcionario> consultar(final String metodo) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
@@ -76,7 +76,7 @@ public class NegFuncionario {
 		}
 	}
 
-	public boolean alterar(final Funcionario funcionario) throws SQLException {
+	public final boolean alterar(final Funcionario funcionario) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
@@ -97,9 +97,11 @@ public class NegFuncionario {
 				comando.setString(5, salt);
 			}
 			comando.setString(6, funcionario.getUsuario());
-			comando.setInt(7, funcionario.getCodigo());
-			comando.setBoolean(8, funcionario.isAtivo());
+			comando.setBoolean(7, funcionario.isAtivo());
+			comando.setInt(8, funcionario.getCodigo());
+
 			final var alterou = comando.executeUpdate() >= 1;
+
 			con.commit();
 			System.out.println(
 					"Alteração de funcionario demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
@@ -107,7 +109,7 @@ public class NegFuncionario {
 		}
 	}
 
-	public boolean excluir(final int id) throws SQLException {
+	public final boolean excluir(final int id) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);

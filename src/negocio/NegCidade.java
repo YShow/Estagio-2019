@@ -10,14 +10,14 @@ import java.util.List;
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Cidade;
 
-public class NegCidade {
+public final class NegCidade {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_INSERT = "INSERT INTO cidade(nome,estado) values(?,?)";
 	private static final String SQL_SEARCH = "select codigo,nome,estado from cidade where nome LIKE ? ";
 	private static final String SQL_UPDATE = "update cidade set nome = ?, estado = ? where codigo = ?";
 	private static final String SQL_DELETE = "DELETE FROM cantagalo.cidade\n" + "WHERE codigo = ? ;";
 
-	public boolean inserir(final Cidade cidade) throws SQLException {
+	public final boolean inserir(final Cidade cidade) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
@@ -35,7 +35,7 @@ public class NegCidade {
 		}
 	}
 
-	public List<Cidade> consultar(final String metodo) throws SQLException {
+	public final List<Cidade> consultar(final String metodo) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
@@ -61,7 +61,7 @@ public class NegCidade {
 		}
 	}
 
-	public boolean alterar(final Cidade cidade) throws SQLException {
+	public final boolean alterar(final Cidade cidade) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
@@ -80,7 +80,7 @@ public class NegCidade {
 		}
 	}
 
-	public boolean excluir(final int id) throws SQLException {
+	public final boolean excluir(final int id) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);

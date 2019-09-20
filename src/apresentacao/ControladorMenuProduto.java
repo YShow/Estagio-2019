@@ -25,7 +25,7 @@ import objeto.Produto;
 import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
-public class ControladorMenuProduto {
+public final class ControladorMenuProduto {
 
 	private final ControladorInserirProduto tela = new ControladorInserirProduto();
 	@FXML
@@ -63,7 +63,7 @@ public class ControladorMenuProduto {
 		tipo_telaa = tipo_tela;
 		final var stage = new Stage();
 		Parent root;
-		var loader = new FXMLLoader();
+		final var loader = new FXMLLoader();
 		stage.initModality(Modality.APPLICATION_MODAL);
 
 		try {
@@ -74,14 +74,14 @@ public class ControladorMenuProduto {
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
-			var controlador = (ControladorMenuProduto) loader.getController();
+			final var controlador = (ControladorMenuProduto) loader.getController();
 
 			if (!Funcionario.getFuncionario().getAdministrador()) {
 				controlador.btnDesativaProduto.setVisible(false);
 				controlador.btnDesativaProduto.setDisable(true);
 			}
 			stage.show();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
@@ -90,7 +90,7 @@ public class ControladorMenuProduto {
 		tipo_telaa = tipo_tela;
 		final var stage = new Stage();
 		Parent root;
-		var loader = new FXMLLoader();
+		final var loader = new FXMLLoader();
 		stage.initModality(Modality.APPLICATION_MODAL);
 
 		try {
@@ -101,7 +101,7 @@ public class ControladorMenuProduto {
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
-			var controlador = (ControladorMenuProduto) loader.getController();
+			final var controlador = (ControladorMenuProduto) loader.getController();
 			if (tipo_tela.equals(TIPO_TELA.CONSULTA)) {
 
 				controlador.btnInsereProduto.setDisable(true);
@@ -118,20 +118,20 @@ public class ControladorMenuProduto {
 				controlador.btnDesativaProduto.setDisable(true);
 			}
 
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 		return produtoAlterar;
 	}
 
 	@FXML
-	void btnAlteraProduto(ActionEvent event) {
+	private void btnAlteraProduto(final ActionEvent event) {
 		final var produto = tvProduto.getSelectionModel().getSelectedItem();
 		tela.abreTelaProdutoInsere(TIPO_TELA.ALTERA, produto);
 	}
 
 	@FXML
-	void btnConsultaProduto(ActionEvent event) {
+	private void btnConsultaProduto(final ActionEvent event) {
 		final var negProduto = new NegProduto();
 		try {
 			final List<Produto> funcionario = negProduto.consultar(txtProduto.getText());
@@ -143,14 +143,14 @@ public class ControladorMenuProduto {
 			tcQuantidade.setCellValueFactory(new PropertyValueFactory("Quantidade"));
 			tcAtivo.setCellValueFactory(new PropertyValueFactory("Ativo"));
 
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
 
 	@FXML
-	void btnDesativaProduto(ActionEvent event) {
+	private void btnDesativaProduto(final ActionEvent event) {
 		final var produto = tvProduto.getSelectionModel().getSelectedItem();
 		if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
 
@@ -165,14 +165,14 @@ public class ControladorMenuProduto {
 					Alerta.alertaSucesso();
 
 				}
-			} catch (SQLException e) {
+			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
 			}
 		}
 	}
 
 	@FXML
-	void btnInsereProduto(ActionEvent event) {
+	private void btnInsereProduto(final ActionEvent event) {
 		tela.abreTelaProdutoInsere(TIPO_TELA.INSERE, null);
 	}
 }

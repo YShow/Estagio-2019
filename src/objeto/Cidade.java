@@ -1,6 +1,6 @@
 package objeto;
 
-public class Cidade {
+public final class Cidade {
 	private String nome;
 
 	public String getNome() {

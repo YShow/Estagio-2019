@@ -11,7 +11,7 @@ import java.util.List;
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Caixa;
 
-public class NegCaixa {
+public final class NegCaixa {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_INSERT = "INSERT INTO cantagalo.caixa\n"
 			+ "(`data`, preco_total, saida, codigo_cliente)" + "VALUES(?, ?, ?, ?)";
@@ -21,7 +21,7 @@ public class NegCaixa {
 			+ "SET data= ?, preco_total=?, saida= ?, codigo_cliente= ?" + "WHERE codigo= ?;";
 	private static final String SQL_DELETE = "";
 
-	public boolean inserir(final Caixa caixa) throws SQLException {
+	public final boolean inserir(final Caixa caixa) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		final var comando = con.prepareStatement(SQL_INSERT);
@@ -40,7 +40,7 @@ public class NegCaixa {
 		}
 	}
 
-	public List<Caixa> consultar(final String metodo) throws SQLException {
+	public final List<Caixa> consultar(final String metodo) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		final var comando = con.prepareStatement(SQL_SEARCH);
@@ -67,7 +67,7 @@ public class NegCaixa {
 		}
 	}
 
-	public boolean alterar(final Caixa caixa) throws SQLException {
+	public final boolean alterar(final Caixa caixa) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		final var comando = con.prepareStatement(SQL_UPDATE);
@@ -88,7 +88,7 @@ public class NegCaixa {
 		}
 	}
 
-	public boolean excluir(final int id) throws SQLException {
+	public final boolean excluir(final int id) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		final var comando = con.prepareStatement(SQL_DELETE);

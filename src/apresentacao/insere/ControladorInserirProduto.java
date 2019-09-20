@@ -20,7 +20,7 @@ import objeto.Produto;
 import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
-public class ControladorInserirProduto {
+public final class ControladorInserirProduto {
 
 	@FXML
 	private TextField txtCodigo;
@@ -39,7 +39,7 @@ public class ControladorInserirProduto {
 	private CheckBox chkAtivo;
 	private static TIPO_TELA tipo_telaa;
 
-	public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela, Produto produto) {
+	public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela, final Produto produto) {
 		tipo_telaa = tipo_tela;
 		Parent root;
 		final var stage = new Stage();
@@ -69,13 +69,13 @@ public class ControladorInserirProduto {
 				stage.setTitle("Inserir Produto");
 				stage.show();
 			}
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
 
 	@FXML
-	void btnGravar(ActionEvent event) {
+	private void btnGravar(final ActionEvent event) {
 		final var negProduto = new NegProduto();
 		final var produto = new Produto();
 		if (tipo_telaa == TIPO_TELA.INSERE) {
@@ -85,7 +85,7 @@ public class ControladorInserirProduto {
 			produto.setQuantidade(Integer.valueOf(txtQuantidade.getText()));
 			try {
 				negProduto.inserir(produto);
-			} catch (SQLException e) {
+			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
 			}
 		} else {
@@ -97,7 +97,7 @@ public class ControladorInserirProduto {
 
 			try {
 				negProduto.alterar(produto);
-			} catch (SQLException e) {
+			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
 			}
 		}

@@ -12,18 +12,18 @@ import acessoBD.MariaDB.AcessoBD;
 import objeto.Cidade;
 import objeto.Cliente;
 
-public class NegCliente {
+public final class NegCliente {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_INSERT = "insert into cliente(nome,CPF,endereco,telefone,ativo,id_cidade)"
 			+ " values(?,?,?,?,?,?)";
 	private static final String SQL_SEARCH = "SELECT c.codigo, c.nome, c.CPF, c.endereco, c.telefone, c.ativo, c.id_cidade,\n"
 			+ "ci.nome\n" + "FROM cantagalo.cliente c\n" + "JOIN cidade ci ON c.id_cidade = ci.codigo\n"
-			+ "WHERE c.nome LIKE ?;";
+			+ "WHERE MATCH(c.nome) AGAINST(? in boolean mode)";
 	private static final String SQL_UPDATE = "update cliente set nome = ?, CPF = ?, endereco = ?,"
 			+ "telefone = ?, ativo = ?, id_cidade = ? where codigo = ?;";
 	private static final String SQL_DELETE = "DELETE FROM cantagalo.cliente\n" + "WHERE codigo=?;";
 
-	public boolean inserir(final Cliente cliente) throws SQLException {
+	public final boolean inserir(final Cliente cliente) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
@@ -38,7 +38,7 @@ public class NegCliente {
 //	    comando.setInt(6, cliente.getCidade().getCodigo());
 //	    final var inseriu = comando.executeUpdate() >= 1;
 			var a = 0;
-			var b = new Random();
+			final var b = new Random();
 
 			while (a <= 1000000) {
 				comando.setString(1, "teste" + a);
@@ -58,17 +58,18 @@ public class NegCliente {
 		}
 	}
 
-	public List<Cliente> consultar(final String metodo) throws SQLException {
+	public final List<Cliente> consultar(final String metodo) throws SQLException {
 		final var comeco = Instant.now();
 
 		final var con = conexao.getConexao();
+
 		con.setAutoCommit(false);
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		con.setReadOnly(true);
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
 
-			comando.setString(1, metodo + '%');
+			comando.setString(1, metodo + '*');
 			final var lista = new ArrayList<Cliente>();
 			final var result = comando.executeQuery();
 
@@ -95,7 +96,7 @@ public class NegCliente {
 
 	}
 
-	public boolean alterar(final Cliente cliente) throws SQLException {
+	public final boolean alterar(final Cliente cliente) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		final var comando = con.prepareStatement(SQL_UPDATE);
@@ -118,7 +119,7 @@ public class NegCliente {
 		}
 	}
 
-	public boolean excluir(final int id) throws SQLException {
+	public final boolean excluir(final int id) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);

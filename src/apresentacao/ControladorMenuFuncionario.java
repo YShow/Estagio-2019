@@ -24,7 +24,7 @@ import objeto.Funcionario;
 import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
-public class ControladorMenuFuncionario {
+public final class ControladorMenuFuncionario {
 
 	@FXML
 	private TextField txtFuncionario;
@@ -69,13 +69,13 @@ public class ControladorMenuFuncionario {
 				control.limpaTabela();
 
 			});
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
 
 	@FXML
-	void btnAlteraFuncionario(ActionEvent event) {
+	private void btnAlteraFuncionario(final ActionEvent event) {
 		final var funcionario = tblFuncionario.getSelectionModel().getSelectedItem();
 
 		tela.abreTelaFuncionarioInsere(TIPO_TELA.ALTERA, funcionario);
@@ -86,7 +86,7 @@ public class ControladorMenuFuncionario {
 	}
 
 	@FXML
-	void btnConsultaFuncionario(ActionEvent event) {
+	private void btnConsultaFuncionario(final ActionEvent event) {
 		limpaTabela();
 		final var negFuncionario = new NegFuncionario();
 		try {
@@ -99,14 +99,14 @@ public class ControladorMenuFuncionario {
 			tcUsuario.setCellValueFactory(usuario -> new ReadOnlyStringWrapper(usuario.getValue().getUsuario()));
 			tcAdm.setCellValueFactory(new PropertyValueFactory("Administrador"));
 
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
 
 	@FXML
-	void btnDesativaFuncionario(ActionEvent event) {
+	private void btnDesativaFuncionario(final ActionEvent event) {
 		final var negFuncionario = new NegFuncionario();
 		final var funcionario = tblFuncionario.getSelectionModel().getSelectedItem();
 		try {
@@ -114,13 +114,13 @@ public class ControladorMenuFuncionario {
 				tblFuncionario.getItems().remove(funcionario);
 				Alerta.alertaSucesso();
 			}
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
 
 	@FXML
-	void btnInsereFuncionario(ActionEvent event) {
+	private void btnInsereFuncionario(final ActionEvent event) {
 		tela.abreTelaFuncionarioInsere(TIPO_TELA.INSERE, null);
 	}
 }

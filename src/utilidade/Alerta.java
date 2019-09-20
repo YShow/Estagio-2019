@@ -5,17 +5,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Modality;
-import javafx.stage.StageStyle;
 import jfxtras.styles.jmetro.JMetro;
 
-public class Alerta {
-
-	
+public final class Alerta {
 
 	public static void alertaSucesso() {
 		final Alert alerta = new Alert(Alert.AlertType.NONE);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
-		alerta.initStyle(StageStyle.TRANSPARENT);
+
 		alerta.initModality(Modality.APPLICATION_MODAL);
 		alerta.setAlertType(AlertType.INFORMATION);
 		alerta.setHeaderText("Função realizada com sucesso");
@@ -28,7 +25,7 @@ public class Alerta {
 	public static void alertaErro(final String erro) {
 		final Alert alerta = new Alert(Alert.AlertType.NONE);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
-		alerta.initStyle(StageStyle.TRANSPARENT);
+
 		alerta.initModality(Modality.APPLICATION_MODAL);
 		alerta.setAlertType(AlertType.WARNING);
 		alerta.setTitle("Ocorreu um problema");
@@ -44,7 +41,7 @@ public class Alerta {
 	public static void alertaCampoNulo() {
 		final Alert alerta = new Alert(Alert.AlertType.NONE);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
-		alerta.initStyle(StageStyle.TRANSPARENT);
+
 		alerta.initModality(Modality.APPLICATION_MODAL);
 		alerta.setHeaderText("Verifique os campos");
 		alerta.setContentText("Por favor verifique se todos os campos foram preenchidos");
@@ -57,7 +54,7 @@ public class Alerta {
 	public static void alertaCidadeEmUso() {
 		final Alert alerta = new Alert(Alert.AlertType.NONE);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
-		alerta.initStyle(StageStyle.TRANSPARENT);
+
 		alerta.initModality(Modality.APPLICATION_MODAL);
 		alerta.setAlertType(AlertType.WARNING);
 		alerta.setHeaderText("Cidade associada em cliente");
@@ -71,7 +68,7 @@ public class Alerta {
 	public static void alertaClienteEmCaixa() {
 		final Alert alerta = new Alert(Alert.AlertType.NONE);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
-		alerta.initStyle(StageStyle.TRANSPARENT);
+
 		alerta.initModality(Modality.APPLICATION_MODAL);
 		alerta.setAlertType(AlertType.WARNING);
 		alerta.setHeaderText("Cliente possui caixa");

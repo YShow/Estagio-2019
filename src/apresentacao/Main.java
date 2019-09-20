@@ -10,7 +10,7 @@ public class Main extends Application {
 	public static final Style style = Style.LIGHT;
 
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(final Stage primaryStage) {
 		// isto é um teste para como esconder uma tela e abrir outra sem fexar o
 		// programa
 		// TODO
@@ -20,13 +20,13 @@ public class Main extends Application {
 			final var login = new ControladorTelaLogin();
 			login.start(primaryStage);
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 
 	}
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		launch(args);
 	}
 }

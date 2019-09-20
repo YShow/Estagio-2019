@@ -31,7 +31,7 @@ import objeto.Vendas;
 import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
-public class ControladorInserirVenda {
+public final class ControladorInserirVenda {
 	@FXML
 	private TextField txtCliente;
 
@@ -61,7 +61,7 @@ public class ControladorInserirVenda {
 	private CheckBox chkAtivo;
 	private static TIPO_TELA tipo_telaa;
 
-	public void abreTelaVendaInsere(final TIPO_TELA tipo_tela, Vendas venda) {
+	public void abreTelaVendaInsere(final TIPO_TELA tipo_tela, final Vendas venda) {
 		tipo_telaa = tipo_tela;
 		Parent root;
 		final var stage = new Stage();
@@ -90,37 +90,37 @@ public class ControladorInserirVenda {
 				stage.setTitle("Inserir Venda");
 				stage.show();
 			}
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
 
 	@FXML
-	void btnPesquisaCliente(ActionEvent event) {
+	private void btnPesquisaCliente(final ActionEvent event) {
 		final var telaCliente = new ControladorMenuCliente();
 		final var cliente = telaCliente.abreTelaClienteMenuAlterar(TIPO_TELA.CONSULTA);
 		atualizaValorCliente(cliente);
 	}
 
 	@FXML
-	void btnPesquisaProduto(ActionEvent event) {
+	private void btnPesquisaProduto(final ActionEvent event) {
 		final var telaProduto = new ControladorMenuProduto();
 		final var produto = telaProduto.abreTelaProdutoMenuAlterar(TIPO_TELA.CONSULTA);
 		atualizaValorProduto(produto);
 	}
 
-	private void atualizaValorCliente(Cliente cliente) {
+	private void atualizaValorCliente(final Cliente cliente) {
 
 		txtCliente.setText(String.valueOf(cliente.getCodigo()));
 	}
 
-	private void atualizaValorProduto(Produto produto) {
+	private void atualizaValorProduto(final Produto produto) {
 		txtProduto.setText(String.valueOf(produto.getCodigo()));
 		txtQtdEstoque.setText(String.valueOf(produto.getQuantidade()));
 		txtPrecoUnitario.setText(String.valueOf(produto.getPreco()));
 	}
 
-	private void formataCampo(ControladorInserirVenda controlador) {
+	private void formataCampo(final ControladorInserirVenda controlador) {
 		controlador.txtQtd.setTextFormatter(new TextFormatter<String>(change -> {
 			if (!change.getText().isBlank()) {
 				final var too = new Tooltip();
@@ -137,7 +137,7 @@ public class ControladorInserirVenda {
 						final var qtd = Integer.valueOf(change.getControlNewText());
 						final var preco = Double.valueOf(controlador.txtPrecoUnitario.getText());
 						final var total = qtd * preco;
-						var valor = new BigDecimal(total).setScale(2, RoundingMode.HALF_EVEN);
+						final var valor = new BigDecimal(total).setScale(2, RoundingMode.HALF_EVEN);
 						controlador.txtPrecoTotal.setText(valor.toString());
 					}
 					return change;
@@ -149,7 +149,7 @@ public class ControladorInserirVenda {
 	}
 
 	@FXML
-	void btnGravar(ActionEvent event) {
+	private void btnGravar(final ActionEvent event) {
 		final var negVenda = new NegVendas();
 		final var venda = new Vendas();
 		final var cliente = new Cliente();
@@ -184,16 +184,17 @@ public class ControladorInserirVenda {
 		venda.setCaixa(caixa);
 
 		try {
-			if (tipo_telaa.equals(TIPO_TELA.INSERE))
+			if (tipo_telaa.equals(TIPO_TELA.INSERE)) {
 				negVenda.inserir(venda);
-			else
+			} else {
 				negVenda.alterar(venda);
-		} catch (SQLException e) {
+			}
+		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
 
-	private void preencheCampos(ControladorInserirVenda controlador, int idVenda) {
+	private void preencheCampos(final ControladorInserirVenda controlador, final int idVenda) {
 		final var negVenda = new NegVendas();
 		try {
 			final var venda = negVenda.pegaVendaAlterar(idVenda);
@@ -204,7 +205,7 @@ public class ControladorInserirVenda {
 			controlador.txtProduto.setText(String.valueOf(venda.getProduto().getCodigo()));
 			controlador.txtQtd.setText(String.valueOf(venda.getProduto().getQuantidade()));
 			controlador.chkAtivo.setSelected(venda.isAtivo());
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}

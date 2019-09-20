@@ -13,13 +13,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import jfxtras.styles.jmetro.JMetro;
 import negocio.NegLogin;
 import objeto.Funcionario;
 import utilidade.Alerta;
 
-public class ControladorTelaLogin extends Application {
+public final class ControladorTelaLogin extends Application {
 	@FXML
 	private TextField txtUsuario;
 
@@ -31,23 +30,24 @@ public class ControladorTelaLogin extends Application {
 	private double yOffset = 0;
 
 	@FXML
-	private void btnLogin(ActionEvent event) {
-		if (txtUsuario.getText().isBlank() && txtSenha.getText().isBlank())
+	private void btnLogin(final ActionEvent event) {
+		if (txtUsuario.getText().isBlank() && txtSenha.getText().isBlank()) {
 			Alerta.alertaCampoNulo();
-		else {
+		} else {
 			final var funcionario = new Funcionario();
 			funcionario.setUsuario(txtUsuario.getText());
 			funcionario.setSenha(txtSenha.getText());
-			var login = new NegLogin();
+			final var login = new NegLogin();
 			try {
 				if (login.verificaLogin(funcionario)) {
 					// fexa tela de login login
 					stage.close();
 					// abre tela do menu apos login
 					abreTelaMenuPrincipal();
-				} else
+				} else {
 					Alerta.alertaCampoNulo();
-			} catch (SQLException e) {
+				}
+			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
 
 			}
@@ -56,10 +56,10 @@ public class ControladorTelaLogin extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(final Stage primaryStage) throws Exception {
 
 		stage = primaryStage;
-		stage.initStyle(StageStyle.TRANSPARENT);
+
 		abreTelaLogin();
 	}
 
@@ -70,11 +70,12 @@ public class ControladorTelaLogin extends Application {
 
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+			stage.setResizable(false);
 			stage.setTitle("Canta Galo");
 			stage.setScene(scene);
 			stage.show();
 
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 
@@ -100,7 +101,7 @@ public class ControladorTelaLogin extends Application {
 			stage.setTitle("Canta Galo");
 			stage.setScene(scene);
 			stage.show();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}

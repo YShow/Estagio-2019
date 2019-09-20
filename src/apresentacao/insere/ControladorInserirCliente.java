@@ -22,7 +22,7 @@ import objeto.Cliente;
 import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
-public class ControladorInserirCliente {
+public final class ControladorInserirCliente {
 	@FXML
 	private TextField txtCodigo;
 
@@ -50,7 +50,7 @@ public class ControladorInserirCliente {
 	private TextField txtCodCidade;
 	private static TIPO_TELA tipo_telaa;
 
-	public void abreTelaClienteInsere(final TIPO_TELA tipo_tela, Cliente cliente) {
+	public void abreTelaClienteInsere(final TIPO_TELA tipo_tela, final Cliente cliente) {
 		tipo_telaa = tipo_tela;
 		final var stage = new Stage();
 		Parent root;
@@ -66,7 +66,7 @@ public class ControladorInserirCliente {
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
 			final var controlador = (ControladorInserirCliente) loader.getController();
-			if (tipo_tela.equals(tipo_telaa.ALTERA)) {
+			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 				controlador.btnGrava.setText("Alterar");
 				controlador.chkAtivo.setSelected(cliente.getAtivo());
 				controlador.txtCidade.setText(cliente.getCidade().getNome());
@@ -83,13 +83,13 @@ public class ControladorInserirCliente {
 				stage.setTitle("Inserir Cliente");
 				stage.show();
 			}
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
 
 	@FXML
-	void btnGrava(ActionEvent event) {
+	private void btnGrava(final ActionEvent event) {
 		final var negCliente = new NegCliente();
 		final var cliente = new Cliente();
 		final var cidade = new Cidade();
@@ -106,7 +106,7 @@ public class ControladorInserirCliente {
 
 			try {
 				negCliente.inserir(cliente);
-			} catch (SQLException e) {
+			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
 			}
 		} else {
@@ -121,14 +121,14 @@ public class ControladorInserirCliente {
 
 			try {
 				negCliente.alterar(cliente);
-			} catch (SQLException e) {
+			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
 			}
 		}
 	}
 
 	@FXML
-	void btnPesquisarCidade(ActionEvent event) {
+	private void btnPesquisarCidade(final ActionEvent event) {
 		final var abreTelaCidadeMenu = new ControladorMenuCidade();
 		final var cidade = abreTelaCidadeMenu.abreTelaCidadeMenu(TIPO_TELA.CONSULTA);
 
@@ -136,8 +136,8 @@ public class ControladorInserirCliente {
 
 	}
 
-	private void atualizaValorCidade(Cidade cidade) {
-		 txtCodCidade.setText(String.valueOf(cidade.getCodigo()));
-		 txtCidade.setText(cidade.getNome());
+	private void atualizaValorCidade(final Cidade cidade) {
+		txtCodCidade.setText(String.valueOf(cidade.getCodigo()));
+		txtCidade.setText(cidade.getNome());
 	}
 }

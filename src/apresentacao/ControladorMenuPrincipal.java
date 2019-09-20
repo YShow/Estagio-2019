@@ -12,13 +12,13 @@ import jfxtras.styles.jmetro.JMetro;
 import utilidade.Alerta;
 import utilidade.TIPO_TELA;
 
-public class ControladorMenuPrincipal {
+public final class ControladorMenuPrincipal {
 
 	private final Stage stage = new Stage();
 	private Parent root;
 
 	@FXML
-	void menuTelaCaixa(ActionEvent event) {
+	private void menuTelaCaixa(final ActionEvent event) {
 
 		try {
 
@@ -28,33 +28,33 @@ public class ControladorMenuPrincipal {
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
 			stage.show();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
 
 	@FXML
-	void menuTelaCidade(ActionEvent event) {
+	private void menuTelaCidade(final ActionEvent event) {
 		final var telaCidade = new ControladorMenuCidade();
 		telaCidade.abreTelaCidadeMenu(TIPO_TELA.EXCLUI);
 	}
 
 	@FXML
-	void menuTelaCliente(ActionEvent event) {
+	private void menuTelaCliente(final ActionEvent event) {
 
 		final var telaCliente = new ControladorMenuCliente();
 		telaCliente.abreTelaClienteMenu(TIPO_TELA.EXCLUI);
 	}
 
 	@FXML
-	void menuTelaFuncionario(ActionEvent event) {
+	private void menuTelaFuncionario(final ActionEvent event) {
 
 		final var telaFuncionario = new ControladorMenuFuncionario();
 		telaFuncionario.abreTelaFuncionarioMenu();
 	}
 
 	@FXML
-	void menuTelaProduto(ActionEvent event) {
+	private void menuTelaProduto(final ActionEvent event) {
 
 		final var telaProduto = new ControladorMenuProduto();
 		telaProduto.abreTelaProdutoMenu(TIPO_TELA.EXCLUI);
@@ -62,7 +62,7 @@ public class ControladorMenuPrincipal {
 	}
 
 	@FXML
-	void menuTelaVenda(ActionEvent event) {
+	private void menuTelaVenda(final ActionEvent event) {
 
 		try {
 			root = FXMLLoader.load(getClass().getResource("Venda.fxml"));
@@ -73,7 +73,7 @@ public class ControladorMenuPrincipal {
 			stage.setScene(scene);
 			stage.show();
 
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}

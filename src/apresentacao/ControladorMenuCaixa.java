@@ -4,27 +4,27 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 
-public class ControladorMenuCaixa {
+public final class ControladorMenuCaixa {
 	@FXML
 	private TextField txtPesquisaCaixa;
 
 	@FXML
-	void btnAlterarCaixa(ActionEvent event) {
+	private void btnAlterarCaixa(final ActionEvent event) {
 
 	}
 
 	@FXML
-	void btnDesativarCaixa(ActionEvent event) {
+	private void btnDesativarCaixa(final ActionEvent event) {
 
 	}
 
 	@FXML
-	void btnInserirCaixa(ActionEvent event) {
+	private void btnInserirCaixa(final ActionEvent event) {
 
 	}
 
 	@FXML
-	void conulstaCaixa(ActionEvent event) {
+	private void conulstaCaixa(final ActionEvent event) {
 
 	}
 }

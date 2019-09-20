@@ -1,6 +1,6 @@
 package objeto;
 
-public class Produto {
+public final class Produto {
 	private int codigo;
 
 	public Boolean getAtivo() {

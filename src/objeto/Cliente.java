@@ -1,6 +1,6 @@
 package objeto;
 
-public class Cliente {
+public final class Cliente {
 	private int codigo;
 
 	public String getNome() {

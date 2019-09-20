@@ -10,7 +10,7 @@ import java.util.List;
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Produto;
 
-public class NegProduto {
+public final class NegProduto {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_INSERT = "INSERT INTO cantagalo.produto\n" + "(ativo, preco, quantidade, nome)\n"
 			+ "VALUES(?, ?, ?, ?);\n";
@@ -20,7 +20,7 @@ public class NegProduto {
 			+ "SET ativo=?, preco=?, quantidade=?, nome=?\n" + "WHERE codigo=? ;";
 	private static final String SQL_DELETE = "";
 
-	public boolean inserir(final Produto produto) throws SQLException {
+	public final boolean inserir(final Produto produto) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
@@ -40,7 +40,7 @@ public class NegProduto {
 
 	}
 
-	public List<Produto> consultar(final String metodo) throws SQLException {
+	public final List<Produto> consultar(final String metodo) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
@@ -67,7 +67,7 @@ public class NegProduto {
 		}
 	}
 
-	public boolean alterar(final Produto produto) throws SQLException {
+	public final boolean alterar(final Produto produto) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
@@ -87,7 +87,7 @@ public class NegProduto {
 		}
 	}
 
-	public boolean excluir(final int id) throws SQLException {
+	public final boolean excluir(final int id) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
