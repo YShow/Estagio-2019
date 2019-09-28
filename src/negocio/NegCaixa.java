@@ -15,7 +15,7 @@ public final class NegCaixa {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_INSERT = "INSERT INTO cantagalo.caixa\n"
 			+ "(`data`, preco_total, saida, codigo_cliente)" + "VALUES(?, ?, ?, ?)";
-	private static final String SQL_SEARCH = "SELECT codigo, data, preco_total, saida, codigo_cliente "
+	private static final String SQL_SEARCH = "SELECT codigo, data, preco_total, saida, codigo_cliente,ativo "
 			+ "FROM cantagalo.caixa where data = ?";
 	private static final String SQL_UPDATE = "UPDATE cantagalo.caixa "
 			+ "SET data= ?, preco_total=?, saida= ?, codigo_cliente= ?" + "WHERE codigo= ?;";
@@ -40,7 +40,7 @@ public final class NegCaixa {
 		}
 	}
 
-	public final List<Caixa> consultar(final String metodo) throws SQLException {
+	public final List<Caixa> consultar(final LocalDate data) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		final var comando = con.prepareStatement(SQL_SEARCH);
@@ -48,7 +48,7 @@ public final class NegCaixa {
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		con.setReadOnly(true);
 		try (con; comando;) {
-			comando.setString(1, metodo);
+			comando.setObject(1, data);
 
 			final var result = comando.executeQuery();
 			final var lista = new ArrayList<Caixa>();
@@ -59,6 +59,7 @@ public final class NegCaixa {
 				caixa.setPrecototal(result.getDouble("preco_total"));
 				caixa.setSaida(result.getDouble("saida"));
 				caixa.setCliente(result.getInt("codigo_cliente"));
+				caixa.setAtivo(result.getBoolean("ativo"));
 				lista.add(caixa);
 			}
 			System.out

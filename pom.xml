@@ -81,7 +81,7 @@
 		<dependency>
 			<groupId>org.jfxtras</groupId>
 			<artifactId>jmetro</artifactId>
-			<version>11.5.8</version>
+			<version>11.5.10</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.openjfx</groupId>
