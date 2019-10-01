@@ -17,7 +17,7 @@ public final class NegCliente {
 			+ " values(?,?,?,?,?,?)";
 	private static final String SQL_SEARCH = "SELECT c.codigo, c.nome, c.CPF, c.endereco, c.telefone, c.ativo, c.id_cidade,\n"
 			+ "ci.nome\n" + "FROM cantagalo.cliente c\n" + "JOIN cidade ci ON c.id_cidade = ci.codigo\n"
-			+ "WHERE MATCH(c.nome) AGAINST(? in boolean mode)";
+			+ "WHERE c.nome like ?";
 	private static final String SQL_UPDATE = "update cliente set nome = ?, CPF = ?, endereco = ?,"
 			+ "telefone = ?, ativo = ?, id_cidade = ? where codigo = ?;";
 	private static final String SQL_DELETE = "DELETE FROM cantagalo.cliente\n" + "WHERE codigo=?;";
@@ -56,7 +56,7 @@ public final class NegCliente {
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
 
-			comando.setString(1, metodo + '*');
+			comando.setString(1, metodo + '%');
 			final var lista = new ArrayList<Cliente>();
 			final var result = comando.executeQuery();
 
