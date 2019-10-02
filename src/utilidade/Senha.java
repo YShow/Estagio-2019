@@ -33,7 +33,7 @@ public final class Senha {
 		final var senhachar = senha.toCharArray();
 		final var saltbyte = salt.getBytes();
 		try {
-			final var scry = SCrypt.generate(Strings.toByteArray(senhachar), saltbyte, 128, 128, 128, 512);
+			final var scry = SCrypt.generate(Strings.toByteArray(senhachar), saltbyte, 16384, 16, 1, 64);
 			Arrays.fill(senhachar, Character.MIN_VALUE);
 
 			return new String(Base64.encode(scry));
