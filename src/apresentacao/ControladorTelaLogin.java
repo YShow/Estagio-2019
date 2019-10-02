@@ -28,8 +28,8 @@ public final class ControladorTelaLogin extends Application {
 	private PasswordField txtSenha;
 	private static Stage stage;
 
-	private  double xOffset = 0;
-	private  double yOffset = 0;
+	private double xOffset = 0;
+	private double yOffset = 0;
 
 	@FXML
 	private void btnLogin(final ActionEvent event) {

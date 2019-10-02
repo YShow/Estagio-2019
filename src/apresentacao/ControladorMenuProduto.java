@@ -61,7 +61,6 @@ public final class ControladorMenuProduto {
 
 	public void abreTelaProdutoMenu(final TIPO_TELA tipo_tela) {
 
-
 		try {
 			tipo_telaa = tipo_tela;
 			final var stage = new Stage();
@@ -87,7 +86,6 @@ public final class ControladorMenuProduto {
 	}
 
 	public Produto abreTelaProdutoMenuAlterar(final TIPO_TELA tipo_tela) {
-
 
 		try {
 			tipo_telaa = tipo_tela;
@@ -136,11 +134,11 @@ public final class ControladorMenuProduto {
 			final List<Produto> funcionario = negProduto.consultar(txtProduto.getText());
 			final var data = FXCollections.observableList(funcionario);
 			tvProduto.setItems(data);
-			tcCodigo.setCellValueFactory(new PropertyValueFactory<Produto,Integer>("Codigo"));
-			tcNome.setCellValueFactory(new PropertyValueFactory<Produto,String>("Nome"));
-			tcPreco.setCellValueFactory(new PropertyValueFactory<Produto,Double>("Preco"));
-			tcQuantidade.setCellValueFactory(new PropertyValueFactory<Produto,Integer>("Quantidade"));
-			tcAtivo.setCellValueFactory(new PropertyValueFactory<Produto,Boolean>("Ativo"));
+			tcCodigo.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("Codigo"));
+			tcNome.setCellValueFactory(new PropertyValueFactory<Produto, String>("Nome"));
+			tcPreco.setCellValueFactory(new PropertyValueFactory<Produto, Double>("Preco"));
+			tcQuantidade.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("Quantidade"));
+			tcAtivo.setCellValueFactory(new PropertyValueFactory<Produto, Boolean>("Ativo"));
 
 		} catch (final SQLException e) {
 

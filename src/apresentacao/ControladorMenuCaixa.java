@@ -25,94 +25,92 @@ import utilidade.Alerta;
 
 public final class ControladorMenuCaixa {
 
-    @FXML
-    private DatePicker dpData;
+	@FXML
+	private DatePicker dpData;
 
-	  @FXML
-	    private TableView<Caixa> tvCaixa;
-	    @FXML
-	    private Button btnDesativarCaixa;
+	@FXML
+	private TableView<Caixa> tvCaixa;
+	@FXML
+	private Button btnDesativarCaixa;
 
+	@FXML
+	private TableColumn<Caixa, Integer> tcCodigo;
 
-	    @FXML
-	    private TableColumn<Caixa, Integer> tcCodigo;
+	@FXML
+	private TableColumn<Caixa, LocalDate> tcData;
 
-	    @FXML
-	    private TableColumn<Caixa, LocalDate> tcData;
+	@FXML
+	private TableColumn<Caixa, Double> tcPreco;
 
-	    @FXML
-	    private TableColumn<Caixa, Double> tcPreco;
+	@FXML
+	private TableColumn<Caixa, Integer> tcSaida;
 
-	    @FXML
-	    private TableColumn<Caixa, Integer> tcSaida;
+	@FXML
+	private TableColumn<Caixa, Integer> tcCodCli;
 
-	    @FXML
-	    private TableColumn<Caixa, Integer> tcCodCli;
+	@FXML
+	private TableColumn<Caixa, Boolean> tcAtivo;
 
-	    @FXML
-	    private TableColumn<Caixa, Boolean> tcAtivo;
+	public void abreTelaCaixaMenu() {
+		try {
+			final var stage = new Stage();
 
-	    public void abreTelaCaixaMenu() {
-			try {
-				final var stage = new Stage();
-
-				final var loader = new FXMLLoader();
-				stage.initModality(Modality.APPLICATION_MODAL);
-				loader.setLocation(getClass().getResource("/apresentacao/Caixa.fxml"));
+			final var loader = new FXMLLoader();
+			stage.initModality(Modality.APPLICATION_MODAL);
+			loader.setLocation(getClass().getResource("/apresentacao/Caixa.fxml"));
 			final Parent root = loader.load();
 
-				stage.setMinHeight(root.minHeight(-1));
-				stage.setMinWidth(root.minWidth(-1));
-				final var scene = new Scene(root);
-				new JMetro(scene, Main.style);
-				stage.setScene(scene);
-				final ControladorMenuCaixa controlador = loader.getController();
+			stage.setMinHeight(root.minHeight(-1));
+			stage.setMinWidth(root.minWidth(-1));
+			final var scene = new Scene(root);
+			new JMetro(scene, Main.style);
+			stage.setScene(scene);
+			final ControladorMenuCaixa controlador = loader.getController();
 
-				if (!Funcionario.getFuncionario().getAdministrador()) {
+			if (!Funcionario.getFuncionario().getAdministrador()) {
 
-					controlador.btnDesativarCaixa.setDisable(true);
-				}
-				stage.show();
-			} catch (final IOException e) {
-				Alerta.alertaErro(e.getMessage());
+				controlador.btnDesativarCaixa.setDisable(true);
 			}
+			stage.show();
+		} catch (final IOException e) {
+			Alerta.alertaErro(e.getMessage());
+		}
+	}
+
+	@FXML
+	void btnAlterarCaixa(final ActionEvent event) {
+
+	}
+
+	@FXML
+	void btnDesativarCaixa(final ActionEvent event) {
+
+	}
+
+	@FXML
+	void btnInserirCaixa(final ActionEvent event) {
+
+	}
+
+	@FXML
+	void conulstaCaixa(final ActionEvent event) {
+		final var negCaixa = new NegCaixa();
+		try {
+			final var caixas = negCaixa.consultar(dpData.getValue());
+
+			tcAtivo.setCellValueFactory(new PropertyValueFactory<Caixa, Boolean>("ativo"));
+			tcCodCli.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("cliente"));
+			tcCodigo.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("codigo"));
+			tcData.setCellValueFactory(new PropertyValueFactory<Caixa, LocalDate>("data"));
+			tcPreco.setCellValueFactory(new PropertyValueFactory<Caixa, Double>("precototal"));
+			tcSaida.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("saida"));
+
+			final var data = FXCollections.observableArrayList(caixas);
+			tvCaixa.setItems(data);
+
+		} catch (final SQLException e) {
+			Alerta.alertaErro(e.getMessage());
 		}
 
-	    @FXML
-	    void btnAlterarCaixa(final ActionEvent event) {
-
-	    }
-
-	    @FXML
-	    void btnDesativarCaixa(final ActionEvent event) {
-
-	    }
-
-	    @FXML
-	    void btnInserirCaixa(final ActionEvent event) {
-
-	    }
-
-	    @FXML
-	    void conulstaCaixa(final ActionEvent event) {
-	    	final var negCaixa = new NegCaixa();
-	    	try {
-	    	final var caixas =	negCaixa.consultar(dpData.getValue());
-
-	    	tcAtivo.setCellValueFactory(new PropertyValueFactory<Caixa,Boolean>("ativo"));
-	    	tcCodCli.setCellValueFactory(new PropertyValueFactory<Caixa,Integer>("cliente"));
-	    	tcCodigo.setCellValueFactory(new PropertyValueFactory<Caixa,Integer>("codigo"));
-	    	tcData.setCellValueFactory(new PropertyValueFactory<Caixa,LocalDate>("data"));
-	    	tcPreco.setCellValueFactory(new PropertyValueFactory<Caixa,Double>("precototal"));
-	    	tcSaida.setCellValueFactory(new PropertyValueFactory<Caixa,Integer>("saida"));
-
-	    	final var data = FXCollections.observableArrayList(caixas);
-	    	tvCaixa.setItems(data);
-
-	    	} catch (final SQLException e) {
-				Alerta.alertaErro(e.getMessage());
-			}
-
-
-	    }
+	}
 }

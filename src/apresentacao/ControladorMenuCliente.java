@@ -72,7 +72,6 @@ public final class ControladorMenuCliente {
 
 	public void abreTelaClienteMenu(final TIPO_TELA tipo_tela) {
 
-
 		try {
 			tipo_telaa = tipo_tela;
 			final var stage = new Stage();
@@ -104,7 +103,6 @@ public final class ControladorMenuCliente {
 
 	public Cliente abreTelaClienteMenuAlterar(final TIPO_TELA tipo_tela) {
 
-
 		try {
 			tipo_telaa = tipo_tela;
 			final var stage = new Stage();
@@ -112,7 +110,7 @@ public final class ControladorMenuCliente {
 			final var loader = new FXMLLoader();
 			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/Cliente.fxml"));
-			final Pane root =  loader.load();
+			final Pane root = loader.load();
 			controlador = loader.getController();
 			stage.setMinHeight(root.minHeight(-1));
 			stage.setMinWidth(root.minWidth(-1));
@@ -132,7 +130,6 @@ public final class ControladorMenuCliente {
 
 			});
 			stage.showAndWait();
-
 
 		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
@@ -155,12 +152,12 @@ public final class ControladorMenuCliente {
 			final List<Cliente> cliente = negCliente.consultar(txtCliente.getText());
 			final var data = FXCollections.observableList(cliente);
 			tvCliente.setItems(data);
-			tcCodigo.setCellValueFactory(new PropertyValueFactory<Cliente,Integer>("Codigo"));
-			tcAtivo.setCellValueFactory(new PropertyValueFactory<Cliente,Boolean>("Ativo"));
-			tcCPF.setCellValueFactory(new PropertyValueFactory<Cliente,String>("CPF"));
-			tcEndereco.setCellValueFactory(new PropertyValueFactory<Cliente,String>("Endereco"));
-			tcNome.setCellValueFactory(new PropertyValueFactory<Cliente,String>("Nome"));
-			tcTelefone.setCellValueFactory(new PropertyValueFactory<Cliente,String>("Telefone"));
+			tcCodigo.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("Codigo"));
+			tcAtivo.setCellValueFactory(new PropertyValueFactory<Cliente, Boolean>("Ativo"));
+			tcCPF.setCellValueFactory(new PropertyValueFactory<Cliente, String>("CPF"));
+			tcEndereco.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Endereco"));
+			tcNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Nome"));
+			tcTelefone.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Telefone"));
 
 			tcCidade.setCellValueFactory(cidade -> new ReadOnlyStringWrapper(cidade.getValue().getCidade().getNome()));
 

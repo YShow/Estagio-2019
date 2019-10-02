@@ -52,7 +52,6 @@ public final class ControladorInserirCliente {
 
 	public void abreTelaClienteInsere(final TIPO_TELA tipo_tela, final Cliente cliente) {
 
-
 		try {
 			tipo_telaa = tipo_tela;
 			final var stage = new Stage();
@@ -65,7 +64,7 @@ public final class ControladorInserirCliente {
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
-			final ControladorInserirCliente controlador =  loader.getController();
+			final ControladorInserirCliente controlador = loader.getController();
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 				controlador.btnGrava.setText("Alterar");
 				controlador.chkAtivo.setSelected(cliente.getAtivo());

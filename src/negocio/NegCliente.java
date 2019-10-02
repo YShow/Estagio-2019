@@ -29,14 +29,13 @@ public final class NegCliente {
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_INSERT);
 		try (con; comando;) {
-	    comando.setString(1, cliente.getNome());
-	    comando.setString(2, cliente.getCPF());
-	    comando.setString(3, cliente.getEndereco());
-	    comando.setString(4, cliente.getTelefone());
-	    comando.setBoolean(5, cliente.getAtivo());
-	    comando.setInt(6, cliente.getCidade().getCodigo());
-	    final var inseriu = comando.executeUpdate() >= 1;
-
+			comando.setString(1, cliente.getNome());
+			comando.setString(2, cliente.getCPF());
+			comando.setString(3, cliente.getEndereco());
+			comando.setString(4, cliente.getTelefone());
+			comando.setBoolean(5, cliente.getAtivo());
+			comando.setInt(6, cliente.getCidade().getCodigo());
+			final var inseriu = comando.executeUpdate() >= 1;
 
 			con.commit();
 			System.out.println(

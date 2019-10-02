@@ -63,7 +63,7 @@ public final class ControladorMenuCidade {
 
 			loader.setLocation(getClass().getResource("/apresentacao/Cidade.fxml"));
 			final Parent root = loader.load();
-			final ControladorMenuCidade controlador =  loader.getController();
+			final ControladorMenuCidade controlador = loader.getController();
 			stage.setMinHeight(root.minHeight(-1));
 			stage.setMinWidth(root.minWidth(-1));
 			final var scene = new Scene(root);
@@ -79,8 +79,7 @@ public final class ControladorMenuCidade {
 				stage.showAndWait();
 				return cidadeVolta;
 			} else {
-				if(!Funcionario.getFuncionario().getAdministrador())
-				{
+				if (!Funcionario.getFuncionario().getAdministrador()) {
 					controlador.btnDesativar.setDisable(true);
 				}
 				stage.show();
@@ -106,9 +105,9 @@ public final class ControladorMenuCidade {
 
 			final var data = FXCollections.observableList(funcionario);
 			tvCidade.setItems(data);
-			tcCodigo.setCellValueFactory(new PropertyValueFactory<Cidade,Integer>("Codigo"));
-			tcNome.setCellValueFactory(new PropertyValueFactory<Cidade,String>("Nome"));
-			tcEstado.setCellValueFactory(new PropertyValueFactory<Cidade,String>("Estado"));
+			tcCodigo.setCellValueFactory(new PropertyValueFactory<Cidade, Integer>("Codigo"));
+			tcNome.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Nome"));
+			tcEstado.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Estado"));
 
 		} catch (final SQLException e) {
 

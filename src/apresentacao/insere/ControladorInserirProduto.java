@@ -41,7 +41,6 @@ public final class ControladorInserirProduto {
 
 	public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela, final Produto produto) {
 
-
 		try {
 			tipo_telaa = tipo_tela;
 
@@ -49,7 +48,7 @@ public final class ControladorInserirProduto {
 			final var loader = new FXMLLoader();
 			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/insere/ProdutoInsere.fxml"));
-			final Parent root =  loader.load();
+			final Parent root = loader.load();
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);

@@ -1,4 +1,5 @@
 package utilidade;
+
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
@@ -31,7 +32,6 @@ public class Imagem {
 
 		final var backgroundImage = new BackgroundImage(image, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
 				BackgroundPosition.CENTER, backgroundSize);
-
 
 		return new Background(backgroundImage);
 	}

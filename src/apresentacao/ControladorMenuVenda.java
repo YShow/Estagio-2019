@@ -50,7 +50,7 @@ public final class ControladorMenuVenda {
 	@FXML
 	private TableColumn<Vendas, String> tcFormaPAg;
 	@FXML
-    private Button btnDesativaVenda;
+	private Button btnDesativaVenda;
 	@FXML
 	private TableColumn<Vendas, Boolean> tcAtivo;
 
@@ -68,8 +68,7 @@ public final class ControladorMenuVenda {
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
-			if(!Funcionario.getFuncionario().getAdministrador())
-			{
+			if (!Funcionario.getFuncionario().getAdministrador()) {
 				control.btnDesativaVenda.setDisable(true);
 			}
 
@@ -93,19 +92,20 @@ public final class ControladorMenuVenda {
 
 			final var data = FXCollections.observableList(venda);
 			tvVenda.setItems(data);
-			tcCodigo.setCellValueFactory(new PropertyValueFactory<Vendas,Integer>("Codigo"));
+			tcCodigo.setCellValueFactory(new PropertyValueFactory<Vendas, Integer>("Codigo"));
 			tcFormaPAg.setCellValueFactory(new PropertyValueFactory<Vendas, String>("FormaPagamento"));
 
 			tcDataVenda.setCellValueFactory(dataVenda -> new ReadOnlyStringWrapper(
 					dataVenda.getValue().getData().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
 
-			tcCodCaixa.setCellValueFactory(	codCaixa -> new ReadOnlyIntegerWrapper(codCaixa.getValue().getCaixa().getCodigo()).asObject());
+			tcCodCaixa.setCellValueFactory(
+					codCaixa -> new ReadOnlyIntegerWrapper(codCaixa.getValue().getCaixa().getCodigo()).asObject());
 
 			tcCodCliente.setCellValueFactory(
 					codCliente -> new ReadOnlyIntegerWrapper(codCliente.getValue().getCliente().getCodigo())
 							.asObject());
 
-			tcAtivo.setCellValueFactory(new PropertyValueFactory<Vendas,Boolean>("Ativo"));
+			tcAtivo.setCellValueFactory(new PropertyValueFactory<Vendas, Boolean>("Ativo"));
 
 		} catch (final SQLException e) {
 

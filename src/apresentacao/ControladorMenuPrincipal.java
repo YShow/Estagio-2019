@@ -6,8 +6,6 @@ import utilidade.TIPO_TELA;
 
 public final class ControladorMenuPrincipal {
 
-
-
 	@FXML
 	private void menuTelaCaixa(final ActionEvent event) {
 
