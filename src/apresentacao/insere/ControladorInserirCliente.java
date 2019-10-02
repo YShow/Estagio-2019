@@ -51,21 +51,21 @@ public final class ControladorInserirCliente {
 	private static TIPO_TELA tipo_telaa;
 
 	public void abreTelaClienteInsere(final TIPO_TELA tipo_tela, final Cliente cliente) {
-		tipo_telaa = tipo_tela;
-		final var stage = new Stage();
-		Parent root;
-		final var loader = new FXMLLoader();
-		stage.initModality(Modality.APPLICATION_MODAL);
+
 
 		try {
+			tipo_telaa = tipo_tela;
+			final var stage = new Stage();
+			final var loader = new FXMLLoader();
+			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/insere/ClienteInsere.fxml"));
-			root = loader.load();
+			final Parent root = loader.load();
 			stage.setMinHeight(root.minHeight(-1));
 			stage.setMinWidth(root.minWidth(-1));
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
-			final var controlador = (ControladorInserirCliente) loader.getController();
+			final ControladorInserirCliente controlador =  loader.getController();
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 				controlador.btnGrava.setText("Alterar");
 				controlador.chkAtivo.setSelected(cliente.getAtivo());

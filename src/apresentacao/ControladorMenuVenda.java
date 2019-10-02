@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import apresentacao.insere.ControladorInserirVenda;
-import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
@@ -19,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
@@ -55,16 +55,16 @@ public final class ControladorMenuVenda {
 	private TableColumn<Vendas, Boolean> tcAtivo;
 
 	public void abreTelaVendaMenu() {
-		final var stage = new Stage();
-		Parent root;
-		final var loader = new FXMLLoader();
-
-		stage.initModality(Modality.APPLICATION_MODAL);
 
 		try {
+			final var stage = new Stage();
+
+			final var loader = new FXMLLoader();
+
+			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/Venda.fxml"));
-			root = loader.load();
-			final var control = (ControladorMenuVenda) loader.getController();
+			final Parent root = loader.load();
+			final ControladorMenuVenda control = loader.getController();
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
@@ -93,21 +93,19 @@ public final class ControladorMenuVenda {
 
 			final var data = FXCollections.observableList(venda);
 			tvVenda.setItems(data);
-			tcCodigo.setCellValueFactory(cod -> new ReadOnlyIntegerWrapper(cod.getValue().getCodigo()).asObject());
-			tcFormaPAg
-					.setCellValueFactory(formPag -> new ReadOnlyStringWrapper(formPag.getValue().getFormaPagamento()));
+			tcCodigo.setCellValueFactory(new PropertyValueFactory<Vendas,Integer>("Codigo"));
+			tcFormaPAg.setCellValueFactory(new PropertyValueFactory<Vendas, String>("FormaPagamento"));
 
 			tcDataVenda.setCellValueFactory(dataVenda -> new ReadOnlyStringWrapper(
 					dataVenda.getValue().getData().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
 
-			tcCodCaixa.setCellValueFactory(
-					codCaixa -> new ReadOnlyIntegerWrapper(codCaixa.getValue().getCaixa().getCodigo()).asObject());
+			tcCodCaixa.setCellValueFactory(	codCaixa -> new ReadOnlyIntegerWrapper(codCaixa.getValue().getCaixa().getCodigo()).asObject());
 
 			tcCodCliente.setCellValueFactory(
 					codCliente -> new ReadOnlyIntegerWrapper(codCliente.getValue().getCliente().getCodigo())
 							.asObject());
 
-			tcAtivo.setCellValueFactory(ativo -> new ReadOnlyBooleanWrapper(ativo.getValue().isAtivo()));
+			tcAtivo.setCellValueFactory(new PropertyValueFactory<Vendas,Boolean>("Ativo"));
 
 		} catch (final SQLException e) {
 
@@ -117,10 +115,10 @@ public final class ControladorMenuVenda {
 
 	@FXML
 	private void btnDesativaVenda(final ActionEvent event) {
-		final var venda = tvVenda.getSelectionModel().getSelectedItem().getCodigo();
+		final var venda = tvVenda.getSelectionModel().getSelectedItem();
 		final var negVenda = new NegVendas();
 		try {
-			if (negVenda.excluir(venda)) {
+			if (negVenda.excluir(venda.getCodigo())) {
 				tvVenda.getItems().remove(venda);
 				Alerta.alertaSucesso();
 			}

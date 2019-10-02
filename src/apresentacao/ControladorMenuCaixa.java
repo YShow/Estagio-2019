@@ -53,21 +53,20 @@ public final class ControladorMenuCaixa {
 	    private TableColumn<Caixa, Boolean> tcAtivo;
 
 	    public void abreTelaCaixaMenu() {
-
-			final var stage = new Stage();
-			Parent root;
-			final var loader = new FXMLLoader();
-			stage.initModality(Modality.APPLICATION_MODAL);
-
 			try {
+				final var stage = new Stage();
+
+				final var loader = new FXMLLoader();
+				stage.initModality(Modality.APPLICATION_MODAL);
 				loader.setLocation(getClass().getResource("/apresentacao/Caixa.fxml"));
-				root = loader.load();
+			final Parent root = loader.load();
+
 				stage.setMinHeight(root.minHeight(-1));
 				stage.setMinWidth(root.minWidth(-1));
 				final var scene = new Scene(root);
-				new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+				new JMetro(scene, Main.style);
 				stage.setScene(scene);
-				final var controlador = (ControladorMenuCaixa) loader.getController();
+				final ControladorMenuCaixa controlador = loader.getController();
 
 				if (!Funcionario.getFuncionario().getAdministrador()) {
 

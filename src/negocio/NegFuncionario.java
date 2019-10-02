@@ -56,7 +56,7 @@ public final class NegFuncionario {
 			comando.setString(1, '%' + metodo + '%');
 			final var result = comando.executeQuery();
 
-			final var lista = new ArrayList<Funcionario>();
+			final List<Funcionario> lista = new ArrayList<>();
 
 			while (result.next()) {
 				final var funcionario = new Funcionario();

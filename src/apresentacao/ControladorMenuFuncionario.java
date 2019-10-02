@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 
 import apresentacao.insere.ControladorInserirFuncionario;
-import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -53,16 +52,15 @@ public final class ControladorMenuFuncionario {
 
 	public void abreTelaFuncionarioMenu() {
 
-		final var stage = new Stage();
-		Parent root;
-		final var loader = new FXMLLoader();
 
-		stage.initModality(Modality.APPLICATION_MODAL);
 
 		try {
+			final var stage = new Stage();
+			final var loader = new FXMLLoader();
+			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/Funcionario.fxml"));
-			root = loader.load();
-			final var control = (ControladorMenuFuncionario) loader.getController();
+			final Parent root =  loader.load();
+			final ControladorMenuFuncionario control = loader.getController();
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
@@ -102,11 +100,11 @@ public final class ControladorMenuFuncionario {
 			final List<Funcionario> funcionario = negFuncionario.consultar(txtFuncionario.getText());
 			final var data = FXCollections.observableList(funcionario);
 			tblFuncionario.setItems(data);
-			tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
-			tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));
-			tcFuncao.setCellValueFactory(new PropertyValueFactory("Funcao"));
-			tcUsuario.setCellValueFactory(usuario -> new ReadOnlyStringWrapper(usuario.getValue().getUsuario()));
-			tcAdm.setCellValueFactory(new PropertyValueFactory("Administrador"));
+			tcCodigo.setCellValueFactory(new PropertyValueFactory<Funcionario,Integer>("Codigo"));
+			tcNome.setCellValueFactory(new PropertyValueFactory<Funcionario,String>("Nome"));
+			tcFuncao.setCellValueFactory(new PropertyValueFactory<Funcionario,String>("Funcao"));
+			tcUsuario.setCellValueFactory(new PropertyValueFactory<Funcionario,String>("Usuario"));
+			tcAdm.setCellValueFactory(new PropertyValueFactory<Funcionario,String>("Administrador"));
 
 		} catch (final SQLException e) {
 

@@ -7,30 +7,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="400.0" maxWidth="600.0"
-	minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0"
-	xmlns="http://javafx.com/javafx/11.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="apresentacao.ControladorTelaLogin">
+<AnchorPane maxHeight="465.0" maxWidth="600.0" minHeight="400.0" minWidth="600.0" prefHeight="465.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apresentacao.ControladorTelaLogin">
 	<children>
-		<Label alignment="CENTER" layoutX="226.0" layoutY="108.0"
-			prefHeight="39.0" prefWidth="125.0" text="Usuario" wrapText="true">
+		<Label alignment="CENTER" layoutX="226.0" prefHeight="39.0" prefWidth="125.0" text="Usuario" wrapText="true">
 			<font>
 				<Font name="Arimo" size="34.0" />
 			</font>
 		</Label>
-		<TextField fx:id="txtUsuario" layoutX="122.0"
-			layoutY="147.0" prefHeight="20.0" prefWidth="356.0" />
-		<Label alignment="CENTER" layoutX="226.0" layoutY="181.0"
-			prefHeight="39.0" prefWidth="125.0" text="Senha" wrapText="true">
+		<TextField fx:id="txtUsuario" layoutX="122.0" layoutY="39.0" prefHeight="20.0" prefWidth="356.0" />
+		<Label alignment="CENTER" layoutX="227.0" layoutY="64.0" prefHeight="39.0" prefWidth="125.0" text="Senha" wrapText="true">
 			<font>
 				<Font name="Arimo" size="34.0" />
 			</font>
 		</Label>
-		<PasswordField fx:id="txtSenha" layoutX="122.0"
-			layoutY="220.0" prefHeight="25.0" prefWidth="356.0" />
-		<Button layoutX="250.0" layoutY="276.0" mnemonicParsing="false"
-			onAction="#btnLogin" prefHeight="39.0" prefWidth="100.0"
-			text="Entrar" />
+		<PasswordField fx:id="txtSenha" layoutX="122.0" layoutY="103.0" prefHeight="25.0" prefWidth="356.0" />
+		<Button layoutX="240.0" layoutY="128.0" mnemonicParsing="false" onAction="#btnLogin" prefHeight="39.0" prefWidth="100.0" text="Entrar" />
 	</children>
 </AnchorPane>

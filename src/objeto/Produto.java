@@ -3,11 +3,11 @@ package objeto;
 public final class Produto {
 	private int codigo;
 
-	public Boolean getAtivo() {
+	public boolean getAtivo() {
 		return ativo;
 	}
 
-	public void setAtivo(final Boolean ativo) {
+	public void setAtivo(final boolean ativo) {
 		this.ativo = ativo;
 	}
 
@@ -47,7 +47,7 @@ public final class Produto {
 		return codProduto;
 	}
 
-	private Boolean ativo;
+	private boolean ativo;
 	public static int codProduto;
 	private Double preco;
 	private int quantidade;

@@ -45,21 +45,22 @@ public final class ControladorInserirFuncionario {
 	private static TIPO_TELA tipo_telaa;
 
 	public void abreTelaFuncionarioInsere(final TIPO_TELA tipo_tela, final Funcionario funcionario) {
-		tipo_telaa = tipo_tela;
-		final var stage = new Stage();
-		Parent root;
-		final var loader = new FXMLLoader();
-		stage.initModality(Modality.APPLICATION_MODAL);
+
 
 		try {
+			tipo_telaa = tipo_tela;
+			final var stage = new Stage();
+
+			final var loader = new FXMLLoader();
+			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/insere/FuncionarioInsere.fxml"));
-			root = loader.load();
+			final Parent root =  loader.load();
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
 			stage.setMinHeight(root.minHeight(-1));
 			stage.setMinWidth(root.minWidth(-1));
-			final var controlador = (ControladorInserirFuncionario) loader.getController();
+			final ControladorInserirFuncionario controlador = loader.getController();
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 
 				controlador.btnGravarFuncionario.setText("Alterar");

@@ -102,7 +102,7 @@ public final class NegVendas {
 		try (con; comando;) {
 			comando.setString(1, metodo + '%');
 			final var result = comando.executeQuery();
-			final var lista = new ArrayList<Vendas>();
+			final List<Vendas> lista = new ArrayList<>();
 
 			/*
 			 * "SELECT codigo, cod_cliente, cod_caixa, data_venda," +

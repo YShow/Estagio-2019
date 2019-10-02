@@ -18,6 +18,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
@@ -70,16 +71,17 @@ public final class ControladorMenuCliente {
 	private ControladorMenuCliente controlador;
 
 	public void abreTelaClienteMenu(final TIPO_TELA tipo_tela) {
-		tipo_telaa = tipo_tela;
-		final var stage = new Stage();
-		Parent root;
-		final var loader = new FXMLLoader();
-		stage.initModality(Modality.APPLICATION_MODAL);
+
 
 		try {
+			tipo_telaa = tipo_tela;
+			final var stage = new Stage();
+
+			final var loader = new FXMLLoader();
+			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/Cliente.fxml"));
-			root = loader.load();
-			controlador = (ControladorMenuCliente)loader.getController();
+			final Parent root = loader.load();
+			controlador = loader.getController();
 			stage.setMinHeight(root.minHeight(-1));
 			stage.setMinWidth(root.minWidth(-1));
 			final var scene = new Scene(root);
@@ -101,15 +103,16 @@ public final class ControladorMenuCliente {
 	}
 
 	public Cliente abreTelaClienteMenuAlterar(final TIPO_TELA tipo_tela) {
-		tipo_telaa = tipo_tela;
-		final var stage = new Stage();
-		Parent root;
-		final var loader = new FXMLLoader();
-		stage.initModality(Modality.APPLICATION_MODAL);
+
 
 		try {
+			tipo_telaa = tipo_tela;
+			final var stage = new Stage();
+
+			final var loader = new FXMLLoader();
+			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/Cliente.fxml"));
-			root = loader.load();
+			final Pane root =  loader.load();
 			controlador = loader.getController();
 			stage.setMinHeight(root.minHeight(-1));
 			stage.setMinWidth(root.minWidth(-1));
@@ -152,12 +155,12 @@ public final class ControladorMenuCliente {
 			final List<Cliente> cliente = negCliente.consultar(txtCliente.getText());
 			final var data = FXCollections.observableList(cliente);
 			tvCliente.setItems(data);
-			tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
-			tcAtivo.setCellValueFactory(new PropertyValueFactory("Ativo"));
-			tcCPF.setCellValueFactory(new PropertyValueFactory("CPF"));
-			tcEndereco.setCellValueFactory(new PropertyValueFactory("Endereco"));
-			tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));
-			tcTelefone.setCellValueFactory(new PropertyValueFactory("Telefone"));
+			tcCodigo.setCellValueFactory(new PropertyValueFactory<Cliente,Integer>("Codigo"));
+			tcAtivo.setCellValueFactory(new PropertyValueFactory<Cliente,Boolean>("Ativo"));
+			tcCPF.setCellValueFactory(new PropertyValueFactory<Cliente,String>("CPF"));
+			tcEndereco.setCellValueFactory(new PropertyValueFactory<Cliente,String>("Endereco"));
+			tcNome.setCellValueFactory(new PropertyValueFactory<Cliente,String>("Nome"));
+			tcTelefone.setCellValueFactory(new PropertyValueFactory<Cliente,String>("Telefone"));
 
 			tcCidade.setCellValueFactory(cidade -> new ReadOnlyStringWrapper(cidade.getValue().getCidade().getNome()));
 

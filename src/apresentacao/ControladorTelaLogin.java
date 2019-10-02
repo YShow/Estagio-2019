@@ -10,13 +10,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
 import negocio.NegLogin;
 import objeto.Funcionario;
 import utilidade.Alerta;
+import utilidade.Imagem;
+import utilidade.Imagem.IMAGEM;
 
 public final class ControladorTelaLogin extends Application {
 	@FXML
@@ -26,8 +28,8 @@ public final class ControladorTelaLogin extends Application {
 	private PasswordField txtSenha;
 	private static Stage stage;
 
-	private double xOffset = 0;
-	private double yOffset = 0;
+	private  double xOffset = 0;
+	private  double yOffset = 0;
 
 	@FXML
 	private void btnLogin(final ActionEvent event) {
@@ -66,10 +68,13 @@ public final class ControladorTelaLogin extends Application {
 	private void abreTelaLogin() {
 
 		try {
-			final var root = (AnchorPane) FXMLLoader.load(getClass().getResource("TelaLogin.fxml"));
+			final Pane root = FXMLLoader.load(getClass().getResource("TelaLogin.fxml"));
 
 			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+
+			new JMetro(scene, Main.style);
+			root.setBackground(Imagem.colocaImagemFundo(IMAGEM.FUNDO));
+			stage.getIcons().add(new Image(IMAGEM.FUNDO.getImagem()));
 			stage.setResizable(false);
 			stage.setTitle("Canta Galo");
 			stage.setScene(scene);
@@ -83,10 +88,11 @@ public final class ControladorTelaLogin extends Application {
 
 	private void abreTelaMenuPrincipal() {
 		try {
-			final var root = (BorderPane) FXMLLoader.load(getClass().getResource("MenuPrincipal.fxml"));
-			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+			final Pane root = FXMLLoader.load(getClass().getResource("MenuPrincipal.fxml"));
 
+			final var scene = new Scene(root);
+			new JMetro(scene, Main.style);
+			root.setBackground(Imagem.colocaImagemFundo(IMAGEM.FUNDO));
 			root.setOnMousePressed(event -> {
 				xOffset = event.getSceneX();
 				yOffset = event.getSceneY();

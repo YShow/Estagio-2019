@@ -33,15 +33,14 @@ public final class ControladorInserirCidade {
 
 	public void abreTelaCidadeInsere(final TIPO_TELA tipo_tela, final Cidade cidade) {
 
-		tipo_telaa = tipo_tela;
-		final var stage = new Stage();
-		Parent root;
-		final var loader = new FXMLLoader();
-		stage.initModality(Modality.APPLICATION_MODAL);
-
 		try {
+			tipo_telaa = tipo_tela;
+			final var stage = new Stage();
+
+			final var loader = new FXMLLoader();
+			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/insere/CidadeInsere.fxml"));
-			root = loader.load();
+			 final Parent root = loader.load();
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
@@ -49,7 +48,7 @@ public final class ControladorInserirCidade {
 			stage.setMinWidth(root.minWidth(-1));
 
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
-				final var controlador = (ControladorInserirCidade) loader.getController();
+				final ControladorInserirCidade controlador = loader.getController();
 				controlador.btnGravar.setText("Alterar");
 				controlador.txtCidade.setText(cidade.getNome());
 				controlador.txtEstado.setText(cidade.getEstado());

@@ -50,7 +50,7 @@ public final class NegProduto {
 		try (con; comando;) {
 			comando.setString(1, '%' + metodo + '%');
 			final var result = comando.executeQuery();
-			final var lista = new ArrayList<Produto>();
+			final List<Produto> lista = new ArrayList<>();
 			while (result.next()) {
 				final var produto = new Produto();
 				produto.setAtivo(result.getBoolean("ativo"));

@@ -42,7 +42,7 @@ public final class NegVendaProd {
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
 			final var result = comando.executeQuery();
-			final var lista = new ArrayList<VendaProd>();
+			final List<VendaProd> lista = new ArrayList<>();
 			while (result.next()) {
 				final var vendaProd = new VendaProd();
 				//

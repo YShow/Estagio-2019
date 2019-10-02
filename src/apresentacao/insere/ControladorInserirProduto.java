@@ -40,23 +40,23 @@ public final class ControladorInserirProduto {
 	private static TIPO_TELA tipo_telaa;
 
 	public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela, final Produto produto) {
-		tipo_telaa = tipo_tela;
-		Parent root;
-		final var stage = new Stage();
 
-		final var loader = new FXMLLoader();
-		stage.initModality(Modality.APPLICATION_MODAL);
 
 		try {
+			tipo_telaa = tipo_tela;
+
+			final var stage = new Stage();
+			final var loader = new FXMLLoader();
+			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/insere/ProdutoInsere.fxml"));
-			root = loader.load();
+			final Parent root =  loader.load();
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
 			stage.setMinHeight(root.minHeight(-1));
 			stage.setMinWidth(root.minWidth(-1));
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
-				final var controlador = (ControladorInserirProduto) loader.getController();
+				final ControladorInserirProduto controlador = loader.getController();
 				controlador.btnGravar.setText("Alterar");
 				controlador.txtCodigo.setText(String.valueOf(produto.getCodigo()));
 				controlador.txtNome.setText(produto.getNome());

@@ -53,17 +53,17 @@ public final class ControladorMenuCidade {
 	private static Cidade cidadeVolta;
 
 	public Cidade abreTelaCidadeMenu(final TIPO_TELA tipo_tela) {
-		tipo_telaa = tipo_tela;
-		final var stage = new Stage();
-		Parent root;
-		final var loader = new FXMLLoader();
-
-		stage.initModality(Modality.APPLICATION_MODAL);
 
 		try {
+			tipo_telaa = tipo_tela;
+			final var stage = new Stage();
+
+			final var loader = new FXMLLoader();
+			stage.initModality(Modality.APPLICATION_MODAL);
+
 			loader.setLocation(getClass().getResource("/apresentacao/Cidade.fxml"));
-			root = loader.load();
-			final var controlador = (ControladorMenuCidade) loader.getController();
+			final Parent root = loader.load();
+			final ControladorMenuCidade controlador =  loader.getController();
 			stage.setMinHeight(root.minHeight(-1));
 			stage.setMinWidth(root.minWidth(-1));
 			final var scene = new Scene(root);
@@ -106,9 +106,9 @@ public final class ControladorMenuCidade {
 
 			final var data = FXCollections.observableList(funcionario);
 			tvCidade.setItems(data);
-			tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
-			tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));
-			tcEstado.setCellValueFactory(new PropertyValueFactory("Estado"));
+			tcCodigo.setCellValueFactory(new PropertyValueFactory<Cidade,Integer>("Codigo"));
+			tcNome.setCellValueFactory(new PropertyValueFactory<Cidade,String>("Nome"));
+			tcEstado.setCellValueFactory(new PropertyValueFactory<Cidade,String>("Estado"));
 
 		} catch (final SQLException e) {
 

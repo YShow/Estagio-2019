@@ -33,11 +33,11 @@ public final class Funcionario {
 		this.funcao = funcao;
 	}
 
-	public Boolean getAdministrador() {
+	public boolean getAdministrador() {
 		return administrador;
 	}
 
-	public void setAdministrador(final Boolean administrador) {
+	public void setAdministrador(final boolean administrador) {
 		this.administrador = administrador;
 	}
 
@@ -65,7 +65,7 @@ public final class Funcionario {
 
 	private String usuario;
 	private String funcao;
-	private Boolean administrador;
+	private boolean administrador;
 	private String senha;
 	private boolean ativo;
 

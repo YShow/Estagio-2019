@@ -62,22 +62,21 @@ public final class ControladorInserirVenda {
 	private static TIPO_TELA tipo_telaa;
 
 	public void abreTelaVendaInsere(final TIPO_TELA tipo_tela, final Vendas venda) {
-		tipo_telaa = tipo_tela;
-		Parent root;
-		final var stage = new Stage();
-
-		final var loader = new FXMLLoader();
-		stage.initModality(Modality.APPLICATION_MODAL);
 
 		try {
+			tipo_telaa = tipo_tela;
+			final var stage = new Stage();
+			final var loader = new FXMLLoader();
+			stage.initModality(Modality.APPLICATION_MODAL);
+
 			loader.setLocation(getClass().getResource("/apresentacao/insere/VendaInsere.fxml"));
-			root = loader.load();
+			final Parent root = loader.load();
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
 			stage.setMinHeight(root.minHeight(-1));
 			stage.setMinWidth(root.minWidth(-1));
-			final var controlador = (ControladorInserirVenda) loader.getController();
+			final ControladorInserirVenda controlador = loader.getController();
 
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 
@@ -137,7 +136,7 @@ public final class ControladorInserirVenda {
 						final var qtd = Integer.valueOf(change.getControlNewText());
 						final var preco = Double.valueOf(controlador.txtPrecoUnitario.getText());
 						final var total = qtd * preco;
-						final var valor = new BigDecimal(total).setScale(2, RoundingMode.HALF_EVEN);
+						final var valor = BigDecimal.valueOf(total).setScale(2, RoundingMode.HALF_EVEN);
 						controlador.txtPrecoTotal.setText(valor.toString());
 					}
 					return change;

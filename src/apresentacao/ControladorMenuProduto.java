@@ -60,21 +60,21 @@ public final class ControladorMenuProduto {
 	private static Produto produtoAlterar;
 
 	public void abreTelaProdutoMenu(final TIPO_TELA tipo_tela) {
-		tipo_telaa = tipo_tela;
-		final var stage = new Stage();
-		Parent root;
-		final var loader = new FXMLLoader();
-		stage.initModality(Modality.APPLICATION_MODAL);
+
 
 		try {
+			tipo_telaa = tipo_tela;
+			final var stage = new Stage();
+			final var loader = new FXMLLoader();
+			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/Produto.fxml"));
-			root = loader.load();
+			final Parent root = loader.load();
 			stage.setMinHeight(root.minHeight(-1));
 			stage.setMinWidth(root.minWidth(-1));
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
-			final var controlador = (ControladorMenuProduto) loader.getController();
+			final ControladorMenuProduto controlador = loader.getController();
 
 			if (!Funcionario.getFuncionario().getAdministrador()) {
 
@@ -87,21 +87,21 @@ public final class ControladorMenuProduto {
 	}
 
 	public Produto abreTelaProdutoMenuAlterar(final TIPO_TELA tipo_tela) {
-		tipo_telaa = tipo_tela;
-		final var stage = new Stage();
-		Parent root;
-		final var loader = new FXMLLoader();
-		stage.initModality(Modality.APPLICATION_MODAL);
+
 
 		try {
+			tipo_telaa = tipo_tela;
+			final var stage = new Stage();
+			final var loader = new FXMLLoader();
+			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/Produto.fxml"));
-			root = loader.load();
+			final Parent root = loader.load();
 			stage.setMinHeight(root.minHeight(-1));
 			stage.setMinWidth(root.minWidth(-1));
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
-			final var controlador = (ControladorMenuProduto) loader.getController();
+			final ControladorMenuProduto controlador = loader.getController();
 			if (tipo_tela.equals(TIPO_TELA.CONSULTA)) {
 
 				controlador.btnInsereProduto.setDisable(true);
@@ -136,11 +136,11 @@ public final class ControladorMenuProduto {
 			final List<Produto> funcionario = negProduto.consultar(txtProduto.getText());
 			final var data = FXCollections.observableList(funcionario);
 			tvProduto.setItems(data);
-			tcCodigo.setCellValueFactory(new PropertyValueFactory("Codigo"));
-			tcNome.setCellValueFactory(new PropertyValueFactory("Nome"));
-			tcPreco.setCellValueFactory(new PropertyValueFactory("Preco"));
-			tcQuantidade.setCellValueFactory(new PropertyValueFactory("Quantidade"));
-			tcAtivo.setCellValueFactory(new PropertyValueFactory("Ativo"));
+			tcCodigo.setCellValueFactory(new PropertyValueFactory<Produto,Integer>("Codigo"));
+			tcNome.setCellValueFactory(new PropertyValueFactory<Produto,String>("Nome"));
+			tcPreco.setCellValueFactory(new PropertyValueFactory<Produto,Double>("Preco"));
+			tcQuantidade.setCellValueFactory(new PropertyValueFactory<Produto,Integer>("Quantidade"));
+			tcAtivo.setCellValueFactory(new PropertyValueFactory<Produto,Boolean>("Ativo"));
 
 		} catch (final SQLException e) {
 

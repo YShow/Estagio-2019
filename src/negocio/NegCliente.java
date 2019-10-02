@@ -57,7 +57,7 @@ public final class NegCliente {
 		try (con; comando;) {
 
 			comando.setString(1, metodo + '%');
-			final var lista = new ArrayList<Cliente>();
+			final List<Cliente> lista = new ArrayList<>();
 			final var result = comando.executeQuery();
 
 			while (result.next()) {

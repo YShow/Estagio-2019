@@ -35,11 +35,11 @@ public final class Cliente {
 		this.telefone = telefone;
 	}
 
-	public Boolean getAtivo() {
+	public boolean getAtivo() {
 		return ativo;
 	}
 
-	public void setAtivo(final Boolean ativo) {
+	public void setAtivo(final boolean ativo) {
 		this.ativo = ativo;
 	}
 
@@ -64,7 +64,7 @@ public final class Cliente {
 	private String cpf;
 	private String endereco;
 	private String telefone;
-	private Boolean ativo;
+	private boolean ativo;
 	private Cidade cidade;
 
 }
