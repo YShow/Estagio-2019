@@ -1,0 +1,6 @@
+jlink --no-header-files --no-man-pages --compress=2 --strip-debug --add-modules java.base,java.desktop,java.sql,jdk.jfr,java.scripting,java.xml,jdk.unsupported --output /home/md-brasil-yasser/eclipse-workspace/Estagio-2019/target/teste
+
+
+
+
+../../../opt/jdk-13/bin/jdeps --module-path ./libs/:/home/md-brasil-yasser/opt/jdk-13/lib/ --add-modules=javafx.controls,javafx.base --ignore-missing-deps --multi-release=13 --list-deps teste-0.0.1-SNAPSHOT.jar libs/*
