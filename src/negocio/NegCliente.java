@@ -20,7 +20,7 @@ public final class NegCliente {
 			+ "WHERE c.nome like ?";
 	private static final String SQL_UPDATE = "update cliente set nome = ?, CPF = ?, endereco = ?,"
 			+ "telefone = ?, ativo = ?, id_cidade = ? where codigo = ?;";
-	private static final String SQL_DELETE = "DELETE FROM cantagalo.cliente\n" + "WHERE codigo=?;";
+	private static final String SQL_DELETE = "DELETE FROM cantagalo.cliente\n" + " WHERE codigo=?;";
 
 	public final boolean inserir(final Cliente cliente) throws SQLException {
 		final var comeco = Instant.now();

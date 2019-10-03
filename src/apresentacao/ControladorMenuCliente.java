@@ -88,7 +88,7 @@ public final class ControladorMenuCliente {
 			stage.setScene(scene);
 			if (!Funcionario.getFuncionario().getAdministrador()) {
 
-				btnDesativarCliente.setDisable(true);
+				controlador.btnDesativarCliente.setDisable(true);
 			}
 			stage.show();
 			stage.setOnCloseRequest(e -> {

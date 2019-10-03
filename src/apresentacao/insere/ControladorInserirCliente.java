@@ -104,7 +104,11 @@ public final class ControladorInserirCliente {
 			cliente.setCidade(cidade);
 
 			try {
-				negCliente.inserir(cliente);
+				if(negCliente.inserir(cliente))
+				{
+					Alerta.alertaSucesso();
+					btnGrava.getScene().getWindow().hide();
+				}
 			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
 			}
@@ -119,7 +123,12 @@ public final class ControladorInserirCliente {
 			cliente.setCidade(cidade);
 
 			try {
-				negCliente.alterar(cliente);
+				if(negCliente.alterar(cliente))
+				{
+					Alerta.alertaSucesso();
+					btnGrava.getScene().getWindow().hide();
+				}
+
 			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
 			}

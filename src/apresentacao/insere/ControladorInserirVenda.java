@@ -184,9 +184,17 @@ public final class ControladorInserirVenda {
 
 		try {
 			if (tipo_telaa.equals(TIPO_TELA.INSERE)) {
-				negVenda.inserir(venda);
+				if(negVenda.inserir(venda))
+				{
+					Alerta.alertaSucesso();
+					btnGravar.getScene().getWindow().hide();
+				}
 			} else {
-				negVenda.alterar(venda);
+				if(negVenda.alterar(venda))
+				{
+					Alerta.alertaSucesso();
+					btnGravar.getScene().getWindow().hide();
+				}
 			}
 		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());

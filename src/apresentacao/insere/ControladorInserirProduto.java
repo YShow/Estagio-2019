@@ -83,7 +83,11 @@ public final class ControladorInserirProduto {
 			produto.setPreco(Double.valueOf(txtPreco.getText()));
 			produto.setQuantidade(Integer.valueOf(txtQuantidade.getText()));
 			try {
-				negProduto.inserir(produto);
+				if(negProduto.inserir(produto))
+				{
+					Alerta.alertaSucesso();
+					btnGravar.getScene().getWindow().hide();
+				}
 			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
 			}
@@ -95,7 +99,11 @@ public final class ControladorInserirProduto {
 			produto.setQuantidade(Integer.valueOf(txtQuantidade.getText()));
 
 			try {
-				negProduto.alterar(produto);
+				if(negProduto.alterar(produto))
+				{
+					Alerta.alertaSucesso();
+					btnGravar.getScene().getWindow().hide();
+				}
 			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
 			}

@@ -93,7 +93,11 @@ public final class ControladorInserirFuncionario {
 			funcionario.setUsuario(txtUsuario.getText().trim());
 			funcionario.setAtivo(chkAtivo.isSelected());
 			try {
-				negFun.inserir(funcionario);
+				if(negFun.inserir(funcionario))
+				{
+					Alerta.alertaSucesso();
+					btnGravarFuncionario.getScene().getWindow().hide();
+				}
 
 			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
@@ -111,7 +115,11 @@ public final class ControladorInserirFuncionario {
 				funcionario.setSenha(txtSenhaFuncionario.getText());
 			}
 			try {
-				negFun.alterar(funcionario);
+				if(negFun.alterar(funcionario))
+				{
+					Alerta.alertaSucesso();
+					btnGravarFuncionario.getScene().getWindow();
+				}
 
 			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());

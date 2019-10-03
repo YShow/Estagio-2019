@@ -79,6 +79,7 @@ public final class ControladorInserirCidade {
 
 				if (negcidade.inserir(cidade)) {
 					Alerta.alertaSucesso();
+					btnGravar.getScene().getWindow().hide();
 				}
 
 			} catch (final SQLException e) {
@@ -90,7 +91,11 @@ public final class ControladorInserirCidade {
 			cidade.setNome(txtCidade.getText().trim());
 
 			try {
-				negcidade.alterar(cidade);
+				if(negcidade.alterar(cidade))
+				{
+					Alerta.alertaSucesso();
+					btnGravar.getScene().getWindow().hide();
+				}
 			} catch (final SQLException e) {
 				Alerta.alertaErro(e.getMessage());
 			}
