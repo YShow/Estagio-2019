@@ -11,10 +11,6 @@ public class Main extends Application {
 
 	@Override
 	public void start(final Stage primaryStage) {
-		// isto é um teste para como esconder uma tela e abrir outra sem fexar o
-		// programa
-		// TODO
-		// Platform.setImplicitExit(false);
 
 		try {
 			final var login = new ControladorTelaLogin();

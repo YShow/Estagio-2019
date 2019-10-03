@@ -87,7 +87,6 @@ public final class ControladorMenuCliente {
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
 			if (!Funcionario.getFuncionario().getAdministrador()) {
-
 				controlador.btnDesativarCliente.setDisable(true);
 			}
 			stage.show();
