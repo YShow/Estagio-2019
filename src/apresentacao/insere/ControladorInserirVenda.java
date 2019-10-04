@@ -167,9 +167,9 @@ public final class ControladorInserirVenda {
 		caixa.setCliente(Integer.parseInt(txtCliente.getText().trim()));
 		caixa.setData(LocalDate.now());
 
-		final var precototal = BigDecimal.valueOf(Double.parseDouble(txtPrecoTotal.getText().trim()));
+		final var precototal = BigDecimal.valueOf(Double.parseDouble(txtPrecoTotal.getText().trim())).doubleValue();
 
-		caixa.setPrecototal(precototal.doubleValue());
+		caixa.setPrecototal(precototal);
 		caixa.setSaida(Double.parseDouble(txtSaida.getText().trim()));
 
 		venda.setAtivo(true);
