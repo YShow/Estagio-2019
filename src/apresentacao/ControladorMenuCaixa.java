@@ -60,8 +60,6 @@ public final class ControladorMenuCaixa {
 			loader.setLocation(getClass().getResource("/apresentacao/Caixa.fxml"));
 			final Parent root = loader.load();
 
-			stage.setMinHeight(root.minHeight(-1));
-			stage.setMinWidth(root.minWidth(-1));
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style);
 			stage.setScene(scene);

@@ -81,8 +81,7 @@ public final class ControladorMenuCliente {
 			loader.setLocation(getClass().getResource("/apresentacao/Cliente.fxml"));
 			final Parent root = loader.load();
 			controlador = loader.getController();
-			stage.setMinHeight(root.minHeight(-1));
-			stage.setMinWidth(root.minWidth(-1));
+
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
@@ -111,8 +110,7 @@ public final class ControladorMenuCliente {
 			loader.setLocation(getClass().getResource("/apresentacao/Cliente.fxml"));
 			final Pane root = loader.load();
 			controlador = loader.getController();
-			stage.setMinHeight(root.minHeight(-1));
-			stage.setMinWidth(root.minWidth(-1));
+
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
@@ -148,7 +146,7 @@ public final class ControladorMenuCliente {
 		limpaTabela();
 		final var negCliente = new NegCliente();
 		try {
-			final List<Cliente> cliente = negCliente.consultar(txtCliente.getText());
+			final List<Cliente> cliente = negCliente.consultar(txtCliente.getText().trim());
 			final var data = FXCollections.observableList(cliente);
 			tvCliente.setItems(data);
 			tcCodigo.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("Codigo"));

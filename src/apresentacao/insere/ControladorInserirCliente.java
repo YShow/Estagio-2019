@@ -59,8 +59,7 @@ public final class ControladorInserirCliente {
 			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/insere/ClienteInsere.fxml"));
 			final Parent root = loader.load();
-			stage.setMinHeight(root.minHeight(-1));
-			stage.setMinWidth(root.minWidth(-1));
+
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
@@ -96,11 +95,11 @@ public final class ControladorInserirCliente {
 			cliente.setAtivo(chkAtivo.isSelected());
 
 			// INSERCAO DE CODIGO CIDADE APENAS
-			cidade.setCodigo(Integer.valueOf(txtCodCidade.getText()));
-			cliente.setNome(txtNome.getText());
-			cliente.setEndereco(txtEndereco.getText());
-			cliente.setTelefone(txtTelefone.getText());
-			cliente.setCPF(txtCPF.getText());
+			cidade.setCodigo(Integer.parseInt(txtCodCidade.getText().trim()));
+			cliente.setNome(txtNome.getText().trim());
+			cliente.setEndereco(txtEndereco.getText().trim());
+			cliente.setTelefone(txtTelefone.getText().trim());
+			cliente.setCPF(txtCPF.getText().trim());
 			cliente.setCidade(cidade);
 
 			try {
@@ -114,12 +113,12 @@ public final class ControladorInserirCliente {
 			}
 		} else {
 			cliente.setAtivo(chkAtivo.isSelected());
-			cliente.setCodigo(Integer.valueOf(txtCodigo.getText()));
-			cliente.setCPF(txtCPF.getText());
-			cliente.setEndereco(txtEndereco.getText());
-			cliente.setNome(txtNome.getText());
-			cliente.setTelefone(txtTelefone.getText());
-			cidade.setCodigo(Integer.valueOf(txtCodCidade.getText()));
+			cliente.setCodigo(Integer.parseInt(txtCodigo.getText().trim()));
+			cliente.setCPF(txtCPF.getText().trim());
+			cliente.setEndereco(txtEndereco.getText().trim());
+			cliente.setNome(txtNome.getText().trim());
+			cliente.setTelefone(txtTelefone.getText().trim());
+			cidade.setCodigo(Integer.parseInt(txtCodCidade.getText().trim()));
 			cliente.setCidade(cidade);
 
 			try {

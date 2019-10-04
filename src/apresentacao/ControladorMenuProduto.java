@@ -68,8 +68,6 @@ public final class ControladorMenuProduto {
 			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/Produto.fxml"));
 			final Parent root = loader.load();
-			stage.setMinHeight(root.minHeight(-1));
-			stage.setMinWidth(root.minWidth(-1));
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
@@ -94,8 +92,7 @@ public final class ControladorMenuProduto {
 			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/Produto.fxml"));
 			final Parent root = loader.load();
-			stage.setMinHeight(root.minHeight(-1));
-			stage.setMinWidth(root.minWidth(-1));
+
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
@@ -131,7 +128,7 @@ public final class ControladorMenuProduto {
 	private void btnConsultaProduto(final ActionEvent event) {
 		final var negProduto = new NegProduto();
 		try {
-			final List<Produto> funcionario = negProduto.consultar(txtProduto.getText());
+			final List<Produto> funcionario = negProduto.consultar(txtProduto.getText().trim());
 			final var data = FXCollections.observableList(funcionario);
 			tvProduto.setItems(data);
 			tcCodigo.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("Codigo"));

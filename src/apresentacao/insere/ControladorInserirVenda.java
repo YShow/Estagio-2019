@@ -74,8 +74,7 @@ public final class ControladorInserirVenda {
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
-			stage.setMinHeight(root.minHeight(-1));
-			stage.setMinWidth(root.minWidth(-1));
+
 			final ControladorInserirVenda controlador = loader.getController();
 
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
@@ -123,8 +122,8 @@ public final class ControladorInserirVenda {
 		controlador.txtQtd.setTextFormatter(new TextFormatter<String>(change -> {
 			if (!change.getText().isBlank()) {
 				final var too = new Tooltip();
-				if (Integer.valueOf(change.getControlNewText()) > Integer
-						.valueOf(controlador.txtQtdEstoque.getText())) {
+				if (Integer.parseInt(change.getControlNewText()) > Integer
+						.parseInt(controlador.txtQtdEstoque.getText())) {
 					too.setText("Quantidade maior do que em estoque");
 					too.setShowDuration(Duration.seconds(3));
 					change.getControl().setTooltip(too);
@@ -133,8 +132,8 @@ public final class ControladorInserirVenda {
 					return null;
 				} else {
 					if (!change.getControlNewText().isBlank()) {
-						final var qtd = Integer.valueOf(change.getControlNewText());
-						final var preco = Double.valueOf(controlador.txtPrecoUnitario.getText());
+						final var qtd = Integer.parseInt(change.getControlNewText());
+						final var preco = Double.parseDouble(controlador.txtPrecoUnitario.getText());
 						final var total = qtd * preco;
 						final var valor = BigDecimal.valueOf(total).setScale(2, RoundingMode.HALF_EVEN);
 						controlador.txtPrecoTotal.setText(valor.toString());
@@ -156,28 +155,28 @@ public final class ControladorInserirVenda {
 		final var caixa = new Caixa();
 
 		// PEGA CODIGO DO CLIENTE
-		cliente.setCodigo(Integer.valueOf(txtCliente.getText()));
+		cliente.setCodigo(Integer.parseInt(txtCliente.getText().trim()));
 
 		// PEGA PRODUTO
-		produto.setCodigo(Integer.valueOf(txtProduto.getText()));
-		produto.setPreco(Double.valueOf(txtPrecoUnitario.getText()));
-		produto.setQuantidade(Integer.valueOf(txtQtd.getText()));
+		produto.setCodigo(Integer.parseInt(txtProduto.getText().trim()));
+		produto.setPreco(Double.parseDouble(txtPrecoUnitario.getText().trim()));
+		produto.setQuantidade(Integer.parseInt(txtQtd.getText().trim()));
 
 		// PEGA CAIXA
 		caixa.setAtivo(true);
-		caixa.setCliente(Integer.valueOf(txtCliente.getText()));
+		caixa.setCliente(Integer.parseInt(txtCliente.getText().trim()));
 		caixa.setData(LocalDate.now());
 
-		final var precototal = new BigDecimal(Double.valueOf(txtPrecoTotal.getText()));
+		final var precototal = BigDecimal.valueOf(Double.parseDouble(txtPrecoTotal.getText().trim()));
 
 		caixa.setPrecototal(precototal.doubleValue());
-		caixa.setSaida(Double.valueOf(txtSaida.getText()));
+		caixa.setSaida(Double.parseDouble(txtSaida.getText().trim()));
 
 		venda.setAtivo(true);
 		venda.setData(LocalDate.now());
 
 		venda.setCliente(cliente);
-		venda.setFormaPagamento(txtFormaPagamento.getText());
+		venda.setFormaPagamento(txtFormaPagamento.getText().trim());
 
 		venda.setProduto(produto);
 		venda.setCaixa(caixa);

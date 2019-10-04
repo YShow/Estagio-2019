@@ -33,12 +33,12 @@ public final class ControladorTelaLogin extends Application {
 
 	@FXML
 	private void btnLogin(final ActionEvent event) {
-		if (txtUsuario.getText().isBlank() && txtSenha.getText().isBlank()) {
+		if (txtUsuario.getText().trim().isBlank() && txtSenha.getText().trim().isBlank()) {
 			Alerta.alertaCampoNulo();
 		} else {
 			final var funcionario = new Funcionario();
-			funcionario.setUsuario(txtUsuario.getText());
-			funcionario.setSenha(txtSenha.getText());
+			funcionario.setUsuario(txtUsuario.getText().trim());
+			funcionario.setSenha(txtSenha.getText().trim());
 			final var login = new NegLogin();
 			try {
 				if (login.verificaLogin(funcionario)) {

@@ -3,7 +3,7 @@ package objeto;
 public final class VendaProd {
 	private Produto produto;
 	private Vendas vendas;
-	private Double precoUnitario;
+	private double precoUnitario;
 	private int quantidade;
 
 	public Produto getProduto() {
@@ -22,11 +22,11 @@ public final class VendaProd {
 		this.vendas = vendas;
 	}
 
-	public Double getPrecoUnitario() {
+	public double getPrecoUnitario() {
 		return precoUnitario;
 	}
 
-	public void setPrecoUnitario(final Double precoUnitario) {
+	public void setPrecoUnitario(final double precoUnitario) {
 		this.precoUnitario = precoUnitario;
 	}
 

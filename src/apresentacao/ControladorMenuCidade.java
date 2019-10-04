@@ -64,8 +64,6 @@ public final class ControladorMenuCidade {
 			loader.setLocation(getClass().getResource("/apresentacao/Cidade.fxml"));
 			final Parent root = loader.load();
 			final ControladorMenuCidade controlador = loader.getController();
-			stage.setMinHeight(root.minHeight(-1));
-			stage.setMinWidth(root.minWidth(-1));
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
@@ -101,7 +99,7 @@ public final class ControladorMenuCidade {
 	private void btnConsultaCidade(final ActionEvent event) {
 		final var negCidade = new NegCidade();
 		try {
-			final List<Cidade> funcionario = negCidade.consultar(txtConsullaCidade.getText());
+			final List<Cidade> funcionario = negCidade.consultar(txtConsullaCidade.getText().trim());
 
 			final var data = FXCollections.observableList(funcionario);
 			tvCidade.setItems(data);

@@ -12,19 +12,19 @@ public final class Caixa {
 
 	}
 
-	public Double getPrecototal() {
+	public double getPrecototal() {
 		return precototal;
 	}
 
-	public void setPrecototal(final Double precototal) {
+	public void setPrecototal(final double precototal) {
 		this.precototal = precototal;
 	}
 
-	public Double getSaida() {
+	public double getSaida() {
 		return saida;
 	}
 
-	public void setSaida(final Double saida) {
+	public void setSaida(final double saida) {
 		this.saida = saida;
 	}
 
@@ -42,8 +42,8 @@ public final class Caixa {
 
 	private int codigo;
 	private LocalDate data;
-	private Double precototal;
-	private Double saida;
+	private double precototal;
+	private double saida;
 	private int cliente;
 
 	public boolean isAtivo() {

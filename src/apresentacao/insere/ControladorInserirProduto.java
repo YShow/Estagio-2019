@@ -52,8 +52,7 @@ public final class ControladorInserirProduto {
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
-			stage.setMinHeight(root.minHeight(-1));
-			stage.setMinWidth(root.minWidth(-1));
+
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 				final ControladorInserirProduto controlador = loader.getController();
 				controlador.btnGravar.setText("Alterar");
@@ -79,9 +78,9 @@ public final class ControladorInserirProduto {
 		final var produto = new Produto();
 		if (tipo_telaa == TIPO_TELA.INSERE) {
 			produto.setAtivo(chkAtivo.isSelected());
-			produto.setNome(txtNome.getText());
-			produto.setPreco(Double.valueOf(txtPreco.getText()));
-			produto.setQuantidade(Integer.valueOf(txtQuantidade.getText()));
+			produto.setNome(txtNome.getText().trim());
+			produto.setPreco(Double.parseDouble(txtPreco.getText().trim()));
+			produto.setQuantidade(Integer.parseInt(txtQuantidade.getText().trim()));
 			try {
 				if(negProduto.inserir(produto))
 				{
@@ -93,10 +92,10 @@ public final class ControladorInserirProduto {
 			}
 		} else {
 			produto.setAtivo(chkAtivo.isSelected());
-			produto.setCodigo(Integer.valueOf(txtCodigo.getText()));
-			produto.setNome(txtNome.getText());
-			produto.setPreco(Double.valueOf(txtPreco.getText()));
-			produto.setQuantidade(Integer.valueOf(txtQuantidade.getText()));
+			produto.setCodigo(Integer.parseInt(txtCodigo.getText().trim()));
+			produto.setNome(txtNome.getText().trim());
+			produto.setPreco(Double.parseDouble(txtPreco.getText().trim()));
+			produto.setQuantidade(Integer.parseInt(txtQuantidade.getText().trim()));
 
 			try {
 				if(negProduto.alterar(produto))

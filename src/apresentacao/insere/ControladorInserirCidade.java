@@ -44,8 +44,7 @@ public final class ControladorInserirCidade {
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
-			stage.setMinHeight(root.minHeight(-1));
-			stage.setMinWidth(root.minWidth(-1));
+
 
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 				final ControladorInserirCidade controlador = loader.getController();

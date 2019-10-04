@@ -57,8 +57,7 @@ public final class ControladorInserirFuncionario {
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
-			stage.setMinHeight(root.minHeight(-1));
-			stage.setMinWidth(root.minWidth(-1));
+
 			final ControladorInserirFuncionario controlador = loader.getController();
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 
@@ -103,17 +102,15 @@ public final class ControladorInserirFuncionario {
 				Alerta.alertaErro(e.getMessage());
 			}
 		} else {
-			funcionario.setCodigo(Integer.valueOf(txtCodigo.getText()));
+			funcionario.setCodigo(Integer.parseInt(txtCodigo.getText().trim()));
 			funcionario.setAdministrador(chkAdm.isSelected());
 			funcionario.setFuncao(txtFuncao.getText().trim());
 			funcionario.setNome(txtNomeFuncionario.getText().trim());
 			funcionario.setUsuario(txtUsuario.getText().trim());
 			funcionario.setAtivo(chkAtivo.isSelected());
-			if (txtSenhaFuncionario.getText().strip().isBlank()) {
-				funcionario.setSenha("");
-			} else {
-				funcionario.setSenha(txtSenhaFuncionario.getText());
-			}
+
+				funcionario.setSenha(txtSenhaFuncionario.getText().strip().trim());
+
 			try {
 				if(negFun.alterar(funcionario))
 				{

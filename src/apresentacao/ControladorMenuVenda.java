@@ -88,7 +88,7 @@ public final class ControladorMenuVenda {
 	private void btnConsultaVenda(final ActionEvent event) {
 		final var negVenda = new NegVendas();
 		try {
-			final List<Vendas> venda = negVenda.consultar(txtVenda.getText());
+			final List<Vendas> venda = negVenda.consultar(txtVenda.getText().trim());
 
 			final var data = FXCollections.observableList(venda);
 			tvVenda.setItems(data);

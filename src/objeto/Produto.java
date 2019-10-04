@@ -11,11 +11,11 @@ public final class Produto {
 		this.ativo = ativo;
 	}
 
-	public Double getPreco() {
+	public double getPreco() {
 		return preco;
 	}
 
-	public void setPreco(final Double preco) {
+	public void setPreco(final double preco) {
 		this.preco = preco;
 	}
 
@@ -49,7 +49,7 @@ public final class Produto {
 
 	private boolean ativo;
 	public static int codProduto;
-	private Double preco;
+	private double preco;
 	private int quantidade;
 	private String nome;
 }

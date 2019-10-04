@@ -94,7 +94,7 @@ public final class ControladorMenuFuncionario {
 		limpaTabela();
 		final var negFuncionario = new NegFuncionario();
 		try {
-			final List<Funcionario> funcionario = negFuncionario.consultar(txtFuncionario.getText());
+			final List<Funcionario> funcionario = negFuncionario.consultar(txtFuncionario.getText().trim());
 			final var data = FXCollections.observableList(funcionario);
 			tblFuncionario.setItems(data);
 			tcCodigo.setCellValueFactory(new PropertyValueFactory<Funcionario, Integer>("Codigo"));
