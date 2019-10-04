@@ -49,11 +49,12 @@ public final class NegCliente {
 
 		final var con = conexao.getConexao();
 
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-		con.setReadOnly(true);
+
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			con.setReadOnly(true);
 
 			comando.setString(1, metodo + '%');
 			final List<Cliente> lista = new ArrayList<>();

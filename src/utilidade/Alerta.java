@@ -10,7 +10,7 @@ import jfxtras.styles.jmetro.JMetro;
 public final class Alerta {
 
 	public static void alertaSucesso() {
-		final Alert alerta = new Alert(Alert.AlertType.NONE);
+		final Alert alerta = new Alert(Alert.AlertType.INFORMATION);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
@@ -23,7 +23,7 @@ public final class Alerta {
 	}
 
 	public static void alertaErro(final String erro) {
-		final Alert alerta = new Alert(Alert.AlertType.NONE);
+		final Alert alerta = new Alert(Alert.AlertType.ERROR);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
@@ -39,8 +39,8 @@ public final class Alerta {
 	}
 
 	public static void alertaCampoNulo() {
-		final Alert alerta = new Alert(Alert.AlertType.NONE);
-		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
+		final Alert alerta = new Alert(Alert.AlertType.WARNING);
+		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
 		alerta.setHeaderText("Verifique os campos");
@@ -52,8 +52,8 @@ public final class Alerta {
 	}
 
 	public static void alertaCidadeEmUso() {
-		final Alert alerta = new Alert(Alert.AlertType.NONE);
-		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
+		final Alert alerta = new Alert(Alert.AlertType.WARNING);
+		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
 		alerta.setAlertType(AlertType.WARNING);
@@ -66,7 +66,7 @@ public final class Alerta {
 	}
 
 	public static void alertaClienteEmCaixa() {
-		final Alert alerta = new Alert(Alert.AlertType.NONE);
+		final Alert alerta = new Alert(Alert.AlertType.WARNING);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
