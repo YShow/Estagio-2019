@@ -52,6 +52,7 @@ public final class ControladorMenuCidade {
 	private final ControladorInserirCidade tela = new ControladorInserirCidade();
 	private static Cidade cidadeVolta;
 
+
 	public Cidade abreTelaCidadeMenu(final TIPO_TELA tipo_tela) {
 
 		try {
@@ -97,8 +98,9 @@ public final class ControladorMenuCidade {
 
 	@FXML
 	private void btnConsultaCidade(final ActionEvent event) {
-		final var negCidade = new NegCidade();
+
 		try {
+			final var negCidade = new NegCidade();
 			final List<Cidade> funcionario = negCidade.consultar(txtConsullaCidade.getText().trim());
 
 			final var data = FXCollections.observableList(funcionario);
@@ -122,8 +124,9 @@ public final class ControladorMenuCidade {
 			btnDesativar.getScene().getWindow().hide();
 
 		} else {
-			final var negCidade = new NegCidade();
+
 			try {
+				final var negCidade = new NegCidade();
 				if (negCidade.excluir(cidade.getCodigo())) {
 					tvCidade.getItems().remove(cidade);
 					Alerta.alertaSucesso();

@@ -70,6 +70,7 @@ public final class ControladorMenuCliente {
 	private static Cliente clienteAlterar;
 	private ControladorMenuCliente controlador;
 
+
 	public void abreTelaClienteMenu(final TIPO_TELA tipo_tela) {
 
 		try {
@@ -143,9 +144,9 @@ public final class ControladorMenuCliente {
 
 	@FXML
 	private void btnConsultaCliente(final ActionEvent event) {
-		limpaTabela();
-		final var negCliente = new NegCliente();
 		try {
+			limpaTabela();
+			 final var negCliente = new NegCliente();
 			final List<Cliente> cliente = negCliente.consultar(txtCliente.getText().trim());
 			final var data = FXCollections.observableList(cliente);
 			tvCliente.setItems(data);
@@ -168,7 +169,7 @@ public final class ControladorMenuCliente {
 	}
 
 	@FXML
-	void btnDesativarCliente(final ActionEvent event) {
+	private void btnDesativarCliente(final ActionEvent event) {
 		final var cliente = tvCliente.getSelectionModel().getSelectedItem();
 
 		if (tipo_telaa.equals(TIPO_TELA.CONSULTA)) {
@@ -190,7 +191,7 @@ public final class ControladorMenuCliente {
 	}
 
 	@FXML
-	void btnInsereCliente(final ActionEvent event) {
+	private void btnInsereCliente(final ActionEvent event) {
 		tela.abreTelaClienteInsere(TIPO_TELA.INSERE, null);
 	}
 

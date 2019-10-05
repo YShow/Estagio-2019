@@ -61,6 +61,7 @@ public final class ControladorInserirVenda {
 	private CheckBox chkAtivo;
 	private static TIPO_TELA tipo_telaa;
 
+
 	public void abreTelaVendaInsere(final TIPO_TELA tipo_tela, final Vendas venda) {
 
 		try {
@@ -146,9 +147,7 @@ public final class ControladorInserirVenda {
 		}));
 	}
 
-	@FXML
-	private void btnGravar(final ActionEvent event) {
-		final var negVenda = new NegVendas();
+	private Vendas preencheVenda(){
 		final var venda = new Vendas();
 		final var cliente = new Cliente();
 		final var produto = new Produto();
@@ -181,6 +180,14 @@ public final class ControladorInserirVenda {
 		venda.setProduto(produto);
 		venda.setCaixa(caixa);
 
+		return venda;
+	}
+
+	@FXML
+	private void btnGravar(final ActionEvent event) {
+
+		final var venda = preencheVenda();
+		final var negVenda = new NegVendas();
 		try {
 			if (tipo_telaa.equals(TIPO_TELA.INSERE)) {
 				if(negVenda.inserir(venda))
@@ -201,10 +208,10 @@ public final class ControladorInserirVenda {
 	}
 
 	private void preencheCampos(final ControladorInserirVenda controlador, final int idVenda) {
-		final var negVenda = new NegVendas();
-		try {
-			final var venda = negVenda.pegaVendaAlterar(idVenda);
 
+		try {
+			final var negVenda = new NegVendas();
+			final var venda = negVenda.pegaVendaAlterar(idVenda);
 			controlador.txtFormaPagamento.setText(venda.getFormaPagamento());
 			controlador.txtPrecoTotal.setText(String.valueOf(venda.getCaixa().getPrecototal()));
 			controlador.txtPrecoUnitario.setText(String.valueOf(venda.getProduto().getPreco()));

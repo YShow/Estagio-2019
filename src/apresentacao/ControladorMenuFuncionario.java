@@ -91,9 +91,9 @@ public final class ControladorMenuFuncionario {
 
 	@FXML
 	private void btnConsultaFuncionario(final ActionEvent event) {
-		limpaTabela();
-		final var negFuncionario = new NegFuncionario();
 		try {
+			final var negFuncionario = new NegFuncionario();
+			limpaTabela();
 			final List<Funcionario> funcionario = negFuncionario.consultar(txtFuncionario.getText().trim());
 			final var data = FXCollections.observableList(funcionario);
 			tblFuncionario.setItems(data);
@@ -111,9 +111,10 @@ public final class ControladorMenuFuncionario {
 
 	@FXML
 	private void btnDesativaFuncionario(final ActionEvent event) {
-		final var negFuncionario = new NegFuncionario();
+
 		final var funcionario = tblFuncionario.getSelectionModel().getSelectedItem();
 		try {
+			final var negFuncionario = new NegFuncionario();
 			if (negFuncionario.excluir(funcionario.getCodigo())) {
 				tblFuncionario.getItems().remove(funcionario);
 				Alerta.alertaSucesso();
