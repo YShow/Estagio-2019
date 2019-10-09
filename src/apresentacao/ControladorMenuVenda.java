@@ -3,7 +3,6 @@ package apresentacao;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 import apresentacao.insere.ControladorInserirVenda;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
@@ -88,10 +87,9 @@ public final class ControladorMenuVenda {
 	private void btnConsultaVenda(final ActionEvent event) {
 		final var negVenda = new NegVendas();
 		try {
-			final List<Vendas> venda = negVenda.consultar(txtVenda.getText().trim());
+			final var venda = negVenda.consultar(txtVenda.getText().trim());
 
-			final var data = FXCollections.observableList(venda);
-			tvVenda.setItems(data);
+			tvVenda.setItems(FXCollections.observableList(venda));
 			tcCodigo.setCellValueFactory(new PropertyValueFactory<Vendas, Integer>("Codigo"));
 			tcFormaPAg.setCellValueFactory(new PropertyValueFactory<Vendas, String>("FormaPagamento"));
 

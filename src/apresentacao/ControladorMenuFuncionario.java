@@ -2,7 +2,6 @@ package apresentacao;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import apresentacao.insere.ControladorInserirFuncionario;
 import javafx.collections.FXCollections;
@@ -68,11 +67,6 @@ public final class ControladorMenuFuncionario {
 
 			stage.show();
 
-			stage.setOnCloseRequest(e -> {
-
-				control.limpaTabela();
-
-			});
 		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
@@ -94,9 +88,9 @@ public final class ControladorMenuFuncionario {
 		try {
 			final var negFuncionario = new NegFuncionario();
 			limpaTabela();
-			final List<Funcionario> funcionario = negFuncionario.consultar(txtFuncionario.getText().trim());
-			final var data = FXCollections.observableList(funcionario);
-			tblFuncionario.setItems(data);
+			final var funcionario = negFuncionario.consultar(txtFuncionario.getText().trim());
+
+			tblFuncionario.setItems(FXCollections.observableList(funcionario));
 			tcCodigo.setCellValueFactory(new PropertyValueFactory<Funcionario, Integer>("Codigo"));
 			tcNome.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Nome"));
 			tcFuncao.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Funcao"));
@@ -111,10 +105,9 @@ public final class ControladorMenuFuncionario {
 
 	@FXML
 	private void btnDesativaFuncionario(final ActionEvent event) {
-
-		final var funcionario = tblFuncionario.getSelectionModel().getSelectedItem();
 		try {
 			final var negFuncionario = new NegFuncionario();
+			final var funcionario = tblFuncionario.getSelectionModel().getSelectedItem();
 			if (negFuncionario.excluir(funcionario.getCodigo())) {
 				tblFuncionario.getItems().remove(funcionario);
 				Alerta.alertaSucesso();

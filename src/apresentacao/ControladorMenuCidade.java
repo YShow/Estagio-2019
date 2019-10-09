@@ -2,7 +2,6 @@ package apresentacao;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import apresentacao.insere.ControladorInserirCidade;
 import javafx.collections.FXCollections;
@@ -100,10 +99,9 @@ public final class ControladorMenuCidade {
 
 		try {
 			final var negCidade = new NegCidade();
-			final List<Cidade> funcionario = negCidade.consultar(txtConsullaCidade.getText().trim());
+			final var funcionario = negCidade.consultar(txtConsullaCidade.getText().trim());
 
-			final var data = FXCollections.observableList(funcionario);
-			tvCidade.setItems(data);
+			tvCidade.setItems(FXCollections.observableList(funcionario));
 			tcCodigo.setCellValueFactory(new PropertyValueFactory<Cidade, Integer>("Codigo"));
 			tcNome.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Nome"));
 			tcEstado.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Estado"));

@@ -2,7 +2,6 @@ package apresentacao;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import apresentacao.insere.ControladorInserirCliente;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
@@ -89,11 +88,7 @@ public final class ControladorMenuCliente {
 				controlador.btnDesativarCliente.setDisable(true);
 			}
 			stage.show();
-			stage.setOnCloseRequest(e -> {
 
-				controlador.limpaTabela();
-
-			});
 		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
@@ -121,11 +116,7 @@ public final class ControladorMenuCliente {
 			controlador.btnAlterarCliente.setVisible(false);
 			controlador.btnDesativarCliente.setText("Selecionar");
 			stage.setTitle("Consultar Cliente");
-			stage.setOnCloseRequest(e -> {
 
-				controlador.limpaTabela();
-
-			});
 			stage.showAndWait();
 
 		} catch (final IOException e) {
@@ -146,9 +137,9 @@ public final class ControladorMenuCliente {
 		try {
 			limpaTabela();
 			final var negCliente = new NegCliente();
-			final List<Cliente> cliente = negCliente.consultar(txtCliente.getText().trim());
-			final var data = FXCollections.observableList(cliente);
-			tvCliente.setItems(data);
+			final var cliente = negCliente.consultar(txtCliente.getText().trim());
+
+			tvCliente.setItems(FXCollections.observableList(cliente));
 			tcCodigo.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("Codigo"));
 			tcAtivo.setCellValueFactory(new PropertyValueFactory<Cliente, Boolean>("Ativo"));
 			tcCPF.setCellValueFactory(new PropertyValueFactory<Cliente, String>("CPF"));

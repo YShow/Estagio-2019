@@ -2,7 +2,6 @@ package apresentacao;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 import apresentacao.insere.ControladorInserirProduto;
 import javafx.collections.FXCollections;
@@ -72,9 +71,7 @@ public final class ControladorMenuProduto {
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
 			final ControladorMenuProduto controlador = loader.getController();
-
 			if (!Funcionario.getFuncionario().getAdministrador()) {
-
 				controlador.btnDesativaProduto.setDisable(true);
 			}
 			stage.show();
@@ -128,9 +125,9 @@ public final class ControladorMenuProduto {
 	private void btnConsultaProduto(final ActionEvent event) {
 		final var negProduto = new NegProduto();
 		try {
-			final List<Produto> funcionario = negProduto.consultar(txtProduto.getText().trim());
-			final var data = FXCollections.observableList(funcionario);
-			tvProduto.setItems(data);
+			final var funcionario = negProduto.consultar(txtProduto.getText().trim());
+
+			tvProduto.setItems(FXCollections.observableList(funcionario));
 			tcCodigo.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("Codigo"));
 			tcNome.setCellValueFactory(new PropertyValueFactory<Produto, String>("Nome"));
 			tcPreco.setCellValueFactory(new PropertyValueFactory<Produto, Double>("Preco"));

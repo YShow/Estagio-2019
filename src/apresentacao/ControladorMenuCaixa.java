@@ -103,8 +103,8 @@ public final class ControladorMenuCaixa {
 			tcPreco.setCellValueFactory(new PropertyValueFactory<Caixa, Double>("precototal"));
 			tcSaida.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("saida"));
 
-			final var data = FXCollections.observableArrayList(caixas);
-			tvCaixa.setItems(data);
+
+			tvCaixa.setItems(FXCollections.observableList(caixas));
 
 		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());
