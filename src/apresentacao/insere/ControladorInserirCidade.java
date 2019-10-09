@@ -45,7 +45,6 @@ public final class ControladorInserirCidade {
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
 
-
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 				final ControladorInserirCidade controlador = loader.getController();
 				controlador.btnGravar.setText("Alterar");
@@ -90,8 +89,7 @@ public final class ControladorInserirCidade {
 			cidade.setNome(txtCidade.getText().trim());
 
 			try {
-				if(negcidade.alterar(cidade))
-				{
+				if (negcidade.alterar(cidade)) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}

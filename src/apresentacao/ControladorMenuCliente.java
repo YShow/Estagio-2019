@@ -70,7 +70,6 @@ public final class ControladorMenuCliente {
 	private static Cliente clienteAlterar;
 	private ControladorMenuCliente controlador;
 
-
 	public void abreTelaClienteMenu(final TIPO_TELA tipo_tela) {
 
 		try {
@@ -146,7 +145,7 @@ public final class ControladorMenuCliente {
 	private void btnConsultaCliente(final ActionEvent event) {
 		try {
 			limpaTabela();
-			 final var negCliente = new NegCliente();
+			final var negCliente = new NegCliente();
 			final List<Cliente> cliente = negCliente.consultar(txtCliente.getText().trim());
 			final var data = FXCollections.observableList(cliente);
 			tvCliente.setItems(data);

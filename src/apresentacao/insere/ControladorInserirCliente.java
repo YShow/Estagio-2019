@@ -103,8 +103,7 @@ public final class ControladorInserirCliente {
 			cliente.setCidade(cidade);
 
 			try {
-				if(negCliente.inserir(cliente))
-				{
+				if (negCliente.inserir(cliente)) {
 					Alerta.alertaSucesso();
 					btnGrava.getScene().getWindow().hide();
 				}
@@ -122,8 +121,7 @@ public final class ControladorInserirCliente {
 			cliente.setCidade(cidade);
 
 			try {
-				if(negCliente.alterar(cliente))
-				{
+				if (negCliente.alterar(cliente)) {
 					Alerta.alertaSucesso();
 					btnGrava.getScene().getWindow().hide();
 				}

@@ -44,8 +44,6 @@ public final class ControladorInserirFuncionario {
 	private CheckBox chkAtivo;
 	private static TIPO_TELA tipo_telaa;
 
-
-
 	public void abreTelaFuncionarioInsere(final TIPO_TELA tipo_tela, final Funcionario funcionario) {
 
 		try {
@@ -95,8 +93,7 @@ public final class ControladorInserirFuncionario {
 			funcionario.setAtivo(chkAtivo.isSelected());
 			try {
 
-				if(negFun.inserir(funcionario))
-				{
+				if (negFun.inserir(funcionario)) {
 					Alerta.alertaSucesso();
 					btnGravarFuncionario.getScene().getWindow().hide();
 				}
@@ -112,11 +109,10 @@ public final class ControladorInserirFuncionario {
 			funcionario.setUsuario(txtUsuario.getText().trim());
 			funcionario.setAtivo(chkAtivo.isSelected());
 
-				funcionario.setSenha(txtSenhaFuncionario.getText().strip().trim());
+			funcionario.setSenha(txtSenhaFuncionario.getText().strip().trim());
 
 			try {
-				if(negFun.alterar(funcionario))
-				{
+				if (negFun.alterar(funcionario)) {
 					Alerta.alertaSucesso();
 					btnGravarFuncionario.getScene().getWindow();
 				}

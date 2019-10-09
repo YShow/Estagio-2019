@@ -82,8 +82,7 @@ public final class ControladorInserirProduto {
 			produto.setPreco(Double.parseDouble(txtPreco.getText().trim()));
 			produto.setQuantidade(Integer.parseInt(txtQuantidade.getText().trim()));
 			try {
-				if(negProduto.inserir(produto))
-				{
+				if (negProduto.inserir(produto)) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
@@ -98,8 +97,7 @@ public final class ControladorInserirProduto {
 			produto.setQuantidade(Integer.parseInt(txtQuantidade.getText().trim()));
 
 			try {
-				if(negProduto.alterar(produto))
-				{
+				if (negProduto.alterar(produto)) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}

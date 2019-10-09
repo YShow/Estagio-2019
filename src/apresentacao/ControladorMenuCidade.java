@@ -52,7 +52,6 @@ public final class ControladorMenuCidade {
 	private final ControladorInserirCidade tela = new ControladorInserirCidade();
 	private static Cidade cidadeVolta;
 
-
 	public Cidade abreTelaCidadeMenu(final TIPO_TELA tipo_tela) {
 
 		try {

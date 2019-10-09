@@ -21,6 +21,7 @@ public final class Alerta {
 		alerta.showAndWait();
 
 	}
+
 	public static void alertaCustom() {
 		final Alert alerta = new Alert(Alert.AlertType.INFORMATION);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);

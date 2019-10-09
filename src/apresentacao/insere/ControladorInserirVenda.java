@@ -61,7 +61,6 @@ public final class ControladorInserirVenda {
 	private CheckBox chkAtivo;
 	private static TIPO_TELA tipo_telaa;
 
-
 	public void abreTelaVendaInsere(final TIPO_TELA tipo_tela, final Vendas venda) {
 
 		try {
@@ -147,7 +146,7 @@ public final class ControladorInserirVenda {
 		}));
 	}
 
-	private Vendas preencheVenda(){
+	private Vendas preencheVenda() {
 		final var venda = new Vendas();
 		final var cliente = new Cliente();
 		final var produto = new Produto();
@@ -190,14 +189,12 @@ public final class ControladorInserirVenda {
 		final var negVenda = new NegVendas();
 		try {
 			if (tipo_telaa.equals(TIPO_TELA.INSERE)) {
-				if(negVenda.inserir(venda))
-				{
+				if (negVenda.inserir(venda)) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
 			} else {
-				if(negVenda.alterar(venda))
-				{
+				if (negVenda.alterar(venda)) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}

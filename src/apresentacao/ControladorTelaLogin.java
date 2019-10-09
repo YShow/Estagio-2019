@@ -33,6 +33,7 @@ public final class ControladorTelaLogin extends Application {
 	private double xOffset = 0;
 	private double yOffset = 0;
 	private final NegLogin login = new NegLogin();
+
 	@FXML
 	private void btnLogin(final ActionEvent event) {
 		if (txtUsuario.getText().trim().isBlank() && txtSenha.getText().trim().isBlank()) {
@@ -64,18 +65,16 @@ public final class ControladorTelaLogin extends Application {
 
 		stage = primaryStage;
 		try {
-		if(login.ePrimeiroLogin()) {
-		abreTelaLogin();
-		}else
-		{
-			Alerta.alertaCustom();
-			final var criausuario = new ControladorInserirFuncionario();
-			criausuario.abreTelaFuncionarioInsere(TIPO_TELA.INSERE, null);
-			if(login.ePrimeiroLogin())
-			{
+			if (login.ePrimeiroLogin()) {
 				abreTelaLogin();
+			} else {
+				Alerta.alertaCustom();
+				final var criausuario = new ControladorInserirFuncionario();
+				criausuario.abreTelaFuncionarioInsere(TIPO_TELA.INSERE, null);
+				if (login.ePrimeiroLogin()) {
+					abreTelaLogin();
+				}
 			}
-		}
 		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());
 		}

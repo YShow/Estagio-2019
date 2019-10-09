@@ -49,7 +49,6 @@ public final class NegCliente {
 
 		final var con = conexao.getConexao();
 
-
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
 			con.setAutoCommit(false);
