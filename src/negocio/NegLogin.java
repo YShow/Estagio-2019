@@ -37,13 +37,6 @@ public final class NegLogin {
 					Funcionario.setFuncionario(funcionarioPadrao);
 
 					existeUsuario = true;
-				} else {
-
-					// TODO retirar este else pois ele permite logar se o usuario existir mas a
-					// senha esta incorreta
-					funcionarioPadrao.setAdministrador(false);
-					Funcionario.setFuncionario(funcionarioPadrao);
-					existeUsuario = true;
 				}
 			}
 			System.out
