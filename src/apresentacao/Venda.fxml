@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
@@ -13,8 +13,8 @@
 			<top>
 				<AnchorPane prefHeight="50.0" prefWidth="606.0" BorderPane.alignment="CENTER">
 					<children>
-						<TextField fx:id="txtVenda" layoutX="14.0" layoutY="13.0" prefHeight="25.0" prefWidth="483.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="109.0" />
 						<Button layoutX="517.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnConsultaVenda" prefHeight="25.0" prefWidth="89.0" text="Consultar" AnchorPane.rightAnchor="14.0" />
+                  <DatePicker fx:id="dateData" layoutX="6.0" layoutY="13.0" prefHeight="25.0" prefWidth="549.0" />
 					</children>
 				</AnchorPane>
 			</top>

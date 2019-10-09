@@ -14,8 +14,7 @@ public final class NegProduto {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_INSERT = "INSERT INTO cantagalo.produto\n" + "(ativo, preco, quantidade, nome)\n"
 			+ "VALUES(?, ?, ?, ?);\n";
-	private static final String SQL_SEARCH = "SELECT codigo, ativo, preco, quantidade, nome\n"
-			+ "FROM cantagalo.produto WHERE nome LIKE ? ";
+	private static final String SQL_SEARCH = "SELECT codigo, ativo, preco, quantidade, nome FROM produto WHERE MATCH(nome) AGAINST(? IN BOOLEAN MODE)";
 	private static final String SQL_UPDATE = "UPDATE cantagalo.produto\n"
 			+ "SET ativo=?, preco=?, quantidade=?, nome=?\n" + "WHERE codigo=? ;";
 	private static final String SQL_DELETE = "";
@@ -48,7 +47,7 @@ public final class NegProduto {
 		con.setReadOnly(true);
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
-			comando.setString(1, '%' + metodo + '%');
+			comando.setString(1, metodo + '*');
 			final var result = comando.executeQuery();
 			final List<Produto> lista = new ArrayList<>();
 			while (result.next()) {

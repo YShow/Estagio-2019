@@ -98,6 +98,7 @@ public final class ControladorMenuCidade {
 	private void btnConsultaCidade(final ActionEvent event) {
 
 		try {
+			if(!txtConsullaCidade.getText().isBlank()) {
 			final var negCidade = new NegCidade();
 			final var funcionario = negCidade.consultar(txtConsullaCidade.getText().trim());
 
@@ -105,7 +106,10 @@ public final class ControladorMenuCidade {
 			tcCodigo.setCellValueFactory(new PropertyValueFactory<Cidade, Integer>("Codigo"));
 			tcNome.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Nome"));
 			tcEstado.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Estado"));
-
+			}else
+			{
+				Alerta.alertaCampoNulo();
+			}
 		} catch (final SQLException e) {
 
 			Alerta.alertaErro(e.getMessage());

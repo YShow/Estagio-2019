@@ -88,14 +88,19 @@ public final class ControladorMenuFuncionario {
 		try {
 			final var negFuncionario = new NegFuncionario();
 			limpaTabela();
+			if(!txtFuncionario.getText().isBlank()) {
 			final var funcionario = negFuncionario.consultar(txtFuncionario.getText().trim());
-
 			tblFuncionario.setItems(FXCollections.observableList(funcionario));
 			tcCodigo.setCellValueFactory(new PropertyValueFactory<Funcionario, Integer>("Codigo"));
 			tcNome.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Nome"));
 			tcFuncao.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Funcao"));
 			tcUsuario.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Usuario"));
 			tcAdm.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Administrador"));
+			}else {
+				Alerta.alertaCampoNulo();
+			}
+
+
 
 		} catch (final SQLException e) {
 

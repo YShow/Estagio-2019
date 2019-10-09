@@ -20,7 +20,7 @@ public final class NegVendas {
 	private static final String SQL_INSERT = "INSERT INTO cantagalo.vendas\n"
 			+ "(cod_cliente, cod_caixa, data_venda, forma_de_pagamento,ativo)\n" + "VALUES(?, ?, ?, ?,?);";
 	private static final String SQL_SEARCH = "SELECT codigo, cod_cliente, cod_caixa, data_venda,"
-			+ " forma_de_pagamento,ativo\n" + "FROM cantagalo.vendas WHERE data_venda LIKE ? and ativo=true \n";
+			+ " forma_de_pagamento,ativo\n" + "FROM cantagalo.vendas WHERE data_venda = ? and ativo=true \n";
 	private static final String SQL_UPDATE = "UPDATE cantagalo.vendas\n"
 			+ "SET cod_cliente=?, cod_caixa=?, data_venda=?, forma_de_pagamento=?, aitvo=? " + "WHERE codigo= ?;\n";
 	private static final String SQL_DELETE = "update cantagalo.vendas set ativo=? where codigo = ?";
@@ -92,7 +92,7 @@ public final class NegVendas {
 		}
 	}
 
-	public final List<Vendas> consultar(final String metodo) throws SQLException {
+	public final List<Vendas> consultar(final LocalDate metodo) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		con.setAutoCommit(false);
@@ -100,7 +100,7 @@ public final class NegVendas {
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
-			comando.setString(1, metodo + '%');
+			comando.setObject(1, metodo);
 			final var result = comando.executeQuery();
 			final List<Vendas> lista = new ArrayList<>();
 

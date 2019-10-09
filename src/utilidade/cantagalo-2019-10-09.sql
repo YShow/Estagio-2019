@@ -32,7 +32,7 @@ CREATE TABLE `caixa` (
   PRIMARY KEY (`codigo`),
   KEY `codigo_cliente` (`codigo_cliente`),
   CONSTRAINT `caixa_ibfk_1` FOREIGN KEY (`codigo_cliente`) REFERENCES `cliente` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=201 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=216 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -47,8 +47,8 @@ CREATE TABLE `cidade` (
   `estado` varchar(2) NOT NULL,
   `codigo` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`codigo`),
-  UNIQUE KEY `estado` (`estado`)
-) ENGINE=InnoDB AUTO_INCREMENT=122 DEFAULT CHARSET=utf8mb4;
+  FULLTEXT KEY `fts_cidade` (`nome`)
+) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -68,8 +68,10 @@ CREATE TABLE `cliente` (
   `id_cidade` int(11) NOT NULL,
   PRIMARY KEY (`codigo`),
   KEY `id_cidade` (`id_cidade`),
+  FULLTEXT KEY `fts_nome` (`nome`),
+  FULLTEXT KEY `fts_cliente` (`nome`),
   CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`id_cidade`) REFERENCES `cidade` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=2226719 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2226720 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -89,9 +91,9 @@ CREATE TABLE `funcionario` (
   `usuario` varchar(20) NOT NULL,
   `ativo` tinyint(1) NOT NULL,
   PRIMARY KEY (`codigo`),
-  UNIQUE KEY `usuario2` (`usuario`),
-  UNIQUE KEY `usuario` (`usuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+  UNIQUE KEY `usuario` (`usuario`),
+  FULLTEXT KEY `fts_funcionario` (`nome`,`usuario`)
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -107,7 +109,8 @@ CREATE TABLE `produto` (
   `preco` decimal(10,2) NOT NULL,
   `quantidade` int(11) NOT NULL,
   `nome` varchar(100) NOT NULL,
-  PRIMARY KEY (`codigo`)
+  PRIMARY KEY (`codigo`),
+  FULLTEXT KEY `fts_produto` (`nome`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1103 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -149,12 +152,51 @@ CREATE TABLE `vendas` (
   KEY `cod_caixa` (`cod_caixa`),
   CONSTRAINT `vendas_ibfk_1` FOREIGN KEY (`cod_cliente`) REFERENCES `cliente` (`codigo`),
   CONSTRAINT `vendas_ibfk_2` FOREIGN KEY (`cod_caixa`) REFERENCES `caixa` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping routines for database 'cantagalo'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `pegacliente` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE  PROCEDURE `pegacliente`(in a varchar(50))
+BEGIN
+	SELECT * from cantagalo.cliente where cliente.nome like concat('%',a,'%');
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `pegaclientee` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'IGNORE_SPACE,STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE  PROCEDURE `pegaclientee`(in a varchar(50))
+BEGIN
+	SELECT * from cantagalo.cliente where cliente.nome like concat('%',a,'%')
+GROUP by codigo;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -165,4 +207,4 @@ CREATE TABLE `vendas` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-18 17:41:32
+-- Dump completed on 2019-10-09 16:22:32

@@ -15,8 +15,7 @@ public final class NegFuncionario {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_INSERT = "insert into funcionario(nome,funcao,administrador,senhahash,salt,usuario,ativo)"
 			+ " values(?,?,?,?,?,?,?)";
-	private static final String SQL_SEARCH = "select codigo,nome,funcao,administrador,usuario from funcionario"
-			+ "  where nome LIKE ?  and ativo = true";
+	private static final String SQL_SEARCH = "SELECT codigo,nome,funcao,administrador,usuario FROM funcionario WHERE MATCH(nome,usuario) AGAINST(? IN BOOLEAN MODE) and ativo = true";
 	private static final String SQL_UPDATE = "update funcionario set nome = ?, funcao = ?, administrador = ?,"
 			+ "senhahash =COALESCE(?,senhahash), salt =COALESCE(?,salt),usuario = ?,ativo = ? where codigo = ?";
 	private static final String SQL_DELETE = "update funcionario set ativo = ?" + " WHERE codigo=? ;";
@@ -53,7 +52,7 @@ public final class NegFuncionario {
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
-			comando.setString(1, '%' + metodo + '%');
+			comando.setString(1, metodo + '*');
 			final var result = comando.executeQuery();
 
 			final List<Funcionario> lista = new ArrayList<>();

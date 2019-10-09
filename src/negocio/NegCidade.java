@@ -13,7 +13,7 @@ import objeto.Cidade;
 public final class NegCidade {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_INSERT = "INSERT INTO cidade(nome,estado) values(?,?)";
-	private static final String SQL_SEARCH = "select codigo,nome,estado from cidade where nome LIKE ? ";
+	private static final String SQL_SEARCH = "SELECT codigo,nome,estado FROM cidade WHERE MATCH(nome) AGAINST(? IN BOOLEAN MODE)";
 	private static final String SQL_UPDATE = "update cidade set nome = ?, estado = ? where codigo = ?";
 	private static final String SQL_DELETE = "DELETE FROM cantagalo.cidade\n" + "WHERE codigo = ? ;";
 
@@ -44,7 +44,7 @@ public final class NegCidade {
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
 
-			comando.setString(1, '%' + metodo + '%');
+			comando.setString(1, metodo + '*');
 			final var result = comando.executeQuery();
 			// con.commit();
 			final List<Cidade> lista = new ArrayList<>();

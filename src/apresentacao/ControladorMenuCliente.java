@@ -135,10 +135,11 @@ public final class ControladorMenuCliente {
 	@FXML
 	private void btnConsultaCliente(final ActionEvent event) {
 		try {
+
+			if(!txtCliente.getText().isBlank()) {
 			limpaTabela();
 			final var negCliente = new NegCliente();
 			final var cliente = negCliente.consultar(txtCliente.getText().trim());
-
 			tvCliente.setItems(FXCollections.observableList(cliente));
 			tcCodigo.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("Codigo"));
 			tcAtivo.setCellValueFactory(new PropertyValueFactory<Cliente, Boolean>("Ativo"));
@@ -146,12 +147,12 @@ public final class ControladorMenuCliente {
 			tcEndereco.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Endereco"));
 			tcNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Nome"));
 			tcTelefone.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Telefone"));
-
 			tcCidade.setCellValueFactory(cidade -> new ReadOnlyStringWrapper(cidade.getValue().getCidade().getNome()));
-
 			tcCodCidade.setCellValueFactory(
 					codCidade -> new ReadOnlyIntegerWrapper(codCidade.getValue().getCidade().getCodigo()).asObject());
-
+			}else {
+				Alerta.alertaCampoNulo();
+			}
 		} catch (final SQLException e) {
 
 			Alerta.alertaErro(e.getMessage());

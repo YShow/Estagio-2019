@@ -125,6 +125,7 @@ public final class ControladorMenuProduto {
 	private void btnConsultaProduto(final ActionEvent event) {
 		final var negProduto = new NegProduto();
 		try {
+			if(!txtProduto.getText().isBlank()) {
 			final var funcionario = negProduto.consultar(txtProduto.getText().trim());
 
 			tvProduto.setItems(FXCollections.observableList(funcionario));
@@ -133,6 +134,10 @@ public final class ControladorMenuProduto {
 			tcPreco.setCellValueFactory(new PropertyValueFactory<Produto, Double>("Preco"));
 			tcQuantidade.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("Quantidade"));
 			tcAtivo.setCellValueFactory(new PropertyValueFactory<Produto, Boolean>("Ativo"));
+			}else
+			{
+				Alerta.alertaCampoNulo();
+			}
 
 		} catch (final SQLException e) {
 
