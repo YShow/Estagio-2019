@@ -75,7 +75,7 @@ public final class ControladorInserirFuncionario {
 			} else {
 
 				stage.setTitle("Inserir Funcionario");
-				stage.show();
+				stage.showAndWait();
 			}
 		} catch (final IOException e) {
 			Alerta.alertaErro(e.getMessage());

@@ -13,6 +13,8 @@ public final class NegLogin {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_SEARCH = "SELECT usuario,salt, senhahash, administrador from funcionario WHERE  usuario = ?;";
 
+	private static final String SQL_VERIFICA_SE_TEM_USUARIO = "SELECT COUNT(administrador) as qtd_adm_ativo from funcionario\n" +
+			" WHERE administrador = true and ativo = true";
 	public final boolean verificaLogin(final Funcionario funcionario) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
@@ -47,6 +49,26 @@ public final class NegLogin {
 			return existeUsuario;
 		} finally {
 			System.gc();
+		}
+	}
+
+	public final boolean ePrimeiroLogin() throws SQLException {
+		final var con = conexao.getConexao();
+		final var comando = con.prepareStatement(SQL_VERIFICA_SE_TEM_USUARIO);
+
+		try(con;comando;){
+			con.setReadOnly(true);
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+
+			final var result = comando.executeQuery();
+
+			if(result.next())
+			{
+				return result.getInt("qtd_adm_ativo") >= 1;
+			} else {
+				return false;
+			}
 		}
 	}
 }

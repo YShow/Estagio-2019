@@ -18,7 +18,20 @@ public final class Alerta {
 		alerta.setHeaderText("Função realizada com sucesso");
 		alerta.setHeight(300);
 		alerta.setWidth(300);
-		alerta.show();
+		alerta.showAndWait();
+
+	}
+	public static void alertaCustom() {
+		final Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
+
+		alerta.initModality(Modality.APPLICATION_MODAL);
+		alerta.setAlertType(AlertType.INFORMATION);
+		alerta.setHeaderText("Primeiro login no sistema");
+		alerta.setContentText("Por favor crie um usuario administrador");
+		alerta.setHeight(300);
+		alerta.setWidth(300);
+		alerta.showAndWait();
 
 	}
 
@@ -34,7 +47,7 @@ public final class Alerta {
 		alerta.setResult(ButtonType.OK);
 		alerta.setHeight(300);
 		alerta.setWidth(300);
-		alerta.show();
+		alerta.showAndWait();
 
 	}
 
@@ -48,7 +61,7 @@ public final class Alerta {
 		alerta.setResult(ButtonType.OK);
 		alerta.setHeight(300);
 		alerta.setWidth(300);
-		alerta.show();
+		alerta.showAndWait();
 	}
 
 	public static void alertaCidadeEmUso() {
@@ -62,7 +75,7 @@ public final class Alerta {
 		alerta.setResult(ButtonType.OK);
 		alerta.setHeight(300);
 		alerta.setWidth(300);
-		alerta.show();
+		alerta.showAndWait();
 	}
 
 	public static void alertaClienteEmCaixa() {
@@ -76,6 +89,6 @@ public final class Alerta {
 		alerta.setResult(ButtonType.OK);
 		alerta.setHeight(300);
 		alerta.setWidth(300);
-		alerta.show();
+		alerta.showAndWait();
 	}
 }
