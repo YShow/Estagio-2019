@@ -47,11 +47,11 @@ public final class NegFuncionario {
 	public final List<Funcionario> consultar(final String metodo) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setReadOnly(true);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
+			con.setAutoCommit(false);
+			con.setReadOnly(true);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setString(1, metodo + '*');
 			final var result = comando.executeQuery();
 

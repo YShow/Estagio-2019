@@ -33,7 +33,7 @@ public final class ControladorMenuVenda {
 	@FXML
 	private TableView<Vendas> tvVenda;
 	@FXML
-    private DatePicker dateData;
+	private DatePicker dateData;
 	@FXML
 	private TableColumn<Vendas, Integer> tcCodigo;
 
@@ -58,16 +58,15 @@ public final class ControladorMenuVenda {
 		try {
 			final var stage = new Stage();
 
-			final var loader = new FXMLLoader();
+			final var loader = new FXMLLoader(getClass().getResource("/apresentacao/Venda.fxml"));
 
 			stage.initModality(Modality.APPLICATION_MODAL);
-			loader.setLocation(getClass().getResource("/apresentacao/Venda.fxml"));
+
 			final Parent root = loader.load();
 			final ControladorMenuVenda control = loader.getController();
 
 			control.dateData.setOnKeyPressed(e -> {
-				if(e.getCode().equals(KeyCode.ENTER))
-				{
+				if (e.getCode().equals(KeyCode.ENTER)) {
 					control.btnConsultaVenda(null);
 				}
 			});
@@ -93,30 +92,43 @@ public final class ControladorMenuVenda {
 
 	@FXML
 	private void btnConsultaVenda(final ActionEvent event) {
-		final var negVenda = new NegVendas();
+
 		try {
-			final var venda = negVenda.consultar(dateData.getValue());
+			if (dateData.getValue() != null) {
+				limpaTabela();
+				final var negVenda = new NegVendas();
+				final var venda = negVenda.consultar(dateData.getValue());
+				if (!venda.isEmpty()) {
+					tvVenda.setItems(FXCollections.observableList(venda));
+					tcCodigo.setCellValueFactory(new PropertyValueFactory<Vendas, Integer>("Codigo"));
+					tcFormaPAg.setCellValueFactory(new PropertyValueFactory<Vendas, String>("FormaPagamento"));
 
-			tvVenda.setItems(FXCollections.observableList(venda));
-			tcCodigo.setCellValueFactory(new PropertyValueFactory<Vendas, Integer>("Codigo"));
-			tcFormaPAg.setCellValueFactory(new PropertyValueFactory<Vendas, String>("FormaPagamento"));
+					tcDataVenda.setCellValueFactory(dataVenda -> new ReadOnlyStringWrapper(
+							dataVenda.getValue().getData().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
 
-			tcDataVenda.setCellValueFactory(dataVenda -> new ReadOnlyStringWrapper(
-					dataVenda.getValue().getData().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
+					tcCodCaixa.setCellValueFactory(
+							codCaixa -> new ReadOnlyIntegerWrapper(codCaixa.getValue().getCaixa().getCodigo())
+									.asObject());
 
-			tcCodCaixa.setCellValueFactory(
-					codCaixa -> new ReadOnlyIntegerWrapper(codCaixa.getValue().getCaixa().getCodigo()).asObject());
+					tcCodCliente.setCellValueFactory(
+							codCliente -> new ReadOnlyIntegerWrapper(codCliente.getValue().getCliente().getCodigo())
+									.asObject());
 
-			tcCodCliente.setCellValueFactory(
-					codCliente -> new ReadOnlyIntegerWrapper(codCliente.getValue().getCliente().getCodigo())
-							.asObject());
-
-			tcAtivo.setCellValueFactory(new PropertyValueFactory<Vendas, Boolean>("Ativo"));
-
+					tcAtivo.setCellValueFactory(new PropertyValueFactory<Vendas, Boolean>("Ativo"));
+				} else {
+					Alerta.alertaNaoEncontrado();
+				}
+			} else {
+				Alerta.alertaCampoNulo();
+			}
 		} catch (final SQLException e) {
 
 			Alerta.alertaErro(e.getMessage());
 		}
+	}
+
+	private void limpaTabela() {
+		tvVenda.getItems().clear();
 	}
 
 	@FXML

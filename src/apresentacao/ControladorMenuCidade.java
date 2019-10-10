@@ -58,16 +58,14 @@ public final class ControladorMenuCidade {
 			tipo_telaa = tipo_tela;
 			final var stage = new Stage();
 
-			final var loader = new FXMLLoader();
+			final var loader = new FXMLLoader(getClass().getResource("/apresentacao/Cidade.fxml"));
 			stage.initModality(Modality.APPLICATION_MODAL);
 
-			loader.setLocation(getClass().getResource("/apresentacao/Cidade.fxml"));
 			final Parent root = loader.load();
 			final ControladorMenuCidade controlador = loader.getController();
 			controlador.txtConsullaCidade.setOnKeyPressed(e -> {
-				if(e.getCode().equals(KeyCode.ENTER))
-				{
-				controlador.btnConsultaCidade(null);
+				if (e.getCode().equals(KeyCode.ENTER)) {
+					controlador.btnConsultaCidade(null);
 				}
 			});
 
@@ -106,22 +104,29 @@ public final class ControladorMenuCidade {
 	private void btnConsultaCidade(final ActionEvent event) {
 
 		try {
-			if(!txtConsullaCidade.getText().isBlank()) {
-			final var negCidade = new NegCidade();
-			final var funcionario = negCidade.consultar(txtConsullaCidade.getText().trim());
-
-			tvCidade.setItems(FXCollections.observableList(funcionario));
-			tcCodigo.setCellValueFactory(new PropertyValueFactory<Cidade, Integer>("Codigo"));
-			tcNome.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Nome"));
-			tcEstado.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Estado"));
-			}else
-			{
+			if (!txtConsullaCidade.getText().isBlank()) {
+				limpaTabela();
+				final var negCidade = new NegCidade();
+				final var funcionario = negCidade.consultar(txtConsullaCidade.getText().trim());
+				if (!funcionario.isEmpty()) {
+					tvCidade.setItems(FXCollections.observableList(funcionario));
+					tcCodigo.setCellValueFactory(new PropertyValueFactory<Cidade, Integer>("Codigo"));
+					tcNome.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Nome"));
+					tcEstado.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Estado"));
+				} else {
+					Alerta.alertaNaoEncontrado();
+				}
+			} else {
 				Alerta.alertaCampoNulo();
 			}
 		} catch (final SQLException e) {
 
 			Alerta.alertaErro(e.getMessage());
 		}
+	}
+
+	private void limpaTabela() {
+		tvCidade.getItems().clear();
 	}
 
 	@FXML

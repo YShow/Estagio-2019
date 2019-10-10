@@ -54,14 +54,12 @@ public final class ControladorMenuFuncionario {
 
 		try {
 			final var stage = new Stage();
-			final var loader = new FXMLLoader();
+			final var loader = new FXMLLoader(getClass().getResource("/apresentacao/Funcionario.fxml"));
 			stage.initModality(Modality.APPLICATION_MODAL);
-			loader.setLocation(getClass().getResource("/apresentacao/Funcionario.fxml"));
 			final Parent root = loader.load();
 			final ControladorMenuFuncionario control = loader.getController();
 			control.txtFuncionario.setOnKeyPressed(e -> {
-				if(e.getCode().equals(KeyCode.ENTER))
-				{
+				if (e.getCode().equals(KeyCode.ENTER)) {
 					control.btnConsultaFuncionario(null);
 				}
 			});
@@ -93,21 +91,25 @@ public final class ControladorMenuFuncionario {
 	@FXML
 	private void btnConsultaFuncionario(final ActionEvent event) {
 		try {
-			final var negFuncionario = new NegFuncionario();
-			limpaTabela();
-			if(!txtFuncionario.getText().isBlank()) {
-			final var funcionario = negFuncionario.consultar(txtFuncionario.getText().trim());
-			tblFuncionario.setItems(FXCollections.observableList(funcionario));
-			tcCodigo.setCellValueFactory(new PropertyValueFactory<Funcionario, Integer>("Codigo"));
-			tcNome.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Nome"));
-			tcFuncao.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Funcao"));
-			tcUsuario.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Usuario"));
-			tcAdm.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Administrador"));
-			}else {
+
+			if (!txtFuncionario.getText().isBlank()) {
+				limpaTabela();
+				final var negFuncionario = new NegFuncionario();
+				final var funcionario = negFuncionario.consultar(txtFuncionario.getText().trim());
+				if (!funcionario.isEmpty()) {
+					tblFuncionario.setItems(FXCollections.observableList(funcionario));
+					tcCodigo.setCellValueFactory(new PropertyValueFactory<Funcionario, Integer>("Codigo"));
+					tcNome.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Nome"));
+					tcFuncao.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Funcao"));
+					tcUsuario.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Usuario"));
+					tcAdm.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("Administrador"));
+				} else {
+					Alerta.alertaNaoEncontrado();
+				}
+
+			} else {
 				Alerta.alertaCampoNulo();
 			}
-
-
 
 		} catch (final SQLException e) {
 

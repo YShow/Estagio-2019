@@ -64,17 +64,16 @@ public final class ControladorMenuProduto {
 		try {
 			tipo_telaa = tipo_tela;
 			final var stage = new Stage();
-			final var loader = new FXMLLoader();
+			final var loader = new FXMLLoader(getClass().getResource("/apresentacao/Produto.fxml"));
 			stage.initModality(Modality.APPLICATION_MODAL);
-			loader.setLocation(getClass().getResource("/apresentacao/Produto.fxml"));
+
 			final Parent root = loader.load();
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
 			final ControladorMenuProduto controlador = loader.getController();
 			controlador.txtProduto.setOnKeyPressed(e -> {
-				if(e.getCode().equals(KeyCode.ENTER))
-				{
+				if (e.getCode().equals(KeyCode.ENTER)) {
 					controlador.btnConsultaProduto(null);
 				}
 			});
@@ -130,19 +129,23 @@ public final class ControladorMenuProduto {
 
 	@FXML
 	private void btnConsultaProduto(final ActionEvent event) {
-		final var negProduto = new NegProduto();
-		try {
-			if(!txtProduto.getText().isBlank()) {
-			final var funcionario = negProduto.consultar(txtProduto.getText().trim());
 
-			tvProduto.setItems(FXCollections.observableList(funcionario));
-			tcCodigo.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("Codigo"));
-			tcNome.setCellValueFactory(new PropertyValueFactory<Produto, String>("Nome"));
-			tcPreco.setCellValueFactory(new PropertyValueFactory<Produto, Double>("Preco"));
-			tcQuantidade.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("Quantidade"));
-			tcAtivo.setCellValueFactory(new PropertyValueFactory<Produto, Boolean>("Ativo"));
-			}else
-			{
+		try {
+			if (!txtProduto.getText().isBlank()) {
+				limpaTabela();
+				final var negProduto = new NegProduto();
+				final var funcionario = negProduto.consultar(txtProduto.getText().trim());
+				if (!funcionario.isEmpty()) {
+					tvProduto.setItems(FXCollections.observableList(funcionario));
+					tcCodigo.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("Codigo"));
+					tcNome.setCellValueFactory(new PropertyValueFactory<Produto, String>("Nome"));
+					tcPreco.setCellValueFactory(new PropertyValueFactory<Produto, Double>("Preco"));
+					tcQuantidade.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("Quantidade"));
+					tcAtivo.setCellValueFactory(new PropertyValueFactory<Produto, Boolean>("Ativo"));
+				} else {
+					Alerta.alertaNaoEncontrado();
+				}
+			} else {
 				Alerta.alertaCampoNulo();
 			}
 
@@ -150,6 +153,10 @@ public final class ControladorMenuProduto {
 
 			Alerta.alertaErro(e.getMessage());
 		}
+	}
+
+	private void limpaTabela() {
+		tvProduto.getItems().clear();
 	}
 
 	@FXML

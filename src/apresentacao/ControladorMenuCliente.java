@@ -76,14 +76,13 @@ public final class ControladorMenuCliente {
 			tipo_telaa = tipo_tela;
 			final var stage = new Stage();
 
-			final var loader = new FXMLLoader();
+			final var loader = new FXMLLoader(getClass().getResource("/apresentacao/Cliente.fxml"));
 			stage.initModality(Modality.APPLICATION_MODAL);
-			loader.setLocation(getClass().getResource("/apresentacao/Cliente.fxml"));
+
 			final Parent root = loader.load();
 			controlador = loader.getController();
 			controlador.txtCliente.setOnKeyPressed(e -> {
-				if(e.getCode().equals(KeyCode.ENTER))
-				{
+				if (e.getCode().equals(KeyCode.ENTER)) {
 					controlador.btnConsultaCliente(null);
 				}
 			});
@@ -142,21 +141,27 @@ public final class ControladorMenuCliente {
 	private void btnConsultaCliente(final ActionEvent event) {
 		try {
 
-			if(!txtCliente.getText().isBlank()) {
-			limpaTabela();
-			final var negCliente = new NegCliente();
-			final var cliente = negCliente.consultar(txtCliente.getText().trim());
-			tvCliente.setItems(FXCollections.observableList(cliente));
-			tcCodigo.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("Codigo"));
-			tcAtivo.setCellValueFactory(new PropertyValueFactory<Cliente, Boolean>("Ativo"));
-			tcCPF.setCellValueFactory(new PropertyValueFactory<Cliente, String>("CPF"));
-			tcEndereco.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Endereco"));
-			tcNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Nome"));
-			tcTelefone.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Telefone"));
-			tcCidade.setCellValueFactory(cidade -> new ReadOnlyStringWrapper(cidade.getValue().getCidade().getNome()));
-			tcCodCidade.setCellValueFactory(
-					codCidade -> new ReadOnlyIntegerWrapper(codCidade.getValue().getCidade().getCodigo()).asObject());
-			}else {
+			if (!txtCliente.getText().isBlank()) {
+				limpaTabela();
+				final var negCliente = new NegCliente();
+				final var cliente = negCliente.consultar(txtCliente.getText().trim());
+				if (!cliente.isEmpty()) {
+					tvCliente.setItems(FXCollections.observableList(cliente));
+					tcCodigo.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("Codigo"));
+					tcAtivo.setCellValueFactory(new PropertyValueFactory<Cliente, Boolean>("Ativo"));
+					tcCPF.setCellValueFactory(new PropertyValueFactory<Cliente, String>("CPF"));
+					tcEndereco.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Endereco"));
+					tcNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Nome"));
+					tcTelefone.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Telefone"));
+					tcCidade.setCellValueFactory(
+							cidade -> new ReadOnlyStringWrapper(cidade.getValue().getCidade().getNome()));
+					tcCodCidade.setCellValueFactory(
+							codCidade -> new ReadOnlyIntegerWrapper(codCidade.getValue().getCidade().getCodigo())
+									.asObject());
+				} else {
+					Alerta.alertaNaoEncontrado();
+				}
+			} else {
 				Alerta.alertaCampoNulo();
 			}
 		} catch (final SQLException e) {

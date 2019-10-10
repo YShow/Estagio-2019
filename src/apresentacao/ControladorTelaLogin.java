@@ -98,14 +98,12 @@ public final class ControladorTelaLogin extends Application {
 			final ControladorTelaLogin control = loader.getController();
 
 			control.txtSenha.setOnKeyPressed(e -> {
-				if(e.getCode().equals(KeyCode.ENTER))
-				{
+				if (e.getCode().equals(KeyCode.ENTER)) {
 					control.btnLogin(null);
 				}
 			});
 			control.txtUsuario.setOnKeyPressed(e -> {
-				if(e.getCode().equals(KeyCode.ENTER))
-				{
+				if (e.getCode().equals(KeyCode.ENTER)) {
 					control.btnLogin(null);
 				}
 			});

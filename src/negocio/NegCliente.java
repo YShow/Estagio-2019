@@ -15,9 +15,9 @@ public final class NegCliente {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final String SQL_INSERT = "insert into cliente(nome,CPF,endereco,telefone,ativo,id_cidade)"
 			+ " values(?,?,?,?,?,?)";
-	private static final String SQL_SEARCH = "SELECT c.codigo, c.nome, c.CPF, c.endereco, c.telefone, c.ativo, c.id_cidade, ci.nome\n" +
-			"FROM cantagalo.cliente c JOIN cidade ci ON c.id_cidade = ci.codigo\n" +
-			"WHERE MATCH(c.nome) AGAINST(? IN BOOLEAN MODE)";
+	private static final String SQL_SEARCH = "SELECT c.codigo, c.nome, c.CPF, c.endereco, c.telefone, c.ativo, c.id_cidade, ci.nome\n"
+			+ "FROM cantagalo.cliente c JOIN cidade ci ON c.id_cidade = ci.codigo\n"
+			+ "WHERE MATCH(c.nome) AGAINST(? IN BOOLEAN MODE)";
 	private static final String SQL_UPDATE = "update cliente set nome = ?, CPF = ?, endereco = ?,"
 			+ "telefone = ?, ativo = ?, id_cidade = ? where codigo = ?;";
 	private static final String SQL_DELETE = "DELETE FROM cantagalo.cliente\n" + " WHERE codigo=?;";
