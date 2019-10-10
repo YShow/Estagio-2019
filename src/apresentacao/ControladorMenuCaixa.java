@@ -15,6 +15,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
@@ -60,11 +61,16 @@ public final class ControladorMenuCaixa {
 			loader.setLocation(getClass().getResource("/apresentacao/Caixa.fxml"));
 			final Parent root = loader.load();
 
+
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style);
 			stage.setScene(scene);
 			final ControladorMenuCaixa controlador = loader.getController();
-
+			controlador.dpData.setOnKeyPressed(e -> {
+				if(e.getCode().equals(KeyCode.ENTER)) {
+					controlador.conulstaCaixa(null);
+				}
+			});
 			if (!Funcionario.getFuncionario().getAdministrador()) {
 
 				controlador.btnDesativarCaixa.setDisable(true);

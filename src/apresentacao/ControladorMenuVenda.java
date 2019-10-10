@@ -18,6 +18,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
@@ -63,6 +64,14 @@ public final class ControladorMenuVenda {
 			loader.setLocation(getClass().getResource("/apresentacao/Venda.fxml"));
 			final Parent root = loader.load();
 			final ControladorMenuVenda control = loader.getController();
+
+			control.dateData.setOnKeyPressed(e -> {
+				if(e.getCode().equals(KeyCode.ENTER))
+				{
+					control.btnConsultaVenda(null);
+				}
+			});
+
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);

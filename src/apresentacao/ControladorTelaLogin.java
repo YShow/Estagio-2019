@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
@@ -83,7 +84,10 @@ public final class ControladorTelaLogin extends Application {
 	private void abreTelaLogin() {
 
 		try {
-			final Pane root = FXMLLoader.load(getClass().getResource("TelaLogin.fxml"));
+
+			final var loader = new FXMLLoader(getClass().getResource("TelaLogin.fxml"));
+
+			final Pane root = loader.load();
 
 			final var scene = new Scene(root);
 
@@ -91,6 +95,20 @@ public final class ControladorTelaLogin extends Application {
 			root.setBackground(Imagem.colocaImagemFundo(IMAGEM.FUNDO));
 			stage.getIcons().add(new Image(IMAGEM.FUNDO.getImagem()));
 			stage.setResizable(false);
+			final ControladorTelaLogin control = loader.getController();
+
+			control.txtSenha.setOnKeyPressed(e -> {
+				if(e.getCode().equals(KeyCode.ENTER))
+				{
+					control.btnLogin(null);
+				}
+			});
+			control.txtUsuario.setOnKeyPressed(e -> {
+				if(e.getCode().equals(KeyCode.ENTER))
+				{
+					control.btnLogin(null);
+				}
+			});
 			stage.setTitle("Canta Galo");
 			stage.setScene(scene);
 			stage.show();

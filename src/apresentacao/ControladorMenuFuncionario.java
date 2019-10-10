@@ -15,6 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
@@ -58,6 +59,12 @@ public final class ControladorMenuFuncionario {
 			loader.setLocation(getClass().getResource("/apresentacao/Funcionario.fxml"));
 			final Parent root = loader.load();
 			final ControladorMenuFuncionario control = loader.getController();
+			control.txtFuncionario.setOnKeyPressed(e -> {
+				if(e.getCode().equals(KeyCode.ENTER))
+				{
+					control.btnConsultaFuncionario(null);
+				}
+			});
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);

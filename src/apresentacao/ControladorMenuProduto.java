@@ -15,6 +15,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
@@ -71,6 +72,12 @@ public final class ControladorMenuProduto {
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
 			final ControladorMenuProduto controlador = loader.getController();
+			controlador.txtProduto.setOnKeyPressed(e -> {
+				if(e.getCode().equals(KeyCode.ENTER))
+				{
+					controlador.btnConsultaProduto(null);
+				}
+			});
 			if (!Funcionario.getFuncionario().getAdministrador()) {
 				controlador.btnDesativaProduto.setDisable(true);
 			}

@@ -17,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -80,7 +81,12 @@ public final class ControladorMenuCliente {
 			loader.setLocation(getClass().getResource("/apresentacao/Cliente.fxml"));
 			final Parent root = loader.load();
 			controlador = loader.getController();
-
+			controlador.txtCliente.setOnKeyPressed(e -> {
+				if(e.getCode().equals(KeyCode.ENTER))
+				{
+					controlador.btnConsultaCliente(null);
+				}
+			});
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
