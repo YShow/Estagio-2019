@@ -145,7 +145,7 @@ public final class ControladorMenuCliente {
 				limpaTabela();
 				final var negCliente = new NegCliente();
 				final var cliente = negCliente.consultar(txtCliente.getText().trim());
-				if (!cliente.isEmpty() && !tvCliente.getItems().containsAll(cliente)) {
+				if (!cliente.isEmpty()) {
 					tvCliente.setItems(FXCollections.observableList(cliente));
 					tcCodigo.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("Codigo"));
 					tcAtivo.setCellValueFactory(new PropertyValueFactory<Cliente, Boolean>("Ativo"));
