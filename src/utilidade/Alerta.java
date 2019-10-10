@@ -72,6 +72,18 @@ public final class Alerta {
 		alerta.showAndWait();
 	}
 
+	public static void alertaCampoNulo(final String erros) {
+		final Alert alerta = new Alert(Alert.AlertType.WARNING);
+		new JMetro(alerta.getDialogPane().getScene(), Main.style);
+
+		alerta.initModality(Modality.APPLICATION_MODAL);
+		alerta.setHeaderText("Verifique os campos: ");
+		alerta.setContentText(erros);
+		alerta.setResult(ButtonType.OK);
+
+		alerta.showAndWait();
+	}
+
 	public static void alertaCidadeEmUso() {
 		final Alert alerta = new Alert(Alert.AlertType.WARNING);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style);

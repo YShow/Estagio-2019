@@ -103,7 +103,7 @@ public final class ControladorInserirCliente {
 			cliente.setCidade(cidade);
 
 			try {
-				if (negCliente.inserir(cliente)) {
+				if (verificaValores() && negCliente.inserir(cliente)) {
 					Alerta.alertaSucesso();
 					btnGrava.getScene().getWindow().hide();
 				}
@@ -121,7 +121,7 @@ public final class ControladorInserirCliente {
 			cliente.setCidade(cidade);
 
 			try {
-				if (negCliente.alterar(cliente)) {
+				if (verificaValores() && negCliente.alterar(cliente)) {
 					Alerta.alertaSucesso();
 					btnGrava.getScene().getWindow().hide();
 				}
@@ -139,6 +139,32 @@ public final class ControladorInserirCliente {
 
 		atualizaValorCidade(cidade);
 
+	}
+
+	private boolean verificaValores() {
+		final var erros = new StringBuilder();
+		if (txtCidade.getText().isBlank()) {
+			erros.append("Cidade esta vazio. \n");
+		}
+		if (txtCodCidade.getText().isBlank()) {
+			erros.append("Codigo da cidade esta vazio. \n");
+		}
+		if (txtCPF.getText().isBlank()) {
+			erros.append("CPF esta vazio. \n");
+		}
+		if (txtEndereco.getText().isBlank()) {
+			erros.append("Endereço esta vazio. \n");
+		}
+		if (txtNome.getText().isBlank()) {
+			erros.append("Nome esta vazio. \n");
+		}
+		if (txtTelefone.getText().isBlank()) {
+			erros.append("Telefone esta vazio.");
+		}
+		if (erros.length() != 0) {
+			Alerta.alertaCampoNulo(erros.toString());
+		}
+		return erros.length() == 0;
 	}
 
 	private void atualizaValorCidade(final Cidade cidade) {

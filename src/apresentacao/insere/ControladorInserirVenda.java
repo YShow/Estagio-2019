@@ -184,17 +184,16 @@ public final class ControladorInserirVenda {
 
 	@FXML
 	private void btnGravar(final ActionEvent event) {
-
-		final var venda = preencheVenda();
-		final var negVenda = new NegVendas();
 		try {
+			final var venda = preencheVenda();
+			final var negVenda = new NegVendas();
 			if (tipo_telaa.equals(TIPO_TELA.INSERE)) {
-				if (negVenda.inserir(venda)) {
+				if (verificaValores() && negVenda.inserir(venda)) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
 			} else {
-				if (negVenda.alterar(venda)) {
+				if (verificaValores() && negVenda.alterar(venda)) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
@@ -218,5 +217,37 @@ public final class ControladorInserirVenda {
 		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
+	}
+
+	private boolean verificaValores() {
+		final var erros = new StringBuilder();
+		if (txtCliente.getText().isBlank()) {
+			erros.append("Cliente esta vazio. \n");
+		}
+		if (txtFormaPagamento.getText().isBlank()) {
+			erros.append("Forma de pagamento esta vazio. \n");
+		}
+		if (txtPrecoTotal.getText().isBlank()) {
+			erros.append("Preço esta vazio. \n");
+		}
+		if (txtPrecoUnitario.getText().isBlank()) {
+			erros.append("Preço Unitario está vazio. \n");
+		}
+		if (txtProduto.getText().isBlank()) {
+			erros.append("Produto está vazio. \n");
+		}
+		if (txtQtd.getText().isBlank()) {
+			erros.append("Quantidade está vazio. \n");
+		}
+		if (txtQtdEstoque.getText().isBlank()) {
+			erros.append("Quantidade em estoque esta vazio. \n");
+		}
+		if (txtSaida.getText().isBlank()) {
+			erros.append("Saida está vazio");
+		}
+		if (erros.length() != 0) {
+			Alerta.alertaCampoNulo(erros.toString());
+		}
+		return erros.length() == 0;
 	}
 }

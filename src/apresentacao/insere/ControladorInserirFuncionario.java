@@ -93,7 +93,7 @@ public final class ControladorInserirFuncionario {
 			funcionario.setAtivo(chkAtivo.isSelected());
 			try {
 
-				if (negFun.inserir(funcionario)) {
+				if (verificaValores() && negFun.inserir(funcionario)) {
 					Alerta.alertaSucesso();
 					btnGravarFuncionario.getScene().getWindow().hide();
 				}
@@ -112,7 +112,7 @@ public final class ControladorInserirFuncionario {
 			funcionario.setSenha(txtSenhaFuncionario.getText().strip().trim());
 
 			try {
-				if (negFun.alterar(funcionario)) {
+				if (verificaValores() && negFun.alterar(funcionario)) {
 					Alerta.alertaSucesso();
 					btnGravarFuncionario.getScene().getWindow();
 				}
@@ -121,6 +121,27 @@ public final class ControladorInserirFuncionario {
 				Alerta.alertaErro(e.getMessage());
 			}
 		}
+	}
+
+	private boolean verificaValores() {
+		final var erros = new StringBuilder();
+		if (txtFuncao.getText().isBlank()) {
+			erros.append("Funcao esta vazio. \n");
+		}
+		if (txtNomeFuncionario.getText().isBlank()) {
+			erros.append("Nome do funcionario esta vazio. \n");
+		}
+		if (txtSenhaFuncionario.getText().isBlank()) {
+			erros.append("Senha esta vazio. \n");
+		}
+		if (txtUsuario.getText().isBlank()) {
+			erros.append("Usuario esta vazio. \n");
+		}
+		if (erros.length() != 0) {
+			Alerta.alertaCampoNulo(erros.toString());
+		}
+
+		return erros.length() == 0;
 	}
 
 }

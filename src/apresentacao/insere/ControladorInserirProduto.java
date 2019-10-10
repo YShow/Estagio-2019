@@ -82,7 +82,7 @@ public final class ControladorInserirProduto {
 			produto.setPreco(Double.parseDouble(txtPreco.getText().trim()));
 			produto.setQuantidade(Integer.parseInt(txtQuantidade.getText().trim()));
 			try {
-				if (negProduto.inserir(produto)) {
+				if (verificaValores() && negProduto.inserir(produto)) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
@@ -97,7 +97,7 @@ public final class ControladorInserirProduto {
 			produto.setQuantidade(Integer.parseInt(txtQuantidade.getText().trim()));
 
 			try {
-				if (negProduto.alterar(produto)) {
+				if (verificaValores() && negProduto.alterar(produto)) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
@@ -108,4 +108,23 @@ public final class ControladorInserirProduto {
 
 	}
 
+	private boolean verificaValores() {
+		final var erros = new StringBuilder();
+
+		if (txtNome.getText().isBlank()) {
+			erros.append("Nome esta vazio. \n");
+		}
+		if (txtPreco.getText().isBlank()) {
+			erros.append("Preço esta vazio. \n");
+		}
+		if (txtQuantidade.getText().isBlank()) {
+			erros.append("Quantidade esta vazio. \n");
+		}
+		if (erros.length() != 0) {
+			Alerta.alertaCampoNulo(erros.toString());
+		}
+
+		return erros.length() == 0;
+
+	}
 }

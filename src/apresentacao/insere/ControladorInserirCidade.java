@@ -75,7 +75,7 @@ public final class ControladorInserirCidade {
 
 			try {
 
-				if (negcidade.inserir(cidade)) {
+				if (verificaValores() && negcidade.inserir(cidade)) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
@@ -89,7 +89,7 @@ public final class ControladorInserirCidade {
 			cidade.setNome(txtCidade.getText().trim());
 
 			try {
-				if (negcidade.alterar(cidade)) {
+				if (verificaValores() && negcidade.alterar(cidade)) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
@@ -97,5 +97,19 @@ public final class ControladorInserirCidade {
 				Alerta.alertaErro(e.getMessage());
 			}
 		}
+	}
+
+	private boolean verificaValores() {
+		final var erros = new StringBuilder();
+		if (txtCidade.getText().isBlank()) {
+			erros.append("Cidade não preenchida. \n");
+		}
+		if (txtEstado.getText().isBlank()) {
+			erros.append("Estado não preenchido.");
+		}
+		if (erros.length() != 0) {
+			Alerta.alertaCampoNulo(erros.toString());
+		}
+		return erros.length() == 0;
 	}
 }
