@@ -51,7 +51,7 @@ public final class NegCaixa {
 			comando.setObject(1, data);
 
 			final var result = comando.executeQuery();
-			final List<Caixa> lista = new ArrayList<Caixa>();
+			final List<Caixa> lista = new ArrayList<>();
 			while (result.next()) {
 				final var caixa = new Caixa();
 				caixa.setCodigo(result.getInt("codigo"));
