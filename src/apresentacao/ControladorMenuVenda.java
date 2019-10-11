@@ -6,8 +6,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import apresentacao.insere.ControladorInserirVenda;
-import javafx.beans.property.ReadOnlyIntegerWrapper;
-import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -105,15 +105,15 @@ public final class ControladorMenuVenda {
 					tcCodigo.setCellValueFactory(new PropertyValueFactory<Vendas, Integer>("Codigo"));
 					tcFormaPAg.setCellValueFactory(new PropertyValueFactory<Vendas, String>("FormaPagamento"));
 
-					tcDataVenda.setCellValueFactory(dataVenda -> new ReadOnlyStringWrapper(
+					tcDataVenda.setCellValueFactory(dataVenda -> new SimpleStringProperty(
 							dataVenda.getValue().getData().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))));
 
 					tcCodCaixa.setCellValueFactory(
-							codCaixa -> new ReadOnlyIntegerWrapper(codCaixa.getValue().getCaixa().getCodigo())
+							codCaixa -> new SimpleIntegerProperty(codCaixa.getValue().getCaixa().getCodigo())
 									.asObject());
 
 					tcCodCliente.setCellValueFactory(
-							codCliente -> new ReadOnlyIntegerWrapper(codCliente.getValue().getCliente().getCodigo())
+							codCliente -> new SimpleIntegerProperty(codCliente.getValue().getCliente().getCodigo())
 									.asObject());
 
 					tcAtivo.setCellValueFactory(new PropertyValueFactory<Vendas, Boolean>("Ativo"));

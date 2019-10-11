@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import apresentacao.insere.ControladorInserirCliente;
-import javafx.beans.property.ReadOnlyIntegerWrapper;
-import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -159,9 +159,9 @@ public final class ControladorMenuCliente {
 					tcNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Nome"));
 					tcTelefone.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Telefone"));
 					tcCidade.setCellValueFactory(
-							cidade -> new ReadOnlyStringWrapper(cidade.getValue().getCidade().getNome()));
+							cidade -> new SimpleStringProperty(cidade.getValue().getCidade().getNome()));
 					tcCodCidade.setCellValueFactory(
-							codCidade -> new ReadOnlyIntegerWrapper(codCidade.getValue().getCidade().getCodigo())
+							codCidade -> new SimpleIntegerProperty(codCidade.getValue().getCidade().getCodigo())
 									.asObject());
 				} else {
 					Alerta.alertaNaoEncontrado();
