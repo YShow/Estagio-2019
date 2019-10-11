@@ -64,7 +64,7 @@ public final class ControladorMenuFuncionario {
 				}
 			});
 			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+			new JMetro(scene, Main.style);
 			stage.setScene(scene);
 			if (!Funcionario.getFuncionario().getAdministrador()) {
 				control.btnDesativaFuncionario.setDisable(true);

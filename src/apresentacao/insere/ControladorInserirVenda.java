@@ -72,20 +72,20 @@ public final class ControladorInserirVenda {
 			loader.setLocation(getClass().getResource("/apresentacao/insere/VendaInsere.fxml"));
 			final Parent root = loader.load();
 			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+			new JMetro(scene, Main.style);
 			stage.setScene(scene);
 
 			final ControladorInserirVenda controlador = loader.getController();
 
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
-
 				controlador.txtCliente.setText(String.valueOf(venda.getCliente().getCodigo()));
 				preencheCampos(controlador, venda.getCodigo());
+				formataCampo(controlador);
 				stage.setTitle("Alterar Venda");
 				stage.show();
 			} else if (tipo_tela.equals(TIPO_TELA.INSERE)) {
-				formataCampo(controlador);
 				stage.setTitle("Inserir Venda");
+				formataCampo(controlador);
 				stage.show();
 			}
 		} catch (final IOException e) {
@@ -146,7 +146,7 @@ public final class ControladorInserirVenda {
 		}));
 	}
 
-	private Vendas preencheVenda() {
+	private Vendas pegaVenda() {
 		final var venda = new Vendas();
 		final var cliente = new Cliente();
 		final var produto = new Produto();
@@ -185,15 +185,14 @@ public final class ControladorInserirVenda {
 	@FXML
 	private void btnGravar(final ActionEvent event) {
 		try {
-			final var venda = preencheVenda();
 			final var negVenda = new NegVendas();
 			if (tipo_telaa.equals(TIPO_TELA.INSERE)) {
-				if (verificaValores() && negVenda.inserir(venda)) {
+				if (verificaValores() && negVenda.inserir(pegaVenda())) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
 			} else {
-				if (verificaValores() && negVenda.alterar(venda)) {
+				if (verificaValores() && negVenda.alterar(pegaVenda())) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
@@ -212,7 +211,8 @@ public final class ControladorInserirVenda {
 			controlador.txtPrecoTotal.setText(String.valueOf(venda.getCaixa().getPrecototal()));
 			controlador.txtPrecoUnitario.setText(String.valueOf(venda.getProduto().getPreco()));
 			controlador.txtProduto.setText(String.valueOf(venda.getProduto().getCodigo()));
-			controlador.txtQtd.setText(String.valueOf(venda.getProduto().getQuantidade()));
+			controlador.txtQtd.setText(String.valueOf(venda.getQuantidadeVendida()));
+			controlador.txtQtdEstoque.setText(String.valueOf(venda.getProduto().getQuantidade()));
 			controlador.chkAtivo.setSelected(venda.isAtivo());
 		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());

@@ -55,7 +55,7 @@ public final class ControladorInserirFuncionario {
 			loader.setLocation(getClass().getResource("/apresentacao/insere/FuncionarioInsere.fxml"));
 			final Parent root = loader.load();
 			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+			new JMetro(scene, Main.style);
 			stage.setScene(scene);
 
 			final ControladorInserirFuncionario controlador = loader.getController();
@@ -82,45 +82,36 @@ public final class ControladorInserirFuncionario {
 
 	@FXML
 	private void btnGravarFuncionario(final ActionEvent event) {
-		final var negFun = new NegFuncionario();
-		final var funcionario = new Funcionario();
-		if (tipo_telaa == TIPO_TELA.INSERE) {
-			funcionario.setAdministrador(chkAdm.isSelected());
-			funcionario.setFuncao(txtFuncao.getText().trim());
-			funcionario.setNome(txtNomeFuncionario.getText().trim());
-			funcionario.setSenha(txtSenhaFuncionario.getText().trim());
-			funcionario.setUsuario(txtUsuario.getText().trim());
-			funcionario.setAtivo(chkAtivo.isSelected());
-			try {
-
-				if (verificaValores() && negFun.inserir(funcionario)) {
+		try {
+			final var negFun = new NegFuncionario();
+			if (tipo_telaa == TIPO_TELA.INSERE) {
+				if (verificaValores() && negFun.inserir(pegaValores())) {
 					Alerta.alertaSucesso();
 					btnGravarFuncionario.getScene().getWindow().hide();
 				}
-
-			} catch (final SQLException e) {
-				Alerta.alertaErro(e.getMessage());
-			}
-		} else {
-			funcionario.setCodigo(Integer.parseInt(txtCodigo.getText().trim()));
-			funcionario.setAdministrador(chkAdm.isSelected());
-			funcionario.setFuncao(txtFuncao.getText().trim());
-			funcionario.setNome(txtNomeFuncionario.getText().trim());
-			funcionario.setUsuario(txtUsuario.getText().trim());
-			funcionario.setAtivo(chkAtivo.isSelected());
-
-			funcionario.setSenha(txtSenhaFuncionario.getText().strip().trim());
-
-			try {
-				if (verificaValores() && negFun.alterar(funcionario)) {
+			} else {
+				if (verificaValores() && negFun.alterar(pegaValores())) {
 					Alerta.alertaSucesso();
-					btnGravarFuncionario.getScene().getWindow();
+					btnGravarFuncionario.getScene().getWindow().hide();
 				}
-
-			} catch (final SQLException e) {
-				Alerta.alertaErro(e.getMessage());
 			}
+		} catch (final SQLException e) {
+			Alerta.alertaErro(e.getMessage());
 		}
+	}
+
+	private Funcionario pegaValores() {
+		final var funcionario = new Funcionario();
+		if(!txtCodigo.getText().isBlank()) {
+			funcionario.setCodigo(Integer.parseInt(txtCodigo.getText()));
+		}
+		funcionario.setAdministrador(chkAdm.isSelected());
+		funcionario.setFuncao(txtFuncao.getText().trim());
+		funcionario.setNome(txtNomeFuncionario.getText().trim());
+		funcionario.setSenha(txtSenhaFuncionario.getText().trim());
+		funcionario.setUsuario(txtUsuario.getText().trim());
+		funcionario.setAtivo(chkAtivo.isSelected());
+		return funcionario;
 	}
 
 	private boolean verificaValores() {
@@ -131,7 +122,7 @@ public final class ControladorInserirFuncionario {
 		if (txtNomeFuncionario.getText().isBlank()) {
 			erros.append("Nome do funcionario esta vazio. \n");
 		}
-		if (txtSenhaFuncionario.getText().isBlank()) {
+		if (txtSenhaFuncionario.getText().isBlank() && tipo_telaa.equals(TIPO_TELA.INSERE)) {
 			erros.append("Senha esta vazio. \n");
 		}
 		if (txtUsuario.getText().isBlank()) {

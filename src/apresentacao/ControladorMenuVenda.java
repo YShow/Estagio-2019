@@ -2,6 +2,7 @@ package apresentacao;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import apresentacao.insere.ControladorInserirVenda;
@@ -70,9 +71,9 @@ public final class ControladorMenuVenda {
 					control.btnConsultaVenda(null);
 				}
 			});
-
+			control.dateData.setValue(LocalDate.now());
 			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+			new JMetro(scene, Main.style);
 			stage.setScene(scene);
 			if (!Funcionario.getFuncionario().getAdministrador()) {
 				control.btnDesativaVenda.setDisable(true);

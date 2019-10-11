@@ -68,4 +68,14 @@ public final class Vendas {
 		this.codigo = codigo;
 	}
 
+	private int quantidadeVendida;
+
+	public final int getQuantidadeVendida() {
+		return quantidadeVendida;
+	}
+
+	public final void setQuantidadeVendida(final int quantidadeVendida) {
+		this.quantidadeVendida = quantidadeVendida;
+	}
+
 }

@@ -70,7 +70,7 @@ public final class ControladorMenuCidade {
 			});
 
 			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+			new JMetro(scene, Main.style);
 			stage.setScene(scene);
 
 			if (tipo_tela.equals(TIPO_TELA.CONSULTA)) {

@@ -42,11 +42,11 @@ public final class ControladorInserirCidade {
 			loader.setLocation(getClass().getResource("/apresentacao/insere/CidadeInsere.fxml"));
 			final Parent root = loader.load();
 			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+			new JMetro(scene, Main.style);
 			stage.setScene(scene);
-
+			final ControladorInserirCidade controlador = loader.getController();
+			controlador.txtCodigo.setVisible(false);
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
-				final ControladorInserirCidade controlador = loader.getController();
 				controlador.btnGravar.setText("Alterar");
 				controlador.txtCidade.setText(cidade.getNome());
 				controlador.txtEstado.setText(cidade.getEstado());
@@ -66,37 +66,34 @@ public final class ControladorInserirCidade {
 
 	@FXML
 	private void btnGravar(final ActionEvent event) {
-		final var negcidade = new NegCidade();
-		final var cidade = new Cidade();
-		if (tipo_telaa == TIPO_TELA.INSERE) {
+		try {
+			final var negcidade = new NegCidade();
 
-			cidade.setNome(txtCidade.getText().trim());
-			cidade.setEstado(txtEstado.getText().trim());
-
-			try {
-
-				if (verificaValores() && negcidade.inserir(cidade)) {
+			if (tipo_telaa == TIPO_TELA.INSERE) {
+				if (verificaValores() && negcidade.inserir(pegaCidade())) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
-
-			} catch (final SQLException e) {
-				Alerta.alertaErro(e.getMessage());
-			}
-		} else {
-			cidade.setCodigo(Integer.valueOf(txtCodigo.getText().trim()));
-			cidade.setEstado(txtEstado.getText().trim());
-			cidade.setNome(txtCidade.getText().trim());
-
-			try {
-				if (verificaValores() && negcidade.alterar(cidade)) {
+			} else {
+				if (verificaValores() && negcidade.alterar(pegaCidade())) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
-			} catch (final SQLException e) {
-				Alerta.alertaErro(e.getMessage());
 			}
+		} catch (final SQLException e) {
+			Alerta.alertaErro(e.getMessage());
 		}
+
+	}
+
+	private Cidade pegaCidade() {
+		final var cidade = new Cidade();
+		if(!txtCodigo.getText().isBlank()) {
+			cidade.setCodigo(Integer.valueOf(txtCodigo.getText().trim()));
+		}
+		cidade.setEstado(txtEstado.getText().trim());
+		cidade.setNome(txtCidade.getText().trim());
+		return cidade;
 	}
 
 	private boolean verificaValores() {

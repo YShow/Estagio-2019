@@ -61,7 +61,7 @@ public final class ControladorInserirCliente {
 			final Parent root = loader.load();
 
 			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+			new JMetro(scene, Main.style);
 			stage.setScene(scene);
 			final ControladorInserirCliente controlador = loader.getController();
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
@@ -88,48 +88,40 @@ public final class ControladorInserirCliente {
 
 	@FXML
 	private void btnGrava(final ActionEvent event) {
-		final var negCliente = new NegCliente();
+		try {
+			final var negCliente = new NegCliente();
+
+			if (tipo_telaa == TIPO_TELA.INSERE) {
+				if (verificaValores() && negCliente.inserir(pegaCliente())) {
+					Alerta.alertaSucesso();
+					btnGrava.getScene().getWindow().hide();
+				}
+			} else {
+				if (verificaValores() && negCliente.alterar(pegaCliente())) {
+					Alerta.alertaSucesso();
+					btnGrava.getScene().getWindow().hide();
+				}
+			}
+		} catch (final SQLException e) {
+			Alerta.alertaErro(e.getMessage());
+		}
+
+	}
+
+	private Cliente pegaCliente() {
 		final var cliente = new Cliente();
 		final var cidade = new Cidade();
-		if (tipo_telaa == TIPO_TELA.INSERE) {
-			cliente.setAtivo(chkAtivo.isSelected());
-
-			// INSERCAO DE CODIGO CIDADE APENAS
-			cidade.setCodigo(Integer.parseInt(txtCodCidade.getText().trim()));
-			cliente.setNome(txtNome.getText().trim());
-			cliente.setEndereco(txtEndereco.getText().trim());
-			cliente.setTelefone(txtTelefone.getText().trim());
-			cliente.setCPF(txtCPF.getText().trim());
-			cliente.setCidade(cidade);
-
-			try {
-				if (verificaValores() && negCliente.inserir(cliente)) {
-					Alerta.alertaSucesso();
-					btnGrava.getScene().getWindow().hide();
-				}
-			} catch (final SQLException e) {
-				Alerta.alertaErro(e.getMessage());
-			}
-		} else {
-			cliente.setAtivo(chkAtivo.isSelected());
+		cliente.setAtivo(chkAtivo.isSelected());
+		if (!txtCodigo.getText().isBlank()) {
 			cliente.setCodigo(Integer.parseInt(txtCodigo.getText().trim()));
-			cliente.setCPF(txtCPF.getText().trim());
-			cliente.setEndereco(txtEndereco.getText().trim());
-			cliente.setNome(txtNome.getText().trim());
-			cliente.setTelefone(txtTelefone.getText().trim());
-			cidade.setCodigo(Integer.parseInt(txtCodCidade.getText().trim()));
-			cliente.setCidade(cidade);
-
-			try {
-				if (verificaValores() && negCliente.alterar(cliente)) {
-					Alerta.alertaSucesso();
-					btnGrava.getScene().getWindow().hide();
-				}
-
-			} catch (final SQLException e) {
-				Alerta.alertaErro(e.getMessage());
-			}
 		}
+		cliente.setCPF(txtCPF.getText().trim());
+		cliente.setEndereco(txtEndereco.getText().trim());
+		cliente.setNome(txtNome.getText().trim());
+		cliente.setTelefone(txtTelefone.getText().trim());
+		cidade.setCodigo(Integer.parseInt(txtCodCidade.getText().trim()));
+		cliente.setCidade(cidade);
+		return cliente;
 	}
 
 	@FXML

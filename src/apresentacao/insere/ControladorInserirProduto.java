@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -37,6 +38,8 @@ public final class ControladorInserirProduto {
 	private Button btnGravar;
 	@FXML
 	private CheckBox chkAtivo;
+	@FXML
+    private Label lblCodigo;
 	private static TIPO_TELA tipo_telaa;
 
 	public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela, final Produto produto) {
@@ -50,11 +53,11 @@ public final class ControladorInserirProduto {
 			loader.setLocation(getClass().getResource("/apresentacao/insere/ProdutoInsere.fxml"));
 			final Parent root = loader.load();
 			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+			new JMetro(scene, Main.style);
 			stage.setScene(scene);
-
+			final ControladorInserirProduto controlador = loader.getController();
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
-				final ControladorInserirProduto controlador = loader.getController();
+
 				controlador.btnGravar.setText("Alterar");
 				controlador.txtCodigo.setText(String.valueOf(produto.getCodigo()));
 				controlador.txtNome.setText(produto.getNome());
@@ -64,6 +67,8 @@ public final class ControladorInserirProduto {
 				stage.setTitle("Alterar Produto");
 				stage.show();
 			} else if (tipo_tela.equals(TIPO_TELA.INSERE)) {
+				controlador.txtCodigo.setVisible(false);
+				controlador.lblCodigo.setVisible(false);
 				stage.setTitle("Inserir Produto");
 				stage.show();
 			}
@@ -74,38 +79,35 @@ public final class ControladorInserirProduto {
 
 	@FXML
 	private void btnGravar(final ActionEvent event) {
-		final var negProduto = new NegProduto();
-		final var produto = new Produto();
-		if (tipo_telaa == TIPO_TELA.INSERE) {
-			produto.setAtivo(chkAtivo.isSelected());
-			produto.setNome(txtNome.getText().trim());
-			produto.setPreco(Double.parseDouble(txtPreco.getText().trim()));
-			produto.setQuantidade(Integer.parseInt(txtQuantidade.getText().trim()));
-			try {
-				if (verificaValores() && negProduto.inserir(produto)) {
+		try {
+			final var negProduto = new NegProduto();
+			if (tipo_telaa == TIPO_TELA.INSERE) {
+				if (verificaValores() && negProduto.inserir(pegaProduto())) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
-			} catch (final SQLException e) {
-				Alerta.alertaErro(e.getMessage());
-			}
-		} else {
-			produto.setAtivo(chkAtivo.isSelected());
-			produto.setCodigo(Integer.parseInt(txtCodigo.getText().trim()));
-			produto.setNome(txtNome.getText().trim());
-			produto.setPreco(Double.parseDouble(txtPreco.getText().trim()));
-			produto.setQuantidade(Integer.parseInt(txtQuantidade.getText().trim()));
-
-			try {
-				if (verificaValores() && negProduto.alterar(produto)) {
+			} else {
+				if (verificaValores() && negProduto.alterar(pegaProduto())) {
 					Alerta.alertaSucesso();
 					btnGravar.getScene().getWindow().hide();
 				}
-			} catch (final SQLException e) {
-				Alerta.alertaErro(e.getMessage());
 			}
+		} catch (final SQLException e) {
+			Alerta.alertaErro(e.getMessage());
 		}
 
+	}
+
+	private Produto pegaProduto() {
+		final var produto = new Produto();
+		produto.setAtivo(chkAtivo.isSelected());
+		if (!txtCodigo.getText().isBlank()) {
+			produto.setCodigo(Integer.parseInt(txtCodigo.getText().trim()));
+		}
+		produto.setNome(txtNome.getText().trim());
+		produto.setPreco(Double.parseDouble(txtPreco.getText().trim()));
+		produto.setQuantidade(Integer.parseInt(txtQuantidade.getText().trim()));
+		return produto;
 	}
 
 	private boolean verificaValores() {

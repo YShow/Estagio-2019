@@ -28,10 +28,12 @@ public final class NegVendas {
 	private static final String SQL_VENDA_PRODUTO = "INSERT INTO cantagalo.vend_prod(preco_unitario, quantidade, cod_venda, cod_produto)\n"
 			+ "VALUES(?,?,?,?);";
 	private static final String SQL_CAIXA = "INSERT into caixa(data,preco_total,saida,codigo_cliente,ativo) values(?,?,?,?,?)";
-	private static final String SQL_SEARCH_UPDATE = "SELECT v.codigo,v.cod_cliente,vp.cod_produto,v.ativo"
-			+ ",v.forma_de_pagamento,vp.preco_unitario,vp.quantidade,\n" + "c.preco_total,c.saida\n" + "from vendas v\n"
-			+ "JOIN vend_prod vp on vp.cod_venda = v.codigo\n" + "JOIN caixa c on c.codigo_cliente = v.cod_cliente\n"
-			+ "WHERE v.codigo = ?;";
+	private static final String SQL_SEARCH_UPDATE = "SELECT v.codigo,v.cod_cliente,vp.cod_produto,v.ativo,\n" +
+			"v.forma_de_pagamento,vp.preco_unitario,vp.quantidade, c.preco_total,c.saida,p.quantidade from vendas v\n" +
+			"JOIN vend_prod vp on vp.cod_venda = v.codigo\n" +
+			"JOIN caixa c on c.codigo_cliente = v.cod_cliente\n" +
+			"join produto p on p.codigo = vp.cod_produto\n" +
+			"WHERE v.codigo = ?;";
 
 	public final boolean inserir(final Vendas vendas) throws SQLException {
 		final var comeco = Instant.now();
@@ -190,10 +192,10 @@ public final class NegVendas {
 				venda.setAtivo(result.getBoolean("v.ativo"));
 				venda.setFormaPagamento(result.getString("v.forma_de_pagamento"));
 				produto.setPreco(result.getDouble("vp.preco_unitario"));
-				produto.setQuantidade(result.getInt("vp.quantidade"));
+				produto.setQuantidade(result.getInt("p.quantidade"));
 				caixa.setPrecototal(result.getDouble("c.preco_total"));
 				caixa.setSaida(result.getDouble("c.saida"));
-
+				venda.setQuantidadeVendida(result.getInt("vp.quantidade"));
 				venda.setCaixa(caixa);
 				venda.setProduto(produto);
 				venda.setCliente(cliente);

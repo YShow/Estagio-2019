@@ -65,6 +65,7 @@ public final class ControladorMenuCaixa {
 			new JMetro(scene, Main.style);
 			stage.setScene(scene);
 			final ControladorMenuCaixa controlador = loader.getController();
+			controlador.dpData.setValue(LocalDate.now());
 			controlador.dpData.setOnKeyPressed(e -> {
 				if (e.getCode().equals(KeyCode.ENTER)) {
 					controlador.conulstaCaixa(null);

@@ -18,7 +18,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import jfxtras.styles.jmetro.JMetro;
@@ -87,7 +86,7 @@ public final class ControladorMenuCliente {
 				}
 			});
 			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+			new JMetro(scene, Main.style);
 			stage.setScene(scene);
 			if (!Funcionario.getFuncionario().getAdministrador()) {
 				controlador.btnDesativarCliente.setDisable(true);
@@ -108,12 +107,17 @@ public final class ControladorMenuCliente {
 			final var loader = new FXMLLoader();
 			stage.initModality(Modality.APPLICATION_MODAL);
 			loader.setLocation(getClass().getResource("/apresentacao/Cliente.fxml"));
-			final Pane root = loader.load();
+			final Parent root = loader.load();
 			controlador = loader.getController();
 
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
 			stage.setScene(scene);
+			controlador.txtCliente.setOnKeyPressed(e -> {
+				if (e.getCode().equals(KeyCode.ENTER)) {
+					controlador.btnConsultaCliente(null);
+				}
+			});
 
 			controlador.btnInsereCliente.setDisable(true);
 			controlador.btnInsereCliente.setVisible(false);

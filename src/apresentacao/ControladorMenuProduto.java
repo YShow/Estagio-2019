@@ -69,7 +69,7 @@ public final class ControladorMenuProduto {
 
 			final Parent root = loader.load();
 			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+			new JMetro(scene, Main.style);
 			stage.setScene(scene);
 			final ControladorMenuProduto controlador = loader.getController();
 			controlador.txtProduto.setOnKeyPressed(e -> {
@@ -97,7 +97,7 @@ public final class ControladorMenuProduto {
 			final Parent root = loader.load();
 
 			final var scene = new Scene(root);
-			new JMetro(scene, Main.style).setAutomaticallyColorPanes(true);
+			new JMetro(scene, Main.style);
 			stage.setScene(scene);
 			final ControladorMenuProduto controlador = loader.getController();
 			if (tipo_tela.equals(TIPO_TELA.CONSULTA)) {
