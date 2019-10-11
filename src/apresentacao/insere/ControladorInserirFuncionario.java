@@ -43,6 +43,7 @@ public final class ControladorInserirFuncionario {
 	@FXML
 	private CheckBox chkAtivo;
 	private static TIPO_TELA tipo_telaa;
+	private final NegFuncionario negFun = new NegFuncionario();
 
 	public void abreTelaFuncionarioInsere(final TIPO_TELA tipo_tela, final Funcionario funcionario) {
 
@@ -83,7 +84,7 @@ public final class ControladorInserirFuncionario {
 	@FXML
 	private void btnGravarFuncionario(final ActionEvent event) {
 		try {
-			final var negFun = new NegFuncionario();
+
 			if (tipo_telaa == TIPO_TELA.INSERE) {
 				if (verificaValores() && negFun.inserir(pegaValores())) {
 					Alerta.alertaSucesso();

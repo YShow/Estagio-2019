@@ -30,6 +30,7 @@ public final class ControladorInserirCidade {
 	@FXML
 	private TextField txtEstado;
 	private static TIPO_TELA tipo_telaa;
+	private final NegCidade negcidade = new NegCidade();
 
 	public void abreTelaCidadeInsere(final TIPO_TELA tipo_tela, final Cidade cidade) {
 
@@ -67,7 +68,7 @@ public final class ControladorInserirCidade {
 	@FXML
 	private void btnGravar(final ActionEvent event) {
 		try {
-			final var negcidade = new NegCidade();
+
 
 			if (tipo_telaa == TIPO_TELA.INSERE) {
 				if (verificaValores() && negcidade.inserir(pegaCidade())) {

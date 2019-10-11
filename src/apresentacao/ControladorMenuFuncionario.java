@@ -49,6 +49,7 @@ public final class ControladorMenuFuncionario {
 	private Button btnDesativaFuncionario;
 
 	private final ControladorInserirFuncionario tela = new ControladorInserirFuncionario();
+	private final NegFuncionario negFuncionario = new NegFuncionario();
 
 	public void abreTelaFuncionarioMenu() {
 
@@ -94,7 +95,7 @@ public final class ControladorMenuFuncionario {
 
 			if (!txtFuncionario.getText().isBlank()) {
 				limpaTabela();
-				final var negFuncionario = new NegFuncionario();
+
 				final var funcionario = negFuncionario.consultar(txtFuncionario.getText().trim());
 				if (!funcionario.isEmpty()) {
 					tblFuncionario.setItems(FXCollections.observableList(funcionario));
@@ -120,7 +121,7 @@ public final class ControladorMenuFuncionario {
 	@FXML
 	private void btnDesativaFuncionario(final ActionEvent event) {
 		try {
-			final var negFuncionario = new NegFuncionario();
+
 			final var funcionario = tblFuncionario.getSelectionModel().getSelectedItem();
 			if (negFuncionario.excluir(funcionario.getCodigo())) {
 				tblFuncionario.getItems().remove(funcionario);

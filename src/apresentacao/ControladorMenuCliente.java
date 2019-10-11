@@ -68,6 +68,7 @@ public final class ControladorMenuCliente {
 	private static TIPO_TELA tipo_telaa;
 	private static Cliente clienteAlterar;
 	private ControladorMenuCliente controlador;
+	private final NegCliente negCliente = new NegCliente();
 
 	public void abreTelaClienteMenu(final TIPO_TELA tipo_tela) {
 
@@ -147,7 +148,7 @@ public final class ControladorMenuCliente {
 
 			if (!txtCliente.getText().isBlank()) {
 				limpaTabela();
-				final var negCliente = new NegCliente();
+
 				final var cliente = negCliente.consultar(txtCliente.getText().trim());
 				if (!cliente.isEmpty()) {
 					tvCliente.setItems(FXCollections.observableList(cliente));
@@ -184,7 +185,7 @@ public final class ControladorMenuCliente {
 			btnDesativarCliente.getScene().getWindow().hide();
 
 		} else {
-			final var negCliente = new NegCliente();
+
 			try {
 				if (negCliente.excluir(cliente.getCodigo())) {
 					tvCliente.getItems().remove(cliente);

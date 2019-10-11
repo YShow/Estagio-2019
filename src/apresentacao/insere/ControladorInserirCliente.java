@@ -49,6 +49,7 @@ public final class ControladorInserirCliente {
 	@FXML
 	private TextField txtCodCidade;
 	private static TIPO_TELA tipo_telaa;
+	private final NegCliente negCliente = new NegCliente();
 
 	public void abreTelaClienteInsere(final TIPO_TELA tipo_tela, final Cliente cliente) {
 
@@ -89,7 +90,7 @@ public final class ControladorInserirCliente {
 	@FXML
 	private void btnGrava(final ActionEvent event) {
 		try {
-			final var negCliente = new NegCliente();
+
 
 			if (tipo_telaa == TIPO_TELA.INSERE) {
 				if (verificaValores() && negCliente.inserir(pegaCliente())) {

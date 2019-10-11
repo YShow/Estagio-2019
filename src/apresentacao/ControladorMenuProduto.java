@@ -58,6 +58,7 @@ public final class ControladorMenuProduto {
 	private TableColumn<Produto, Boolean> tcAtivo;
 	private static TIPO_TELA tipo_telaa;
 	private static Produto produtoAlterar;
+	private final NegProduto negProduto = new NegProduto();
 
 	public void abreTelaProdutoMenu(final TIPO_TELA tipo_tela) {
 
@@ -133,7 +134,7 @@ public final class ControladorMenuProduto {
 		try {
 			if (!txtProduto.getText().isBlank()) {
 				limpaTabela();
-				final var negProduto = new NegProduto();
+
 				final var funcionario = negProduto.consultar(txtProduto.getText().trim());
 				if (!funcionario.isEmpty()) {
 					tvProduto.setItems(FXCollections.observableList(funcionario));
@@ -167,7 +168,7 @@ public final class ControladorMenuProduto {
 			produtoAlterar = produto;
 			btnDesativaProduto.getScene().getWindow().hide();
 		} else {
-			final var negProduto = new NegProduto();
+
 			try {
 				if (negProduto.excluir(produto.getCodigo())) {
 

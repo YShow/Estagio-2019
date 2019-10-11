@@ -41,7 +41,7 @@ public final class ControladorInserirProduto {
 	@FXML
     private Label lblCodigo;
 	private static TIPO_TELA tipo_telaa;
-
+	private final NegProduto negProduto = new NegProduto();
 	public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela, final Produto produto) {
 
 		try {
@@ -80,7 +80,7 @@ public final class ControladorInserirProduto {
 	@FXML
 	private void btnGravar(final ActionEvent event) {
 		try {
-			final var negProduto = new NegProduto();
+
 			if (tipo_telaa == TIPO_TELA.INSERE) {
 				if (verificaValores() && negProduto.inserir(pegaProduto())) {
 					Alerta.alertaSucesso();

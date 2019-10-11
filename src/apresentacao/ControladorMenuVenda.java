@@ -53,6 +53,7 @@ public final class ControladorMenuVenda {
 	private Button btnDesativaVenda;
 	@FXML
 	private TableColumn<Vendas, Boolean> tcAtivo;
+	private final NegVendas negVenda = new NegVendas();
 
 	public void abreTelaVendaMenu() {
 
@@ -97,7 +98,7 @@ public final class ControladorMenuVenda {
 		try {
 			if (dateData.getValue() != null) {
 				limpaTabela();
-				final var negVenda = new NegVendas();
+
 				final var venda = negVenda.consultar(dateData.getValue());
 				if (!venda.isEmpty()) {
 					tvVenda.setItems(FXCollections.observableList(venda));
@@ -135,7 +136,7 @@ public final class ControladorMenuVenda {
 	@FXML
 	private void btnDesativaVenda(final ActionEvent event) {
 		final var venda = tvVenda.getSelectionModel().getSelectedItem();
-		final var negVenda = new NegVendas();
+
 		try {
 			if (negVenda.excluir(venda.getCodigo())) {
 				tvVenda.getItems().remove(venda);

@@ -51,6 +51,7 @@ public final class ControladorMenuCaixa {
 
 	@FXML
 	private TableColumn<Caixa, Boolean> tcAtivo;
+	private final NegCaixa negCaixa = new NegCaixa();
 
 	public void abreTelaCaixaMenu() {
 		try {
@@ -102,7 +103,6 @@ public final class ControladorMenuCaixa {
 		try {
 			if (dpData.getValue() != null) {
 				limpaTabela();
-				final var negCaixa = new NegCaixa();
 				final var caixas = negCaixa.consultar(dpData.getValue());
 				if (!caixas.isEmpty()) {
 					tcAtivo.setCellValueFactory(new PropertyValueFactory<Caixa, Boolean>("ativo"));

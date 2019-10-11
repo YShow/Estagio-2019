@@ -51,6 +51,7 @@ public final class ControladorMenuCidade {
 	private static TIPO_TELA tipo_telaa;
 	private final ControladorInserirCidade tela = new ControladorInserirCidade();
 	private static Cidade cidadeVolta;
+	private final NegCidade negCidade = new NegCidade();
 
 	public Cidade abreTelaCidadeMenu(final TIPO_TELA tipo_tela) {
 
@@ -106,7 +107,7 @@ public final class ControladorMenuCidade {
 		try {
 			if (!txtConsullaCidade.getText().isBlank()) {
 				limpaTabela();
-				final var negCidade = new NegCidade();
+
 				final var funcionario = negCidade.consultar(txtConsullaCidade.getText().trim());
 				if (!funcionario.isEmpty()) {
 					tvCidade.setItems(FXCollections.observableList(funcionario));
@@ -140,7 +141,7 @@ public final class ControladorMenuCidade {
 		} else {
 
 			try {
-				final var negCidade = new NegCidade();
+
 				if (negCidade.excluir(cidade.getCodigo())) {
 					tvCidade.getItems().remove(cidade);
 					Alerta.alertaSucesso();
