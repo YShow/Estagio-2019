@@ -46,7 +46,7 @@ public final class NegCidade {
 
 			comando.setString(1, metodo + '*');
 			final var result = comando.executeQuery();
-			final List<Cidade> lista = new ArrayList<>();
+			final var lista = new ArrayList<Cidade>();
 			while (result.next()) {
 				final var cidade = new Cidade();
 				cidade.setCodigo(result.getInt("codigo"));

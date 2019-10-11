@@ -104,7 +104,7 @@ public final class NegVendas {
 		try (con; comando;) {
 			comando.setObject(1, metodo);
 			final var result = comando.executeQuery();
-			final List<Vendas> lista = new ArrayList<>();
+			final var lista = new ArrayList<Vendas>();
 
 			/*
 			 * "SELECT codigo, cod_cliente, cod_caixa, data_venda," +
@@ -137,7 +137,7 @@ public final class NegVendas {
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_UPDATE);
 		try (con; comando;) {
-
+			//TODO Fazer alteração de venda
 			con.commit();
 			System.out
 					.println("Alterar de Vendas demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");

@@ -49,7 +49,7 @@ public final class NegProduto {
 		try (con; comando;) {
 			comando.setString(1, metodo + '*');
 			final var result = comando.executeQuery();
-			final List<Produto> lista = new ArrayList<>();
+			final var lista = new ArrayList<Produto>();
 			while (result.next()) {
 				final var produto = new Produto();
 				produto.setAtivo(result.getBoolean("ativo"));
@@ -92,6 +92,7 @@ public final class NegProduto {
 		con.setAutoCommit(false);
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_DELETE);
+		//TODO FAZER A EXCLUSAO
 		try (con; comando;) {
 			comando.setInt(1, id);
 			final var excluiu = comando.executeUpdate() >= 1;
