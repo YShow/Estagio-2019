@@ -7,6 +7,7 @@
 	<version>0.9.0</version>
 	  <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
   </properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -24,6 +25,9 @@
 				<version>3.8.1</version>
 				<configuration>
 					<release>13</release>
+					<target>13</target>
+					<source>13</source>
+					<encoding>UTF-8</encoding>
 					<debug>false</debug>
 					<showDeprecation>true</showDeprecation>					
 				</configuration>
@@ -37,7 +41,7 @@
 						<manifest>
 							<mainClass>apresentacao.NewMain</mainClass>
 							<addClasspath>true</addClasspath>
-							<classpathPrefix>./libs/</classpathPrefix>
+							<classpathPrefix>./libs/</classpathPrefix>							
 						</manifest>
 					</archive>
 				</configuration>
