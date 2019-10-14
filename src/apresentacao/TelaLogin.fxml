@@ -21,6 +21,7 @@
 			</font>
 		</Label>
 		<PasswordField fx:id="txtSenha" layoutX="122.0" layoutY="103.0" prefHeight="25.0" prefWidth="356.0" />
-		<Button layoutX="240.0" layoutY="128.0" mnemonicParsing="false" onAction="#btnLogin" prefHeight="39.0" prefWidth="100.0" text="Entrar" />
+		<Button layoutX="302.0" layoutY="128.0" mnemonicParsing="false" onAction="#btnLogin" prefHeight="39.0" prefWidth="100.0" text="Entrar" />
+      <Button layoutX="190.0" layoutY="128.0" mnemonicParsing="false" onAction="#btnSair" prefHeight="39.0" prefWidth="100.0" text="Sair" />
 	</children>
 </AnchorPane>

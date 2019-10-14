@@ -15,7 +15,7 @@ public final class Alerta {
 
 	public static void alertaSucesso() {
 		final Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
+		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
 		alerta.setAlertType(AlertType.INFORMATION);
@@ -27,7 +27,7 @@ public final class Alerta {
 
 	public static void alertaNaoEncontrado() {
 		final Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
+		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
 		alerta.setAlertType(AlertType.INFORMATION);
@@ -38,7 +38,7 @@ public final class Alerta {
 
 	public static void alertaCustom() {
 		final Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
+		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
 		alerta.setAlertType(AlertType.INFORMATION);
@@ -51,7 +51,7 @@ public final class Alerta {
 
 	public static void alertaErro(final String erro) {
 		final Alert alerta = new Alert(Alert.AlertType.ERROR);
-		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
+		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
 		alerta.setAlertType(AlertType.WARNING);
@@ -103,7 +103,7 @@ public final class Alerta {
 
 	public static void alertaClienteEmCaixa() {
 		final Alert alerta = new Alert(Alert.AlertType.WARNING);
-		new JMetro(alerta.getDialogPane().getScene(), Main.style).setAutomaticallyColorPanes(true);
+		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
 		alerta.setAlertType(AlertType.WARNING);

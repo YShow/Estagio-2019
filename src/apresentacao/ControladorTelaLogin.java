@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import apresentacao.insere.ControladorInserirFuncionario;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -142,4 +143,8 @@ public final class ControladorTelaLogin extends Application {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
+	   @FXML
+	    void btnSair(final ActionEvent event) {
+		   Platform.exit();
+	    }
 }
