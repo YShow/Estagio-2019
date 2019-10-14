@@ -1,6 +1,8 @@
-jlink --no-header-files --no-man-pages --compress=2 --strip-debug --add-modules java.base,java.desktop,java.sql,jdk.jfr,java.scripting,java.xml,jdk.unsupported --output /home/md-brasil-yasser/eclipse-workspace/Estagio-2019/target/teste
+jlink --no-header-files --no-man-pages --compress=2 --strip-debug --add-modules java.base,java.desktop,java.sql,jdk.jfr,java.scripting,java.xml,jdk.unsupported --output ~/eclipse-workspace/Estagio-2019/target/teste
 
 
 
 
-../../../opt/jdk-13/bin/jdeps --module-path ./libs/:/home/md-brasil-yasser/opt/jdk-13/lib/ --add-modules=javafx.controls,javafx.base --ignore-missing-deps --multi-release=13 --list-deps teste-0.0.1-SNAPSHOT.jar libs/*
+~/opt/jdk-13/bin/jdeps --module-path ./libs/:~/opt/jdk-13/lib/ --add-modules=javafx.controls,javafx.base --ignore-missing-deps --multi-release=13 --list-deps teste-0.0.1-SNAPSHOT.jar libs/*
+
+~/opt/jdk-13/bin/java -serverXX:+UnlockExperimentalVMOptions  -Xmx500m -XX:MaxHeapFreeRatio=10 -XX:MinHeapFreeRatio=5 -XX:+EnableJVMCI -XX:+UseJVMCICompiler -XX:+TieredCompilation -XX:+UseStringDeduplication -Dcom.sun.management.jmxremote=true -Dcom.sun.management.jmxremote.port=20000 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1 -XX:-ShrinkHeapInSteps  -XX:-PrintCompilation -XX:-G1UseAdaptiveIHOP -XX:InitiatingHeapOccupancyPercent=20 -Dgraal.CompilerConfiguration=economy -Dgraal.MitigateSpeculativeExecutionAttacks=None  -jar

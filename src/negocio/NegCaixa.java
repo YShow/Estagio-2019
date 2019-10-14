@@ -80,7 +80,8 @@ public final class NegCaixa {
 			comando.setDouble(2, caixa.getPrecototal());
 			comando.setDouble(3, caixa.getSaida());
 			comando.setDouble(4, caixa.getCliente());
-			comando.setDouble(5, caixa.getCodigo());
+			comando.setBoolean(5, caixa.isAtivo());
+			comando.setDouble(6, caixa.getCodigo());
 			final var alterou = comando.executeUpdate() >= 1;
 			con.commit();
 
