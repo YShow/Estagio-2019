@@ -20,7 +20,7 @@ public final class NegCliente {
 			+ "WHERE MATCH(c.nome) AGAINST(? IN BOOLEAN MODE)";
 	private static final String SQL_UPDATE = "update cliente set nome = ?, CPF = ?, endereco = ?,"
 			+ "telefone = ?, ativo = ?, id_cidade = ? where codigo = ?;";
-	private static final String SQL_DELETE = "DELETE FROM cantagalo.cliente\n" + " WHERE codigo=?;";
+	private static final String SQL_DELETE = "UPDATE cantagalo.cliente SET ativo=? WHERE codigo=?;";
 
 	public final boolean inserir(final Cliente cliente) throws SQLException {
 		final var comeco = Instant.now();
@@ -112,7 +112,8 @@ public final class NegCliente {
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_DELETE);
 		try (con; comando;) {
-			comando.setInt(1, id);
+			comando.setBoolean(1, false);
+			comando.setInt(2, id);
 			final var excluiu = comando.executeUpdate() >= 1;
 			con.commit();
 			System.out.println(

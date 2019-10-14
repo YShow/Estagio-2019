@@ -18,8 +18,8 @@ public final class NegCaixa {
 	private static final String SQL_SEARCH = "SELECT codigo, data, preco_total, saida, codigo_cliente,ativo "
 			+ "FROM cantagalo.caixa where data = ?";
 	private static final String SQL_UPDATE = "UPDATE cantagalo.caixa "
-			+ "SET data= ?, preco_total=?, saida= ?, codigo_cliente= ?" + "WHERE codigo= ?;";
-	private static final String SQL_DELETE = "";
+			+ "SET data= ?, preco_total=?, saida= ?, codigo_cliente= ?, ativo = ? WHERE codigo= ?;";
+	private static final String SQL_DELETE = "UPDATE cantagalo.caixa SET ativo= ? WHERE codigo= ?;";
 
 	public final boolean inserir(final Caixa caixa) throws SQLException {
 		final var comeco = Instant.now();
@@ -97,7 +97,8 @@ public final class NegCaixa {
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		con.setAutoCommit(false);
 		try (con; comando;) {
-			comando.setInt(1, id);
+			comando.setBoolean(1, false);
+			comando.setInt(2, id);
 			final var excluiu = comando.executeUpdate() >= 1;
 			con.commit();
 			System.out

@@ -89,7 +89,15 @@ public final class ControladorMenuCaixa {
 
 	@FXML
 	void btnDesativarCaixa(final ActionEvent event) {
-
+		final var caixa = tvCaixa.getSelectionModel().getSelectedItem();
+		try {
+			if(negCaixa.excluir(caixa.getCodigo())) {
+				Alerta.alertaSucesso();
+				tvCaixa.getItems().remove(caixa);
+			}
+		} catch (final SQLException e) {
+			Alerta.alertaErro(e.getMessage());
+		}
 	}
 
 	@FXML

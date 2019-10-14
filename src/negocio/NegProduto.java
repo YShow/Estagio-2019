@@ -17,7 +17,7 @@ public final class NegProduto {
 	private static final String SQL_SEARCH = "SELECT codigo, ativo, preco, quantidade, nome FROM produto WHERE MATCH(nome) AGAINST(? IN BOOLEAN MODE)";
 	private static final String SQL_UPDATE = "UPDATE cantagalo.produto\n"
 			+ "SET ativo=?, preco=?, quantidade=?, nome=?\n" + "WHERE codigo=? ;";
-	private static final String SQL_DELETE = "";
+	private static final String SQL_DELETE = "UPDATE cantagalo.produto SET ativo=? WHERE codigo=?;";
 
 	public final boolean inserir(final Produto produto) throws SQLException {
 		final var comeco = Instant.now();
@@ -94,7 +94,8 @@ public final class NegProduto {
 		final var comando = con.prepareStatement(SQL_DELETE);
 		//TODO FAZER A EXCLUSAO
 		try (con; comando;) {
-			comando.setInt(1, id);
+			comando.setBoolean(1, false);
+			comando.setInt(2, id);
 			final var excluiu = comando.executeUpdate() >= 1;
 			con.commit();
 			System.out.println(

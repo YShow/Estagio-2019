@@ -18,7 +18,7 @@ public final class NegFuncionario {
 	private static final String SQL_SEARCH = "SELECT codigo,nome,funcao,administrador,usuario FROM funcionario WHERE MATCH(nome,usuario) AGAINST(? IN BOOLEAN MODE) and ativo = true";
 	private static final String SQL_UPDATE = "update funcionario set nome = ?, funcao = ?, administrador = ?,"
 			+ "senhahash =COALESCE(?,senhahash), salt =COALESCE(?,salt),usuario = ?,ativo = ? where codigo = ?";
-	private static final String SQL_DELETE = "update funcionario set ativo = ?" + " WHERE codigo=? ;";
+	private static final String SQL_DELETE = "update funcionario set ativo = ? WHERE codigo=? ;";
 
 	public final boolean inserir(final Funcionario funcionario) throws SQLException {
 		final var comeco = Instant.now();
