@@ -128,6 +128,7 @@ public final class ControladorMenuCidade {
 
 	private void limpaTabela() {
 		tvCidade.getItems().clear();
+		tvCidade.refresh();
 	}
 
 	@FXML

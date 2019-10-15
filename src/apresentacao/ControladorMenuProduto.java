@@ -158,6 +158,7 @@ public final class ControladorMenuProduto {
 
 	private void limpaTabela() {
 		tvProduto.getItems().clear();
+		tvProduto.refresh();
 	}
 
 	@FXML

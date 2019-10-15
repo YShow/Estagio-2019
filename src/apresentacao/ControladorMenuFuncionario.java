@@ -87,6 +87,7 @@ public final class ControladorMenuFuncionario {
 
 	private void limpaTabela() {
 		tblFuncionario.getItems().clear();
+		tblFuncionario.refresh();
 	}
 
 	@FXML

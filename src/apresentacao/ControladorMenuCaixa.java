@@ -113,13 +113,13 @@ public final class ControladorMenuCaixa {
 				limpaTabela();
 				final var caixas = negCaixa.consultar(dpData.getValue());
 				if (!caixas.isEmpty()) {
+					tvCaixa.setItems(FXCollections.observableList(caixas));
 					tcAtivo.setCellValueFactory(new PropertyValueFactory<Caixa, Boolean>("ativo"));
 					tcCodCli.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("cliente"));
 					tcCodigo.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("codigo"));
 					tcData.setCellValueFactory(new PropertyValueFactory<Caixa, LocalDate>("data"));
 					tcPreco.setCellValueFactory(new PropertyValueFactory<Caixa, Double>("precototal"));
 					tcSaida.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("saida"));
-					tvCaixa.setItems(FXCollections.observableList(caixas));
 				} else {
 					Alerta.alertaNaoEncontrado();
 				}
@@ -135,5 +135,6 @@ public final class ControladorMenuCaixa {
 
 	private void limpaTabela() {
 		tvCaixa.getItems().clear();
+		tvCaixa.refresh();
 	}
 }

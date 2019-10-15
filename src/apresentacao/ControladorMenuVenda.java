@@ -131,6 +131,7 @@ public final class ControladorMenuVenda {
 
 	private void limpaTabela() {
 		tvVenda.getItems().clear();
+		tvVenda.refresh();
 	}
 
 	@FXML

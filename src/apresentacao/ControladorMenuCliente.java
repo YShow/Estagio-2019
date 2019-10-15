@@ -204,5 +204,6 @@ public final class ControladorMenuCliente {
 
 	private void limpaTabela() {
 		tvCliente.getItems().clear();
+		tvCliente.refresh();
 	}
 }
