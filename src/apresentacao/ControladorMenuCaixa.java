@@ -61,7 +61,7 @@ public final class ControladorMenuCaixa {
 			stage.initModality(Modality.APPLICATION_MODAL);
 
 			final Parent root = loader.load();
-
+			stage.setTitle("Consulta Caixa");
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style);
 			stage.setScene(scene);

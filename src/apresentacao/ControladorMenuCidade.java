@@ -61,7 +61,7 @@ public final class ControladorMenuCidade {
 
 			final var loader = new FXMLLoader(getClass().getResource("/apresentacao/Cidade.fxml"));
 			stage.initModality(Modality.APPLICATION_MODAL);
-
+			stage.setTitle("Consulta Cidade");
 			final Parent root = loader.load();
 			final ControladorMenuCidade controlador = loader.getController();
 			controlador.txtConsullaCidade.setOnKeyPressed(e -> {

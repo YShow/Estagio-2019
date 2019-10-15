@@ -58,6 +58,7 @@ public final class ControladorMenuFuncionario {
 			final var loader = new FXMLLoader(getClass().getResource("/apresentacao/Funcionario.fxml"));
 			stage.initModality(Modality.APPLICATION_MODAL);
 			final Parent root = loader.load();
+			stage.setTitle("Consulta Funcionario");
 			final ControladorMenuFuncionario control = loader.getController();
 			control.txtFuncionario.setOnKeyPressed(e -> {
 				if (e.getCode().equals(KeyCode.ENTER)) {

@@ -67,7 +67,7 @@ public final class ControladorMenuProduto {
 			final var stage = new Stage();
 			final var loader = new FXMLLoader(getClass().getResource("/apresentacao/Produto.fxml"));
 			stage.initModality(Modality.APPLICATION_MODAL);
-
+			stage.setTitle("Consulta Produto");
 			final Parent root = loader.load();
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style);

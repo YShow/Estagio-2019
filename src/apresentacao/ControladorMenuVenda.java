@@ -66,7 +66,7 @@ public final class ControladorMenuVenda {
 
 			final Parent root = loader.load();
 			final ControladorMenuVenda control = loader.getController();
-
+			stage.setTitle("Consulta Venda");
 			control.dateData.setOnKeyPressed(e -> {
 				if (e.getCode().equals(KeyCode.ENTER)) {
 					control.btnConsultaVenda(null);

@@ -81,6 +81,7 @@ public final class ControladorMenuCliente {
 
 			final Parent root = loader.load();
 			controlador = loader.getController();
+			stage.setTitle("Consulta Cliente");
 			controlador.txtCliente.setOnKeyPressed(e -> {
 				if (e.getCode().equals(KeyCode.ENTER)) {
 					controlador.btnConsultaCliente(null);
