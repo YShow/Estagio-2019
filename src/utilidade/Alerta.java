@@ -10,8 +10,8 @@ import jfxtras.styles.jmetro.JMetro;
 public final class Alerta {
 
 	private Alerta() {
-	    throw new IllegalStateException("Utility class");
-	  }
+		throw new IllegalStateException("Utility class");
+	}
 
 	public static void alertaSucesso() {
 		final Alert alerta = new Alert(Alert.AlertType.INFORMATION);

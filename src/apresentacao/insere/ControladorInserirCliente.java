@@ -91,7 +91,6 @@ public final class ControladorInserirCliente {
 	private void btnGrava(final ActionEvent event) {
 		try {
 
-
 			if (tipo_telaa == TIPO_TELA.INSERE) {
 				if (verificaValores() && negCliente.inserir(pegaCliente())) {
 					Alerta.alertaSucesso();

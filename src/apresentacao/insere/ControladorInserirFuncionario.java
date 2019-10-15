@@ -103,7 +103,7 @@ public final class ControladorInserirFuncionario {
 
 	private Funcionario pegaValores() {
 		final var funcionario = new Funcionario();
-		if(!txtCodigo.getText().isBlank()) {
+		if (!txtCodigo.getText().isBlank()) {
 			funcionario.setCodigo(Integer.parseInt(txtCodigo.getText()));
 		}
 		funcionario.setAdministrador(chkAdm.isSelected());

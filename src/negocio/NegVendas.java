@@ -28,12 +28,10 @@ public final class NegVendas {
 	private static final String SQL_VENDA_PRODUTO = "INSERT INTO cantagalo.vend_prod(preco_unitario, quantidade, cod_venda, cod_produto)\n"
 			+ "VALUES(?,?,?,?);";
 	private static final String SQL_CAIXA = "INSERT into caixa(data,preco_total,saida,codigo_cliente,ativo) values(?,?,?,?,?)";
-	private static final String SQL_SEARCH_UPDATE = "SELECT v.codigo,v.cod_cliente,vp.cod_produto,v.ativo,\n" +
-			"v.forma_de_pagamento,vp.preco_unitario,vp.quantidade, c.preco_total,c.saida,p.quantidade from vendas v\n" +
-			"JOIN vend_prod vp on vp.cod_venda = v.codigo\n" +
-			"JOIN caixa c on c.codigo_cliente = v.cod_cliente\n" +
-			"join produto p on p.codigo = vp.cod_produto\n" +
-			"WHERE v.codigo = ?;";
+	private static final String SQL_SEARCH_UPDATE = "SELECT v.codigo,v.cod_cliente,vp.cod_produto,v.ativo,\n"
+			+ "v.forma_de_pagamento,vp.preco_unitario,vp.quantidade, c.preco_total,c.saida,p.quantidade from vendas v\n"
+			+ "JOIN vend_prod vp on vp.cod_venda = v.codigo\n" + "JOIN caixa c on c.codigo_cliente = v.cod_cliente\n"
+			+ "join produto p on p.codigo = vp.cod_produto\n" + "WHERE v.codigo = ?;";
 
 	public final boolean inserir(final Vendas vendas) throws SQLException {
 		final var comeco = Instant.now();
@@ -137,7 +135,7 @@ public final class NegVendas {
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_UPDATE);
 		try (con; comando;) {
-			//TODO Fazer alteração de venda
+			// TODO Fazer alteração de venda
 			con.commit();
 			System.out
 					.println("Alterar de Vendas demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");

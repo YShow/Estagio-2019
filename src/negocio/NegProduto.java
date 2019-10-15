@@ -92,7 +92,7 @@ public final class NegProduto {
 		con.setAutoCommit(false);
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_DELETE);
-		//TODO FAZER A EXCLUSAO
+		// TODO FAZER A EXCLUSAO
 		try (con; comando;) {
 			comando.setBoolean(1, false);
 			comando.setInt(2, id);

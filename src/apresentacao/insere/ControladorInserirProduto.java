@@ -39,9 +39,10 @@ public final class ControladorInserirProduto {
 	@FXML
 	private CheckBox chkAtivo;
 	@FXML
-    private Label lblCodigo;
+	private Label lblCodigo;
 	private static TIPO_TELA tipo_telaa;
 	private final NegProduto negProduto = new NegProduto();
+
 	public void abreTelaProdutoInsere(final TIPO_TELA tipo_tela, final Produto produto) {
 
 		try {

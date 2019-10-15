@@ -6,45 +6,40 @@ import utilidade.TIPO_TELA;
 
 public final class ControladorMenuPrincipal {
 
+	private final ControladorMenuCaixa telaCaixa = new ControladorMenuCaixa();
+	private final ControladorMenuCidade telaCidade = new ControladorMenuCidade();
+	private final ControladorMenuCliente telaCliente = new ControladorMenuCliente();
+	private final ControladorMenuFuncionario telaFuncionario = new ControladorMenuFuncionario();
+	private final ControladorMenuProduto telaProduto = new ControladorMenuProduto();
+	private final ControladorMenuVenda telaVenda = new ControladorMenuVenda();
+
 	@FXML
 	private void menuTelaCaixa(final ActionEvent event) {
-
-		final var telaCaixa = new ControladorMenuCaixa();
 		telaCaixa.abreTelaCaixaMenu();
 	}
 
 	@FXML
 	private void menuTelaCidade(final ActionEvent event) {
-		final var telaCidade = new ControladorMenuCidade();
 		telaCidade.abreTelaCidadeMenu(TIPO_TELA.EXCLUI);
 	}
 
 	@FXML
 	private void menuTelaCliente(final ActionEvent event) {
-
-		final var telaCliente = new ControladorMenuCliente();
 		telaCliente.abreTelaClienteMenu(TIPO_TELA.EXCLUI);
 	}
 
 	@FXML
 	private void menuTelaFuncionario(final ActionEvent event) {
-
-		final var telaFuncionario = new ControladorMenuFuncionario();
 		telaFuncionario.abreTelaFuncionarioMenu();
 	}
 
 	@FXML
 	private void menuTelaProduto(final ActionEvent event) {
-
-		final var telaProduto = new ControladorMenuProduto();
 		telaProduto.abreTelaProdutoMenu(TIPO_TELA.EXCLUI);
-
 	}
 
 	@FXML
 	private void menuTelaVenda(final ActionEvent event) {
-		final var telaVenda = new ControladorMenuVenda();
 		telaVenda.abreTelaVendaMenu();
-
 	}
 }

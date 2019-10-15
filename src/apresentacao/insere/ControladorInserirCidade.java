@@ -69,7 +69,6 @@ public final class ControladorInserirCidade {
 	private void btnGravar(final ActionEvent event) {
 		try {
 
-
 			if (tipo_telaa == TIPO_TELA.INSERE) {
 				if (verificaValores() && negcidade.inserir(pegaCidade())) {
 					Alerta.alertaSucesso();
@@ -89,7 +88,7 @@ public final class ControladorInserirCidade {
 
 	private Cidade pegaCidade() {
 		final var cidade = new Cidade();
-		if(!txtCodigo.getText().isBlank()) {
+		if (!txtCodigo.getText().isBlank()) {
 			cidade.setCodigo(Integer.valueOf(txtCodigo.getText().trim()));
 		}
 		cidade.setEstado(txtEstado.getText().trim());

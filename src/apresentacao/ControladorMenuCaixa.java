@@ -91,7 +91,7 @@ public final class ControladorMenuCaixa {
 	void btnDesativarCaixa(final ActionEvent event) {
 		final var caixa = tvCaixa.getSelectionModel().getSelectedItem();
 		try {
-			if(negCaixa.excluir(caixa.getCodigo())) {
+			if (negCaixa.excluir(caixa.getCodigo())) {
 				Alerta.alertaSucesso();
 				tvCaixa.getItems().remove(caixa);
 			}

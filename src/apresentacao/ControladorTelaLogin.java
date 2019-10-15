@@ -143,8 +143,9 @@ public final class ControladorTelaLogin extends Application {
 			Alerta.alertaErro(e.getMessage());
 		}
 	}
-	   @FXML
-	    void btnSair(final ActionEvent event) {
-		   Platform.exit();
-	    }
+
+	@FXML
+	void btnSair(final ActionEvent event) {
+		Platform.exit();
+	}
 }
