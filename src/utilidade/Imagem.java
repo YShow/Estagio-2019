@@ -10,12 +10,12 @@ import javafx.scene.layout.BackgroundSize;
 public class Imagem {
 
 	public enum IMAGEM {
-		FUNDO("apresentacao/cantagalo.png");
+		FUNDO("resource/cantagalo.png");
 
 		private final String imagem;
 
 		public String getImagem() {
-			return imagem;
+			return getClass().getResource(imagem).toString();
 		}
 
 		private IMAGEM(final String pegaImagem) {
@@ -26,7 +26,7 @@ public class Imagem {
 
 	public static Background colocaImagemFundo(final IMAGEM imagem) {
 
-		final var image = new Image(imagem.getImagem(), Double.MAX_VALUE, Double.MAX_VALUE, false, true);
+		final var image = new Image( imagem.getImagem(), Double.MAX_VALUE, Double.MAX_VALUE, false, true);
 
 		final var backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
 
