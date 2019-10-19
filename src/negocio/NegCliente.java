@@ -6,6 +6,8 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Cidade;
@@ -13,6 +15,7 @@ import objeto.Cliente;
 
 public final class NegCliente {
 	private final AcessoBD conexao = new AcessoBD();
+	private static final Logger logger = Logger.getLogger(NegCliente.class.getName());
 	private static final String SQL_INSERT = "insert into cliente(nome,CPF,endereco,telefone,ativo,id_cidade)"
 			+ " values(?,?,?,?,?,?)";
 	private static final String SQL_SEARCH = "SELECT c.codigo, c.nome, c.CPF, c.endereco, c.telefone, c.ativo, c.id_cidade, ci.nome\n"
@@ -38,10 +41,12 @@ public final class NegCliente {
 			final var inseriu = comando.executeUpdate() >= 1;
 
 			con.commit();
-			System.out.println(
-					"Insercao de Cliente demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return inseriu;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Inserir de cliente demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
+
 	}
 
 	public final List<Cliente> consultar(final String metodo) throws SQLException {
@@ -75,9 +80,10 @@ public final class NegCliente {
 				cliente.setCidade(cidade);
 				lista.add(cliente);
 			}
-			System.out.println(
-					"Consulta de cliente demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return lista;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Consulta de cliente demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 
 	}
@@ -99,9 +105,10 @@ public final class NegCliente {
 			comando.setInt(7, cliente.getCodigo());
 			final var alterou = comando.executeUpdate() >= 1;
 			con.commit();
-			System.out.println(
-					"Alterar de cliente demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return alterou;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Alterar cliente demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -116,9 +123,11 @@ public final class NegCliente {
 			comando.setInt(2, id);
 			final var excluiu = comando.executeUpdate() >= 1;
 			con.commit();
-			System.out.println(
-					"Excluir de cliente demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return excluiu;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Excluir de cliente demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
+
 	}
 }

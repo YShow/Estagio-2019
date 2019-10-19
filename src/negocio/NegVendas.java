@@ -8,6 +8,8 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Caixa;
@@ -17,6 +19,7 @@ import objeto.Vendas;
 
 public final class NegVendas {
 	private final AcessoBD conexao = new AcessoBD();
+	private static final Logger logger = Logger.getLogger(NegVendas.class.getName());
 	private static final String SQL_INSERT = "INSERT INTO cantagalo.vendas\n"
 			+ "(cod_cliente, cod_caixa, data_venda, forma_de_pagamento,ativo)\n" + "VALUES(?, ?, ?, ?,?);";
 	private static final String SQL_SEARCH = "SELECT codigo, cod_cliente, cod_caixa, data_venda,"
@@ -85,10 +88,11 @@ public final class NegVendas {
 			insereVendaProd.executeUpdate();
 
 			con.commit();
-			System.out
-					.println("Inserir de Vendas demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return inseriu;
 
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Inserir venda demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -122,9 +126,10 @@ public final class NegVendas {
 				venda.setAtivo(result.getBoolean("ativo"));
 				lista.add(venda);
 			}
-			System.out.println(
-					"Consulta de Vendas demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return lista;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Consultar venda demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -137,9 +142,10 @@ public final class NegVendas {
 		try (con; comando;) {
 			// TODO Fazer alteração de venda
 			con.commit();
-			System.out
-					.println("Alterar de Vendas demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return false;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Alterar venda demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -154,9 +160,10 @@ public final class NegVendas {
 			comando.setInt(2, id);
 			final var desativou = comando.executeUpdate() >= 1;
 			con.commit();
-			System.out
-					.println("Excluir de Vendas demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return desativou;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Excluir venda demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -199,9 +206,10 @@ public final class NegVendas {
 				venda.setCliente(cliente);
 
 			}
-			System.out.println("Consulta de Vendas para alterar demorou: "
-					+ Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return venda;
+		} finally {
+			logger.log(Level.INFO, () -> "Consulta vendas alterar demorou: "
+					+ Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 
 	}

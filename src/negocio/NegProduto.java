@@ -6,12 +6,15 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Produto;
 
 public final class NegProduto {
 	private final AcessoBD conexao = new AcessoBD();
+	private static final Logger logger = Logger.getLogger(NegProduto.class.getName());
 	private static final String SQL_INSERT = "INSERT INTO cantagalo.produto\n" + "(ativo, preco, quantidade, nome)\n"
 			+ "VALUES(?, ?, ?, ?);\n";
 	private static final String SQL_SEARCH = "SELECT codigo, ativo, preco, quantidade, nome FROM produto WHERE MATCH(nome) AGAINST(? IN BOOLEAN MODE)";
@@ -32,9 +35,10 @@ public final class NegProduto {
 			comando.setString(4, produto.getNome());
 			final var inseriu = comando.executeUpdate() >= 1;
 			con.commit();
-			System.out.println(
-					"Inserir de produto demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return inseriu;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Inserir produto demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 
 	}
@@ -60,9 +64,10 @@ public final class NegProduto {
 
 				lista.add(produto);
 			}
-			System.out.println(
-					"Consulta de produto demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return lista;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Consultar produto demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -80,9 +85,10 @@ public final class NegProduto {
 			comando.setInt(5, produto.getCodigo());
 			final var alterou = comando.executeUpdate() >= 1;
 			con.commit();
-			System.out
-					.println("Altera de produto demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return alterou;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Alterar produto demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -98,9 +104,10 @@ public final class NegProduto {
 			comando.setInt(2, id);
 			final var excluiu = comando.executeUpdate() >= 1;
 			con.commit();
-			System.out.println(
-					"Excluir de produto demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return excluiu;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Excluir produto demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 }

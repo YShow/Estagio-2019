@@ -6,6 +6,8 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Funcionario;
@@ -13,6 +15,7 @@ import utilidade.Senha;
 
 public final class NegFuncionario {
 	private final AcessoBD conexao = new AcessoBD();
+	private static final Logger logger = Logger.getLogger(NegFuncionario.class.getName());
 	private static final String SQL_INSERT = "insert into funcionario(nome,funcao,administrador,senhahash,salt,usuario,ativo)"
 			+ " values(?,?,?,?,?,?,?)";
 	private static final String SQL_SEARCH = "SELECT codigo,nome,funcao,administrador,usuario FROM funcionario WHERE MATCH(nome,usuario) AGAINST(? IN BOOLEAN MODE) and ativo = true";
@@ -38,9 +41,10 @@ public final class NegFuncionario {
 			comando.setBoolean(7, funcionario.isAtivo());
 			final var inseriu = comando.executeUpdate() >= 1;
 			con.commit();
-			System.out.println(
-					"Insercao de funcionario demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return inseriu;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Inserir funcionario demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -68,10 +72,10 @@ public final class NegFuncionario {
 				lista.add(funcionario);
 			}
 
-			System.out.println(
-					"Consulta de funcionario demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
-
 			return lista;
+		} finally {
+			logger.log(Level.INFO, () -> "Consultar funcionario demorou: "
+					+ Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -102,9 +106,10 @@ public final class NegFuncionario {
 			final var alterou = comando.executeUpdate() >= 1;
 
 			con.commit();
-			System.out.println(
-					"Alteração de funcionario demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return alterou;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Alterar funcionario demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -120,9 +125,10 @@ public final class NegFuncionario {
 			comando.setInt(2, id);
 			final var excluiu = comando.executeUpdate() >= 1;
 			con.commit();
-			System.out.println(
-					"Exclusao de funcionario demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return excluiu;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Excluir funcionario demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 

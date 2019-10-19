@@ -6,12 +6,15 @@ import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Cidade;
 
 public final class NegCidade {
 	private final AcessoBD conexao = new AcessoBD();
+	private static final Logger logger = Logger.getLogger(NegCidade.class.getName());
 	private static final String SQL_INSERT = "INSERT INTO cidade(nome,estado) values(?,?)";
 	private static final String SQL_SEARCH = "SELECT codigo,nome,estado FROM cidade WHERE MATCH(nome) AGAINST(? IN BOOLEAN MODE)";
 	private static final String SQL_UPDATE = "update cidade set nome = ?, estado = ? where codigo = ?";
@@ -29,9 +32,10 @@ public final class NegCidade {
 			comando.setString(2, cidade.getEstado());
 			final var inseriu = comando.executeUpdate() >= 1;
 			con.commit();
-			System.out.println(
-					"Insercao de cidade demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return inseriu;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Inserir cidade demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -54,9 +58,10 @@ public final class NegCidade {
 				cidade.setEstado(result.getString("estado"));
 				lista.add(cidade);
 			}
-			System.out.println(
-					"Consulta de cidade demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return lista;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Consultar cidade demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -73,9 +78,10 @@ public final class NegCidade {
 			comando.setInt(3, cidade.getCodigo());
 			final var alterou = comando.executeUpdate() >= 1;
 			con.commit();
-			System.out
-					.println("Altera de cidade demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return alterou;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Alterar cidade demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -90,9 +96,10 @@ public final class NegCidade {
 			comando.setInt(1, id);
 			final var excluiu = comando.executeUpdate() >= 1;
 			con.commit();
-			System.out
-					.println("Excluir de cidade demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return excluiu;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Excluir cidade demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 }

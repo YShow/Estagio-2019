@@ -7,12 +7,15 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Caixa;
 
 public final class NegCaixa {
 	private final AcessoBD conexao = new AcessoBD();
+	private static final Logger logger = Logger.getLogger(NegCaixa.class.getName());
 	private static final String SQL_INSERT = "INSERT INTO cantagalo.caixa\n"
 			+ "(`data`, preco_total, saida, codigo_cliente)" + "VALUES(?, ?, ?, ?)";
 	private static final String SQL_SEARCH = "SELECT codigo, data, preco_total, saida, codigo_cliente,ativo "
@@ -34,10 +37,12 @@ public final class NegCaixa {
 			comando.setInt(4, caixa.getCliente());
 			final var inseriu = comando.executeUpdate() >= 1;
 			con.commit();
-			System.out
-					.println("Insercao de caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return inseriu;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Inserir caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
+
 	}
 
 	public final List<Caixa> consultar(final LocalDate data) throws SQLException {
@@ -63,9 +68,10 @@ public final class NegCaixa {
 				caixa.setAtivo(result.getBoolean("ativo"));
 				lista.add(caixa);
 			}
-			System.out
-					.println("Consulta de caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return lista;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Consultar caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -85,9 +91,10 @@ public final class NegCaixa {
 			final var alterou = comando.executeUpdate() >= 1;
 			con.commit();
 
-			System.out
-					.println("Alterar de caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return alterou;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Alterar caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
@@ -102,9 +109,10 @@ public final class NegCaixa {
 			comando.setInt(2, id);
 			final var excluiu = comando.executeUpdate() >= 1;
 			con.commit();
-			System.out
-					.println("Alterar de caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return excluiu;
+		} finally {
+			logger.log(Level.INFO,
+					() -> "Excluir caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 }

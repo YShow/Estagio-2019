@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Funcionario;
@@ -11,6 +13,7 @@ import utilidade.Senha;
 
 public final class NegLogin {
 	private final AcessoBD conexao = new AcessoBD();
+	private static final Logger logger = Logger.getLogger(NegLogin.class.getName());
 	private static final String SQL_SEARCH = "SELECT usuario,salt, senhahash, administrador from funcionario WHERE  usuario = ?;";
 
 	private static final String SQL_VERIFICA_SE_TEM_USUARIO = "SELECT COUNT(administrador) as qtd_adm_ativo from funcionario\n"
@@ -39,11 +42,11 @@ public final class NegLogin {
 					existeUsuario = true;
 				}
 			}
-			System.out
-					.println("Login de usuario demorou: " + Duration.between(comeco, Instant.now()).toMillis() + "ms");
 			return existeUsuario;
 		} finally {
 			System.gc();
+			logger.log(Level.INFO,
+					() -> "Login demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 

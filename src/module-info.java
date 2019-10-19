@@ -1,5 +1,4 @@
 module estagio {
-
 	exports apresentacao to javafx.graphics;
 
 	opens apresentacao to javafx.fxml;
@@ -12,5 +11,5 @@ module estagio {
 	requires transitive javafx.fxml;
 	requires transitive javafx.graphics;
 	requires org.bouncycastle.provider;
-	requires org.jfxtras.styles.jmetro;
+	requires transitive org.jfxtras.styles.jmetro;
 }
