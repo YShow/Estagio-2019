@@ -26,7 +26,7 @@ public class Imagem {
 
 	public static Background colocaImagemFundo(final IMAGEM imagem) {
 
-		final var image = new Image( imagem.getImagem(), Double.MAX_VALUE, Double.MAX_VALUE, false, true);
+		final var image = new Image(imagem.getImagem(), Double.MAX_VALUE, Double.MAX_VALUE, false, true);
 
 		final var backgroundSize = new BackgroundSize(100, 100, true, true, true, true);
 
