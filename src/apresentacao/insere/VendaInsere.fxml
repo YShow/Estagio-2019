@@ -28,5 +28,7 @@
       <TextField fx:id="txtSaida" layoutX="12.0" layoutY="189.0" prefHeight="25.0" prefWidth="88.0" />
       <Label layoutX="12.0" layoutY="174.0" text="Saida" />
       <CheckBox fx:id="chkAtivo" layoutX="114.0" layoutY="193.0" mnemonicParsing="false" selected="true" text="Ativo" />
+      <Label fx:id="lblCodvenda" disable="true" layoutX="13.0" layoutY="224.0" visible="false" />
+      <Label fx:id="lblCodCaixa" disable="true" layoutX="73.0" layoutY="217.0" visible="false" />
 	</children>
 </AnchorPane>
