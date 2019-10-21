@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.Tooltip;
@@ -59,6 +60,10 @@ public final class ControladorInserirVenda {
 	private TextField txtSaida;
 	@FXML
 	private CheckBox chkAtivo;
+	 @FXML
+	 private Label lblCodvenda;
+	 @FXML
+	 private Label lblCodCaixa;
 	private static TIPO_TELA tipo_telaa;
 	private final NegVendas negVenda = new NegVendas();
 
@@ -170,9 +175,11 @@ public final class ControladorInserirVenda {
 
 		caixa.setPrecototal(precototal);
 		caixa.setSaida(Double.parseDouble(txtSaida.getText().trim()));
+		caixa.setCodigo(Integer.parseInt(lblCodCaixa.getText()));
 
 		venda.setAtivo(true);
 		venda.setData(LocalDate.now());
+		venda.setCodigo(Integer.parseInt(lblCodvenda.getText()));
 
 		venda.setCliente(cliente);
 		venda.setFormaPagamento(txtFormaPagamento.getText().trim());
@@ -215,6 +222,8 @@ public final class ControladorInserirVenda {
 			controlador.txtQtd.setText(String.valueOf(venda.getQuantidadeVendida()));
 			controlador.txtQtdEstoque.setText(String.valueOf(venda.getProduto().getQuantidade()));
 			controlador.chkAtivo.setSelected(venda.isAtivo());
+			controlador.lblCodvenda.setText(String.valueOf(venda.getCodigo()));
+			controlador.lblCodCaixa.setText(String.valueOf(venda.getCaixa().getCodigo()));
 		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
