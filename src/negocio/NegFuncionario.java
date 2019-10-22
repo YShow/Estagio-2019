@@ -26,11 +26,10 @@ public final class NegFuncionario {
 	public final boolean inserir(final Funcionario funcionario) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-		con.setAutoCommit(false);
 		final var comando = con.prepareStatement(SQL_INSERT);
-
 		try (con; comando;) {
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			con.setAutoCommit(false);
 			final var salt = Senha.geraSalt();
 			comando.setString(1, funcionario.getNome());
 			comando.setString(2, funcionario.getFuncao());
@@ -82,11 +81,10 @@ public final class NegFuncionario {
 	public final boolean alterar(final Funcionario funcionario) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_UPDATE);
 		try (con; comando;) {
-
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setString(1, funcionario.getNome());
 			comando.setString(2, funcionario.getFuncao());
 			comando.setBoolean(3, funcionario.getAdministrador());
@@ -116,11 +114,10 @@ public final class NegFuncionario {
 	public final boolean excluir(final int id) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_DELETE);
 		try (con; comando;) {
-
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setBoolean(1, false);
 			comando.setInt(2, id);
 			final var excluiu = comando.executeUpdate() >= 1;

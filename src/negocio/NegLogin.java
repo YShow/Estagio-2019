@@ -22,11 +22,11 @@ public final class NegLogin {
 	public final boolean verificaLogin(final Funcionario funcionario) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-		con.setAutoCommit(false);
-		con.setReadOnly(true);
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			con.setAutoCommit(false);
+			con.setReadOnly(true);
 			var existeUsuario = false;
 			comando.setString(1, funcionario.getUsuario());
 			final var resultado = comando.executeQuery();
@@ -53,7 +53,6 @@ public final class NegLogin {
 	public final boolean ePrimeiroLogin() throws SQLException {
 		final var con = conexao.getConexao();
 		final var comando = con.prepareStatement(SQL_VERIFICA_SE_TEM_USUARIO);
-
 		try (con; comando;) {
 			con.setReadOnly(true);
 			con.setAutoCommit(false);

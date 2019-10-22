@@ -60,10 +60,10 @@ public final class ControladorInserirVenda {
 	private TextField txtSaida;
 	@FXML
 	private CheckBox chkAtivo;
-	 @FXML
-	 private Label lblCodvenda;
-	 @FXML
-	 private Label lblCodCaixa;
+	@FXML
+	private Label lblCodvenda;
+	@FXML
+	private Label lblCodCaixa;
 	private static TIPO_TELA tipo_telaa;
 	private final NegVendas negVenda = new NegVendas();
 
@@ -176,14 +176,14 @@ public final class ControladorInserirVenda {
 		caixa.setPrecototal(precototal);
 		caixa.setSaida(Double.parseDouble(txtSaida.getText().trim()));
 
-		if(!lblCodCaixa.getText().isBlank()) {
-		caixa.setCodigo(Integer.parseInt(lblCodCaixa.getText()));
+		if (!lblCodCaixa.getText().isBlank()) {
+			caixa.setCodigo(Integer.parseInt(lblCodCaixa.getText()));
 		}
 
 		venda.setAtivo(true);
 		venda.setData(LocalDate.now());
-		if(!lblCodvenda.getText().isBlank()) {
-		venda.setCodigo(Integer.parseInt(lblCodvenda.getText()));
+		if (!lblCodvenda.getText().isBlank()) {
+			venda.setCodigo(Integer.parseInt(lblCodvenda.getText()));
 		}
 		venda.setCliente(cliente);
 		venda.setFormaPagamento(txtFormaPagamento.getText().trim());
@@ -226,9 +226,9 @@ public final class ControladorInserirVenda {
 			controlador.txtQtd.setText(String.valueOf(venda.getQuantidadeVendida()));
 			controlador.txtQtdEstoque.setText(String.valueOf(venda.getProduto().getQuantidade()));
 			controlador.chkAtivo.setSelected(venda.isAtivo());
-			if(!String.valueOf(venda.getCodigo()).isBlank() && !String.valueOf(venda.getCaixa().getCodigo()).isBlank()) {
-			controlador.lblCodvenda.setText(String.valueOf(venda.getCodigo()));
-			controlador.lblCodCaixa.setText(String.valueOf(venda.getCaixa().getCodigo()));
+			if (Integer.valueOf(venda.getCodigo()) != null && Integer.valueOf(venda.getCaixa().getCodigo()) != null) {
+				controlador.lblCodvenda.setText(String.valueOf(venda.getCodigo()));
+				controlador.lblCodCaixa.setText(String.valueOf(venda.getCaixa().getCodigo()));
 			}
 		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());

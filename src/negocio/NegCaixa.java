@@ -28,9 +28,9 @@ public final class NegCaixa {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		final var comando = con.prepareStatement(SQL_INSERT);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-		con.setAutoCommit(false);
 		try (con; comando;) {
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			con.setAutoCommit(false);
 			comando.setObject(1, caixa.getData());
 			comando.setDouble(2, caixa.getPrecototal());
 			comando.setDouble(3, caixa.getSaida());
@@ -49,10 +49,10 @@ public final class NegCaixa {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		final var comando = con.prepareStatement(SQL_SEARCH);
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-		con.setReadOnly(true);
 		try (con; comando;) {
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			con.setReadOnly(true);
 			comando.setObject(1, data);
 
 			final var result = comando.executeQuery();
@@ -79,9 +79,9 @@ public final class NegCaixa {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		final var comando = con.prepareStatement(SQL_UPDATE);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-		con.setAutoCommit(false);
 		try (con; comando;) {
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			con.setAutoCommit(false);
 			comando.setObject(1, caixa.getData());
 			comando.setDouble(2, caixa.getPrecototal());
 			comando.setDouble(3, caixa.getSaida());
@@ -102,9 +102,9 @@ public final class NegCaixa {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		final var comando = con.prepareStatement(SQL_DELETE);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-		con.setAutoCommit(false);
 		try (con; comando;) {
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			con.setAutoCommit(false);
 			comando.setBoolean(1, false);
 			comando.setInt(2, id);
 			final var excluiu = comando.executeUpdate() >= 1;

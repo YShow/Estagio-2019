@@ -28,10 +28,10 @@ public final class NegCliente {
 	public final boolean inserir(final Cliente cliente) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_INSERT);
 		try (con; comando;) {
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setString(1, cliente.getNome());
 			comando.setString(2, cliente.getCPF());
 			comando.setString(3, cliente.getEndereco());
@@ -51,15 +51,12 @@ public final class NegCliente {
 
 	public final List<Cliente> consultar(final String metodo) throws SQLException {
 		final var comeco = Instant.now();
-
 		final var con = conexao.getConexao();
-
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
 			con.setAutoCommit(false);
 			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			con.setReadOnly(true);
-
 			comando.setString(1, metodo + '*');
 			final var lista = new ArrayList<Cliente>();
 			final var result = comando.executeQuery();
@@ -92,10 +89,9 @@ public final class NegCliente {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
 		final var comando = con.prepareStatement(SQL_UPDATE);
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		try (con; comando) {
-
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setString(1, cliente.getNome());
 			comando.setString(2, cliente.getCPF());
 			comando.setString(3, cliente.getEndereco());
@@ -115,10 +111,10 @@ public final class NegCliente {
 	public final boolean excluir(final int id) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_DELETE);
 		try (con; comando;) {
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setBoolean(1, false);
 			comando.setInt(2, id);
 			final var excluiu = comando.executeUpdate() >= 1;
@@ -130,4 +126,5 @@ public final class NegCliente {
 		}
 
 	}
+
 }

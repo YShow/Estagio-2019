@@ -23,11 +23,10 @@ public final class NegCidade {
 	public final boolean inserir(final Cidade cidade) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_INSERT);
 		try (con; comando;) {
-
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setString(1, cidade.getNome());
 			comando.setString(2, cidade.getEstado());
 			final var inseriu = comando.executeUpdate() >= 1;
@@ -42,12 +41,11 @@ public final class NegCidade {
 	public final List<Cidade> consultar(final String metodo) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-		con.setReadOnly(true);
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
-
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			con.setReadOnly(true);
 			comando.setString(1, metodo + '*');
 			final var result = comando.executeQuery();
 			final var lista = new ArrayList<Cidade>();
@@ -68,11 +66,10 @@ public final class NegCidade {
 	public final boolean alterar(final Cidade cidade) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_UPDATE);
 		try (con; comando;) {
-
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setString(1, cidade.getNome());
 			comando.setString(2, cidade.getEstado());
 			comando.setInt(3, cidade.getCodigo());
@@ -88,11 +85,10 @@ public final class NegCidade {
 	public final boolean excluir(final int id) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_DELETE);
 		try (con; comando) {
-
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setInt(1, id);
 			final var excluiu = comando.executeUpdate() >= 1;
 			con.commit();

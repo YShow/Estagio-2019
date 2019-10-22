@@ -35,17 +35,17 @@ public final class NegVendas {
 			+ "v.forma_de_pagamento,vp.preco_unitario,vp.quantidade, c.preco_total,c.saida,c.codigo,p.quantidade from vendas v\n"
 			+ "JOIN vend_prod vp on vp.cod_venda = v.codigo\n" + "JOIN caixa c on c.codigo_cliente = v.cod_cliente\n"
 			+ "join produto p on p.codigo = vp.cod_produto\n" + "WHERE v.codigo = ?;";
+	private static final String SQL_UPDATE_CAIXA = "UPDATE cantagalo.caixa SET `data`=?, preco_total=?, saida=?, codigo_cliente=?, ativo=? WHERE codigo=?;";
 
 	public final boolean inserir(final Vendas vendas) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_INSERT, Statement.RETURN_GENERATED_KEYS);
 		final var insereCaixa = con.prepareStatement(SQL_CAIXA, Statement.RETURN_GENERATED_KEYS);
 		final var insereVendaProd = con.prepareStatement(SQL_VENDA_PRODUTO);
 		try (con; comando; insereCaixa; insereVendaProd;) {
-
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			// INSERT into caixa(data,preco_total,saida,codigo_cliente,ativo)
 			insereCaixa.setObject(1, vendas.getCaixa().getData());
 			insereCaixa.setDouble(2, vendas.getCaixa().getPrecototal());
@@ -99,11 +99,11 @@ public final class NegVendas {
 	public final List<Vendas> consultar(final LocalDate metodo) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setReadOnly(true);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_SEARCH);
 		try (con; comando;) {
+			con.setAutoCommit(false);
+			con.setReadOnly(true);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setObject(1, metodo);
 			final var result = comando.executeQuery();
 			final var lista = new ArrayList<Vendas>();
@@ -136,16 +136,16 @@ public final class NegVendas {
 	public final boolean alterar(final Vendas vendas) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_UPDATE);
-		final var updateCaixa = con.prepareStatement("UPDATE cantagalo.caixa SET \n" +
-				"`data`=?, preco_total=?, saida=?, codigo_cliente=?, ativo=? WHERE codigo=?;");
+		final var updateCaixa = con.prepareStatement(SQL_UPDATE_CAIXA);
 
 		try (con; comando; updateCaixa;) {
-			/*UPDATE cantagalo.vendas\n"
-			+ "SET cod_cliente=?, cod_caixa=?, data_venda=?,
-			forma_de_pagamento=?, aitvo=? " + "WHERE codigo= ?;\n*/
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			/*
+			 * UPDATE cantagalo.vendas\n" + "SET cod_cliente=?, cod_caixa=?, data_venda=?,
+			 * forma_de_pagamento=?, aitvo=? " + "WHERE codigo= ?;\n
+			 */
 			comando.setInt(1, vendas.getCliente().getCodigo());
 			comando.setInt(2, vendas.getCaixa().getCodigo());
 			comando.setObject(3, vendas.getData());
@@ -173,10 +173,10 @@ public final class NegVendas {
 	public final boolean excluir(final int id) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_DELETE);
 		try (con; comando) {
+			con.setAutoCommit(false);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setBoolean(1, false);
 			comando.setInt(2, id);
 			final var desativou = comando.executeUpdate() >= 1;
@@ -191,14 +191,13 @@ public final class NegVendas {
 	public final Vendas pegaVendaAlterar(final int id) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
-		con.setAutoCommit(false);
-		con.setReadOnly(true);
-		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_SEARCH_UPDATE);
 		try (con; comando;) {
+			con.setAutoCommit(false);
+			con.setReadOnly(true);
+			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setInt(1, id);
 			final var result = comando.executeQuery();
-
 			/*
 			 * SELECT v.codigo,v.cod_cliente,vp.cod_produto,v.ativo,
 			 * v.forma_de_pagamento,vp.preco_unitario,vp.quantidade, c.preco_total,c.saida
