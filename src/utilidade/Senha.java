@@ -13,7 +13,7 @@ public final class Senha {
 	public static final String geraSalt() {
 		try {
 
-			final byte[] salt = new byte[16];
+			final var salt = new byte[16];
 			SecureRandom secureRandom = null;
 			try {
 				secureRandom = SecureRandom.getInstanceStrong();

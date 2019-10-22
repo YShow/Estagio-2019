@@ -14,7 +14,7 @@ public final class Alerta {
 	}
 
 	public static void alertaSucesso() {
-		final Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+		final var alerta = new Alert(Alert.AlertType.INFORMATION);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
@@ -26,7 +26,7 @@ public final class Alerta {
 	}
 
 	public static void alertaNaoEncontrado() {
-		final Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+		final var alerta = new Alert(Alert.AlertType.INFORMATION);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
@@ -37,7 +37,7 @@ public final class Alerta {
 	}
 
 	public static void alertaCustom() {
-		final Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+		final var alerta = new Alert(Alert.AlertType.INFORMATION);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
@@ -50,7 +50,7 @@ public final class Alerta {
 	}
 
 	public static void alertaErro(final String erro) {
-		final Alert alerta = new Alert(Alert.AlertType.ERROR);
+		final var alerta = new Alert(Alert.AlertType.ERROR);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
@@ -77,7 +77,7 @@ public final class Alerta {
 	}
 
 	public static void alertaCampoNulo(final String erros) {
-		final Alert alerta = new Alert(Alert.AlertType.WARNING);
+		final var alerta = new Alert(Alert.AlertType.WARNING);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
@@ -89,7 +89,7 @@ public final class Alerta {
 	}
 
 	public static void alertaCidadeEmUso() {
-		final Alert alerta = new Alert(Alert.AlertType.WARNING);
+		final var alerta = new Alert(Alert.AlertType.WARNING);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
@@ -102,7 +102,7 @@ public final class Alerta {
 	}
 
 	public static void alertaClienteEmCaixa() {
-		final Alert alerta = new Alert(Alert.AlertType.WARNING);
+		final var alerta = new Alert(Alert.AlertType.WARNING);
 		new JMetro(alerta.getDialogPane().getScene(), Main.style);
 
 		alerta.initModality(Modality.APPLICATION_MODAL);
