@@ -175,12 +175,16 @@ public final class ControladorInserirVenda {
 
 		caixa.setPrecototal(precototal);
 		caixa.setSaida(Double.parseDouble(txtSaida.getText().trim()));
+
+		if(!lblCodCaixa.getText().isBlank()) {
 		caixa.setCodigo(Integer.parseInt(lblCodCaixa.getText()));
+		}
 
 		venda.setAtivo(true);
 		venda.setData(LocalDate.now());
+		if(!lblCodvenda.getText().isBlank()) {
 		venda.setCodigo(Integer.parseInt(lblCodvenda.getText()));
-
+		}
 		venda.setCliente(cliente);
 		venda.setFormaPagamento(txtFormaPagamento.getText().trim());
 
@@ -222,8 +226,10 @@ public final class ControladorInserirVenda {
 			controlador.txtQtd.setText(String.valueOf(venda.getQuantidadeVendida()));
 			controlador.txtQtdEstoque.setText(String.valueOf(venda.getProduto().getQuantidade()));
 			controlador.chkAtivo.setSelected(venda.isAtivo());
+			if(!String.valueOf(venda.getCodigo()).isBlank() && !String.valueOf(venda.getCaixa().getCodigo()).isBlank()) {
 			controlador.lblCodvenda.setText(String.valueOf(venda.getCodigo()));
 			controlador.lblCodCaixa.setText(String.valueOf(venda.getCaixa().getCodigo()));
+			}
 		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());
 		}

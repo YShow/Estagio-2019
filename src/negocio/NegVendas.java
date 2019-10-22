@@ -139,7 +139,10 @@ public final class NegVendas {
 		con.setAutoCommit(false);
 		con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 		final var comando = con.prepareStatement(SQL_UPDATE);
-		try (con; comando;) {
+		final var updateCaixa = con.prepareStatement("UPDATE cantagalo.caixa SET \n" +
+				"`data`=?, preco_total=?, saida=?, codigo_cliente=?, ativo=? WHERE codigo=?;");
+
+		try (con; comando; updateCaixa;) {
 			/*UPDATE cantagalo.vendas\n"
 			+ "SET cod_cliente=?, cod_caixa=?, data_venda=?,
 			forma_de_pagamento=?, aitvo=? " + "WHERE codigo= ?;\n*/
@@ -149,6 +152,13 @@ public final class NegVendas {
 			comando.setString(4, vendas.getFormaPagamento());
 			comando.setBoolean(5, vendas.isAtivo());
 			comando.setInt(6, vendas.getCodigo());
+
+			updateCaixa.setObject(1, vendas.getCaixa().getData());
+			updateCaixa.setDouble(2, vendas.getCaixa().getPrecototal());
+			updateCaixa.setDouble(3, vendas.getCaixa().getSaida());
+			updateCaixa.setInt(4, vendas.getCaixa().getCliente());
+			updateCaixa.setBoolean(5, true);
+			updateCaixa.setInt(6, vendas.getCaixa().getCodigo());
 
 			final var alterou = comando.executeUpdate() >= 1;
 
