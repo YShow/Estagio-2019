@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.OptionalInt;
 
 import apresentacao.ControladorMenuCliente;
 import apresentacao.ControladorMenuProduto;
@@ -226,7 +227,8 @@ public final class ControladorInserirVenda {
 			controlador.txtQtd.setText(String.valueOf(venda.getQuantidadeVendida()));
 			controlador.txtQtdEstoque.setText(String.valueOf(venda.getProduto().getQuantidade()));
 			controlador.chkAtivo.setSelected(venda.isAtivo());
-			if (Integer.valueOf(venda.getCodigo()) != null && Integer.valueOf(venda.getCaixa().getCodigo()) != null) {
+			//Integer.valueOf(venda.getCodigo()) != null
+			if (OptionalInt.of(venda.getCodigo()).isPresent() && OptionalInt.of(venda.getCaixa().getCodigo()).isPresent()) {
 				controlador.lblCodvenda.setText(String.valueOf(venda.getCodigo()));
 				controlador.lblCodCaixa.setText(String.valueOf(venda.getCaixa().getCodigo()));
 			}
