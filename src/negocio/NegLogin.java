@@ -14,7 +14,7 @@ import utilidade.Senha;
 public final class NegLogin {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final Logger logger = Logger.getLogger(NegLogin.class.getName());
-	private static final String SQL_SEARCH = "SELECT usuario,salt, senhahash, administrador from funcionario WHERE  usuario = ?;";
+	private static final String SQL_SEARCH = "SELECT codigo,usuario,salt, senhahash, administrador from funcionario WHERE  usuario = ?;";
 
 	private static final String SQL_VERIFICA_SE_TEM_USUARIO = "SELECT COUNT(administrador) as qtd_adm_ativo from funcionario\n"
 			+ " WHERE administrador = true and ativo = true";
@@ -37,6 +37,7 @@ public final class NegLogin {
 						resultado.getString("salt"))) {
 
 					funcionarioPadrao.setAdministrador(resultado.getBoolean("administrador"));
+					funcionarioPadrao.setCodigo(resultado.getInt("codigo"));
 					Funcionario.setFuncionario(funcionarioPadrao);
 
 					existeUsuario = true;

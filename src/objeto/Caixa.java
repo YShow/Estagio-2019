@@ -28,14 +28,6 @@ public final class Caixa {
 		this.saida = saida;
 	}
 
-	public int getCliente() {
-		return cliente;
-	}
-
-	public void setCliente(final int cliente) {
-		this.cliente = cliente;
-	}
-
 	public int getCodigo() {
 		return codigo;
 	}
@@ -44,7 +36,15 @@ public final class Caixa {
 	private LocalDate data;
 	private double precototal;
 	private double saida;
-	private int cliente;
+	private int funcionario;
+
+	public final int getFuncionario() {
+		return funcionario;
+	}
+
+	public final void setFuncionario(final int funcionario) {
+		this.funcionario = funcionario;
+	}
 
 	public boolean isAtivo() {
 		return ativo;

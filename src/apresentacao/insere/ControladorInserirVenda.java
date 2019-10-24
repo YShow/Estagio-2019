@@ -28,6 +28,7 @@ import jfxtras.styles.jmetro.JMetro;
 import negocio.NegVendas;
 import objeto.Caixa;
 import objeto.Cliente;
+import objeto.Funcionario;
 import objeto.Produto;
 import objeto.Vendas;
 import utilidade.Alerta;
@@ -169,7 +170,7 @@ public final class ControladorInserirVenda {
 
 		// PEGA CAIXA
 		caixa.setAtivo(true);
-		caixa.setCliente(Integer.parseInt(txtCliente.getText().trim()));
+		caixa.setFuncionario(Funcionario.getFuncionario().getCodigo());
 		caixa.setData(LocalDate.now());
 
 		final var precototal = BigDecimal.valueOf(Double.parseDouble(txtPrecoTotal.getText().trim())).doubleValue();
@@ -227,8 +228,9 @@ public final class ControladorInserirVenda {
 			controlador.txtQtd.setText(String.valueOf(venda.getQuantidadeVendida()));
 			controlador.txtQtdEstoque.setText(String.valueOf(venda.getProduto().getQuantidade()));
 			controlador.chkAtivo.setSelected(venda.isAtivo());
-			//Integer.valueOf(venda.getCodigo()) != null
-			if (OptionalInt.of(venda.getCodigo()).isPresent() && OptionalInt.of(venda.getCaixa().getCodigo()).isPresent()) {
+			// Integer.valueOf(venda.getCodigo()) != null
+			if (OptionalInt.of(venda.getCodigo()).isPresent()
+					&& OptionalInt.of(venda.getCaixa().getCodigo()).isPresent()) {
 				controlador.lblCodvenda.setText(String.valueOf(venda.getCodigo()));
 				controlador.lblCodCaixa.setText(String.valueOf(venda.getCaixa().getCodigo()));
 			}

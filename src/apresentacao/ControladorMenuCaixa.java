@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
+import apresentacao.insere.ControladorInserirCaixa;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Modality;
@@ -51,7 +53,11 @@ public final class ControladorMenuCaixa {
 
 	@FXML
 	private TableColumn<Caixa, Boolean> tcAtivo;
+	  @FXML
+	    private TextField txtTotalValor;
 	private final NegCaixa negCaixa = new NegCaixa();
+
+	private final ControladorInserirCaixa caixaInserir = new ControladorInserirCaixa();
 
 	public void abreTelaCaixaMenu() {
 		try {
@@ -83,31 +89,12 @@ public final class ControladorMenuCaixa {
 	}
 
 	@FXML
-	void btnAlterarCaixa(final ActionEvent event) {
-
-	}
-
-	@FXML
-	void btnDesativarCaixa(final ActionEvent event) {
-		final var caixa = tvCaixa.getSelectionModel().getSelectedItem();
-		try {
-			if (negCaixa.excluir(caixa.getCodigo())) {
-				Alerta.alertaSucesso();
-				tvCaixa.getItems().remove(caixa);
-			}
-		} catch (final SQLException e) {
-			Alerta.alertaErro(e.getMessage());
-		}
-	}
-
-	@FXML
 	void btnInserirCaixa(final ActionEvent event) {
-
+		caixaInserir.abreTelaCaixaMenu();
 	}
 
 	@FXML
 	void conulstaCaixa(final ActionEvent event) {
-
 		try {
 			if (dpData.getValue() != null) {
 				limpaTabela();
@@ -115,11 +102,13 @@ public final class ControladorMenuCaixa {
 				if (!caixas.isEmpty()) {
 					tvCaixa.setItems(FXCollections.observableList(caixas));
 					tcAtivo.setCellValueFactory(new PropertyValueFactory<Caixa, Boolean>("ativo"));
-					tcCodCli.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("cliente"));
+					tcCodCli.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("funcionario"));
 					tcCodigo.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("codigo"));
 					tcData.setCellValueFactory(new PropertyValueFactory<Caixa, LocalDate>("data"));
 					tcPreco.setCellValueFactory(new PropertyValueFactory<Caixa, Double>("precototal"));
 					tcSaida.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("saida"));
+
+					txtTotalValor.setText(String.valueOf(tvCaixa.getItems().stream().mapToDouble(Caixa::getPrecototal).sum()));
 				} else {
 					Alerta.alertaNaoEncontrado();
 				}
@@ -132,6 +121,8 @@ public final class ControladorMenuCaixa {
 		}
 
 	}
+
+
 
 	private void limpaTabela() {
 		tvCaixa.getItems().clear();

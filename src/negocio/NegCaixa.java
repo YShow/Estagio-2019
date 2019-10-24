@@ -17,12 +17,9 @@ public final class NegCaixa {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final Logger logger = Logger.getLogger(NegCaixa.class.getName());
 	private static final String SQL_INSERT = "INSERT INTO cantagalo.caixa\n"
-			+ "(`data`, preco_total, saida, codigo_cliente)" + "VALUES(?, ?, ?, ?)";
-	private static final String SQL_SEARCH = "SELECT codigo, data, preco_total, saida, codigo_cliente,ativo "
+			+ "(`data`, preco_total, saida, codigo_funcionario,ativo)" + "VALUES(?, ?, ?, ?,true)";
+	private static final String SQL_SEARCH = "SELECT codigo, data, preco_total, saida, codigo_funcionario,ativo "
 			+ "FROM cantagalo.caixa where data = ?";
-	private static final String SQL_UPDATE = "UPDATE cantagalo.caixa "
-			+ "SET data= ?, preco_total=?, saida= ?, codigo_cliente= ?, ativo = ? WHERE codigo= ?;";
-	private static final String SQL_DELETE = "UPDATE cantagalo.caixa SET ativo= ? WHERE codigo= ?;";
 
 	public final boolean inserir(final Caixa caixa) throws SQLException {
 		final var comeco = Instant.now();
@@ -34,7 +31,7 @@ public final class NegCaixa {
 			comando.setObject(1, caixa.getData());
 			comando.setDouble(2, caixa.getPrecototal());
 			comando.setDouble(3, caixa.getSaida());
-			comando.setInt(4, caixa.getCliente());
+			comando.setInt(4, caixa.getFuncionario());
 			final var inseriu = comando.executeUpdate() >= 1;
 			con.commit();
 			return inseriu;
@@ -64,7 +61,7 @@ public final class NegCaixa {
 				caixa.setData(result.getObject("data", LocalDate.class));
 				caixa.setPrecototal(result.getDouble("preco_total"));
 				caixa.setSaida(result.getDouble("saida"));
-				caixa.setCliente(result.getInt("codigo_cliente"));
+				caixa.setFuncionario(result.getInt("codigo_funcionario"));
 				caixa.setAtivo(result.getBoolean("ativo"));
 				lista.add(caixa);
 			}
@@ -75,44 +72,4 @@ public final class NegCaixa {
 		}
 	}
 
-	public final boolean alterar(final Caixa caixa) throws SQLException {
-		final var comeco = Instant.now();
-		final var con = conexao.getConexao();
-		final var comando = con.prepareStatement(SQL_UPDATE);
-		try (con; comando;) {
-			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-			con.setAutoCommit(false);
-			comando.setObject(1, caixa.getData());
-			comando.setDouble(2, caixa.getPrecototal());
-			comando.setDouble(3, caixa.getSaida());
-			comando.setDouble(4, caixa.getCliente());
-			comando.setBoolean(5, caixa.isAtivo());
-			comando.setDouble(6, caixa.getCodigo());
-			final var alterou = comando.executeUpdate() >= 1;
-			con.commit();
-
-			return alterou;
-		} finally {
-			logger.log(Level.INFO,
-					() -> "Alterar caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
-		}
-	}
-
-	public final boolean excluir(final int id) throws SQLException {
-		final var comeco = Instant.now();
-		final var con = conexao.getConexao();
-		final var comando = con.prepareStatement(SQL_DELETE);
-		try (con; comando;) {
-			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-			con.setAutoCommit(false);
-			comando.setBoolean(1, false);
-			comando.setInt(2, id);
-			final var excluiu = comando.executeUpdate() >= 1;
-			con.commit();
-			return excluiu;
-		} finally {
-			logger.log(Level.INFO,
-					() -> "Excluir caixa demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
-		}
-	}
 }
