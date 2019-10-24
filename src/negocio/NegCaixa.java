@@ -5,10 +5,11 @@ import java.sql.SQLException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Caixa;
@@ -53,7 +54,7 @@ public final class NegCaixa {
 			comando.setObject(1, data);
 
 			final var result = comando.executeQuery();
-			final var lista = new ArrayList<Caixa>();
+			final var lista = new FastList<Caixa>();
 
 			while (result.next()) {
 				final var caixa = new Caixa();

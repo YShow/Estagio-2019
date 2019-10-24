@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Cidade;
@@ -32,12 +33,14 @@ public final class NegCliente {
 		try (con; comando;) {
 			con.setAutoCommit(false);
 			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+			//nome,CPF,endereco,telefone,ativo,id_cidade
 			comando.setString(1, cliente.getNome());
 			comando.setString(2, cliente.getCPF());
 			comando.setString(3, cliente.getEndereco());
 			comando.setString(4, cliente.getTelefone());
 			comando.setBoolean(5, cliente.getAtivo());
 			comando.setInt(6, cliente.getCidade().getCodigo());
+
 			final var inseriu = comando.executeUpdate() >= 1;
 
 			con.commit();
@@ -58,7 +61,7 @@ public final class NegCliente {
 			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			con.setReadOnly(true);
 			comando.setString(1, metodo + '*');
-			final var lista = new ArrayList<Cliente>();
+			final var lista = new FastList<Cliente>();
 
 			final var result = comando.executeQuery();
 

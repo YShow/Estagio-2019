@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Produto;
@@ -53,7 +54,7 @@ public final class NegProduto {
 			con.setReadOnly(true);
 			comando.setString(1, metodo + '*');
 			final var result = comando.executeQuery();
-			final var lista = new ArrayList<Produto>();
+			final var lista = new FastList<Produto>();
 			while (result.next()) {
 				final var produto = new Produto();
 				produto.setAtivo(result.getBoolean("ativo"));

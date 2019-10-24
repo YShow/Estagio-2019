@@ -9,4 +9,6 @@ module estagio {
 	requires transitive javafx.fxml;
 	requires org.bouncycastle.provider;
 	requires transitive org.jfxtras.styles.jmetro;
+	requires org.eclipse.collections.impl;
+	requires org.eclipse.collections.api;
 }

@@ -6,10 +6,11 @@ import java.sql.Statement;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.eclipse.collections.impl.list.mutable.FastList;
 
 import acessoBD.MariaDB.AcessoBD;
 import objeto.Caixa;
@@ -106,7 +107,7 @@ public final class NegVendas {
 			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setObject(1, metodo);
 			final var result = comando.executeQuery();
-			final var lista = new ArrayList<Vendas>();
+			final var lista = new FastList<Vendas>();
 
 			/*
 			 * "SELECT codigo, cod_cliente, cod_caixa, data_venda," +
