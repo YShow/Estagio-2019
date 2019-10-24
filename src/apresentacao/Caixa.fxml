@@ -9,63 +9,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="393.0" prefWidth="606.0"
-	xmlns="http://javafx.com/javafx/11.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="apresentacao.ControladorMenuCaixa">
+<AnchorPane prefHeight="393.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apresentacao.ControladorMenuCaixa">
 	<children>
-		<BorderPane prefHeight="393.0" prefWidth="376.0"
-			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+		<BorderPane prefHeight="393.0" prefWidth="376.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<top>
-				<AnchorPane prefHeight="50.0" prefWidth="606.0"
-					BorderPane.alignment="CENTER">
+				<AnchorPane prefHeight="50.0" prefWidth="606.0" BorderPane.alignment="CENTER">
 					<children>
-						<Button layoutX="517.0" layoutY="13.0"
-							mnemonicParsing="false" onAction="#conulstaCaixa"
-							prefHeight="25.0" prefWidth="75.0" text="Consultar"
-							AnchorPane.rightAnchor="14.0" />
-						<DatePicker fx:id="dpData" layoutX="6.0" layoutY="13.0"
-							prefHeight="25.0" prefWidth="503.0" AnchorPane.leftAnchor="6.0"
-							AnchorPane.rightAnchor="97.0" />
+						<DatePicker fx:id="dpData" layoutX="6.0" layoutY="13.0" prefHeight="25.0" prefWidth="503.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="97.0" />
+						<Button layoutX="517.0" layoutY="13.0" mnemonicParsing="false" onAction="#conulstaCaixa" prefHeight="25.0" prefWidth="75.0" text="Consultar" AnchorPane.rightAnchor="14.0" />
 					</children>
 				</AnchorPane>
 			</top>
 			<bottom>
-				<AnchorPane prefHeight="49.0" prefWidth="606.0"
-					BorderPane.alignment="CENTER">
+				<AnchorPane prefHeight="49.0" prefWidth="606.0" BorderPane.alignment="CENTER">
 					<children>
-						<Button layoutX="537.0" layoutY="12.0"
-							mnemonicParsing="false" onAction="#btnInserirCaixa"
-							text="Inserir" AnchorPane.rightAnchor="14.0" />
+						<Button layoutX="537.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnInserirCaixa" text="Inserir" AnchorPane.rightAnchor="14.0" />
 						<Label layoutX="332.0" layoutY="17.0" text="Total" />
-						<TextField fx:id="txtTotalValor" editable="false"
-							layoutX="365.0" layoutY="12.0" prefHeight="25.0"
-							prefWidth="111.0" />
+						<TextField fx:id="txtTotalValor" editable="false" layoutX="365.0" layoutY="12.0" prefHeight="25.0" prefWidth="111.0" />
 					</children>
 				</AnchorPane>
 			</bottom>
 			<center>
-				<AnchorPane minWidth="-Infinity" prefHeight="275.0"
-					prefWidth="606.0">
+				<AnchorPane minWidth="-Infinity" prefHeight="275.0" prefWidth="606.0">
 					<children>
-						<TableView fx:id="tvCaixa" layoutX="175.0"
-							layoutY="47.0" prefHeight="294.0" prefWidth="606.0"
-							AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-							AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<TableView fx:id="tvCaixa" layoutX="175.0" layoutY="47.0" prefHeight="294.0" prefWidth="606.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<columns>
-								<TableColumn fx:id="tcCodigo" editable="false"
-									prefWidth="75.0" text="Codigo" />
-								<TableColumn fx:id="tcData" editable="false"
-									prefWidth="115.0" text="Data" />
-								<TableColumn fx:id="tcPreco" prefWidth="130.0"
-									text="Valor" />
-								<TableColumn fx:id="tcSaida" editable="false"
-									prefWidth="86.0" text="Saida" />
-								<TableColumn fx:id="tcCodCli" prefWidth="118.0"
-									text="Cod. Funcionario" />
-								<TableColumn fx:id="tcAtivo" prefWidth="81.0"
-									text="Ativo" />
+								<TableColumn fx:id="tcCodigo" editable="false" prefWidth="75.0" text="Codigo" />
+								<TableColumn fx:id="tcData" editable="false" prefWidth="115.0" text="Data" />
+								<TableColumn fx:id="tcPreco" prefWidth="130.0" text="Valor" />
+								<TableColumn fx:id="tcSaida" editable="false" prefWidth="86.0" text="Saida" />
+								<TableColumn fx:id="tcCodCli" prefWidth="118.0" text="Cod. Funcionario" />
+								<TableColumn fx:id="tcAtivo" prefWidth="81.0" text="Ativo" />
 							</columns>
 						</TableView>
 					</children>

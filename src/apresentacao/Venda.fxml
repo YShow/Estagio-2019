@@ -7,67 +7,37 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="393.0" prefWidth="670.0"
-	xmlns="http://javafx.com/javafx/11.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="apresentacao.ControladorMenuVenda">
+<AnchorPane prefHeight="393.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apresentacao.ControladorMenuVenda">
 	<children>
-		<BorderPane prefHeight="393.0" prefWidth="376.0"
-			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+		<BorderPane prefHeight="393.0" prefWidth="376.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<top>
-				<AnchorPane prefHeight="50.0" prefWidth="606.0"
-					BorderPane.alignment="CENTER">
+				<AnchorPane prefHeight="50.0" prefWidth="606.0" BorderPane.alignment="CENTER">
 					<children>
-						<Button layoutX="517.0" layoutY="13.0"
-							mnemonicParsing="false" onAction="#btnConsultaVenda"
-							prefHeight="25.0" prefWidth="89.0" text="Consultar"
-							AnchorPane.rightAnchor="14.0" />
-						<DatePicker fx:id="dateData" layoutX="6.0"
-							layoutY="13.0" prefHeight="25.0" prefWidth="549.0"
-							AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="115.0" />
+						<DatePicker fx:id="dateData" layoutX="6.0" layoutY="13.0" prefHeight="25.0" prefWidth="549.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="115.0" />
+						<Button layoutX="517.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnConsultaVenda" prefHeight="25.0" prefWidth="89.0" text="Consultar" AnchorPane.rightAnchor="14.0" />
 					</children>
 				</AnchorPane>
 			</top>
 			<bottom>
-				<AnchorPane prefHeight="49.0" prefWidth="606.0"
-					BorderPane.alignment="CENTER">
+				<AnchorPane prefHeight="49.0" prefWidth="606.0" BorderPane.alignment="CENTER">
 					<children>
-						<Button fx:id="btnDesativaVenda" layoutX="519.0"
-							layoutY="12.0" mnemonicParsing="false"
-							onAction="#btnDesativaVenda" text="Desativar"
-							AnchorPane.rightAnchor="14.0" />
-						<Button layoutX="447.0" layoutY="12.0"
-							mnemonicParsing="false" onAction="#btnAlteraVenda"
-							prefHeight="25.0" prefWidth="63.0" text="Alterar"
-							AnchorPane.rightAnchor="96.0" />
-						<Button layoutX="384.0" layoutY="12.0"
-							mnemonicParsing="false" onAction="#btnInsereVenda" text="Inserir"
-							AnchorPane.rightAnchor="167.0" />
+						<Button fx:id="btnDesativaVenda" layoutX="519.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnDesativaVenda" text="Desativar" AnchorPane.rightAnchor="14.0" />
+						<Button layoutX="447.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnAlteraVenda" prefHeight="25.0" prefWidth="63.0" text="Alterar" AnchorPane.rightAnchor="96.0" />
+						<Button layoutX="384.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnInsereVenda" text="Inserir" AnchorPane.rightAnchor="167.0" />
 					</children>
 				</AnchorPane>
 			</bottom>
 			<center>
-				<AnchorPane minWidth="-Infinity" prefHeight="275.0"
-					prefWidth="606.0">
+				<AnchorPane minWidth="-Infinity" prefHeight="275.0" prefWidth="606.0">
 					<children>
-						<TableView fx:id="tvVenda" layoutX="175.0"
-							layoutY="47.0" prefHeight="294.0" prefWidth="606.0"
-							AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-							AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<TableView fx:id="tvVenda" layoutX="175.0" layoutY="47.0" prefHeight="294.0" prefWidth="606.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<columns>
-								<TableColumn fx:id="tcCodigo" prefWidth="95.0"
-									text="Código" />
-								<TableColumn fx:id="tcCodCliente" prefWidth="123.0"
-									text="Cod. Cliente" />
-								<TableColumn fx:id="tcCodCaixa" prefWidth="116.0"
-									text="Cod. Caixa" />
-								<TableColumn fx:id="tcDataVenda" prefWidth="140.0"
-									text="Data da Venda" />
-								<TableColumn fx:id="tcFormaPAg" prefWidth="168.0"
-									text="Forma de pagamento" />
-								<TableColumn fx:id="tcAtivo" editable="false"
-									prefWidth="75.0" sortable="false" text="Ativo" visible="false" />
+								<TableColumn fx:id="tcCodigo" prefWidth="95.0" text="Código" />
+								<TableColumn fx:id="tcCodCliente" prefWidth="123.0" text="Cod. Cliente" />
+								<TableColumn fx:id="tcCodCaixa" prefWidth="116.0" text="Cod. Caixa" />
+								<TableColumn fx:id="tcDataVenda" prefWidth="140.0" text="Data da Venda" />
+								<TableColumn fx:id="tcFormaPAg" prefWidth="168.0" text="Forma de pagamento" />
+								<TableColumn fx:id="tcAtivo" editable="false" prefWidth="75.0" sortable="false" text="Ativo" visible="false" />
 							</columns>
 						</TableView>
 					</children>

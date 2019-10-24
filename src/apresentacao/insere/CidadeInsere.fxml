@@ -5,22 +5,13 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="329.0" minWidth="284.0"
-	prefHeight="329.0" prefWidth="284.0"
-	xmlns="http://javafx.com/javafx/11.0.1"
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="apresentacao.insere.ControladorInserirCidade">
+<AnchorPane minHeight="329.0" minWidth="284.0" prefHeight="329.0" prefWidth="284.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apresentacao.insere.ControladorInserirCidade">
 	<children>
-		<TextField fx:id="txtCidade" layoutX="14.0" layoutY="24.0"
-			prefHeight="25.0" prefWidth="261.0" AnchorPane.leftAnchor="14.0" />
-		<Button fx:id="btnGravar" layoutX="213.0" layoutY="290.0"
-			mnemonicParsing="false" onAction="#btnGravar" text="Gravar"
-			AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
-		<Label layoutX="14.0" layoutY="7.0" text="Cidade"
-			AnchorPane.leftAnchor="14.0" />
-		<Label layoutX="14.0" layoutY="49.0" text="Estado" />
+		<TextField fx:id="txtCidade" layoutX="14.0" layoutY="24.0" prefHeight="25.0" prefWidth="261.0" AnchorPane.leftAnchor="14.0" />
 		<TextField fx:id="txtEstado" layoutX="14.0" layoutY="64.0" />
-		<TextField fx:id="txtCodigo" layoutX="14.0" layoutY="100.0"
-			prefHeight="25.0" prefWidth="57.0" />
+		<TextField fx:id="txtCodigo" layoutX="14.0" layoutY="100.0" prefHeight="25.0" prefWidth="57.0" visible="false" />
+		<Button fx:id="btnGravar" layoutX="213.0" layoutY="290.0" mnemonicParsing="false" onAction="#btnGravar" text="Gravar" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+		<Label layoutX="14.0" layoutY="7.0" text="Cidade" AnchorPane.leftAnchor="14.0" />
+		<Label layoutX="14.0" layoutY="49.0" text="Estado" />
 	</children>
 </AnchorPane>

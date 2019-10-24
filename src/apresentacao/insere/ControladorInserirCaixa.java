@@ -36,6 +36,9 @@ public class ControladorInserirCaixa {
 	@FXML
 	private Button btnCancelar;
 
+	@FXML
+	private Button btnInserir;
+
 	public void abreTelaCaixaMenu() {
 		try {
 			final var stage = new Stage();
@@ -77,6 +80,7 @@ public class ControladorInserirCaixa {
 		try {
 			if (negCaixa.inserir(caixa)) {
 				Alerta.alertaSucesso();
+				btnInserir.getScene().getWindow().hide();
 			}
 		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());

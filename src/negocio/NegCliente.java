@@ -33,7 +33,7 @@ public final class NegCliente {
 		try (con; comando;) {
 			con.setAutoCommit(false);
 			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-			//nome,CPF,endereco,telefone,ativo,id_cidade
+			// nome,CPF,endereco,telefone,ativo,id_cidade
 			comando.setString(1, cliente.getNome());
 			comando.setString(2, cliente.getCPF());
 			comando.setString(3, cliente.getEndereco());
