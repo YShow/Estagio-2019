@@ -23,19 +23,20 @@ import utilidade.Alerta;
 
 public class ControladorInserirCaixa {
 	@FXML
-    private TextField txtData;
+	private TextField txtData;
 
-    @FXML
-    private TextField txtValor;
+	@FXML
+	private TextField txtValor;
 
-    @FXML
-    private TextField txtSaida;
+	@FXML
+	private TextField txtSaida;
 
-    @FXML
-    private TextField txtFuncionario;
-    @FXML
-    private Button btnCancelar;
-    public void abreTelaCaixaMenu() {
+	@FXML
+	private TextField txtFuncionario;
+	@FXML
+	private Button btnCancelar;
+
+	public void abreTelaCaixaMenu() {
 		try {
 			final var stage = new Stage();
 
@@ -58,30 +59,27 @@ public class ControladorInserirCaixa {
 		}
 	}
 
+	@FXML
+	void btnCancelar(final ActionEvent event) {
+		btnCancelar.getScene().getWindow().hide();
+	}
 
-    @FXML
-    void btnCancelar(final ActionEvent event) {
-    	btnCancelar.getScene().getWindow().hide();
-    }
+	@FXML
+	void btnInserir(final ActionEvent event) {
+		final var negCaixa = new NegCaixa();
+		final var caixa = new Caixa();
 
-    @FXML
-    void btnInserir(final ActionEvent event) {
-    	final var negCaixa = new NegCaixa();
-    	final var caixa = new Caixa();
-
-    	caixa.setAtivo(true);
-    	caixa.setData(LocalDate.now());
-    	caixa.setFuncionario(Funcionario.getFuncionario().getCodigo());
-    	caixa.setPrecototal(Double.parseDouble(txtValor.getText()));
-    	caixa.setSaida(Double.parseDouble(txtSaida.getText()));
-    	try {
-
-			if(negCaixa.inserir(caixa))
-			{
+		caixa.setAtivo(true);
+		caixa.setData(LocalDate.now());
+		caixa.setFuncionario(Funcionario.getFuncionario().getCodigo());
+		caixa.setPrecototal(Double.parseDouble(txtValor.getText()));
+		caixa.setSaida(Double.parseDouble(txtSaida.getText()));
+		try {
+			if (negCaixa.inserir(caixa)) {
 				Alerta.alertaSucesso();
 			}
 		} catch (final SQLException e) {
 			Alerta.alertaErro(e.getMessage());
 		}
-    }
+	}
 }

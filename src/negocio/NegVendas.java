@@ -31,12 +31,11 @@ public final class NegVendas {
 	private static final String SQL_VENDA_PRODUTO = "INSERT INTO cantagalo.vend_prod(preco_unitario, quantidade, cod_venda, cod_produto)\n"
 			+ "VALUES(?,?,?,?);";
 	private static final String SQL_CAIXA = "INSERT into caixa(data,preco_total,saida,codigo_funcionario,ativo) values(?,?,?,?,?)";
-	private static final String SQL_SEARCH_UPDATE = "SELECT v.codigo,v.cod_cliente,vp.cod_produto,v.ativo,\n" +
-			" v.forma_de_pagamento,vp.preco_unitario,vp.quantidade, c.preco_total,c.saida,c.codigo,p.quantidade\n" +
-			" from vendas v\n" +
-			" JOIN vend_prod vp on vp.cod_venda = v.codigo\n" +
-			" JOIN caixa c on v.cod_caixa = c.codigo\n" +
-			" join produto p on p.codigo = vp.cod_produto WHERE v.codigo = ?;";
+	private static final String SQL_SEARCH_UPDATE = "SELECT v.codigo,v.cod_cliente,vp.cod_produto,v.ativo,\n"
+			+ " v.forma_de_pagamento,vp.preco_unitario,vp.quantidade, c.preco_total,c.saida,c.codigo,p.quantidade\n"
+			+ " from vendas v\n" + " JOIN vend_prod vp on vp.cod_venda = v.codigo\n"
+			+ " JOIN caixa c on v.cod_caixa = c.codigo\n"
+			+ " join produto p on p.codigo = vp.cod_produto WHERE v.codigo = ?;";
 
 	public final boolean inserir(final Vendas vendas) throws SQLException {
 		final var comeco = Instant.now();
@@ -154,9 +153,10 @@ public final class NegVendas {
 			comando.setBoolean(5, vendas.isAtivo());
 			comando.setInt(6, vendas.getCodigo());
 
-
 			/*
-			 * INSERT into caixa(data,preco_total,saida,codigo_funcionario,ativo) values(?,?,?,?,?)*/
+			 * INSERT into caixa(data,preco_total,saida,codigo_funcionario,ativo)
+			 * values(?,?,?,?,?)
+			 */
 			updateCaixa.setObject(1, vendas.getCaixa().getData());
 			updateCaixa.setDouble(2, vendas.getCaixa().getPrecototal());
 			updateCaixa.setDouble(3, vendas.getCaixa().getSaida());
@@ -165,8 +165,8 @@ public final class NegVendas {
 
 			final var alterou = comando.executeUpdate() >= 1 && updateCaixa.executeUpdate() >= 1;
 
-			if(alterou) {
-			con.commit();
+			if (alterou) {
+				con.commit();
 			}
 			return alterou;
 		} finally {

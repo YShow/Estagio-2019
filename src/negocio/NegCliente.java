@@ -59,6 +59,7 @@ public final class NegCliente {
 			con.setReadOnly(true);
 			comando.setString(1, metodo + '*');
 			final var lista = new ArrayList<Cliente>();
+
 			final var result = comando.executeQuery();
 
 			while (result.next()) {

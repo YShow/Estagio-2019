@@ -5,11 +5,11 @@
 	<groupId>Cantagalo</groupId>
 	<artifactId>Cantagalo</artifactId>
 	<version>0.9.0</version>
-	  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+	</properties>
 	<packaging>jar</packaging>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -31,19 +31,19 @@
 					<source>13</source>
 					<encoding>UTF-8</encoding>
 					<debug>false</debug>
-					<showDeprecation>true</showDeprecation>					
+					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>				
+				<configuration>
 					<archive>
-					<compress>true</compress>
+						<compress>true</compress>
 						<manifest>
 							<mainClass>apresentacao.NewMain</mainClass>
 							<addClasspath>true</addClasspath>
-							<classpathPrefix>./libs/</classpathPrefix>							
+							<classpathPrefix>./libs/</classpathPrefix>
 						</manifest>
 					</archive>
 				</configuration>
@@ -73,7 +73,7 @@
 		<dependency>
 			<groupId>org.openjfx</groupId>
 			<artifactId>javafx-fxml</artifactId>
-			<version>13</version>			
+			<version>13</version>
 		</dependency>
 		<dependency>
 			<groupId>org.mariadb.jdbc</groupId>
@@ -113,11 +113,12 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-<dependency>
-    <groupId>org.bouncycastle</groupId>
-    <artifactId>bcprov-jdk15on</artifactId>
-    <version>1.64</version>
-</dependency>
+		<dependency>
+			<groupId>org.bouncycastle</groupId>
+			<artifactId>bcprov-jdk15on</artifactId>
+			<version>1.64</version>
+		</dependency>
+
 	</dependencies>
 	<repositories>
 		<repository>

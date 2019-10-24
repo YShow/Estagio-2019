@@ -7,19 +7,35 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="357.0" prefWidth="395.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apresentacao.insere.ControladorInserirFuncionario">
+<AnchorPane prefHeight="357.0" prefWidth="395.0"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="apresentacao.insere.ControladorInserirFuncionario">
 	<children>
-		<TextField fx:id="txtNomeFuncionario" layoutX="34.0" layoutY="41.0" prefHeight="25.0" prefWidth="257.0" AnchorPane.leftAnchor="34.0" />
-		<Label layoutX="34.0" layoutY="26.0" text="Nome" AnchorPane.leftAnchor="34.0" />
-		<Label layoutX="229.0" layoutY="72.0" text="Senha" AnchorPane.leftAnchor="229.0" />
-		<PasswordField fx:id="txtSenhaFuncionario" layoutX="229.0" layoutY="87.0" prefHeight="25.0" prefWidth="107.0" AnchorPane.leftAnchor="229.0" />
-		<CheckBox fx:id="chkAdm" layoutX="36.0" layoutY="179.0" mnemonicParsing="false" text="Administrador" AnchorPane.leftAnchor="36.0" />
-		<Button fx:id="btnGravarFuncionario" mnemonicParsing="false" onAction="#btnGravarFuncionario" prefHeight="25.0" prefWidth="66.0" text="Gravar" AnchorPane.bottomAnchor="12.0" AnchorPane.rightAnchor="14.0" />
+		<TextField fx:id="txtNomeFuncionario" layoutX="34.0"
+			layoutY="41.0" prefHeight="25.0" prefWidth="257.0"
+			AnchorPane.leftAnchor="34.0" />
+		<Label layoutX="34.0" layoutY="26.0" text="Nome"
+			AnchorPane.leftAnchor="34.0" />
+		<Label layoutX="229.0" layoutY="72.0" text="Senha"
+			AnchorPane.leftAnchor="229.0" />
+		<PasswordField fx:id="txtSenhaFuncionario"
+			layoutX="229.0" layoutY="87.0" prefHeight="25.0" prefWidth="107.0"
+			AnchorPane.leftAnchor="229.0" />
+		<CheckBox fx:id="chkAdm" layoutX="36.0" layoutY="179.0"
+			mnemonicParsing="false" text="Administrador"
+			AnchorPane.leftAnchor="36.0" />
+		<Button fx:id="btnGravarFuncionario" mnemonicParsing="false"
+			onAction="#btnGravarFuncionario" prefHeight="25.0" prefWidth="66.0"
+			text="Gravar" AnchorPane.bottomAnchor="12.0"
+			AnchorPane.rightAnchor="14.0" />
 		<TextField fx:id="txtFuncao" layoutX="34.0" layoutY="132.0" />
 		<Label layoutX="33.0" layoutY="117.0" text="Função" />
-		<TextField fx:id="txtCodigo" editable="false" layoutX="32.0" layoutY="2.0" prefHeight="25.0" prefWidth="75.0" visible="false" />
-      <TextField fx:id="txtUsuario" layoutX="34.0" layoutY="87.0" />
-      <Label layoutX="33.0" layoutY="72.0" text="Usuario" />
-      <CheckBox fx:id="chkAtivo" disable="true" layoutX="157.0" layoutY="179.0" mnemonicParsing="false" selected="true" text="Ativo" />
+		<TextField fx:id="txtCodigo" editable="false" layoutX="32.0"
+			layoutY="2.0" prefHeight="25.0" prefWidth="75.0" visible="false" />
+		<TextField fx:id="txtUsuario" layoutX="34.0" layoutY="87.0" />
+		<Label layoutX="33.0" layoutY="72.0" text="Usuario" />
+		<CheckBox fx:id="chkAtivo" disable="true" layoutX="157.0"
+			layoutY="179.0" mnemonicParsing="false" selected="true" text="Ativo" />
 	</children>
 </AnchorPane>

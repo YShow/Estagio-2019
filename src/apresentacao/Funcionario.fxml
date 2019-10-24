@@ -7,36 +7,65 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane prefHeight="393.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apresentacao.ControladorMenuFuncionario">
+<AnchorPane prefHeight="393.0" prefWidth="606.0"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="apresentacao.ControladorMenuFuncionario">
 	<children>
-		<BorderPane prefHeight="393.0" prefWidth="376.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+		<BorderPane prefHeight="393.0" prefWidth="376.0"
+			AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+			AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 			<top>
-				<AnchorPane prefHeight="50.0" prefWidth="606.0" BorderPane.alignment="CENTER">
+				<AnchorPane prefHeight="50.0" prefWidth="606.0"
+					BorderPane.alignment="CENTER">
 					<children>
-						<TextField fx:id="txtFuncionario" layoutX="14.0" layoutY="13.0" prefHeight="25.0" prefWidth="483.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="109.0" />
-						<Button layoutX="517.0" layoutY="13.0" mnemonicParsing="false" onAction="#btnConsultaFuncionario" prefHeight="25.0" prefWidth="94.0" text="Consultar" AnchorPane.rightAnchor="6.0" />
+						<TextField fx:id="txtFuncionario" layoutX="14.0"
+							layoutY="13.0" prefHeight="25.0" prefWidth="483.0"
+							AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="109.0" />
+						<Button layoutX="517.0" layoutY="13.0"
+							mnemonicParsing="false" onAction="#btnConsultaFuncionario"
+							prefHeight="25.0" prefWidth="94.0" text="Consultar"
+							AnchorPane.rightAnchor="6.0" />
 					</children>
 				</AnchorPane>
 			</top>
 			<bottom>
-				<AnchorPane prefHeight="49.0" prefWidth="606.0" BorderPane.alignment="CENTER">
+				<AnchorPane prefHeight="49.0" prefWidth="606.0"
+					BorderPane.alignment="CENTER">
 					<children>
-						<Button fx:id="btnDesativaFuncionario" layoutX="519.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnDesativaFuncionario" text="Desativar" AnchorPane.rightAnchor="14.0" />
-						<Button layoutX="445.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnAlteraFuncionario" prefHeight="25.0" prefWidth="63.0" text="Alterar" AnchorPane.rightAnchor="98.0" />
-						<Button layoutX="381.0" layoutY="12.0" mnemonicParsing="false" onAction="#btnInsereFuncionario" text="Inserir" AnchorPane.rightAnchor="170.0" />
+						<Button fx:id="btnDesativaFuncionario" layoutX="519.0"
+							layoutY="12.0" mnemonicParsing="false"
+							onAction="#btnDesativaFuncionario" text="Desativar"
+							AnchorPane.rightAnchor="14.0" />
+						<Button layoutX="445.0" layoutY="12.0"
+							mnemonicParsing="false" onAction="#btnAlteraFuncionario"
+							prefHeight="25.0" prefWidth="63.0" text="Alterar"
+							AnchorPane.rightAnchor="98.0" />
+						<Button layoutX="381.0" layoutY="12.0"
+							mnemonicParsing="false" onAction="#btnInsereFuncionario"
+							text="Inserir" AnchorPane.rightAnchor="170.0" />
 					</children>
 				</AnchorPane>
 			</bottom>
 			<center>
-				<AnchorPane minWidth="-Infinity" prefHeight="275.0" prefWidth="606.0">
+				<AnchorPane minWidth="-Infinity" prefHeight="275.0"
+					prefWidth="606.0">
 					<children>
-						<TableView fx:id="tblFuncionario" layoutX="175.0" layoutY="47.0" prefHeight="294.0" prefWidth="606.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+						<TableView fx:id="tblFuncionario" layoutX="175.0"
+							layoutY="47.0" prefHeight="294.0" prefWidth="606.0"
+							AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+							AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 							<columns>
-								<TableColumn fx:id="tcCodigo" prefWidth="99.0" text="Código" />
-								<TableColumn fx:id="tcNome" prefWidth="125.0" text="Nome" />
-                        <TableColumn fx:id="tcUsuario" editable="false" prefWidth="75.0" text="Usuario" />
-								<TableColumn fx:id="tcFuncao" minWidth="0.0" prefWidth="126.0" text="Função" />
-								<TableColumn fx:id="tcAdm" prefWidth="136.0" text="Administrador" />
+								<TableColumn fx:id="tcCodigo" prefWidth="99.0"
+									text="Código" />
+								<TableColumn fx:id="tcNome" prefWidth="125.0"
+									text="Nome" />
+								<TableColumn fx:id="tcUsuario" editable="false"
+									prefWidth="75.0" text="Usuario" />
+								<TableColumn fx:id="tcFuncao" minWidth="0.0"
+									prefWidth="126.0" text="Função" />
+								<TableColumn fx:id="tcAdm" prefWidth="136.0"
+									text="Administrador" />
 							</columns>
 						</TableView>
 					</children>

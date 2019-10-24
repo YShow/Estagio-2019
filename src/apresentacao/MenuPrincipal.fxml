@@ -4,16 +4,38 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="587.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apresentacao.ControladorMenuPrincipal">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity"
+	prefHeight="437.0" prefWidth="587.0"
+	xmlns="http://javafx.com/javafx/11.0.1"
+	xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="apresentacao.ControladorMenuPrincipal">
 	<top>
 		<AnchorPane prefHeight="30.0" prefWidth="625.0">
 			<children>
-				<Button blendMode="HARD_LIGHT" layoutX="14.0" layoutY="4.0" maxHeight="25.0" maxWidth="87.0" mnemonicParsing="false" onAction="#menuTelaFuncionario" text="Funcionario" textAlignment="CENTER" AnchorPane.leftAnchor="14.0" />
-				<Button blendMode="HARD_LIGHT" layoutX="107.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#menuTelaCidade" prefHeight="25.0" prefWidth="87.0" text="Cidade" AnchorPane.leftAnchor="107.0" />
-				<Button blendMode="HARD_LIGHT" layoutX="200.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#menuTelaCliente" prefHeight="25.0" prefWidth="87.0" text="Cliente" />
-				<Button blendMode="HARD_LIGHT" layoutX="293.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#menuTelaVenda" prefHeight="25.0" prefWidth="87.0" text="Venda" />
-				<Button blendMode="HARD_LIGHT" layoutX="387.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#menuTelaProduto" prefHeight="25.0" prefWidth="87.0" text="Produto" />
-				<Button blendMode="HARD_LIGHT" layoutX="480.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#menuTelaCaixa" prefHeight="25.0" prefWidth="87.0" text="Caixa" />
+				<Button blendMode="HARD_LIGHT" layoutX="14.0" layoutY="4.0"
+					maxHeight="25.0" maxWidth="87.0" mnemonicParsing="false"
+					onAction="#menuTelaFuncionario" text="Funcionario"
+					textAlignment="CENTER" AnchorPane.leftAnchor="14.0" />
+				<Button blendMode="HARD_LIGHT" layoutX="107.0" layoutY="4.0"
+					maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false"
+					onAction="#menuTelaCidade" prefHeight="25.0" prefWidth="87.0"
+					text="Cidade" AnchorPane.leftAnchor="107.0" />
+				<Button blendMode="HARD_LIGHT" layoutX="200.0" layoutY="4.0"
+					maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false"
+					onAction="#menuTelaCliente" prefHeight="25.0" prefWidth="87.0"
+					text="Cliente" />
+				<Button blendMode="HARD_LIGHT" layoutX="293.0" layoutY="4.0"
+					maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false"
+					onAction="#menuTelaVenda" prefHeight="25.0" prefWidth="87.0"
+					text="Venda" />
+				<Button blendMode="HARD_LIGHT" layoutX="387.0" layoutY="4.0"
+					maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false"
+					onAction="#menuTelaProduto" prefHeight="25.0" prefWidth="87.0"
+					text="Produto" />
+				<Button blendMode="HARD_LIGHT" layoutX="480.0" layoutY="4.0"
+					maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false"
+					onAction="#menuTelaCaixa" prefHeight="25.0" prefWidth="87.0"
+					text="Caixa" />
 			</children>
 		</AnchorPane>
 	</top>

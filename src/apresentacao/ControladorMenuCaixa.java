@@ -53,8 +53,8 @@ public final class ControladorMenuCaixa {
 
 	@FXML
 	private TableColumn<Caixa, Boolean> tcAtivo;
-	  @FXML
-	    private TextField txtTotalValor;
+	@FXML
+	private TextField txtTotalValor;
 	private final NegCaixa negCaixa = new NegCaixa();
 
 	private final ControladorInserirCaixa caixaInserir = new ControladorInserirCaixa();
@@ -108,7 +108,8 @@ public final class ControladorMenuCaixa {
 					tcPreco.setCellValueFactory(new PropertyValueFactory<Caixa, Double>("precototal"));
 					tcSaida.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("saida"));
 
-					txtTotalValor.setText(String.valueOf(tvCaixa.getItems().stream().mapToDouble(Caixa::getPrecototal).sum()));
+					txtTotalValor.setText(
+							String.valueOf(tvCaixa.getItems().stream().mapToDouble(Caixa::getPrecototal).sum()));
 				} else {
 					Alerta.alertaNaoEncontrado();
 				}
@@ -121,8 +122,6 @@ public final class ControladorMenuCaixa {
 		}
 
 	}
-
-
 
 	private void limpaTabela() {
 		tvCaixa.getItems().clear();
