@@ -35,10 +35,10 @@ public final class NegCliente {
 			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			// nome,CPF,endereco,telefone,ativo,id_cidade
 			comando.setString(1, cliente.getNome());
-			comando.setString(2, cliente.getCPF());
+			comando.setString(2, cliente.getCpf());
 			comando.setString(3, cliente.getEndereco());
 			comando.setString(4, cliente.getTelefone());
-			comando.setBoolean(5, cliente.getAtivo());
+			comando.setBoolean(5, cliente.isAtivo());
 			comando.setInt(6, cliente.getCidade().getCodigo());
 
 			final var inseriu = comando.executeUpdate() >= 1;
@@ -70,7 +70,7 @@ public final class NegCliente {
 				final var cidade = new Cidade();
 				cliente.setCodigo(result.getInt("c.codigo"));
 				cliente.setNome(result.getString("c.nome"));
-				cliente.setCPF(result.getString("c.CPF"));
+				cliente.setCpf(result.getString("c.CPF"));
 				cliente.setEndereco(result.getString("c.endereco"));
 				cliente.setTelefone(result.getString("c.telefone"));
 				cliente.setAtivo(result.getBoolean("c.ativo"));
@@ -97,10 +97,10 @@ public final class NegCliente {
 			con.setAutoCommit(false);
 			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setString(1, cliente.getNome());
-			comando.setString(2, cliente.getCPF());
+			comando.setString(2, cliente.getCpf());
 			comando.setString(3, cliente.getEndereco());
 			comando.setString(4, cliente.getTelefone());
-			comando.setBoolean(5, cliente.getAtivo());
+			comando.setBoolean(5, cliente.isAtivo());
 			comando.setInt(6, cliente.getCidade().getCodigo());
 			comando.setInt(7, cliente.getCodigo());
 			final var alterou = comando.executeUpdate() >= 1;

@@ -52,7 +52,7 @@ public class ControladorInserirCaixa {
 			final ControladorInserirCaixa control = loader.getController();
 
 			control.txtData.setText(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-			control.txtFuncionario.setText(String.valueOf(Funcionario.getFuncionario().getCodigo()));
+			control.txtFuncionario.setText(String.valueOf(Funcionario.funcionario.getCodigo()));
 
 			new JMetro(scene, Main.style);
 			stage.setScene(scene);
@@ -74,7 +74,7 @@ public class ControladorInserirCaixa {
 
 		caixa.setAtivo(true);
 		caixa.setData(LocalDate.now());
-		caixa.setFuncionario(Funcionario.getFuncionario().getCodigo());
+		caixa.setFuncionario(Funcionario.funcionario.getCodigo());
 		caixa.setPrecototal(Double.parseDouble(txtValor.getText()));
 		caixa.setSaida(Double.parseDouble(txtSaida.getText()));
 		try {

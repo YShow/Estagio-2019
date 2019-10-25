@@ -38,7 +38,7 @@ public final class NegLogin {
 
 					funcionarioPadrao.setAdministrador(resultado.getBoolean("administrador"));
 					funcionarioPadrao.setCodigo(resultado.getInt("codigo"));
-					Funcionario.setFuncionario(funcionarioPadrao);
+					Funcionario.funcionario = funcionarioPadrao;
 
 					existeUsuario = true;
 				}

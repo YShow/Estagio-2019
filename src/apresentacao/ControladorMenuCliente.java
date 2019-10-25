@@ -90,7 +90,7 @@ public final class ControladorMenuCliente {
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style);
 			stage.setScene(scene);
-			if (!Funcionario.getFuncionario().getAdministrador()) {
+			if (!Funcionario.funcionario.isAdministrador()) {
 				controlador.btnDesativarCliente.setDisable(true);
 			}
 			stage.show();
@@ -155,7 +155,7 @@ public final class ControladorMenuCliente {
 					tvCliente.setItems(FXCollections.observableList(cliente));
 					tcCodigo.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("Codigo"));
 					tcAtivo.setCellValueFactory(new PropertyValueFactory<Cliente, Boolean>("Ativo"));
-					tcCPF.setCellValueFactory(new PropertyValueFactory<Cliente, String>("CPF"));
+					tcCPF.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Cpf"));
 					tcEndereco.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Endereco"));
 					tcNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Nome"));
 					tcTelefone.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Telefone"));

@@ -67,10 +67,10 @@ public final class ControladorInserirCliente {
 			final ControladorInserirCliente controlador = loader.getController();
 			if (tipo_tela.equals(TIPO_TELA.ALTERA)) {
 				controlador.btnGrava.setText("Alterar");
-				controlador.chkAtivo.setSelected(cliente.getAtivo());
+				controlador.chkAtivo.setSelected(cliente.isAtivo());
 				controlador.txtCidade.setText(cliente.getCidade().getNome());
 				controlador.txtCodigo.setText(String.valueOf(cliente.getCodigo()));
-				controlador.txtCPF.setText(cliente.getCPF());
+				controlador.txtCPF.setText(cliente.getCpf());
 				controlador.txtEndereco.setText(cliente.getEndereco());
 				controlador.txtNome.setText(cliente.getNome());
 				controlador.txtTelefone.setText(cliente.getTelefone());
@@ -114,7 +114,7 @@ public final class ControladorInserirCliente {
 		if (!txtCodigo.getText().isBlank()) {
 			cliente.setCodigo(Integer.parseInt(txtCodigo.getText().trim()));
 		}
-		cliente.setCPF(txtCPF.getText().trim());
+		cliente.setCpf(txtCPF.getText().trim());
 		cliente.setEndereco(txtEndereco.getText().trim());
 		cliente.setNome(txtNome.getText().trim());
 		cliente.setTelefone(txtTelefone.getText().trim());

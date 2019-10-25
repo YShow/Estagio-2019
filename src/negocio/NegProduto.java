@@ -30,7 +30,7 @@ public final class NegProduto {
 		try (con; comando;) {
 			con.setAutoCommit(false);
 			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-			comando.setBoolean(1, produto.getAtivo());
+			comando.setBoolean(1, produto.isAtivo());
 			comando.setDouble(2, produto.getPreco());
 			comando.setInt(3, produto.getQuantidade());
 			comando.setString(4, produto.getNome());
@@ -79,7 +79,7 @@ public final class NegProduto {
 		try (con; comando;) {
 			con.setAutoCommit(false);
 			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-			comando.setBoolean(1, produto.getAtivo());
+			comando.setBoolean(1, produto.isAtivo());
 			comando.setDouble(2, produto.getPreco());
 			comando.setInt(3, produto.getQuantidade());
 			comando.setString(4, produto.getNome());

@@ -83,7 +83,7 @@ public final class ControladorMenuCidade {
 				stage.showAndWait();
 				return cidadeVolta;
 			} else {
-				if (!Funcionario.getFuncionario().getAdministrador()) {
+				if (!Funcionario.funcionario.isAdministrador()) {
 					controlador.btnDesativar.setDisable(true);
 				}
 				stage.show();

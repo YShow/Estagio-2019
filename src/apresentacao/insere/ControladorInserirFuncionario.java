@@ -65,7 +65,7 @@ public final class ControladorInserirFuncionario {
 				controlador.btnGravarFuncionario.setText("Alterar");
 				controlador.txtFuncao.setText(funcionario.getFuncao());
 				controlador.txtNomeFuncionario.setText(funcionario.getNome());
-				controlador.chkAdm.setSelected(funcionario.getAdministrador());
+				controlador.chkAdm.setSelected(funcionario.isAdministrador());
 				controlador.txtCodigo.setText(String.valueOf(funcionario.getCodigo()));
 				controlador.txtUsuario.setText(funcionario.getUsuario());
 				controlador.chkAtivo.setDisable(false);

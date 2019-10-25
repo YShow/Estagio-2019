@@ -34,7 +34,7 @@ public final class NegFuncionario {
 			final var salt = Senha.geraSalt();
 			comando.setString(1, funcionario.getNome());
 			comando.setString(2, funcionario.getFuncao());
-			comando.setBoolean(3, funcionario.getAdministrador());
+			comando.setBoolean(3, funcionario.isAdministrador());
 			comando.setString(4, Senha.criaSenha(funcionario.getSenha(), salt));
 			comando.setString(5, salt);
 			comando.setString(6, funcionario.getUsuario());
@@ -88,7 +88,7 @@ public final class NegFuncionario {
 			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
 			comando.setString(1, funcionario.getNome());
 			comando.setString(2, funcionario.getFuncao());
-			comando.setBoolean(3, funcionario.getAdministrador());
+			comando.setBoolean(3, funcionario.isAdministrador());
 			if (funcionario.getSenha().isBlank()) {
 
 				comando.setString(4, null);

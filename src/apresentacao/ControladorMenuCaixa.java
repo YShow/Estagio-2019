@@ -78,7 +78,7 @@ public final class ControladorMenuCaixa {
 					controlador.conulstaCaixa(null);
 				}
 			});
-			if (!Funcionario.getFuncionario().getAdministrador()) {
+			if (!Funcionario.funcionario.isAdministrador()) {
 
 				controlador.btnDesativarCaixa.setDisable(true);
 			}

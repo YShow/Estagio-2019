@@ -64,7 +64,7 @@ public final class ControladorInserirProduto {
 				controlador.txtNome.setText(produto.getNome());
 				controlador.txtPreco.setText(String.valueOf(produto.getPreco()));
 				controlador.txtQuantidade.setText(String.valueOf(produto.getQuantidade()));
-				controlador.chkAtivo.setSelected(produto.getAtivo());
+				controlador.chkAtivo.setSelected(produto.isAtivo());
 				stage.setTitle("Alterar Produto");
 				stage.show();
 			} else if (tipo_tela.equals(TIPO_TELA.INSERE)) {

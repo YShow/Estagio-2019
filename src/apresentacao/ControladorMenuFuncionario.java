@@ -68,7 +68,7 @@ public final class ControladorMenuFuncionario {
 			final var scene = new Scene(root);
 			new JMetro(scene, Main.style);
 			stage.setScene(scene);
-			if (!Funcionario.getFuncionario().getAdministrador()) {
+			if (!Funcionario.funcionario.isAdministrador()) {
 				control.btnDesativaFuncionario.setDisable(true);
 			}
 

@@ -170,7 +170,7 @@ public final class ControladorInserirVenda {
 
 		// PEGA CAIXA
 		caixa.setAtivo(true);
-		caixa.setFuncionario(Funcionario.getFuncionario().getCodigo());
+		caixa.setFuncionario(Funcionario.funcionario.getCodigo());
 		caixa.setData(LocalDate.now());
 
 		final var precototal = BigDecimal.valueOf(Double.parseDouble(txtPrecoTotal.getText().trim())).doubleValue();

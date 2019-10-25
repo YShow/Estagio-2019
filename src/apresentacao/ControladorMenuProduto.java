@@ -78,7 +78,7 @@ public final class ControladorMenuProduto {
 					controlador.btnConsultaProduto(null);
 				}
 			});
-			if (!Funcionario.getFuncionario().getAdministrador()) {
+			if (!Funcionario.funcionario.isAdministrador()) {
 				controlador.btnDesativaProduto.setDisable(true);
 			}
 			stage.show();
@@ -112,7 +112,7 @@ public final class ControladorMenuProduto {
 				stage.setTitle("Consultar produto ");
 				stage.showAndWait();
 			}
-			if (!Funcionario.getFuncionario().getAdministrador()) {
+			if (!Funcionario.funcionario.isAdministrador()) {
 				controlador.btnDesativaProduto.setDisable(true);
 			}
 
