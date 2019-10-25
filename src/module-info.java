@@ -11,5 +11,5 @@ module estagio {
 	requires transitive org.jfxtras.styles.jmetro;
 	requires org.eclipse.collections.impl;
 	requires org.eclipse.collections.api;
-	requires static lombok;
+	requires lombok;
 }
