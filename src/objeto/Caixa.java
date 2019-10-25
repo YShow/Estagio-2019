@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 public final class Caixa {
 
-
 	private int codigo;
 	private LocalDate data;
 	private double precototal;

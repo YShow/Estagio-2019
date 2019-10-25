@@ -3,6 +3,7 @@ package objeto;
 import java.time.LocalDate;
 
 import lombok.Data;
+
 @Data
 public final class Vendas {
 	private Produto produto;
