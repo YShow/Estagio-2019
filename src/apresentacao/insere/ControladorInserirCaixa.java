@@ -1,7 +1,6 @@
 package apresentacao.insere;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -77,13 +76,11 @@ public class ControladorInserirCaixa {
 		caixa.setFuncionario(Funcionario.funcionario.getCodigo());
 		caixa.setPrecototal(Double.parseDouble(txtValor.getText()));
 		caixa.setSaida(Double.parseDouble(txtSaida.getText()));
-		try {
-			if (negCaixa.inserir(caixa)) {
-				Alerta.alertaSucesso();
-				btnInserir.getScene().getWindow().hide();
-			}
-		} catch (final SQLException e) {
-			Alerta.alertaErro(e.getMessage());
+
+		if (negCaixa.inserir(caixa)) {
+			Alerta.alertaSucesso();
+			btnInserir.getScene().getWindow().hide();
 		}
+
 	}
 }

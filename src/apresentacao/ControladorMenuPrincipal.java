@@ -1,7 +1,11 @@
 package apresentacao;
 
+import java.sql.SQLException;
+
+import apresentacao.relatorios.RelatorioUm;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import net.sf.jasperreports.engine.JRException;
 import utilidade.TIPO_TELA;
 
 public final class ControladorMenuPrincipal {
@@ -42,4 +46,15 @@ public final class ControladorMenuPrincipal {
 	private void menuTelaVenda(final ActionEvent event) {
 		telaVenda.abreTelaVendaMenu();
 	}
+	
+    @FXML
+    void btnRelatorio(ActionEvent event) {
+    	try {
+			new RelatorioUm().gerar();
+		} catch (ClassNotFoundException | JRException | SQLException e) {
+			System.out.println(e.getMessage());
+		}
+    }
+
+	
 }

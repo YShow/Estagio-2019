@@ -152,6 +152,7 @@ public final class ControladorMenuCliente {
 
 				final var cliente = negCliente.consultar(txtCliente.getText().trim());
 				if (!cliente.isEmpty()) {
+
 					tvCliente.setItems(FXCollections.observableList(cliente));
 					tcCodigo.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("Codigo"));
 					tcAtivo.setCellValueFactory(new PropertyValueFactory<Cliente, Boolean>("Ativo"));
@@ -164,6 +165,7 @@ public final class ControladorMenuCliente {
 					tcCodCidade.setCellValueFactory(
 							codCidade -> new SimpleIntegerProperty(codCidade.getValue().getCidade().getCodigo())
 									.asObject());
+
 				} else {
 					Alerta.alertaNaoEncontrado();
 				}
