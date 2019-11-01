@@ -31,4 +31,6 @@ module estagio {
 	requires org.eclipse.collections.impl;
 	requires org.hibernate.orm.core;
 	requires org.jfxtras.styles.jmetro;
+	requires net.bytebuddy;
+	requires com.sun.xml.bind;
 }
