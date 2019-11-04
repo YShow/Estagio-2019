@@ -19,7 +19,6 @@ public final class NegCaixa {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final Logger logger = Logger.getLogger(NegCaixa.class.getName());
 
-
 	public final boolean inserir(final Caixa caixa) {
 		final var comeco = Instant.now();
 		try (final Session session = HibernateUtil.getSessionFactory().openSession()) {

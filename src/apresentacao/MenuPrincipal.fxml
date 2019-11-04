@@ -6,7 +6,7 @@
 
 <BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="437.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="apresentacao.ControladorMenuPrincipal">
 	<top>
-		<AnchorPane prefHeight="30.0" prefWidth="625.0">
+		<AnchorPane prefHeight="110.0" prefWidth="680.0">
 			<children>
 				<Button blendMode="HARD_LIGHT" layoutX="14.0" layoutY="4.0" maxHeight="25.0" maxWidth="87.0" mnemonicParsing="false" onAction="#menuTelaFuncionario" text="Funcionario" textAlignment="CENTER" AnchorPane.leftAnchor="14.0" />
 				<Button blendMode="HARD_LIGHT" layoutX="107.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#menuTelaCidade" prefHeight="25.0" prefWidth="87.0" text="Cidade" AnchorPane.leftAnchor="107.0" />
@@ -14,7 +14,10 @@
 				<Button blendMode="HARD_LIGHT" layoutX="293.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#menuTelaVenda" prefHeight="25.0" prefWidth="87.0" text="Venda" />
 				<Button blendMode="HARD_LIGHT" layoutX="387.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#menuTelaProduto" prefHeight="25.0" prefWidth="87.0" text="Produto" />
 				<Button blendMode="HARD_LIGHT" layoutX="480.0" layoutY="4.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#menuTelaCaixa" prefHeight="25.0" prefWidth="87.0" text="Caixa" />
-            <Button layoutX="567.0" layoutY="4.0" mnemonicParsing="false" onAction="#btnRelatorio" text="Relatorio" />
+            <Button layoutX="194.0" layoutY="43.0" mnemonicParsing="false" onAction="#btnRelatorio" text="Relatorio" />
+            <Button layoutX="270.0" layoutY="43.0" mnemonicParsing="false" onAction="#btnRelatorio2" text="Relatorio" />
+            <Button layoutX="345.0" layoutY="43.0" mnemonicParsing="false" onAction="#btnRelatorio3" text="Relatorio" />
+            <Button layoutX="421.0" layoutY="43.0" mnemonicParsing="false" onAction="#btnRelatorio4" text="Relatorio" />
 			</children>
 		</AnchorPane>
 	</top>

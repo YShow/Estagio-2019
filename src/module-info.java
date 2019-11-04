@@ -6,7 +6,7 @@ module estagio {
 	exports objeto;
 	exports utilidade;
 	exports negocio;
-	
+
 	opens apresentacao.insere;
 	opens apresentacao.relatorios;
 	opens acessoBD.MariaDB;
@@ -14,8 +14,7 @@ module estagio {
 	opens objeto;
 	opens utilidade;
 	opens negocio;
-	
-	
+
 	requires jasperreports;
 	requires java.logging;
 	requires java.naming;

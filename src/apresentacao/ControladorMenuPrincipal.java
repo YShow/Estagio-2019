@@ -2,6 +2,9 @@ package apresentacao;
 
 import java.sql.SQLException;
 
+import apresentacao.relatorios.RelatorioDois;
+import apresentacao.relatorios.RelatorioQuatro;
+import apresentacao.relatorios.RelatorioTres;
 import apresentacao.relatorios.RelatorioUm;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,15 +49,42 @@ public final class ControladorMenuPrincipal {
 	private void menuTelaVenda(final ActionEvent event) {
 		telaVenda.abreTelaVendaMenu();
 	}
-	
-    @FXML
-    void btnRelatorio(ActionEvent event) {
-    	try {
+
+	@FXML
+	void btnRelatorio(final ActionEvent event) {
+		try {
 			new RelatorioUm().gerar();
-		} catch (ClassNotFoundException | JRException | SQLException e) {
+		} catch (JRException | SQLException e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	
+
+    @FXML
+    void btnRelatorio2(ActionEvent event) {
+    	try {
+			new RelatorioDois().gerar();
+		} catch (JRException | SQLException e) {
 			System.out.println(e.getMessage());
 		}
     }
 
-	
+    @FXML
+    void btnRelatorio3(ActionEvent event) {
+    	try {
+			new RelatorioTres().gerar();
+		} catch (JRException | SQLException e) {
+			System.out.println(e.getMessage());
+		}
+    }
+
+    @FXML
+    void btnRelatorio4(ActionEvent event) {
+    	try {
+			new RelatorioQuatro().gerar();
+		} catch (JRException | SQLException e) {
+			System.out.println(e.getMessage());
+		}
+    }
+
 }

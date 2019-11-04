@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.10.0.final using JasperReports Library version 6.10.0-unknown  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rel3" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f4368b7c-0627-4ab2-82ad-3c05ff3cbb31">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter "/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<queryString>
+		<![CDATA[SELECT c.nome,group_concat(p.nome), (vp.preco_unitario * vp.quantidade) as total,count(v.cod_cliente) as maisvenda  from vendas v
+join vend_prod vp on vp.cod_venda = v.codigo
+join produto p on p.codigo = vp.cod_produto
+join cliente c on c.codigo = v.cod_cliente
+GROUP by c.nome
+ORDER by maisvenda DESC
+LIMIT 100]]>
+	</queryString>
+	<field name="nome" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nome"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="cliente"/>
+	</field>
+	<field name="group_concat(p.nome)" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="group_concat(p.nome)"/>
+	</field>
+	<field name="total" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="total"/>
+	</field>
+	<field name="maisvenda" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="maisvenda"/>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="6" y="17" width="100" height="30" uuid="eb706c85-cf81-4c6c-a704-c728ae28621c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e6aa7605-08ad-4d80-90ca-c5fa9a9ded3d"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="17" width="100" height="30" uuid="be0da672-8f06-4a0c-b29d-f4334dd7bfc6">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="628bd534-2ee8-4a04-9d10-827a3d279064"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{group_concat(p.nome)}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="238" y="18" width="100" height="30" uuid="69649519-1fe6-4e83-a157-d2b0f13b5b67">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e1f2f516-2c79-4239-a257-232c811872fa"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="359" y="18" width="100" height="30" uuid="d6d1040d-457c-4b29-9d8b-fe53586cb316">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fe3201b1-6853-406c-8978-324631fa74d2"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{maisvenda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

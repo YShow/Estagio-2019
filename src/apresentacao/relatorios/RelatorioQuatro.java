@@ -10,12 +10,10 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
 
-public class RelatorioUm {
-
+public class RelatorioQuatro {
 	public void gerar() throws JRException, SQLException {
-		final JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("rel1.jrxml"));
+		final JasperReport relatorio = JasperCompileManager.compileReport(getClass().getResourceAsStream("rel4.jrxml"));
 		final JasperPrint impressao = JasperFillManager.fillReport(relatorio, null, new AcessoBD().getConexao());
 		JasperViewer.viewReport(impressao, false);
 	}
-
 }
