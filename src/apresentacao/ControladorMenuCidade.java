@@ -103,27 +103,22 @@ public final class ControladorMenuCidade {
 
 	@FXML
 	private void btnConsultaCidade(final ActionEvent event) {
+		if (!txtConsullaCidade.getText().isBlank()) {
+			limpaTabela();
 
-		try {
-			if (!txtConsullaCidade.getText().isBlank()) {
-				limpaTabela();
-
-				final var funcionario = negCidade.consultar(txtConsullaCidade.getText().trim());
-				if (!funcionario.isEmpty()) {
-					tvCidade.setItems(FXCollections.observableList(funcionario));
-					tcCodigo.setCellValueFactory(new PropertyValueFactory<Cidade, Integer>("Codigo"));
-					tcNome.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Nome"));
-					tcEstado.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Estado"));
-				} else {
-					Alerta.alertaNaoEncontrado();
-				}
+			final var funcionario = negCidade.consultar(txtConsullaCidade.getText().trim());
+			if (!funcionario.isEmpty()) {
+				tvCidade.setItems(FXCollections.observableList(funcionario));
+				tcCodigo.setCellValueFactory(new PropertyValueFactory<Cidade, Integer>("Codigo"));
+				tcNome.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Nome"));
+				tcEstado.setCellValueFactory(new PropertyValueFactory<Cidade, String>("Estado"));
 			} else {
-				Alerta.alertaCampoNulo();
+				Alerta.alertaNaoEncontrado();
 			}
-		} catch (final SQLException e) {
-
-			Alerta.alertaErro(e.getMessage());
+		} else {
+			Alerta.alertaCampoNulo();
 		}
+
 	}
 
 	private void limpaTabela() {

@@ -8,56 +8,38 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
+import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import acessoBD.MariaDB.AcessoBD;
+import acessoBD.MariaDB.HibernateUtil;
 import objeto.Cidade;
 
 public final class NegCidade {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final Logger logger = Logger.getLogger(NegCidade.class.getName());
-	private static final String SQL_INSERT = "INSERT INTO cidade(nome,estado) values(?,?)";
-	private static final String SQL_SEARCH = "SELECT codigo,nome,estado FROM cidade WHERE MATCH(nome) AGAINST(? IN BOOLEAN MODE)";
+	private static final String SQL_SEARCH = "SELECT codigo,nome,estado FROM cidade WHERE MATCH(nome) AGAINST(:nome IN BOOLEAN MODE)";
 	private static final String SQL_UPDATE = "update cidade set nome = ?, estado = ? where codigo = ?";
 	private static final String SQL_DELETE = "DELETE FROM cantagalo.cidade\n" + "WHERE codigo = ? ;";
 
-	public final boolean inserir(final Cidade cidade) throws SQLException {
+	public final boolean inserir(final Cidade cidade) {
 		final var comeco = Instant.now();
-		final var con = conexao.getConexao();
-		final var comando = con.prepareStatement(SQL_INSERT);
-		try (con; comando;) {
-			con.setAutoCommit(false);
-			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-			comando.setString(1, cidade.getNome());
-			comando.setString(2, cidade.getEstado());
-			final var inseriu = comando.executeUpdate() >= 1;
-			con.commit();
-			return inseriu;
+		try (final var session = HibernateUtil.getSessionFactory().openSession()) {
+			final var transaction = session.beginTransaction();
+			session.save(cidade);
+			transaction.commit();
+			return session.getTransaction().getStatus() == TransactionStatus.COMMITTED;
 		} finally {
 			logger.log(Level.INFO,
 					() -> "Inserir cidade demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
-	public final List<Cidade> consultar(final String metodo) throws SQLException {
+	public final List<Cidade> consultar(final String metodo) {
 		final var comeco = Instant.now();
-		final var con = conexao.getConexao();
-		final var comando = con.prepareStatement(SQL_SEARCH);
-		try (con; comando;) {
-			con.setAutoCommit(false);
-			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-			con.setReadOnly(true);
-			comando.setString(1, metodo + '*');
-			final var result = comando.executeQuery();
-			final var lista = new FastList<Cidade>();
-			while (result.next()) {
-				final var cidade = new Cidade();
-				cidade.setCodigo(result.getInt("codigo"));
-				cidade.setNome(result.getString("nome"));
-				cidade.setEstado(result.getString("estado"));
-				lista.add(cidade);
-			}
-			return lista;
+		try (final var session = HibernateUtil.getSessionFactory().openSession()) {
+			final var query = session.createNativeQuery(SQL_SEARCH, Cidade.class);
+			query.setParameter("nome", metodo + '*');
+			return query.getResultList();
 		} finally {
 			logger.log(Level.INFO,
 					() -> "Consultar cidade demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");

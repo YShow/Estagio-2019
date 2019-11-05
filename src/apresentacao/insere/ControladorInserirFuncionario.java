@@ -19,6 +19,7 @@ import jfxtras.styles.jmetro.JMetro;
 import negocio.NegFuncionario;
 import objeto.Funcionario;
 import utilidade.Alerta;
+import utilidade.Senha;
 import utilidade.TIPO_TELA;
 
 public final class ControladorInserirFuncionario {
@@ -109,7 +110,11 @@ public final class ControladorInserirFuncionario {
 		funcionario.setAdministrador(chkAdm.isSelected());
 		funcionario.setFuncao(txtFuncao.getText().trim());
 		funcionario.setNome(txtNomeFuncionario.getText().trim());
-		funcionario.setSenha(txtSenhaFuncionario.getText().trim());
+		if (!txtSenhaFuncionario.getText().isBlank()) {
+			final var salt = Senha.geraSalt();
+			funcionario.setSenha(Senha.criaSenha(txtSenhaFuncionario.getText().trim(), salt));
+			funcionario.setSalt(salt);
+		}
 		funcionario.setUsuario(txtUsuario.getText().trim());
 		funcionario.setAtivo(chkAtivo.isSelected());
 		return funcionario;

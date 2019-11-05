@@ -145,37 +145,32 @@ public final class ControladorMenuCliente {
 
 	@FXML
 	private void btnConsultaCliente(final ActionEvent event) {
-		try {
+		if (!txtCliente.getText().isBlank()) {
+			limpaTabela();
 
-			if (!txtCliente.getText().isBlank()) {
-				limpaTabela();
+			final var cliente = negCliente.consultar(txtCliente.getText().trim());
+			if (!cliente.isEmpty()) {
 
-				final var cliente = negCliente.consultar(txtCliente.getText().trim());
-				if (!cliente.isEmpty()) {
+				tvCliente.setItems(FXCollections.observableList(cliente));
+				tcCodigo.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("Codigo"));
+				tcAtivo.setCellValueFactory(new PropertyValueFactory<Cliente, Boolean>("Ativo"));
+				tcCPF.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Cpf"));
+				tcEndereco.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Endereco"));
+				tcNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Nome"));
+				tcTelefone.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Telefone"));
+				tcCidade.setCellValueFactory(
+						cidade -> new SimpleStringProperty(cidade.getValue().getCidade().getNome()));
+				tcCodCidade.setCellValueFactory(
+						codCidade -> new SimpleIntegerProperty(codCidade.getValue().getCidade().getCodigo())
+								.asObject());
 
-					tvCliente.setItems(FXCollections.observableList(cliente));
-					tcCodigo.setCellValueFactory(new PropertyValueFactory<Cliente, Integer>("Codigo"));
-					tcAtivo.setCellValueFactory(new PropertyValueFactory<Cliente, Boolean>("Ativo"));
-					tcCPF.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Cpf"));
-					tcEndereco.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Endereco"));
-					tcNome.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Nome"));
-					tcTelefone.setCellValueFactory(new PropertyValueFactory<Cliente, String>("Telefone"));
-					tcCidade.setCellValueFactory(
-							cidade -> new SimpleStringProperty(cidade.getValue().getCidade().getNome()));
-					tcCodCidade.setCellValueFactory(
-							codCidade -> new SimpleIntegerProperty(codCidade.getValue().getCidade().getCodigo())
-									.asObject());
-
-				} else {
-					Alerta.alertaNaoEncontrado();
-				}
 			} else {
-				Alerta.alertaCampoNulo();
+				Alerta.alertaNaoEncontrado();
 			}
-		} catch (final SQLException e) {
-
-			Alerta.alertaErro(e.getMessage());
+		} else {
+			Alerta.alertaCampoNulo();
 		}
+
 	}
 
 	@FXML

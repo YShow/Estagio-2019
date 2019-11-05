@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
+import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import acessoBD.MariaDB.AcessoBD;
-import objeto.Cidade;
+import acessoBD.MariaDB.HibernateUtil;
 import objeto.Cliente;
 
 public final class NegCliente {
@@ -21,30 +21,18 @@ public final class NegCliente {
 			+ " values(?,?,?,?,?,?)";
 	private static final String SQL_SEARCH = "SELECT c.codigo, c.nome, c.CPF, c.endereco, c.telefone, c.ativo, c.id_cidade, ci.nome\n"
 			+ "FROM cantagalo.cliente c JOIN cidade ci ON c.id_cidade = ci.codigo\n"
-			+ "WHERE MATCH(c.nome) AGAINST(? IN BOOLEAN MODE)";
+			+ "WHERE MATCH(c.nome) AGAINST(:nome IN BOOLEAN MODE)";
 	private static final String SQL_UPDATE = "update cliente set nome = ?, CPF = ?, endereco = ?,"
 			+ "telefone = ?, ativo = ?, id_cidade = ? where codigo = ?;";
 	private static final String SQL_DELETE = "UPDATE cantagalo.cliente SET ativo=? WHERE codigo=?;";
 
-	public final boolean inserir(final Cliente cliente) throws SQLException {
+	public final boolean inserir(final Cliente cliente) {
 		final var comeco = Instant.now();
-		final var con = conexao.getConexao();
-		final var comando = con.prepareStatement(SQL_INSERT);
-		try (con; comando;) {
-			con.setAutoCommit(false);
-			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-			// nome,CPF,endereco,telefone,ativo,id_cidade
-			comando.setString(1, cliente.getNome());
-			comando.setString(2, cliente.getCpf());
-			comando.setString(3, cliente.getEndereco());
-			comando.setString(4, cliente.getTelefone());
-			comando.setBoolean(5, cliente.isAtivo());
-			comando.setInt(6, cliente.getCidade().getCodigo());
-
-			final var inseriu = comando.executeUpdate() >= 1;
-
-			con.commit();
-			return inseriu;
+		try (final var session = HibernateUtil.getSessionFactory().openSession()) {
+			final var transaction = session.beginTransaction();
+			session.save(cliente);
+			transaction.commit();
+			return session.getTransaction().getStatus() == TransactionStatus.COMMITTED;
 		} finally {
 			logger.log(Level.INFO,
 					() -> "Inserir de cliente demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
@@ -52,36 +40,12 @@ public final class NegCliente {
 
 	}
 
-	public final List<Cliente> consultar(final String metodo) throws SQLException {
+	public final List<Cliente> consultar(final String metodo) {
 		final var comeco = Instant.now();
-		final var con = conexao.getConexao();
-		final var comando = con.prepareStatement(SQL_SEARCH);
-		try (con; comando;) {
-			con.setAutoCommit(false);
-			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-			con.setReadOnly(true);
-			comando.setString(1, metodo + '*');
-			final var lista = new FastList<Cliente>();
-
-			final var result = comando.executeQuery();
-
-			while (result.next()) {
-				final var cliente = new Cliente();
-				final var cidade = new Cidade();
-				cliente.setCodigo(result.getInt("c.codigo"));
-				cliente.setNome(result.getString("c.nome"));
-				cliente.setCpf(result.getString("c.CPF"));
-				cliente.setEndereco(result.getString("c.endereco"));
-				cliente.setTelefone(result.getString("c.telefone"));
-				cliente.setAtivo(result.getBoolean("c.ativo"));
-
-				cidade.setNome(result.getString("ci.nome"));
-				cidade.setCodigo(result.getInt("c.id_cidade"));
-
-				cliente.setCidade(cidade);
-				lista.add(cliente);
-			}
-			return lista;
+		try (final var session = HibernateUtil.getSessionFactory().openSession()) {
+			final var query = session.createNativeQuery(SQL_SEARCH, Cliente.class);
+			query.setParameter("nome", metodo + '*');
+			return query.getResultList();
 		} finally {
 			logger.log(Level.INFO,
 					() -> "Consulta de cliente demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");

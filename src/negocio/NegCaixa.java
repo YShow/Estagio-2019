@@ -1,6 +1,5 @@
 package negocio;
 
-import java.sql.SQLException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -8,7 +7,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.hibernate.Session;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import acessoBD.MariaDB.AcessoBD;
@@ -21,7 +19,7 @@ public final class NegCaixa {
 
 	public final boolean inserir(final Caixa caixa) {
 		final var comeco = Instant.now();
-		try (final Session session = HibernateUtil.getSessionFactory().openSession()) {
+		try (final var session = HibernateUtil.getSessionFactory().openSession()) {
 			final var transaction = session.beginTransaction();
 			session.save(caixa);
 
@@ -35,10 +33,10 @@ public final class NegCaixa {
 
 	}
 
-	public final List<Caixa> consultar(final LocalDate data) throws SQLException {
+	public final List<Caixa> consultar(final LocalDate data) {
 		final var comeco = Instant.now();
 
-		try (final Session session = HibernateUtil.getSessionFactory().openSession()) {
+		try (final var session = HibernateUtil.getSessionFactory().openSession()) {
 			final var builder = session.getCriteriaBuilder();
 			final var criteria = builder.createQuery(Caixa.class);
 			final var caixa = criteria.from(Caixa.class);

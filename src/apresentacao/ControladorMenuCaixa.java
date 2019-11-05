@@ -1,7 +1,6 @@
 package apresentacao;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.time.LocalDate;
 
 import apresentacao.insere.ControladorInserirCaixa;
@@ -95,30 +94,25 @@ public final class ControladorMenuCaixa {
 
 	@FXML
 	void conulstaCaixa(final ActionEvent event) {
-		try {
-			if (dpData.getValue() != null) {
-				limpaTabela();
-				final var caixas = negCaixa.consultar(dpData.getValue());
-				if (!caixas.isEmpty()) {
-					tvCaixa.setItems(FXCollections.observableList(caixas));
-					tcAtivo.setCellValueFactory(new PropertyValueFactory<Caixa, Boolean>("ativo"));
-					tcCodCli.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("funcionario"));
-					tcCodigo.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("codigo"));
-					tcData.setCellValueFactory(new PropertyValueFactory<Caixa, LocalDate>("data"));
-					tcPreco.setCellValueFactory(new PropertyValueFactory<Caixa, Double>("precototal"));
-					tcSaida.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("saida"));
+		if (dpData.getValue() != null) {
+			limpaTabela();
+			final var caixas = negCaixa.consultar(dpData.getValue());
+			if (!caixas.isEmpty()) {
+				tvCaixa.setItems(FXCollections.observableList(caixas));
+				tcAtivo.setCellValueFactory(new PropertyValueFactory<Caixa, Boolean>("ativo"));
+				tcCodCli.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("funcionario"));
+				tcCodigo.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("codigo"));
+				tcData.setCellValueFactory(new PropertyValueFactory<Caixa, LocalDate>("data"));
+				tcPreco.setCellValueFactory(new PropertyValueFactory<Caixa, Double>("precototal"));
+				tcSaida.setCellValueFactory(new PropertyValueFactory<Caixa, Integer>("saida"));
 
-					txtTotalValor.setText(
-							String.valueOf(tvCaixa.getItems().stream().mapToDouble(Caixa::getPrecototal).sum()));
-				} else {
-					Alerta.alertaNaoEncontrado();
-				}
+				txtTotalValor
+						.setText(String.valueOf(tvCaixa.getItems().stream().mapToDouble(Caixa::getPrecototal).sum()));
 			} else {
-				Alerta.alertaCampoNulo();
+				Alerta.alertaNaoEncontrado();
 			}
-
-		} catch (final SQLException e) {
-			Alerta.alertaErro(e.getMessage());
+		} else {
+			Alerta.alertaCampoNulo();
 		}
 
 	}

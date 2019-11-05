@@ -12,8 +12,13 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 
 import objeto.Caixa;
+import objeto.Cidade;
+import objeto.Cliente;
+import objeto.Funcionario;
 
 public class HibernateUtil {
+
+	private static final Logger logger = Logger.getLogger(HibernateUtil.class.getName());
 
 	private HibernateUtil() {
 		throw new IllegalStateException("Classe Utilidade");
@@ -47,6 +52,9 @@ public class HibernateUtil {
 				configuration.setProperties(settings);
 
 				configuration.addAnnotatedClass(Caixa.class);
+				configuration.addAnnotatedClass(Cidade.class);
+				configuration.addAnnotatedClass(Cliente.class);
+				configuration.addAnnotatedClass(Funcionario.class);
 
 				final ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
 
@@ -55,7 +63,8 @@ public class HibernateUtil {
 				sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
 			} catch (final HibernateException e) {
-				System.out.println(e.getMessage());
+				logger.severe(() -> "Erro na conexão: " + e.getMessage());
+
 			}
 
 		}

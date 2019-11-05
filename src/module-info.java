@@ -32,4 +32,5 @@ module estagio {
 	requires org.jfxtras.styles.jmetro;
 	requires net.bytebuddy;
 	requires com.sun.xml.bind;
+	requires java.transaction;
 }

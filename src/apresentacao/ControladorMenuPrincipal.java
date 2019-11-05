@@ -58,33 +58,32 @@ public final class ControladorMenuPrincipal {
 			System.out.println(e.getMessage());
 		}
 	}
-	
 
-    @FXML
-    void btnRelatorio2(ActionEvent event) {
-    	try {
+	@FXML
+	void btnRelatorio2(final ActionEvent event) {
+		try {
 			new RelatorioDois().gerar();
 		} catch (JRException | SQLException e) {
 			System.out.println(e.getMessage());
 		}
-    }
+	}
 
-    @FXML
-    void btnRelatorio3(ActionEvent event) {
-    	try {
+	@FXML
+	void btnRelatorio3(final ActionEvent event) {
+		try {
 			new RelatorioTres().gerar();
 		} catch (JRException | SQLException e) {
 			System.out.println(e.getMessage());
 		}
-    }
+	}
 
-    @FXML
-    void btnRelatorio4(ActionEvent event) {
-    	try {
+	@FXML
+	void btnRelatorio4(final ActionEvent event) {
+		try {
 			new RelatorioQuatro().gerar();
 		} catch (JRException | SQLException e) {
 			System.out.println(e.getMessage());
 		}
-    }
+	}
 
 }

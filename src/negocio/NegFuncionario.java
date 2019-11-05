@@ -9,45 +9,34 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import acessoBD.MariaDB.AcessoBD;
+import acessoBD.MariaDB.HibernateUtil;
 import objeto.Funcionario;
-import utilidade.Senha;
 
 public final class NegFuncionario {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final Logger logger = Logger.getLogger(NegFuncionario.class.getName());
-	private static final String SQL_INSERT = "insert into funcionario(nome,funcao,administrador,senhahash,salt,usuario,ativo)"
-			+ " values(?,?,?,?,?,?,?)";
 	private static final String SQL_SEARCH = "SELECT codigo,nome,funcao,administrador,usuario FROM funcionario WHERE MATCH(nome,usuario) AGAINST(? IN BOOLEAN MODE) and ativo = true";
 	private static final String SQL_UPDATE = "update funcionario set nome = ?, funcao = ?, administrador = ?,"
 			+ "senhahash =COALESCE(?,senhahash), salt =COALESCE(?,salt),usuario = ?,ativo = ? where codigo = ?";
 	private static final String SQL_DELETE = "update funcionario set ativo = ? WHERE codigo=? ;";
 
-	public final boolean inserir(final Funcionario funcionario) throws SQLException {
+	public final boolean inserir(final Funcionario funcionario) {
 		final var comeco = Instant.now();
-		final var con = conexao.getConexao();
-		final var comando = con.prepareStatement(SQL_INSERT);
-		try (con; comando;) {
-			con.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-			con.setAutoCommit(false);
-			final var salt = Senha.geraSalt();
-			comando.setString(1, funcionario.getNome());
-			comando.setString(2, funcionario.getFuncao());
-			comando.setBoolean(3, funcionario.isAdministrador());
-			comando.setString(4, Senha.criaSenha(funcionario.getSenha(), salt));
-			comando.setString(5, salt);
-			comando.setString(6, funcionario.getUsuario());
-			comando.setBoolean(7, funcionario.isAtivo());
-			final var inseriu = comando.executeUpdate() >= 1;
-			con.commit();
-			return inseriu;
+		try (final var session = HibernateUtil.getSessionFactory().openSession()) {
+			final var transaction = session.beginTransaction();
+			session.save(funcionario);
+			transaction.commit();
+			return session.getTransaction().getStatus() == TransactionStatus.COMMITTED;
 		} finally {
 			logger.log(Level.INFO,
 					() -> "Inserir funcionario demorou: " + Duration.between(comeco, Instant.now()).toMillis() + " ms");
 		}
 	}
 
+	//TODO fazer o consultar com hibernate
 	public final List<Funcionario> consultar(final String metodo) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
@@ -94,9 +83,9 @@ public final class NegFuncionario {
 				comando.setString(4, null);
 				comando.setString(5, null);
 			} else {
-				final var salt = Senha.geraSalt();
-				comando.setString(4, Senha.criaSenha(funcionario.getSenha(), salt));
-				comando.setString(5, salt);
+
+				comando.setString(4, funcionario.getSenha());
+				comando.setString(5, funcionario.getSalt());
 			}
 			comando.setString(6, funcionario.getUsuario());
 			comando.setBoolean(7, funcionario.isAtivo());
