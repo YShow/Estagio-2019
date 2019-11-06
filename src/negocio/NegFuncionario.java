@@ -4,11 +4,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.eclipse.collections.impl.list.mutable.FastList;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import acessoBD.MariaDB.AcessoBD;
@@ -36,7 +36,7 @@ public final class NegFuncionario {
 		}
 	}
 
-	//TODO fazer o consultar com hibernate
+	// TODO fazer o consultar com hibernate
 	public final List<Funcionario> consultar(final String metodo) throws SQLException {
 		final var comeco = Instant.now();
 		final var con = conexao.getConexao();
@@ -48,7 +48,7 @@ public final class NegFuncionario {
 			comando.setString(1, metodo + '*');
 			final var result = comando.executeQuery();
 
-			final var lista = new FastList<Funcionario>();
+			final var lista = new ArrayList<Funcionario>();
 
 			while (result.next()) {
 				final var funcionario = new Funcionario();

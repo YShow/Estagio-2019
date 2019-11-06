@@ -24,10 +24,7 @@ module estagio {
 	requires javafx.controls;
 	requires javafx.fxml;
 	requires javafx.graphics;
-	requires lombok;
 	requires org.bouncycastle.provider;
-	requires org.eclipse.collections.api;
-	requires org.eclipse.collections.impl;
 	requires org.hibernate.orm.core;
 	requires org.jfxtras.styles.jmetro;
 	requires net.bytebuddy;
