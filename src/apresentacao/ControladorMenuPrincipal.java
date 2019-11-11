@@ -53,6 +53,7 @@ public final class ControladorMenuPrincipal {
 	@FXML
 	void btnRelatorio(final ActionEvent event) {
 		try {
+			//ESTOQUE DE PRODUTO
 			new RelatorioUm().gerar();
 		} catch (JRException | SQLException e) {
 			System.out.println(e.getMessage());
@@ -62,6 +63,8 @@ public final class ControladorMenuPrincipal {
 	@FXML
 	void btnRelatorio2(final ActionEvent event) {
 		try {
+			
+			//VENDAS POR CLIENTE
 			new RelatorioDois().gerar();
 		} catch (JRException | SQLException e) {
 			System.out.println(e.getMessage());
@@ -71,6 +74,7 @@ public final class ControladorMenuPrincipal {
 	@FXML
 	void btnRelatorio3(final ActionEvent event) {
 		try {
+			//CLIENTE COM MAIS VENDAS
 			new RelatorioTres().gerar();
 		} catch (JRException | SQLException e) {
 			System.out.println(e.getMessage());
@@ -80,6 +84,7 @@ public final class ControladorMenuPrincipal {
 	@FXML
 	void btnRelatorio4(final ActionEvent event) {
 		try {
+			//RELATORIO MESTRE EM DETALHES DE VENDAS
 			new RelatorioQuatro().gerar();
 		} catch (JRException | SQLException e) {
 			System.out.println(e.getMessage());

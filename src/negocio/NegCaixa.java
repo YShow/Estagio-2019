@@ -9,12 +9,11 @@ import java.util.logging.Logger;
 
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
-import acessoBD.MariaDB.AcessoBD;
 import acessoBD.MariaDB.HibernateUtil;
 import objeto.Caixa;
 
 public final class NegCaixa {
-	private final AcessoBD conexao = new AcessoBD();
+
 	private static final Logger logger = Logger.getLogger(NegCaixa.class.getName());
 
 	public final boolean inserir(final Caixa caixa) {

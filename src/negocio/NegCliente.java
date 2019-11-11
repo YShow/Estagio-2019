@@ -17,8 +17,6 @@ import objeto.Cliente;
 public final class NegCliente {
 	private final AcessoBD conexao = new AcessoBD();
 	private static final Logger logger = Logger.getLogger(NegCliente.class.getName());
-	private static final String SQL_INSERT = "insert into cliente(nome,CPF,endereco,telefone,ativo,id_cidade)"
-			+ " values(?,?,?,?,?,?)";
 	private static final String SQL_SEARCH = "SELECT c.codigo, c.nome, c.CPF, c.endereco, c.telefone, c.ativo, c.id_cidade, ci.nome\n"
 			+ "FROM cantagalo.cliente c JOIN cidade ci ON c.id_cidade = ci.codigo\n"
 			+ "WHERE MATCH(c.nome) AGAINST(:nome IN BOOLEAN MODE)";

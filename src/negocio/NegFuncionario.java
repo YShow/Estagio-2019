@@ -51,6 +51,7 @@ public final class NegFuncionario {
 			final var lista = new ArrayList<Funcionario>();
 
 			while (result.next()) {
+
 				final var funcionario = new Funcionario();
 				funcionario.setCodigo(result.getInt("codigo"));
 				funcionario.setNome(result.getString("nome"));
