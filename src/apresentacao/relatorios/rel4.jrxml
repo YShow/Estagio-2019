@@ -57,13 +57,13 @@ LIMIT 100000]]>
 				<reportElement x="134" y="0" width="100" height="30" uuid="7fb6ed24-6bfd-4ef3-b832-e5a2143c410a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="9dcaba0d-8aef-4c99-8717-39b8c1ae3dfd"/>
 				</reportElement>
-				<text><![CDATA[data_venda]]></text>
+				<text><![CDATA[data venda]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="252" y="0" width="100" height="30" uuid="5767e556-eaa6-4f11-bf03-13133317f6bf">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="87cc7662-0da5-4e73-a007-d8adeb5c0ec3"/>
 				</reportElement>
-				<text><![CDATA[forma_de_pagamento]]></text>
+				<text><![CDATA[forma de pagamento]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="365" y="0" width="100" height="30" uuid="6eb419ad-8c29-4958-b15c-5a67847a356d">
@@ -80,7 +80,7 @@ LIMIT 100000]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch">
+		<band height="63" splitType="Stretch">
 			<textField>
 				<reportElement x="21" y="24" width="100" height="30" uuid="43f48272-43c1-486d-8ebc-919a18d60cc3">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="8c74857f-b679-4b4f-a287-78fbd124c2d7"/>
@@ -114,12 +114,12 @@ LIMIT 100000]]>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45" splitType="Stretch"/>
+		<band height="16" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="16" splitType="Stretch"/>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="15" splitType="Stretch"/>
 	</summary>
 </jasperReport>
